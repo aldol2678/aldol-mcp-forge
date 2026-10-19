@@ -1,0 +1,72 @@
+{
+  "project": "ALDOL MCP Forge",
+  "version": "0.3.1",
+  "timestamp_utc": "2026-10-19T15:11:07.267150+00:00",
+  "regression": {
+    "passed": true,
+    "count": 26,
+    "summary": "OK",
+    "exit_code": 0
+  },
+  "offline_compatibility": {
+    "aldol-openapi-pets": {
+      "passed": true,
+      "compat_smoke_test": "passed",
+      "official_sdk": "not-run: Python mcp SDK not installed",
+      "checks": {
+        "server_identity": true,
+        "list_matches": true,
+        "notification_silent": true,
+        "list_pets_dry_run": true,
+        "list_pets_invalid_rejected": true,
+        "get_pet_dry_run": true,
+        "get_pet_invalid_rejected": true
+      }
+    },
+    "aldol-game-html-audit": {
+      "passed": true,
+      "compat_smoke_test": "passed",
+      "official_sdk": "not-run: Python mcp SDK not installed",
+      "checks": {
+        "server_identity": true,
+        "list_matches": true,
+        "ping": true,
+        "notification_silent": true,
+        "html_audit_call": true,
+        "html_audit_invalid_rejected": true,
+        "json_audit_call": true,
+        "json_audit_invalid_rejected": true
+      }
+    }
+  },
+  "official_sdk": {
+    "tested": false,
+    "passed": false,
+    "status": "unavailable",
+    "install_attempted": true,
+    "pip_error": "No matching distribution found for mcp>=2,<3 in this execution environment",
+    "verifier_exit_code": 2,
+    "verifier_result": {
+      "passed": false,
+      "status": "unavailable",
+      "reason": "Official Python MCP SDK is not installed",
+      "official_sdk_tested": false
+    },
+    "expected_modes": [
+      "inmemory",
+      "stdio"
+    ],
+    "not_verified": [
+      "SDK actual imports and tool registration",
+      "Client(app) real SDK connection",
+      "stdio transport with SDK",
+      "ChatGPT/Claude host compatibility"
+    ]
+  },
+  "external_calls": {
+    "api_calls": false,
+    "deployment": false,
+    "plugin_updates": false
+  },
+  "notes": "Existing forge offline compatibility transport is not equivalent to official SDK verification."
+}

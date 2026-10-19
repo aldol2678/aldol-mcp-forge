@@ -1,0 +1,61 @@
+{
+  "forge_version": "0.3.0",
+  "project_name": "aldol-openapi-pets",
+  "preview": {
+    "supported": true,
+    "operations": [
+      "list_pets",
+      "get_pet"
+    ],
+    "count": 2,
+    "skipped": [
+      {
+        "method": "POST",
+        "path": "/pets",
+        "reason": "non-GET excluded"
+      }
+    ],
+    "default_network_access": false,
+    "limitations": "GET only, inline scalar path/query parameters, JSON document only."
+  },
+  "verification": {
+    "passed": true,
+    "project_name": "aldol-openapi-pets",
+    "checks": {
+      "server_identity": true,
+      "list_matches": true,
+      "notification_silent": true,
+      "list_pets_dry_run": true,
+      "list_pets_invalid_rejected": true,
+      "get_pet_dry_run": true,
+      "get_pet_invalid_rejected": true
+    },
+    "sample_tool_results": {
+      "list_pets": {
+        "mode": "dry_run",
+        "operation": "list_pets",
+        "method": "GET",
+        "path": "/pets",
+        "query": {},
+        "network_called": false
+      },
+      "get_pet": {
+        "mode": "dry_run",
+        "operation": "get_pet",
+        "method": "GET",
+        "path": "/pets/demo",
+        "query": {},
+        "network_called": false
+      }
+    },
+    "isolation": "linux-user-net-mount-pid-namespace-project-readonly",
+    "network_isolated": true,
+    "default_network_access": false,
+    "official_sdk": "not-run: Python mcp SDK not installed",
+    "official_sdk_details": null,
+    "sdk_available_locally": false,
+    "compat_smoke_test": "passed"
+  },
+  "official_sdk_real_tested": false,
+  "external_deployment": false
+}

@@ -1,0 +1,59 @@
+{
+  "name": "aldol-openapi-pets",
+  "version": "0.3.0",
+  "forge_version": "0.3.0",
+  "kind": "openapi-get",
+  "operations": [
+    {
+      "name": "list_pets",
+      "method": "GET",
+      "path": "/pets",
+      "description": "Read list of sample pets",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "type": "integer"
+        },
+        {
+          "name": "active",
+          "in": "query",
+          "required": false,
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "get_pet",
+      "method": "GET",
+      "path": "/pets/{pet_id}",
+      "description": "Read one sample pet",
+      "parameters": [
+        {
+          "name": "pet_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "method": "POST",
+      "path": "/pets",
+      "reason": "non-GET excluded"
+    }
+  ],
+  "created_at": "2026-10-19T14:37:39.484322+00:00",
+  "files_sha256": {
+    "server.py": "f3240608c5f9b8ddd04f31868c1794b555df66610c56f33e010e8c0881b8e27d",
+    "operations.py": "b8535f84713e0b29e7174242a1561b128b85d80c0ac3972770bb394077fca57f",
+    "api_runtime.py": "4f1ea6ddaabac1e5fdc6d43e167d30009aae7c7e15babecdfdf1c806c1ee3a09",
+    "mcp_runtime.py": "bd6f846ec48d9e4415505757bd4254fa6fb36d63713acda5d7a1e001d4b7d0dc",
+    "requirements.txt": "d96f0e8e0f64266570a7d111dc3f0397b560f078c2bc67fc8bda432fa26c62c0",
+    "openapi.json": "1c8101f1c4a7b6d32d3ece746d514584b9567440db97fa7f6869257654921ee0",
+    "README.md": "40aee9594534f72b28bb72fe1c5d97f1706dc746d8bdb734c3a17dfbe1e0b0b1"
+  }
+}

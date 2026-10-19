@@ -1,0 +1,59 @@
+name: ALDOL MCP Forge - official SDK v2 verification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mcp-forge-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline-regression:
+    name: Local regression (no SDK required)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run 26 regression tests
+        run: python -m unittest discover -s tests -v
+
+  sdk-integration:
+    name: Official SDK v2 (in-memory + stdio)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ALDOL_API_BASE_URL: ''
+      ALDOL_API_ALLOWED_HOST: ''
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install official MCP SDK v2
+        run: |
+          python -m pip install --no-input "mcp==2.0.0"
+          python -c 'import importlib.metadata; print("Official MCP SDK:", importlib.metadata.version("mcp"))'
+      - name: Verify generated servers in both transports
+        run: python ci/run_official_sdk.py
+      - name: Save machine-readable verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-sdk-v2-results
+          path: ci-results/
+          if-no-files-found: warn
+          retention-days: 14

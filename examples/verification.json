@@ -1,0 +1,91 @@
+{
+  "forge_version": "0.2.0",
+  "source_project": "aldol-game-html-audit",
+  "tools": [
+    "html_audit",
+    "json_audit"
+  ],
+  "smoke_test": {
+    "passed": true,
+    "project_name": "aldol-game-html-audit",
+    "checks": {
+      "server_identity": true,
+      "list_matches": true,
+      "ping": true,
+      "notification_silent": true,
+      "html_audit_call": true,
+      "html_audit_invalid_rejected": true,
+      "json_audit_call": true,
+      "json_audit_invalid_rejected": true
+    },
+    "sample_tool_results": {
+      "html_audit": {
+        "type": "static_html_audit",
+        "checks": {
+          "canvas_count": 1,
+          "image_alt_missing": 0,
+          "viewport_declared": true
+        },
+        "issue_count": 0,
+        "issues": [],
+        "limitations": "Static syntax/markup heuristics only. No rendering, gameplay, JavaScript execution or device QA."
+      },
+      "json_audit": {
+        "valid": true,
+        "top_level_type": "dict",
+        "top_level_items": 1
+      }
+    },
+    "isolation": "linux-user-net-mount-pid-namespace-project-readonly",
+    "official_sdk": "not-run: Python mcp SDK not installed",
+    "official_sdk_details": null,
+    "sdk_available_locally": false,
+    "compat_smoke_test": "passed",
+    "network_isolated": true,
+    "note": "Compatibility smoke-test alone cannot validate official SDK. Official SDK test runs when installed."
+  },
+  "example_html_audit": {
+    "type": "static_html_audit",
+    "checks": {
+      "canvas_count": 1,
+      "image_alt_missing": 1,
+      "viewport_declared": false
+    },
+    "issue_count": 6,
+    "issues": [
+      {
+        "severity": "warning",
+        "code": "missing-head",
+        "message": "head element not detected"
+      },
+      {
+        "severity": "warning",
+        "code": "missing-title",
+        "message": "title element not detected"
+      },
+      {
+        "severity": "warning",
+        "code": "missing-viewport",
+        "message": "mobile viewport meta element not detected"
+      },
+      {
+        "severity": "info",
+        "code": "missing-lang",
+        "message": "html lang attribute not detected"
+      },
+      {
+        "severity": "warning",
+        "code": "missing-alt",
+        "message": "1 image(s) without alt attribute"
+      },
+      {
+        "severity": "warning",
+        "code": "http-resource",
+        "message": "1 HTTP asset link(s) detected"
+      }
+    ],
+    "limitations": "Static syntax/markup heuristics only. No rendering, gameplay, JavaScript execution or device QA."
+  },
+  "installed_sdk": false,
+  "external_deployment": false
+}

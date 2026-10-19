@@ -1,0 +1,13 @@
+{
+  "name": "aldol-game-html-audit",
+  "version": "0.1.0",
+  "forge_version": "0.1.0",
+  "description": "HTML 게임 문서 기본 구조와 모바일 지원 메타 태그를 정적으로 검사하는 MCP",
+  "template": "html_audit",
+  "created_at": "2026-10-19T13:58:28.027214+00:00",
+  "files_sha256": {
+    "mcp_runtime.py": "bd6f846ec48d9e4415505757bd4254fa6fb36d63713acda5d7a1e001d4b7d0dc",
+    "templates.py": "e22a8d4b2426579264949d5d631f6264c5de7ee8b5254926bd0a6708e9af9c26",
+    "server.py": "4929c85bbdd3a2ce5d703514e5510dbad954005d648017d977a20616e4a62cf3"
+  }
+}
