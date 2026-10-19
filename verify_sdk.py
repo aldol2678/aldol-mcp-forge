@@ -2,7 +2,7 @@
 
 This script never substitutes a fake SDK or the Forge compatibility transport.
 Two transports are exercised: Client(app) (in memory) and
-Client(StdioServerParameters(...)) (a real child process over stdio).
+Client(stdio_client(StdioServerParameters(...))) (a real child process over stdio).
 Requires `mcp>=2,<3`; exit code 2 means dependency unavailable/wrong major version.
 """
 import argparse
@@ -79,6 +79,7 @@ async def run_calls(client, expected, arguments, is_openapi):
 
 async def verify(project, mode='both'):
     from mcp import Client, StdioServerParameters
+    from mcp.client.stdio import stdio_client
     project = Path(project).resolve(strict=True)
     manifest = json.loads((project / 'manifest.json').read_text(encoding='utf-8'))
     if not (project / 'server.py').is_file():
@@ -102,7 +103,7 @@ async def verify(project, mode='both'):
             params = StdioServerParameters(command=sys.executable,
                                            args=['-B', str(project / 'server.py')],
                                            env={'ALDOL_API_BASE_URL': '', 'ALDOL_API_ALLOWED_HOST': ''})
-            async with Client(params, raise_exceptions=True) as client:
+            async with Client(stdio_client(params), raise_exceptions=True) as client:
                 out['stdio'] = await run_calls(client, expected, args, manifest.get('kind') == 'openapi-get')
     return {'passed': True, 'official_sdk': True,
             'validation': 'official Python MCP SDK v2',

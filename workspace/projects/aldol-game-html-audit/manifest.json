@@ -11,7 +11,7 @@
   "files_sha256": {
     "mcp_runtime.py": "bd6f846ec48d9e4415505757bd4254fa6fb36d63713acda5d7a1e001d4b7d0dc",
     "templates.py": "e22a8d4b2426579264949d5d631f6264c5de7ee8b5254926bd0a6708e9af9c26",
-    "server.py": "c2bc4189ca51f4689299309947cffa10f69bb03ab513f738497153ae8088c368",
+    "server.py": "bed9aff42cd5b977d73f28534666cd4396de97ded98e8f0fb3d7a278e574d0df",
     "requirements.txt": "d96f0e8e0f64266570a7d111dc3f0397b560f078c2bc67fc8bda432fa26c62c0"
   },
   "previous_version": "0.1.0",

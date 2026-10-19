@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
-workspace/projects/*
 workspace/history/*
 workspace/packages/*
-!workspace/projects/.gitkeep
+ci-results/

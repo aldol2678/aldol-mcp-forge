@@ -164,7 +164,7 @@ class OpenAPITests(unittest.TestCase):
                            input=wire, text=True, capture_output=True, timeout=5)
         self.assertEqual(p.returncode, 0, p.stderr)
         data = {obj['id']: obj for obj in (json.loads(line) for line in p.stdout.splitlines())}
-        self.assertEqual(data[1]['result']['serverInfo']['version'], '0.3.1')
+        self.assertEqual(data[1]['result']['serverInfo']['version'], '0.3.2')
         names = [tool['name'] for tool in data[2]['result']['tools']]
         self.assertEqual(len(names), 8)
         self.assertIn('forge_import_openapi', names)

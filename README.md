@@ -1,7 +1,13 @@
-# ALDOL MCP Forge v0.3.1 🔧
+# ALDOL MCP Forge v0.3.2 🔧
 
 **자연어 템플릿 + OpenAPI에서 MCP 서버 소스코드를 생성하는 로컬 제작기.**
 외부 서비스에 등록하거나 자동 배포하지 않습니다. Python 3.11+ 필요.
+
+## v0.3.2 공식 SDK 2.0.0 호환 수정 (2026-10-20)
+
+- 생성 도구의 반환 타입을 `dict[str, Any]`로 지정해 구조화 응답을 보장하고, 기존 CI 프로젝트와 체크섬을 재생성했습니다.
+- stdio 검증 연결을 `Client(stdio_client(params), raise_exceptions=True)`로 수정했습니다.
+- `workspace/projects`를 추적 가능하게 하고 `ci-results/`를 제외해 CI 대상 누락을 방지했습니다.
 
 ## v0.3.1 공식 SDK 검증기 보강 (2026-10-20)
 

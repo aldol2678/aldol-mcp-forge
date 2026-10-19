@@ -53,7 +53,7 @@ def main() -> int:
         print(f"{name}: {'PASS' if entry['passed'] else 'FAIL'}", flush=True)
     report = {
         "project": "ALDOL MCP Forge",
-        "target_version": "0.3.1",
+        "target_version": "0.3.2",
         "sdk_pin": "mcp==2.0.0",
         "runner": "GitHub Actions / Python 3.12",
         "timestamp_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

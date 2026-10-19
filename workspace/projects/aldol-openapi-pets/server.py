@@ -1,5 +1,6 @@
 """Generated from OpenAPI GET operations by ALDOL MCP Forge v0.3."""
 import sys
+from typing import Any
 from api_runtime import call_operation
 from operations import OPERATIONS
 
@@ -16,12 +17,12 @@ else:
     app = MCPServer('aldol-openapi-pets')
 
     @app.tool()
-    def list_pets(limit: int | None = None, active: bool | None = None) -> dict:
+    def list_pets(limit: int | None = None, active: bool | None = None) -> dict[str, Any]:
         'Read list of sample pets'
         return call_operation(OPERATIONS[0], {'limit': limit, 'active': active})
 
     @app.tool()
-    def get_pet(pet_id: str) -> dict:
+    def get_pet(pet_id: str) -> dict[str, Any]:
         'Read one sample pet'
         return call_operation(OPERATIONS[1], {'pet_id': pet_id})
 

@@ -1,11 +1,11 @@
-# ALDOL MCP Forge v0.3.1 — GitHub Actions 실연동 검증 키트
+# ALDOL MCP Forge v0.3.2 — GitHub Actions 실연동 검증 키트
 
-이 패키지는 **ALDOL MCP Forge v0.3.1 원본**과 GitHub Actions 검증 파일을 함께 포함합니다.
+이 패키지는 **ALDOL MCP Forge v0.3.2 원본**과 GitHub Actions 검증 파일을 함께 포함합니다.
 이번 키트 자체는 MCP 기능을 새로 릴리스한 것이 아닙니다.
 
 ## 최초 실행
 
-1. GitHub에 **별도 Private 저장소** `aldol-mcp-forge`를 만듭니다. ARAM MCP·ARAM Forge 저장소와 혼동하지 마세요.
+1. GitHub에 **별도 Public 저장소** `aldol-mcp-forge`를 만듭니다. ARAM MCP·ARAM Forge 저장소와 혼동하지 마세요.
 2. 이 ZIP의 **압축 해제된 루트 파일들**을 새 저장소 `main`에 업로드합니다.
    `.github/workflows/verify-mcp-sdk.yml` 파일까지 포함해야 합니다.
 3. GitHub → **Actions** → `ALDOL MCP Forge - official SDK v2 verification`을 열어 실행 결과를 확인합니다.

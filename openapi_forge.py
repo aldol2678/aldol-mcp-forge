@@ -99,7 +99,7 @@ def render_server(name, version, operations):
     # All injected identifiers have passed strict allowlist validation.
     lines = [
         '"""Generated from OpenAPI GET operations by ALDOL MCP Forge v0.3."""',
-        'import sys', 'from api_runtime import call_operation',
+        'import sys', 'from typing import Any', 'from api_runtime import call_operation',
         'from operations import OPERATIONS', '',
         'if __name__ == "__main__" and "--compat-smoke-test" in sys.argv:',
         '    from mcp_runtime import Tool, serve',
@@ -118,7 +118,7 @@ def render_server(name, version, operations):
         pytype = {'string': 'str', 'integer': 'int', 'boolean': 'bool'}
         signature = ', '.join(p['name'] + ': ' + pytype[p['type']] + ('' if p['required'] else ' | None = None') for p in params)
         vals = ', '.join(repr(p['name']) + ': ' + p['name'] for p in params)
-        lines += ['', '    @app.tool()', f'    def {op["name"]}({signature}) -> dict:',
+        lines += ['', '    @app.tool()', f'    def {op["name"]}({signature}) -> dict[str, Any]:',
                   f'        {op["description"]!r}',
                   f'        return call_operation(OPERATIONS[{i}], {{{vals}}})']
     lines += ['', '    if __name__ == "__main__":', '        app.run()', '']
