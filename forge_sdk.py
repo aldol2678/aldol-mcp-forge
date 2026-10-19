@@ -8,9 +8,11 @@ Run (after installing mcp>=2,<3):
 """
 import os
 from pathlib import Path
-from typing import Any
+from typing import Annotated, Any, Literal
 
+from pydantic import Field
 from mcp.server import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 
 import forge
 
@@ -36,6 +38,25 @@ def _configure_workspace() -> None:
 _configure_workspace()
 app = MCPServer("aldol-mcp-forge")
 
+# Match the legacy public argument contract, including bounds and enum values.
+ProjectName = Annotated[str, Field(min_length=1, max_length=40)]
+Description = Annotated[str, Field(min_length=1, max_length=2000)]
+OpenAPISpec = Annotated[str, Field(min_length=2, max_length=120000)]
+Isolation = Annotated[Literal["auto", "strict"], Field(min_length=1, max_length=40)]
+
+
+def _expected_failure(operation, arguments: dict[str, Any]) -> dict[str, Any]:
+    """Keep expected user errors visible to a calling MCP client.
+
+    Unexpected exceptions deliberately escape so the SDK logs and sanitizes
+    them instead of exposing host internals.
+    """
+    try:
+        return operation(arguments)
+    except (ValueError, RuntimeError, OSError) as exc:
+        raise ToolError(str(exc)) from exc
+
+
 
 @app.tool()
 def forge_list_templates() -> dict[str, Any]:
@@ -44,50 +65,50 @@ def forge_list_templates() -> dict[str, Any]:
 
 
 @app.tool()
-def forge_preview(description: str) -> dict[str, Any]:
+def forge_preview(description: Description) -> dict[str, Any]:
     """Preview a natural language request; this operation creates no files."""
-    return forge._preview({"description": description})
+    return _expected_failure(forge._preview, {"description": description})
 
 
 @app.tool()
-def forge_create(project_name: str, description: str) -> dict[str, Any]:
+def forge_create(project_name: ProjectName, description: Description) -> dict[str, Any]:
     """Create a local MCP source project; never deploy or overwrite existing projects."""
-    return forge._create({"project_name": project_name, "description": description})
+    return _expected_failure(forge._create, {"project_name": project_name, "description": description})
 
 
 @app.tool()
 def forge_add_tool(
-    project_name: str, description: str, isolation: str = "auto"
+    project_name: ProjectName, description: Description, isolation: Isolation = "auto"
 ) -> dict[str, Any]:
     """Add a curated tool to a local project, retaining a versioned backup."""
-    return forge._add_tool({"project_name": project_name, "description": description,
+    return _expected_failure(forge._add_tool, {"project_name": project_name, "description": description,
                             "isolation": isolation})
 
 
 @app.tool()
-def forge_test(project_name: str, isolation: str = "auto") -> dict[str, Any]:
+def forge_test(project_name: ProjectName, isolation: Isolation = "auto") -> dict[str, Any]:
     """Validate local project files and run its compatibility / SDK tests."""
-    return forge._test({"project_name": project_name, "isolation": isolation})
+    return _expected_failure(forge._test, {"project_name": project_name, "isolation": isolation})
 
 
 @app.tool()
-def forge_package(project_name: str, isolation: str = "auto") -> dict[str, Any]:
+def forge_package(project_name: ProjectName, isolation: Isolation = "auto") -> dict[str, Any]:
     """Create a local ZIP after testing; never upload or deploy the package."""
-    return forge._package({"project_name": project_name, "isolation": isolation})
+    return _expected_failure(forge._package, {"project_name": project_name, "isolation": isolation})
 
 
 @app.tool()
-def forge_preview_openapi(spec_json: str) -> dict[str, Any]:
+def forge_preview_openapi(spec_json: OpenAPISpec) -> dict[str, Any]:
     """Preview supported OpenAPI 3.x JSON GET methods without network calls."""
-    return forge._preview_openapi({"spec_json": spec_json})
+    return _expected_failure(forge._preview_openapi, {"spec_json": spec_json})
 
 
 @app.tool()
 def forge_import_openapi(
-    project_name: str, spec_json: str, isolation: str = "auto"
+    project_name: ProjectName, spec_json: OpenAPISpec, isolation: Isolation = "auto"
 ) -> dict[str, Any]:
     """Create a local dry-run OpenAPI GET MCP project without live API calls."""
-    return forge._import_openapi({"project_name": project_name, "spec_json": spec_json,
+    return _expected_failure(forge._import_openapi, {"project_name": project_name, "spec_json": spec_json,
                                   "isolation": isolation})
 
 
