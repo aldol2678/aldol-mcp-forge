@@ -19,6 +19,58 @@ EXPECTED = {
 }
 SAMPLE_SPEC = (ROOT / "examples" / "pets_openapi.json").read_text(encoding="utf-8")
 
+# Exact v0.3.2 legacy per-field semantics, ignoring SDK-generated titles/default.
+ARGUMENTS = {
+    "forge_list_templates": ({}, ()),
+    "forge_preview": ({"description": (1, 2000)}, ("description",)),
+    "forge_create": ({"project_name": (1, 40), "description": (1, 2000)},
+                     ("project_name", "description")),
+    "forge_add_tool": ({"project_name": (1, 40), "description": (1, 2000),
+                        "isolation": (1, 40)}, ("project_name", "description")),
+    "forge_test": ({"project_name": (1, 40), "isolation": (1, 40)},
+                   ("project_name",)),
+    "forge_package": ({"project_name": (1, 40), "isolation": (1, 40)},
+                      ("project_name",)),
+    "forge_preview_openapi": ({"spec_json": (2, 120000)}, ("spec_json",)),
+    "forge_import_openapi": ({"project_name": (1, 40),
+                             "spec_json": (2, 120000),
+                             "isolation": (1, 40)}, ("project_name", "spec_json")),
+}
+
+
+def contract_check(tools):
+    """Compare advertised schemas semantically, excluding cosmetics."""
+    for tool in tools:
+        fields, required = ARGUMENTS[tool.name]
+        schema = tool.input_schema
+        props = schema.get("properties", {})
+        if schema.get("type") != "object" or set(props) != set(fields):
+            raise AssertionError(f"{tool.name} properties differ: {schema}")
+        if set(schema.get("required", [])) != set(required):
+            raise AssertionError(f"{tool.name} required fields differ: {schema}")
+        for name, (min_len, max_len) in fields.items():
+            got = props[name]
+            for key, value in (("type", "string"), ("minLength", min_len),
+                               ("maxLength", max_len)):
+                if got.get(key) != value:
+                    raise AssertionError(f"{tool.name}.{name}.{key}: {got!r} != {value!r}")
+            if name == "isolation" and set(got.get("enum", [])) != {"auto", "strict"}:
+                raise AssertionError(f"{tool.name}.isolation enum: {got!r}")
+    return {"schema_fields": sum(len(fields) for fields, _ in ARGUMENTS.values()),
+            "all_required_and_bounds_matched": True}
+
+
+async def expect_rejected(client, tool, args, hint=None):
+    """Expected user mistakes must be observable tool errors, never successes."""
+    reply = await client.call_tool(tool, args)
+    if not reply.is_error or reply.structured_content is not None:
+        raise AssertionError(f"{tool} accepted invalid arguments: {args!r} / {reply!r}")
+    message = " ".join(getattr(block, "text", "") for block in reply.content)
+    if not message.strip() or (hint and hint.lower() not in message.lower()):
+        raise AssertionError(f"{tool} error message lost: {message!r}; expected {hint!r}")
+    return message
+
+
 
 def payload(response):
     if response.is_error:
@@ -34,6 +86,24 @@ async def check(client, mode):
     names = {tool.name for tool in tools}
     if names != EXPECTED or len(tools) != len(EXPECTED):
         raise AssertionError(f"8 public tools changed: {sorted(names)}")
+    schemas = contract_check(tools)
+
+    # No mutation on invalid input; compare schema-validation and execution errors.
+    await expect_rejected(client, "forge_preview", {})
+    await expect_rejected(client, "forge_preview", {"description": ""})
+    await expect_rejected(client, "forge_preview", {"description": "x" * 2001})
+    await expect_rejected(client, "forge_preview", {"description": 3})
+    await expect_rejected(client, "forge_create",
+                          {"project_name": "x" * 41, "description": "HTML 검사"})
+    await expect_rejected(client, "forge_test",
+                          {"project_name": "not-created", "isolation": "unsafe"})
+    await expect_rejected(client, "forge_preview_openapi", {"spec_json": "{"},
+                          "string_too_short")
+    await expect_rejected(client, "forge_preview_openapi",
+                          {"spec_json": "{" + "x" * 120010 + "}"}, "string_too_long")
+    await expect_rejected(client, "forge_test",
+                          {"project_name": "not-created"}, "Project does not exist")
+
     preview = payload(await client.call_tool("forge_preview", {"description": "HTML 게임 검사"}))
     assert preview.get("supported") is True and preview.get("template") == "html_audit", preview
     templates = payload(await client.call_tool("forge_list_templates", {}))
@@ -47,6 +117,8 @@ async def check(client, mode):
     created = payload(await client.call_tool(
         "forge_create", {"project_name": name, "description": "HTML 게임 검사"}))
     assert created.get("created") is True and not created.get("auto_deployed"), created
+    await expect_rejected(client, "forge_create",
+                          {"project_name": name, "description": "HTML 게임 검사"}, "Project exists")
     verified = payload(await client.call_tool("forge_test", {"project_name": name}))
     assert verified.get("passed") is True, verified
     assert verified.get("compat_smoke_test") == "passed", verified
@@ -67,6 +139,7 @@ async def check(client, mode):
             assert item["mode"] == "dry_run" and item["network_called"] is False, item
 
     return {"passed": True, "mode": mode, "tools": sorted(names),
+            "contract": schemas, "errors_visible": True,
             "generated_mcp": name, "official_generated_sdk": "passed",
             "openapi_dry_run": mode == "stdio"}
 
