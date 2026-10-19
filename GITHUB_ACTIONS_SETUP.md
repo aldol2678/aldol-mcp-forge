@@ -25,9 +25,14 @@
 
 ## 검증 경계
 
-현재 이 파일 자체를 GitHub에 업로드하거나 Actions에서 실행한 것은 아닙니다.
-로컬 26개 자동화 테스트는 통과했습니다.
-실제 SDK 확인은 GitHub의 결과를 확인해야만 완료 상태로 승격합니다.
+v0.3.2는 공개 GitHub 저장소에 업로드되어 실제 Actions에서 검증됐습니다.
+- 저장소: https://github.com/aldol2678/aldol-mcp-forge
+- 커밋: `769bd658adb3c041aee4d17d3bbf6a1820c289d4`
+- Actions: https://github.com/aldol2678/aldol-mcp-forge/actions/runs/39315805343
+- 오프라인 회귀 26건 중 **25 PASS, 1 SKIP**; CI job 성공.
+- 공식 SDK `mcp==2.0.0`로 두 예제의 인메모리+stdio 검증 성공. 증거 artifact: https://github.com/aldol2678/aldol-mcp-forge/actions/runs/39315805343/artifacts/12217900746
+
+이 문서는 외부 서비스 배포·실사용 클라이언트 통합 검증을 의미하지 않습니다. 최초 설치 절차는 새로운 저장소를 구성하는 사람을 위한 안내입니다.
 
 보안상 외부에서 받은 미검증 MCP 코드를 이 워크플로에 자동 투입하지 마세요.
 일반 GitHub-hosted runner가 완전한 격리 보안 경계는 아닙니다.
