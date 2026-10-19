@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import traceback
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
@@ -194,6 +195,7 @@ def main():
         print(json.dumps(result, ensure_ascii=False))
         return 0
     except Exception as exc:
+        traceback.print_exception(exc, file=sys.stderr)
         print(json.dumps({"passed": False, "status": "FAILED",
                           "error": str(exc), "error_type": type(exc).__name__},
                          ensure_ascii=False))
