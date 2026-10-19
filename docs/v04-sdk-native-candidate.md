@@ -6,6 +6,8 @@
 
 - `forge_sdk.py`: 공식 Python MCP SDK v2 `MCPServer`로 Forge 자체의 8개 도구를 노출하는 stdio 서버.
 - `ci/verify_forge_sdk.py`: 공식 SDK v2 클라이언트에서 in-memory와 자식 프로세스 stdio를 각각 시험합니다. 목록, 미리보기, 실제 로컬 생성/검증/패키징과 OpenAPI dry-run까지 포함합니다.
+- 인자 호환성: SDK 2.0.0은 기본 동작에서 알 수 없는 추가 인자를 무시하므로, **도구 호출만 대상으로 하는 거부 전용 미들웨어**로 이전 Forge의 추가 인자 거부를 보존합니다. 스키마의 필수값/길이/허용값은 Pydantic Field와 Literal로 정의했습니다. 미들웨어 인터페이스는 SDK에서 잠정적이므로 이후 SDK 버전 업그레이드 시 재검증이 필요합니다.
+- 실행 실패: 사용자 입력이나 기존 프로젝트 중복·누락 등의 예상 가능한 오류는 ToolError로 반환합니다. 예상 밖 예외는 SDK의 기본 오류 은닉을 유지합니다.
 - `ALDOL_FORGE_WORKSPACE_ROOT`: CI 또는 개발자가 **명시적으로** 설정하면 기존 루트 대신 해당 절대 경로에서 프로젝트/백업/ZIP을 생성할 수 있습니다. 이 환경 변수는 *sandbox 정책이 아닙니다*. 폴더는 미리 존재해야 합니다.
 - 기존 `forge.py`의 경량 호환 런타임은 v0.4 검증 완료 전까지 그대로 남아 있습니다.
 
@@ -42,7 +44,7 @@ Forge의 `forge_create`, `forge_add_tool`, `forge_import_openapi`, `forge_packag
 
 ## 남은 범위
 
-- 입력 JSON Schema가 기존 경량 런타임과 필드 수준에서 일치하는지 검증 (SDK 타입 힌트에서 생성하는 스키마 차이 분석 포함)
+- 노출된 JSON Schema의 표현상 차이(예: Pydantic 제목·기본값·additionalProperties 표기)는 호환성 테스트 및 마이그레이션 문서로 추적. 실제 미등록 인자 거부는 도구 호출 레벨에서 검사
 - 실제 ChatGPT/Claude/Cursor 클라이언트 설정 검증
 - 예외 처리/오류 응답 및 격리 보증의 안정화
 - 기존 `forge.py` 엔트리포인트의 공식 교체 여부를 결정하고, 문서의 설치 경로 통합
