@@ -13,6 +13,7 @@ from typing import Annotated, Any, Literal
 from pydantic import Field
 from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
+from mcp.types import CallToolResult, TextContent
 
 import forge
 
@@ -36,7 +37,42 @@ def _configure_workspace() -> None:
 
 
 _configure_workspace()
-app = MCPServer("aldol-mcp-forge")
+# The official SDK 2.0.0 decorator silently drops unknown keys from tool
+# arguments. Legacy Forge rejected them; preserve that behavior at the
+# pre-validation boundary. This middleware only REFUSES unknown arguments.
+_ALLOWED_TOOL_KEYS: dict[str, frozenset[str]] = {
+    "forge_list_templates": frozenset(),
+    "forge_preview": frozenset({"description"}),
+    "forge_create": frozenset({"project_name", "description"}),
+    "forge_add_tool": frozenset({"project_name", "description", "isolation"}),
+    "forge_test": frozenset({"project_name", "isolation"}),
+    "forge_package": frozenset({"project_name", "isolation"}),
+    "forge_preview_openapi": frozenset({"spec_json"}),
+    "forge_import_openapi": frozenset({"project_name", "spec_json", "isolation"}),
+}
+
+
+async def reject_unknown_tool_arguments(ctx, call_next):
+    if ctx.method != "tools/call":
+        return await call_next(ctx)
+    params = ctx.params
+    if isinstance(params, dict):
+        name, arguments = params.get("name"), params.get("arguments", {})
+    else:
+        name = getattr(params, "name", None)
+        arguments = getattr(params, "arguments", {})
+    if name in _ALLOWED_TOOL_KEYS and isinstance(arguments, dict):
+        unknown = arguments.keys() - _ALLOWED_TOOL_KEYS[name]
+        if unknown:
+            return CallToolResult(
+                is_error=True,
+                content=[TextContent(type="text", text="unknown argument(s): " +
+                                     ", ".join(sorted(unknown)))],
+            )
+    return await call_next(ctx)
+
+
+app = MCPServer("aldol-mcp-forge", middleware=[reject_unknown_tool_arguments])
 
 # Match the legacy public argument contract, including bounds and enum values.
 ProjectName = Annotated[str, Field(min_length=1, max_length=40)]
