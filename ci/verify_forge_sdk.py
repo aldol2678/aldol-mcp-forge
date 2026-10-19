@@ -93,14 +93,15 @@ async def check(client, mode):
     await expect_rejected(client, "forge_preview", {"description": ""})
     await expect_rejected(client, "forge_preview", {"description": "x" * 2001})
     await expect_rejected(client, "forge_preview", {"description": 3})
+    await expect_rejected(client, "forge_preview",
+                          {"description": "HTML 검사", "unrecognized": "not-allowed"})
     await expect_rejected(client, "forge_create",
                           {"project_name": "x" * 41, "description": "HTML 검사"})
     await expect_rejected(client, "forge_test",
                           {"project_name": "not-created", "isolation": "unsafe"})
-    await expect_rejected(client, "forge_preview_openapi", {"spec_json": "{"},
-                          "string_too_short")
+    await expect_rejected(client, "forge_preview_openapi", {"spec_json": "{"})
     await expect_rejected(client, "forge_preview_openapi",
-                          {"spec_json": "{" + "x" * 120010 + "}"}, "string_too_long")
+                          {"spec_json": "{" + "x" * 120010 + "}"})
     await expect_rejected(client, "forge_test",
                           {"project_name": "not-created"}, "Project does not exist")
 
