@@ -122,6 +122,8 @@ class JobStore:
                     "status": "QUEUED", "created_at": int(time.time())}
             self.write_meta(subject, job_id, meta)
             self.active += 1
+            self._running_ids = getattr(self, "_running_ids", set())
+            self._running_ids.add(job_id)
             threading.Thread(target=self._execute, args=(subject, job_id),
                              daemon=True, name="forge-sdk-job").start()
         return 202, self.public_state(meta)
@@ -199,6 +201,17 @@ class JobStore:
                     **meta, "status": final, "verification": verification,
                     "finished_at": int(time.time()),
                 })
+        except Exception:
+            # Fail closed even if the verifier crashes unexpectedly. Never leave
+            # a stale RUNNING/PASS status, and never log extracted source.
+            with self.lock:
+                meta = self.meta(subject, jid)
+                if meta:
+                    self.write_meta(subject, jid, {
+                        **meta, "status": "FAIL",
+                        "verification": {"passed": False, "official_sdk": "FAIL"},
+                        "finished_at": int(time.time()),
+                    })
         finally:
             (directory / "export.zip").unlink(missing_ok=True)
             with self.lock:
