@@ -111,5 +111,47 @@ class SDKJobGatewayTests(unittest.TestCase):
         self.assertFalse((self.store.job_directory(body["subject_hash"], jid) / "export.zip").exists())
 
 
-if __name__ == "__main__":
+
+class JobLifecycleTests(unittest.TestCase):
+    def test_completed_result_survives_restart(self):
+        with tempfile.TemporaryDirectory() as root:
+            store = JobStore(root, SECRET)
+            subject, jid, project = 'd'*64, 'e'*64, str(uuid4())
+            store.write_meta(subject, jid, {'job_id': jid, 'project_id': project,
+                'sha256': 'f'*64, 'status':'PASS', 'verification': {'official_sdk':'PASS'}})
+            restarted = JobStore(root, SECRET)
+            self.assertEqual(restarted.status({'subject_hash':subject,'job_id':jid,'project_id':project})['status'],'PASS')
+
+    def test_invalid_verifier_output_is_failure_not_timeout(self):
+        with tempfile.TemporaryDirectory() as root:
+            verifier = Path(root)/'invalid.py'
+            verifier.write_text('print("invalid-json")')
+            store = JobStore(root, SECRET, verifier=verifier)
+            data=SAMPLE.read_bytes()
+            _, job=store.start({'subject_hash':'a'*64,'project_id':str(uuid4()),
+                'sha256':hashlib.sha256(data).hexdigest(),'zip_base64':base64.b64encode(data).decode()})
+            for _ in range(100):
+                meta=store.meta('a'*64,job['job_id'])
+                if meta['status'] not in ('QUEUED','RUNNING'): break
+                time.sleep(.02)
+            self.assertEqual(meta['status'],'FAIL')
+
+    def test_timeout_is_distinct_and_result_persists(self):
+        with tempfile.TemporaryDirectory() as root:
+            verifier=Path(root)/'slow.py'
+            verifier.write_text('import time; time.sleep(30)')
+            store=JobStore(root,SECRET,verifier=verifier,timeout_seconds=.1)
+            data=SAMPLE.read_bytes()
+            body={'subject_hash':'a'*64,'project_id':str(uuid4()),
+                'sha256':hashlib.sha256(data).hexdigest(),'zip_base64':base64.b64encode(data).decode()}
+            _,job=store.start(body)
+            for _ in range(100):
+                meta=store.meta('a'*64,job['job_id'])
+                if meta['status'] not in ('QUEUED','RUNNING'): break
+                time.sleep(.02)
+            self.assertEqual(meta['status'],'TIMEOUT')
+            self.assertEqual(JobStore(root,SECRET).status({'subject_hash':'a'*64,
+                'project_id':body['project_id'],'job_id':job['job_id']})['status'],'TIMEOUT')
+
+if __name__ == '__main__':
     unittest.main()

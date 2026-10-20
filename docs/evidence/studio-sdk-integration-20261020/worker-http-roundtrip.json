@@ -1,0 +1,25 @@
+{
+  "scope": "local actual Worker HMAC + HTTP + Python SDK; synthetic identity and memory R2",
+  "project_id": "2ce8a3cd-8452-4a32-8f80-35d519156339",
+  "duplicate_job_id": "79dea87c18bbbf2a6fdff96f8a90d87d55bd3fd647ffcbb91f51f443378bf920",
+  "refresh_persisted": true,
+  "job_id": "79dea87c18bbbf2a6fdff96f8a90d87d55bd3fd647ffcbb91f51f443378bf920",
+  "sha256": "24433570b7bae3b57417ab0aa1151c8719b192892c1e984ba63340f350376e66",
+  "status": "PASS",
+  "created_at": 1792481726,
+  "finished_at": 1792481729,
+  "verification": {
+    "passed": true,
+    "official_sdk": "PASS",
+    "sdk_version": "2.0.0",
+    "inmemory": "PASS",
+    "stdio": "PASS",
+    "network_used": false,
+    "files_checked": 8,
+    "kind": "curated",
+    "version": "0.2.0"
+  },
+  "available": true,
+  "official_sdk": "PASS",
+  "python_execution": "PASS"
+}

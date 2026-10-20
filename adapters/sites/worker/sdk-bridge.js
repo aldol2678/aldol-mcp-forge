@@ -92,7 +92,7 @@ export async function createSdkJob(request, env, projectId, fetcher = fetch) {
                    sha256: zip.sha256, created_at: Date.now()};
   await env.BUCKET.put((await ownerPrefix(request)) + "sdk-job-latest/" +
     projectId + ".json", JSON.stringify(pointer));
-  return { ...result, python_execution: "QUEUED", official_sdk: "UNKNOWN" };
+  return normalizeSdkResult(result);
 }
 
 export async function readSdkJob(request, env, projectId, fetcher = fetch) {
@@ -120,16 +120,22 @@ export async function readSdkJob(request, env, projectId, fetcher = fetch) {
       !["QUEUED", "RUNNING", "PASS", "FAIL", "REJECTED", "TIMEOUT", "INTERRUPTED"].includes(result.status)) {
     throw bad("SDK 검증 결과의 소유권·작업 해시가 일치하지 않습니다.", 502);
   }
-  // Only a real signed final execution result can become a PASS.
+  return normalizeSdkResult({...result, available: true});
+}
+
+function normalizeSdkResult(result) {
+  // Only authenticated final execution evidence for SDK v2 can become PASS.
   const approved = result.status === "PASS" &&
     result.verification?.passed === true &&
     result.verification?.official_sdk === "PASS" &&
     result.verification?.inmemory === "PASS" &&
     result.verification?.stdio === "PASS" &&
-    result.verification?.network_used === false;
-  return {...result, available: true,
-          official_sdk: approved ? "PASS" :
-            ["QUEUED", "RUNNING"].includes(result.status) ? "UNKNOWN" : "FAIL",
-          python_execution: approved ? "PASS" :
-            ["QUEUED", "RUNNING"].includes(result.status) ? "UNKNOWN" : "FAIL"};
+    result.verification?.network_used === false &&
+    /^2\./.test(result.verification?.sdk_version || "");
+  const status = result.status === "PASS" && !approved ? "FAIL" :
+    result.status === "REJECTED" ? "FAIL" :
+    result.status === "INTERRUPTED" ? "UNKNOWN" : result.status;
+  return {...result, status, official_sdk: status, python_execution: status,
+    reason: result.status === "INTERRUPTED" ? "실행 호스트가 재시작되어 결과를 확인할 수 없습니다." :
+      result.status === "PASS" && !approved ? "공식 SDK v2 실행 증거가 완전하지 않습니다." : result.reason};
 }

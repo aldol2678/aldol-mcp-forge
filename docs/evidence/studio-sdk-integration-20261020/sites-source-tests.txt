@@ -1,0 +1,32 @@
+✔ SDK service is disabled unless all private host settings exist (15.704333ms)
+✔ actual stored project ZIP is signed and posted; results are owner scoped (15.944864ms)
+✔ forged success and mismatched artifact hashes never count as PASS (7.313828ms)
+✔ missing authenticated Sites user is rejected before SDK network request (0.39735ms)
+✔ job states retain TIMEOUT and UNKNOWN; incomplete SDK evidence cannot PASS (12.530507ms)
+✔ served Studio UI includes real SDK verify button and explicit skip state (5.267887ms)
+✔ SDK status stays SKIP before a configured private host (0.742632ms)
+✔ served JavaScript exactly matches client source and contains SDK click handlers (6.833717ms)
+✔ Studio serves functional accessible workspace (5.793682ms)
+✔ identity and verification gate block writes and user-controlled principals (2.628731ms)
+✔ create, readback, immutable edit, ZIP, tenant exclusion and invalid inputs (21.628681ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ OpenAPI import accepts GET, keeps dry-run and rejects malformed specs (5.350146ms)
+✔ MCP write tools hidden until verified and never report Python execution as PASS (3.610513ms)
+✔ MCP mutation keeps original JSON-RPC envelope rejection (1.263518ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ all five Studio MCP tools dispatch through the actual JSON-RPC endpoint (14.522834ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 150.309328

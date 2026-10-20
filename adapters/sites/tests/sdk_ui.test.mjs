@@ -28,3 +28,14 @@ test("SDK status stays SKIP before a configured private host",async()=>{
   assert.equal(body.available,false);
   assert.equal(body.official_sdk,"SKIP");
 });
+
+test('served JavaScript exactly matches client source and contains SDK click handlers',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const {Script}=await import('node:vm');
+ const source=await readFile(new URL('../worker/client.js',import.meta.url),'utf8');
+ const served=await (await worker.fetch(req('/studio.js'))).text();
+ assert.equal(served,source,'Regenerate page.js before checks and deployment');
+ new Script(served);
+ assert.match(served,/sdk-project/);
+ assert.match(served,/pollSdk/);
+});

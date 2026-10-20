@@ -152,8 +152,10 @@ def main() -> int:
     args = parser.parse_args()
     try:
         result = verify(args.archive)
+    except subprocess.TimeoutExpired:
+        result = {"passed": False, "status": "TIMEOUT", "official_sdk": "TIMEOUT"}
     except (OSError, ValueError, RuntimeError, BadZipFile, KeyError,
-            json.JSONDecodeError, subprocess.TimeoutExpired) as error:
+            json.JSONDecodeError) as error:
         result = {"passed": False, "status": "REJECTED",
                   "reason": type(error).__name__}
     print(json.dumps(result, ensure_ascii=False))

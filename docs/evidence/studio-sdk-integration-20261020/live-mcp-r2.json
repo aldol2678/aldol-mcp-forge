@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-10-20T07:44:15.891Z",
+  "scope": "actual installed private MCP plugin; real user-scoped R2",
+  "tools_called": [
+    "forge_list_templates",
+    "forge_preview",
+    "forge_preview_openapi",
+    "forge_create",
+    "forge_add_tool",
+    "forge_import_openapi",
+    "forge_test",
+    "forge_package"
+  ],
+  "created_id": "3ee29ed2-dabc-4ecf-80e1-63da1b911ffd",
+  "new_version_id": "ee2981ff-5fb0-4081-91ae-02845708cd65",
+  "parent_id": "3ee29ed2-dabc-4ecf-80e1-63da1b911ffd",
+  "import_id": "3f26a284-431f-499c-aa8f-342708e9d878",
+  "post_deployment_old_version": {
+    "checks": {
+      "mcp_runtime.py": "PASS",
+      "templates.py": "PASS",
+      "server.py": "PASS",
+      "requirements.txt": "PASS"
+    },
+    "integrity": {
+      "status": "PASS"
+    },
+    "python_execution": {
+      "status": "SKIP"
+    },
+    "official_sdk": {
+      "status": "SKIP"
+    },
+    "note": "파일 무결성 검사입니다. Python 실행·SDK 검사가 아닙니다."
+  },
+  "post_deployment_new_version": {
+    "checks": {
+      "mcp_runtime.py": "PASS",
+      "templates.py": "PASS",
+      "server.py": "PASS",
+      "requirements.txt": "PASS"
+    },
+    "integrity": {
+      "status": "PASS"
+    },
+    "python_execution": {
+      "status": "SKIP"
+    },
+    "official_sdk": {
+      "status": "SKIP"
+    },
+    "note": "파일 무결성 검사입니다. Python 실행·SDK 검사가 아닙니다."
+  },
+  "package": {
+    "project_id": "ee2981ff-5fb0-4081-91ae-02845708cd65",
+    "sha256": "4dc5459452fca7a6086c8606d714fb55423a0e4475aa8934862bda511097130b",
+    "bytes": 15119,
+    "download_path": "/api/projects/ee2981ff-5fb0-4081-91ae-02845708cd65/package",
+    "python_execution": "SKIP"
+  }
+}

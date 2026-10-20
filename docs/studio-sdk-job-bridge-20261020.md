@@ -2,6 +2,8 @@
 
 **Development status (2026-10-20):** SDK button, signed remote-job protocol, localhost Python execution service and CI are implemented. **Production integration NOT active.** Existing owner-private Sites v5 and R2 objects have not been changed by this PR.
 
+> This document records PR #8's pre-deployment state. See [the private integration update](studio-sdk-private-integration-20261020.md) for the subsequent in-place Site update and current verification limits.
+
 ## User experience after a real private SDK host is configured
 
 In Forge Studio > **검증실**, select a saved project and click **공식 SDK 실행 검증**. The Site generates the project's immutable ZIP, compares its source-file checksums, then sends it to an operator-approved Python SDK service over authenticated HTTPS. The status is refreshed periodically and recoverable after reload through an owner-scoped R2 job pointer. The UI only shows SDK PASS if the Python service returns a verified official SDK **in-memory and stdio** PASS with zero live API calls. In every other case it displays UNKNOWN/FAIL/SKIP, never simulated success.

@@ -1,0 +1,31 @@
+test_add_tool_preserves_prior_and_increments_version (test_forge.ForgeTests.test_add_tool_preserves_prior_and_increments_version) ... ok
+test_all_templates_generate_smoke_package (test_forge.ForgeTests.test_all_templates_generate_smoke_package) ... ok
+test_concurrent_lock_refusal (test_forge.ForgeTests.test_concurrent_lock_refusal) ... ok
+test_forge_stdio_roundtrip (test_forge.ForgeTests.test_forge_stdio_roundtrip) ... ok
+test_legacy_v01_migration (test_forge.ForgeTests.test_legacy_v01_migration) ... ok
+test_namespace_network_and_project_readonly (test_forge.ForgeTests.test_namespace_network_and_project_readonly) ... skipped 'Linux user/mount/net namespaces are not supported'
+test_old_functions_regression (test_forge.ForgeTests.test_old_functions_regression) ... ok
+test_path_traversal (test_forge.ForgeTests.test_path_traversal) ... ok
+test_refuse_undeclared_files_and_symlinks (test_forge.ForgeTests.test_refuse_undeclared_files_and_symlinks) ... ok
+test_strict_fails_closed_when_unavailable (test_forge.ForgeTests.test_strict_fails_closed_when_unavailable) ... ok
+test_tamper_does_not_mutate_original (test_forge.ForgeTests.test_tamper_does_not_mutate_original) ... ok
+test_template_resolution (test_forge.ForgeTests.test_template_resolution) ... ok
+test_unsupported_request_and_dup_project (test_forge.ForgeTests.test_unsupported_request_and_dup_project) ... ok
+test_create_run_package_with_readme_and_requirements (test_openapi.OpenAPITests.test_create_run_package_with_readme_and_requirements) ... ok
+test_description_source_injection_stays_inert (test_openapi.OpenAPITests.test_description_source_injection_stays_inert) ... ok
+test_external_network_requires_allowlist (test_openapi.OpenAPITests.test_external_network_requires_allowlist) ... ok
+test_forge_stdio_advertises_import_tools (test_openapi.OpenAPITests.test_forge_stdio_advertises_import_tools) ... ok
+test_legacy_v02_patch_package_contains_requirements (test_openapi.OpenAPITests.test_legacy_v02_patch_package_contains_requirements) ... ok
+test_operation_sanitizes_path_value_and_dry_run (test_openapi.OpenAPITests.test_operation_sanitizes_path_value_and_dry_run) ... ok
+test_preview_is_read_only (test_openapi.OpenAPITests.test_preview_is_read_only) ... ok
+test_reject_reference_and_unsafe_parameters (test_openapi.OpenAPITests.test_reject_reference_and_unsafe_parameters) ... ok
+test_tamper_and_symlink_guard (test_openapi.OpenAPITests.test_tamper_and_symlink_guard) ... ok
+test_dry_run_process_environment_restored (test_sdk_verifier.SDKVerifierContractTests.test_dry_run_process_environment_restored) ... ok
+test_official_sdk_unavailable_is_not_reported_as_success (test_sdk_verifier.SDKVerifierContractTests.test_official_sdk_unavailable_is_not_reported_as_success) ... ok
+test_openapi_expected_tools_are_read_only (test_sdk_verifier.SDKVerifierContractTests.test_openapi_expected_tools_are_read_only) ... ok
+test_write_method_rejected (test_sdk_verifier.SDKVerifierContractTests.test_write_method_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 1.374s
+
+OK (skipped=1)

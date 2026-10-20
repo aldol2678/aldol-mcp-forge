@@ -6,6 +6,8 @@ on:
       - '.github/workflows/verify-studio-sdk-jobs.yml'
       - 'bridge/sdk_job_gateway.py'
       - 'bridge/test_sdk_job_gateway.py'
+      - 'ci/verify_studio_roundtrip.mjs'
+      - 'ci/test_studio_archive.py'
       - 'adapters/sites/**'
       - 'ci/verify_studio_archive.py'
       - 'ci/generate_studio_sdk_fixtures.mjs'
@@ -15,6 +17,8 @@ on:
       - '.github/workflows/verify-studio-sdk-jobs.yml'
       - 'bridge/sdk_job_gateway.py'
       - 'bridge/test_sdk_job_gateway.py'
+      - 'ci/verify_studio_roundtrip.mjs'
+      - 'ci/test_studio_archive.py'
       - 'adapters/sites/**'
       - 'ci/verify_studio_archive.py'
       - 'ci/generate_studio_sdk_fixtures.mjs'
@@ -53,4 +57,6 @@ jobs:
       - name: Install official MCP SDK v2
         run: python -m pip install --no-input "mcp==2.0.0"
       - name: Exercise signed HTTP job and real SDK with no external API target
-        run: python -m unittest bridge.test_sdk_job_gateway -v
+        run: |
+          python -m unittest bridge.test_sdk_job_gateway ci.test_studio_archive -v
+          node ci/verify_studio_roundtrip.mjs

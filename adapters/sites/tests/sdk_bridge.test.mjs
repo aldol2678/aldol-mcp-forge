@@ -64,7 +64,7 @@ test("actual stored project ZIP is signed and posted; results are owner scoped",
  };
  const start=await createSdkJob(makeReq("/api/projects/"+p.id+"/sdk",{}),e,p.id,submit);
  assert.equal(start.status,"QUEUED");
- assert.equal(start.official_sdk,"UNKNOWN");
+ assert.equal(start.official_sdk,"QUEUED");
  assert.equal([...e.BUCKET.data.keys()].filter(k=>k.includes("sdk-job-latest")).length,1);
  const status=await readSdkJob(makeReq("/api/projects/"+p.id+"/sdk"),e,p.id,async(url,opts)=>{
    assert.equal(new URL(url).pathname,"/v1/sdk/jobs/status");
@@ -72,7 +72,7 @@ test("actual stored project ZIP is signed and posted; results are owner scoped",
    assert.equal(body.job_id,"a".repeat(64));
    return {status:200,redirected:false,json:async()=>({
      job_id:body.job_id,project_id:p.id,sha256:expectedHash,status:"PASS",
-     verification:{passed:true,official_sdk:"PASS",inmemory:"PASS",stdio:"PASS",network_used:false},
+     verification:{passed:true,official_sdk:"PASS",inmemory:"PASS",stdio:"PASS",network_used:false,sdk_version:"2.0.0"},
    })};
  });
  assert.equal(status.official_sdk,"PASS");
@@ -102,4 +102,23 @@ test("missing authenticated Sites user is rejected before SDK network request",a
  const req=makeReq("/api/projects/00000000-0000-0000-0000-000000000000/sdk",{},null);
  await assert.rejects(createSdkJob(req,e,"00000000-0000-0000-0000-000000000000",async()=>{touched=true;}));
  assert.equal(touched,false);
+});
+
+test('job states retain TIMEOUT and UNKNOWN; incomplete SDK evidence cannot PASS',async()=>{
+ const e=ready(),p=await (await worker.fetch(makeReq('/api/projects',{project_name:'sdk-states',description:'JSON 검사'}),e)).json();
+ let sha;
+ await createSdkJob(makeReq('/sdk',{}),e,p.id,async(url,opts)=>{
+  sha=JSON.parse(opts.body).sha256;
+  return {status:202,json:async()=>({job_id:'c'.repeat(64),project_id:p.id,sha256:sha,status:'QUEUED'})};
+ });
+ for(const [status,verification,expected] of [
+  ['RUNNING',undefined,'RUNNING'],['QUEUED',undefined,'QUEUED'],
+  ['TIMEOUT',undefined,'TIMEOUT'],['INTERRUPTED',undefined,'UNKNOWN'],
+  ['REJECTED',undefined,'FAIL'],['PASS',{passed:true,official_sdk:'PASS'},'FAIL'],
+  ['PASS',{passed:true,official_sdk:'PASS',inmemory:'PASS',stdio:'PASS',network_used:false,sdk_version:'1.0.0'},'FAIL'],
+ ]){
+  const r=await readSdkJob(makeReq('/sdk'),e,p.id,async()=>({status:200,json:async()=>({job_id:'c'.repeat(64),project_id:p.id,sha256:sha,status,verification})}));
+  assert.equal(r.official_sdk,expected,status);
+  if(status==='PASS')assert.equal(r.status,'FAIL');
+ }
 });

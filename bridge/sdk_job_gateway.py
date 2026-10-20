@@ -17,6 +17,7 @@ import json
 import os
 from pathlib import Path
 import re
+import signal
 import subprocess
 import sys
 import threading
@@ -48,7 +49,7 @@ def verify_signature(key: str, timestamp: str, path: str, raw: bytes, signature:
 
 
 class JobStore:
-    def __init__(self, workspace: str, secret: str, verifier=VERIFY):
+    def __init__(self, workspace: str, secret: str, verifier=VERIFY, timeout_seconds=95):
         root = Path(workspace)
         if not root.is_absolute() or root.is_symlink() or len(secret) < 32:
             raise ValueError("Private absolute workspace and strong secret required")
@@ -60,6 +61,9 @@ class JobStore:
         self.lock = threading.RLock()
         self.active = 0
         self.capacity = 2
+        if not 0 < timeout_seconds <= 95:
+            raise ValueError("Invalid verification timeout")
+        self.timeout_seconds = timeout_seconds
 
     def job_directory(self, subject: str, job_id: str) -> Path:
         if not SHA_RE.fullmatch(subject) or not SHA_RE.fullmatch(job_id):
@@ -175,26 +179,41 @@ class JobStore:
                 "ALDOL_API_ALLOWED_HOST": "",
             }
             try:
-                proc = subprocess.run(
+                # Kill the verifier and its SDK stdio descendants together.
+                with subprocess.Popen(
                     [sys.executable, "-B", str(self.verifier), str(directory / "export.zip")],
-                    capture_output=True, text=True, timeout=95, env=environment,
-                    cwd=REPO, check=False,
-                )
-                report = json.loads(proc.stdout.strip())
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                    env=environment, cwd=REPO, start_new_session=True,
+                ) as proc:
+                    try:
+                        stdout, _ = proc.communicate(timeout=self.timeout_seconds)
+                    except subprocess.TimeoutExpired:
+                        try:
+                            os.killpg(proc.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
+                        proc.communicate()
+                        raise
+                report = json.loads(stdout.strip())
                 passed = (proc.returncode == 0 and report.get("passed") is True
                           and report.get("official_sdk") == "PASS"
                           and report.get("inmemory") == "PASS"
                           and report.get("stdio") == "PASS"
-                          and report.get("network_used") is False)
+                          and report.get("network_used") is False
+                          and str(report.get("sdk_version", "")).startswith("2."))
                 verification = {key: report[key] for key in (
                     "passed", "official_sdk", "sdk_version", "inmemory", "stdio",
                     "network_used", "files_checked", "kind", "version",
                 ) if key in report}
                 if not passed:
                     verification = {"passed": False, "official_sdk": "FAIL"}
-                final = "PASS" if passed else "FAIL"
-            except (subprocess.TimeoutExpired, ValueError, OSError, json.JSONDecodeError):
-                final, verification = "TIMEOUT", {"passed": False, "official_sdk": "UNKNOWN"}
+                final = "PASS" if passed else "TIMEOUT" if report.get("status") == "TIMEOUT" else "FAIL"
+                if final == "TIMEOUT":
+                    verification = {"passed": False, "official_sdk": "TIMEOUT"}
+            except subprocess.TimeoutExpired:
+                final, verification = "TIMEOUT", {"passed": False, "official_sdk": "TIMEOUT"}
+            except (ValueError, OSError):
+                final, verification = "FAIL", {"passed": False, "official_sdk": "FAIL"}
             with self.lock:
                 meta = self.meta(subject, jid)
                 self.write_meta(subject, jid, {

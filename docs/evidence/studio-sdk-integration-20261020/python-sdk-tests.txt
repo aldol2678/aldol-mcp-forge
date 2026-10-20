@@ -1,0 +1,18 @@
+test_completed_result_survives_restart (bridge.test_sdk_job_gateway.JobLifecycleTests.test_completed_result_survives_restart) ... ok
+test_invalid_verifier_output_is_failure_not_timeout (bridge.test_sdk_job_gateway.JobLifecycleTests.test_invalid_verifier_output_is_failure_not_timeout) ... ok
+test_timeout_is_distinct_and_result_persists (bridge.test_sdk_job_gateway.JobLifecycleTests.test_timeout_is_distinct_and_result_persists) ... ok
+test_async_real_sdk_result_and_cross_user_rejection (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_async_real_sdk_result_and_cross_user_rejection) ... ok
+test_hmac_timestamp_and_exact_body (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_hmac_timestamp_and_exact_body) ... ok
+test_reject_tampering_and_bad_ids (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_reject_tampering_and_bad_ids) ... ok
+test_exact_generator_parity_accepts_curated_and_openapi (ci.test_studio_archive.StudioArchiveTests.test_exact_generator_parity_accepts_curated_and_openapi) ... ok
+test_real_official_sdk_both_transports (ci.test_studio_archive.StudioArchiveTests.test_real_official_sdk_both_transports) ... ok
+test_reject_executable_even_when_all_hashes_are_repaired (ci.test_studio_archive.StudioArchiveTests.test_reject_executable_even_when_all_hashes_are_repaired) ... ok
+test_reject_hash_mismatch (ci.test_studio_archive.StudioArchiveTests.test_reject_hash_mismatch) ... ok
+test_reject_oversized_manifest_before_decompression (ci.test_studio_archive.StudioArchiveTests.test_reject_oversized_manifest_before_decompression) ... ok
+test_reject_traversal (ci.test_studio_archive.StudioArchiveTests.test_reject_traversal) ... ok
+test_reject_unknown_files (ci.test_studio_archive.StudioArchiveTests.test_reject_unknown_files) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 6.360s
+
+OK

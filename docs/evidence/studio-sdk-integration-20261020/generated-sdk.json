@@ -1,0 +1,202 @@
+{
+  "passed": true,
+  "projects": [
+    {
+      "name": "studio-html",
+      "original_validator": "PASS",
+      "ast": "PASS",
+      "official_sdk": {
+        "passed": true,
+        "official_sdk": true,
+        "validation": "official Python MCP SDK v2",
+        "sdk_version": "2.0.0",
+        "transports": {
+          "inmemory": {
+            "tools": [
+              "html_audit"
+            ],
+            "sample_results": {
+              "html_audit": {
+                "type": "static_html_audit",
+                "checks": {
+                  "canvas_count": 0,
+                  "image_alt_missing": 0,
+                  "viewport_declared": true
+                },
+                "issue_count": 0,
+                "issues": [],
+                "limitations": "Static syntax/markup heuristics only. No rendering, gameplay, JavaScript execution or device QA."
+              }
+            },
+            "protocol_version": "2026-07-28"
+          },
+          "stdio": {
+            "tools": [
+              "html_audit"
+            ],
+            "sample_results": {
+              "html_audit": {
+                "type": "static_html_audit",
+                "checks": {
+                  "canvas_count": 0,
+                  "image_alt_missing": 0,
+                  "viewport_declared": true
+                },
+                "issue_count": 0,
+                "issues": [],
+                "limitations": "Static syntax/markup heuristics only. No rendering, gameplay, JavaScript execution or device QA."
+              }
+            },
+            "protocol_version": "2026-07-28"
+          }
+        },
+        "network_used": false
+      }
+    },
+    {
+      "name": "studio-text",
+      "original_validator": "PASS",
+      "ast": "PASS",
+      "official_sdk": {
+        "passed": true,
+        "official_sdk": true,
+        "validation": "official Python MCP SDK v2",
+        "sdk_version": "2.0.0",
+        "transports": {
+          "inmemory": {
+            "tools": [
+              "text_stats"
+            ],
+            "sample_results": {
+              "text_stats": {
+                "characters": 11,
+                "words": 2,
+                "lines": 1
+              }
+            },
+            "protocol_version": "2026-07-28"
+          },
+          "stdio": {
+            "tools": [
+              "text_stats"
+            ],
+            "sample_results": {
+              "text_stats": {
+                "characters": 11,
+                "words": 2,
+                "lines": 1
+              }
+            },
+            "protocol_version": "2026-07-28"
+          }
+        },
+        "network_used": false
+      }
+    },
+    {
+      "name": "studio-json",
+      "original_validator": "PASS",
+      "ast": "PASS",
+      "official_sdk": {
+        "passed": true,
+        "official_sdk": true,
+        "validation": "official Python MCP SDK v2",
+        "sdk_version": "2.0.0",
+        "transports": {
+          "inmemory": {
+            "tools": [
+              "json_audit"
+            ],
+            "sample_results": {
+              "json_audit": {
+                "valid": true,
+                "top_level_type": "dict",
+                "top_level_items": 1
+              }
+            },
+            "protocol_version": "2026-07-28"
+          },
+          "stdio": {
+            "tools": [
+              "json_audit"
+            ],
+            "sample_results": {
+              "json_audit": {
+                "valid": true,
+                "top_level_type": "dict",
+                "top_level_items": 1
+              }
+            },
+            "protocol_version": "2026-07-28"
+          }
+        },
+        "network_used": false
+      }
+    },
+    {
+      "name": "studio-api",
+      "original_validator": "PASS",
+      "ast": "PASS",
+      "official_sdk": {
+        "passed": true,
+        "official_sdk": true,
+        "validation": "official Python MCP SDK v2",
+        "sdk_version": "2.0.0",
+        "transports": {
+          "inmemory": {
+            "tools": [
+              "list_pets",
+              "get_pet"
+            ],
+            "sample_results": {
+              "list_pets": {
+                "mode": "dry_run",
+                "operation": "list_pets",
+                "method": "GET",
+                "path": "/pets",
+                "query": {},
+                "network_called": false
+              },
+              "get_pet": {
+                "mode": "dry_run",
+                "operation": "get_pet",
+                "method": "GET",
+                "path": "/pets/sample",
+                "query": {},
+                "network_called": false
+              }
+            },
+            "protocol_version": "2026-07-28"
+          },
+          "stdio": {
+            "tools": [
+              "list_pets",
+              "get_pet"
+            ],
+            "sample_results": {
+              "list_pets": {
+                "mode": "dry_run",
+                "operation": "list_pets",
+                "method": "GET",
+                "path": "/pets",
+                "query": {},
+                "network_called": false
+              },
+              "get_pet": {
+                "mode": "dry_run",
+                "operation": "get_pet",
+                "method": "GET",
+                "path": "/pets/sample",
+                "query": {},
+                "network_called": false
+              }
+            },
+            "protocol_version": "2026-07-28"
+          }
+        },
+        "network_used": false
+      }
+    }
+  ],
+  "scope": "JS-generated files; local Python execution, not Sites Python runtime"
+}

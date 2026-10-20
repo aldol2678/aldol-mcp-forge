@@ -1,0 +1,1 @@
+{"project_name": "sdk-update-20261020-ark", "kind": "curated", "version": "0.2.1", "files_checked": 8, "passed": true, "official_sdk": "PASS", "sdk_version": "2.0.0", "inmemory": "PASS", "stdio": "PASS", "network_used": false, "security_boundary": "trusted generator parity before execution"}
