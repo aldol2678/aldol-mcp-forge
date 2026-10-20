@@ -1,7 +1,7 @@
 name: Forge SDK - GCP Cloud Run reuse
 on:
   pull_request:
-    branches: [main, feat/studio-sdk-private-integration-20261020]
+    branches: [main, feat/studio-sdk-private-integration-20261020, feat/forge-sdk-cloudrun-slack-project]
     paths:
       - "bridge/cloud_run_verifier.py"
       - "bridge/test_cloud_run_verifier.py"

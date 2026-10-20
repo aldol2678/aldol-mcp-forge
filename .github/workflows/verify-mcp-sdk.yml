@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, feat/forge-sdk-cloudrun-slack-project]
   workflow_dispatch:
 
 permissions:
