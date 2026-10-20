@@ -1,0 +1,423 @@
+✔ byte parity with original Python: curated-html_audit (9.933509ms)
+✔ byte parity with original Python: curated-json_audit (0.936064ms)
+✔ byte parity with original Python: curated-text_stats (0.911267ms)
+✔ byte parity with original Python: curated-html_audit,json_audit (0.631174ms)
+✔ byte parity with original Python: curated-html_audit,text_stats (0.830205ms)
+✔ byte parity with original Python: curated-json_audit,html_audit (0.736182ms)
+✔ byte parity with original Python: curated-json_audit,text_stats (0.647218ms)
+✔ byte parity with original Python: curated-text_stats,html_audit (0.570572ms)
+✔ byte parity with original Python: curated-text_stats,json_audit (0.843415ms)
+✔ byte parity with original Python: curated-html_audit,json_audit,text_stats (0.638154ms)
+✔ byte parity with original Python: curated-html_audit,text_stats,json_audit (0.650553ms)
+✔ byte parity with original Python: curated-json_audit,html_audit,text_stats (0.497391ms)
+✔ byte parity with original Python: curated-json_audit,text_stats,html_audit (0.517472ms)
+✔ byte parity with original Python: curated-text_stats,html_audit,json_audit (1.036326ms)
+✔ byte parity with original Python: curated-text_stats,json_audit,html_audit (0.5691ms)
+✔ byte parity with original Python: strip-'\x1cHTML 검사\x85' (0.579365ms)
+✔ byte parity with original Python: strip-'\ufeffHTML 검사\ufeff' (0.874131ms)
+✔ byte parity with original Python: strip-'HTML $$ 검사 🐈' (0.498774ms)
+✔ byte parity with original Python: openapi-'Read pets' (2.000082ms)
+✔ byte parity with original Python: openapi-"A 'quoted' summary" (1.212592ms)
+✔ byte parity with original Python: openapi-'a"b\'c\\d\nnext\tline' (1.004268ms)
+✔ byte parity with original Python: openapi-'한글 😺' (1.132341ms)
+✔ byte parity with original Python: openapi-'\u2028\x00\xa0' (0.909565ms)
+✔ ZIP read by independent Python zipfile; CRC, hashes and generated Python syntax (38.533471ms)
+✔ tampered source fails integrity check (3.17707ms)
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+✔ Sites discovery, tools/list schema parity and least-privilege annotations (12.221035ms)
+✔ Python parity: templates (0.97989ms)
+✔ Python parity: preview-0 (1.041805ms)
+✔ Python parity: preview-1 (0.453255ms)
+✔ Python parity: preview-2 (0.620407ms)
+✔ Python parity: preview-3 (0.625735ms)
+✔ Python parity: preview-4 (0.839639ms)
+✔ Python parity: preview-5 (0.398252ms)
+✔ Python parity: preview-6 (0.465323ms)
+✔ Python parity: preview-7 (0.611534ms)
+✔ Python parity: preview-8 (0.641299ms)
+✔ Python parity: preview-9 (0.370099ms)
+✔ Python parity: preview-10 (0.401226ms)
+✔ Python parity: preview-11 (0.290679ms)
+✔ Python parity: preview-12 (0.280364ms)
+✔ Python parity: preview-13 (0.361266ms)
+✔ Python parity: preview-14 (0.281134ms)
+✔ Python parity: preview-15 (0.348347ms)
+✔ Python parity: preview-16 (0.432254ms)
+✔ Python parity: preview-17 (0.381897ms)
+✔ Python parity: preview-18 (0.247945ms)
+✔ Python parity: preview-19 (0.441917ms)
+✔ Python parity: preview-20 (0.381816ms)
+✔ Python parity: preview-21 (0.534057ms)
+✔ Python parity: preview-22 (0.387115ms)
+✔ Python parity: preview-23 (0.319613ms)
+✔ Python parity: preview-24 (0.394336ms)
+✔ Python parity: arguments-forge_list_templates-0 (0.333034ms)
+✔ Python parity: arguments-forge_list_templates-1 (0.447596ms)
+✔ Python parity: arguments-forge_list_templates-2 (0.243948ms)
+✔ Python parity: arguments-forge_list_templates-3 (0.347855ms)
+✔ Python parity: arguments-forge_list_templates-4 (0.33715ms)
+✔ Python parity: arguments-forge_list_templates-5 (0.222937ms)
+✔ Python parity: arguments-forge_list_templates-6 (0.273453ms)
+✔ Python parity: arguments-forge_preview-0 (0.289337ms)
+✔ Python parity: arguments-forge_preview-1 (0.299492ms)
+✔ Python parity: arguments-forge_preview-2 (0.262116ms)
+✔ Python parity: arguments-forge_preview-3 (0.308065ms)
+✔ Python parity: arguments-forge_preview-4 (1.550914ms)
+✔ Python parity: arguments-forge_preview-5 (0.308306ms)
+✔ Python parity: arguments-forge_preview-6 (0.234314ms)
+✔ Python parity: arguments-forge_preview_openapi-0 (0.217289ms)
+✔ Python parity: arguments-forge_preview_openapi-1 (0.30424ms)
+✔ Python parity: arguments-forge_preview_openapi-2 (0.281165ms)
+✔ Python parity: arguments-forge_preview_openapi-3 (0.273183ms)
+✔ Python parity: arguments-forge_preview_openapi-4 (0.314485ms)
+✔ Python parity: arguments-forge_preview_openapi-5 (0.258531ms)
+✔ Python parity: arguments-forge_preview_openapi-6 (0.249517ms)
+✔ Python parity: preview-schema-0 (0.269858ms)
+✔ Python parity: preview-schema-1 (0.341286ms)
+✔ Python parity: preview-schema-2 (0.29809ms)
+✔ Python parity: preview-schema-3 (0.227684ms)
+✔ Python parity: preview-schema-4 (0.244149ms)
+✔ Python parity: preview-schema-5 (0.281245ms)
+✔ Python parity: basic (0.766929ms)
+✔ Python parity: example-pets (0.532455ms)
+✔ Python parity: version-'3.0.0' (0.297219ms)
+✔ Python parity: version-'3.1.10' (0.318932ms)
+✔ Python parity: version-'3.2.0' (0.232101ms)
+✔ Python parity: version-'2.0' (0.220302ms)
+✔ Python parity: version-'3.1.0\n' (0.2981ms)
+✔ Python parity: version-3 (0.238451ms)
+✔ Python parity: version-None (0.214634ms)
+✔ Python parity: doc-None (0.20458ms)
+✔ Python parity: doc-[] (0.243197ms)
+✔ Python parity: doc-{} (0.298942ms)
+✔ Python parity: doc-'invalid' (0.23137ms)
+✔ Python parity: doc-True (0.26532ms)
+✔ Python parity: info-None (0.389448ms)
+✔ Python parity: info-[] (0.245791ms)
+✔ Python parity: info-'text' (0.231189ms)
+✔ Python parity: info-0 (0.294635ms)
+✔ Python parity: paths-NoneType-0 (0.243728ms)
+✔ Python parity: paths-list-0 (0.342908ms)
+✔ Python parity: paths-dict-0 (0.323038ms)
+✔ Python parity: paths-dict-65 (0.318862ms)
+✔ Python parity: path-'/' (0.254665ms)
+✔ Python parity: path-'//example.com/x' (0.320924ms)
+✔ Python parity: path-'/../x' (0.26433ms)
+✔ Python parity: path-'/./x' (0.4107ms)
+✔ Python parity: path-'/a%2Fb' (0.319072ms)
+✔ Python parity: path-'/pets?x=1' (0.287674ms)
+✔ Python parity: path-'/a\\b' (0.323378ms)
+✔ Python parity: path-'/pets\n' (0.282217ms)
+✔ Python parity: path-'/x/{id' (0.349127ms)
+✔ Python parity: path-'/한글' (0.512214ms)
+✔ Python parity: path-'/a-b_c.d~1' (0.529179ms)
+✔ Python parity: path-'/a//b' (0.322418ms)
+✔ Python parity: path-item-87 (0.284159ms)
+✔ Python parity: path-item-88 (0.276158ms)
+✔ Python parity: path-item-89 (0.242366ms)
+✔ Python parity: path-item-90 (0.29089ms)
+✔ Python parity: path-item-91 (0.244319ms)
+✔ Python parity: path-item-92 (0.365522ms)
+✔ Python parity: path-item-93 (0.435679ms)
+✔ Python parity: operation-'class' (0.261174ms)
+✔ Python parity: operation-'async' (0.31065ms)
+✔ Python parity: operation-'True' (0.212652ms)
+✔ Python parity: operation-'_hidden' (0.210979ms)
+✔ Python parity: operation-'bad-name' (1.441108ms)
+✔ Python parity: operation-'x\n' (0.33759ms)
+✔ Python parity: operation-'app' (0.315938ms)
+✔ Python parity: operation-'sys' (0.301676ms)
+✔ Python parity: operation-'MCPServer' (0.230368ms)
+✔ Python parity: operation-'OPERATIONS' (0.222616ms)
+✔ Python parity: operation-'call_operation' (0.219842ms)
+✔ Python parity: operation-'Tool' (0.574568ms)
+✔ Python parity: operation-'serve' (0.49612ms)
+✔ Python parity: operation-'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' (0.243458ms)
+✔ Python parity: operation-'constructor' (0.223067ms)
+✔ Python parity: operation-'toString' (0.213763ms)
+✔ Python parity: operation-'get_pets' (0.236678ms)
+✔ Python parity: operation-'match' (0.307214ms)
+✔ Python parity: operation-'case' (0.21824ms)
+✔ Python parity: operation-None (0.303779ms)
+✔ Python parity: operation-3 (0.254054ms)
+✔ Python parity: op-count-12 (0.33721ms)
+✔ Python parity: op-count-13 (0.289197ms)
+✔ Python parity: duplicate-operations (0.285101ms)
+✔ Python parity: path-required (0.25778ms)
+✔ Python parity: path-missing (0.23152ms)
+✔ Python parity: path-surplus (0.234154ms)
+✔ Python parity: path-duplicate (0.380916ms)
+✔ Python parity: inherited (0.359353ms)
+✔ Python parity: inherited-duplicate (0.694068ms)
+✔ Python parity: params-shape-124 (0.495199ms)
+✔ Python parity: params-shape-125 (0.341246ms)
+✔ Python parity: params-shape-126 (0.223037ms)
+✔ Python parity: params-shape-127 (0.218631ms)
+✔ Python parity: params-shape-128 (0.29153ms)
+✔ Python parity: parameter-in-'header' (0.22521ms)
+✔ Python parity: parameter-in-'cookie' (0.21171ms)
+✔ Python parity: parameter-in-None (0.309588ms)
+✔ Python parity: parameter-name-'class' (0.281896ms)
+✔ Python parity: parameter-name-'bad-name' (0.285121ms)
+✔ Python parity: parameter-name-'id\n' (0.219101ms)
+✔ Python parity: parameter-name-None (0.239262ms)
+✔ Python parity: parameter-required-False (0.216507ms)
+✔ Python parity: parameter-required-1 (0.29096ms)
+✔ Python parity: parameter-required-None (0.303018ms)
+✔ Python parity: parameter-schema-None (0.451312ms)
+✔ Python parity: parameter-schema-{} (0.537903ms)
+✔ Python parity: parameter-schema-{'type': 'object'} (0.358081ms)
+✔ Python parity: parameter-schema-{'type': 'number'} (0.333364ms)
+✔ Python parity: parameter-schema-{'type': 'string', '$ref': '#/x'} (0.404021ms)
+✔ Python parity: parameter-content-{} (0.335367ms)
+✔ Python parity: parameter-style-'simple' (0.438573ms)
+✔ Python parity: parameter-explode-False (0.360695ms)
+✔ Python parity: parameter-allowReserved-False (0.306443ms)
+✔ Python parity: query-string (0.307936ms)
+✔ Python parity: query-integer (0.285211ms)
+✔ Python parity: query-boolean (0.279523ms)
+✔ Python parity: thirteen-params (0.300464ms)
+✔ Python parity: json-error-1 (0.33757ms)
+✔ Python parity: json-error-14 (0.302637ms)
+✔ Python parity: json-error-2 (0.257619ms)
+✔ Python parity: json-error-120001 (2.724957ms)
+✔ Python parity: path-ending-'\r' (0.37063ms)
+✔ Python parity: operation-ending-'\r' (0.298591ms)
+✔ Python parity: parameter-ending-'\r' (0.308546ms)
+✔ Python parity: version-ending-'\r' (1.45616ms)
+✔ Python parity: path-ending-'\u2028' (0.408077ms)
+✔ Python parity: operation-ending-'\u2028' (0.404672ms)
+✔ Python parity: parameter-ending-'\u2028' (0.373755ms)
+✔ Python parity: version-ending-'\u2028' (0.366604ms)
+✔ Python parity: path-ending-'\u2029' (0.378171ms)
+✔ Python parity: operation-ending-'\u2029' (0.32432ms)
+✔ Python parity: parameter-ending-'\u2029' (0.508027ms)
+✔ Python parity: version-ending-'\u2029' (0.306102ms)
+✔ Python parity: spec-exact-max (2.776986ms)
+✔ JSON-RPC errors, notifications, IDs and method routing (3.288859ms)
+✔ request bounds, invalid UTF-8, content type and cross-origin refusal (4.027225ms)
+✔ no outbound API requests; no shared user input retained between calls (0.987382ms)
+✔ deployment manifest has MCP only; read-only core needs no Node/Python/runtime dependencies (41.48427ms)
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+✔ real loopback HTTP tools/list and tools/call for all three tools (31.829401ms)
+✔ Studio serves functional accessible workspace (4.866312ms)
+✔ identity and verification gate block writes and user-controlled principals (2.215287ms)
+✔ create, readback, immutable edit, ZIP, tenant exclusion and invalid inputs (27.216181ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ OpenAPI import accepts GET, keeps dry-run and rejects malformed specs (3.179464ms)
+✔ MCP write tools hidden until verified and never report Python execution as PASS (5.581313ms)
+✔ MCP mutation keeps original JSON-RPC envelope rejection (1.214896ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ all five Studio MCP tools dispatch through the actual JSON-RPC endpoint (10.92028ms)
+ℹ tests 207
+ℹ suites 0
+ℹ pass 207
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 383.043694

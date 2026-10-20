@@ -1,0 +1,92 @@
+{
+  "run_browser_qa": {
+    "kind": "browser",
+    "status": "UNKNOWN",
+    "artifact": {
+      "filename": "index.html",
+      "sha256": "ed80b4d64631d23d90297e3dd6dd5db4513c4fe0b2f74dd222cc567e35b423cc",
+      "entry": "index.html",
+      "files_count": 1,
+      "bytes": 171,
+      "files": [
+        {
+          "name": "index.html",
+          "bytes": 171,
+          "sha256": "ed80b4d64631d23d90297e3dd6dd5db4513c4fe0b2f74dd222cc567e35b423cc"
+        }
+      ]
+    },
+    "profile_sha256": "80819c599038575ce2584cee3ad72552c9278a95b68416162dc6233673e2ec94",
+    "checks": [
+      {
+        "id": "browser.available",
+        "status": "UNKNOWN",
+        "detail": "Chromium executable not found: /usr/bin/chromium"
+      }
+    ],
+    "blocked": false,
+    "summary": {
+      "PASS": 0,
+      "FAIL": 0,
+      "UNKNOWN": 1
+    },
+    "coverage": {
+      "static": "UNKNOWN",
+      "browser": "UNKNOWN",
+      "real_device": "UNKNOWN"
+    },
+    "environment": {
+      "transport": "stdio",
+      "browser_method": "set_content + emulated localStorage",
+      "os_isolation_verified": false
+    },
+    "qa_id": "86eaebd96de54ff8b8240cc9942dd535",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:49:48.901696+00:00"
+  },
+  "run_game_scenarios": {
+    "kind": "scenarios",
+    "status": "UNKNOWN",
+    "artifact": {
+      "filename": "index.html",
+      "sha256": "ed80b4d64631d23d90297e3dd6dd5db4513c4fe0b2f74dd222cc567e35b423cc",
+      "entry": "index.html",
+      "files_count": 1,
+      "bytes": 171,
+      "files": [
+        {
+          "name": "index.html",
+          "bytes": 171,
+          "sha256": "ed80b4d64631d23d90297e3dd6dd5db4513c4fe0b2f74dd222cc567e35b423cc"
+        }
+      ]
+    },
+    "profile_sha256": "68add232d261ecc11eb5cb3ab3cc761d869d2e196e2177fc788dc0470ec94e2e",
+    "checks": [
+      {
+        "id": "browser.available",
+        "status": "UNKNOWN",
+        "detail": "Chromium executable not found: /usr/bin/chromium"
+      }
+    ],
+    "blocked": false,
+    "summary": {
+      "PASS": 0,
+      "FAIL": 0,
+      "UNKNOWN": 1
+    },
+    "coverage": {
+      "static": "UNKNOWN",
+      "browser": "UNKNOWN",
+      "real_device": "UNKNOWN"
+    },
+    "environment": {
+      "transport": "stdio",
+      "browser_method": "set_content + emulated localStorage",
+      "os_isolation_verified": false
+    },
+    "qa_id": "ecea91439faf42b3aa285bec7598c517",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:49:49.020890+00:00"
+  }
+}

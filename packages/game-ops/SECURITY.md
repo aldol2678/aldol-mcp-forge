@@ -11,3 +11,11 @@ Please use GitHub's private vulnerability reporting mechanism if enabled. Otherw
 
 ## Evidence
 UNKNOWN is deliberately not success; do not infer real-device/production readiness from Playwright emulation. CI tests here cover Python self-test only and do not claim hostile code isolation.
+
+## v0.4 MCP boundary
+
+The remote HTTP adapter is single-owner and authenticated on every MCP request with a >=32-character secret. It refuses server filesystem paths, arbitrary URL downloads, browser Origin access and all HTML execution. Remote Docker contains no Chromium/Playwright. Network denial for arbitrary browser execution is **not verified**; remote browser tools therefore return blocked UNKNOWN. Never enable arbitrary remote code with the local operator opt-in.
+
+Uploads use strict base64 and bounded ZIP parsing; no extraction onto host paths. Limits, TTL, ephemeral reports and process deadlines are described in README. Static checks spawn only Node's syntax parser with a minimal environment, never evaluate uploaded scripts. CPU, output and file-descriptor limits apply to workers; Docker/Railway applies remote service memory/CPU limits. Local execution is not an OS sandbox. An operator-controlled artifact directory must not be writable by other users (local symlink races are outside this single-owner model).
+
+Do not embed owner credentials in plugin archives, GitHub, logs or MCP URLs. Use ChatGPT's API-key credential prompt or another client's secret manager. Rotate via the isolated Game Ops service only. One token grants access to all reports for that owner; this is not a multi-tenant service. Inspecting a game does not authorize publication, deletion, release or modification of that game.

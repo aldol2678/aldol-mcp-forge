@@ -16,3 +16,10 @@
 - Added declarative game profiles with Jelly Lab v0.4 scenario coverage (breeding, reward, menus, emulated storage).
 - Added baseline/candidate same-profile regression comparison with scoped PASS/FAIL/UNKNOWN, missing tests and version hashes.
 - Explicit separation of plugin skill packaging from a separately provisioned execution runtime; no MCP server, new external permissions, user game mutation or deployment.
+
+## 0.4.0
+
+- Six official Python MCP SDK tools; stdio and owner-authenticated Streamable HTTP.
+- Bounded HTML/ZIP ingestion, optional SHA verification, private QA report IDs and conservative regression comparison.
+- Default-denied browser/scenario execution, with local trusted-operator opt-in only; HTTP always blocks HTML execution.
+- Docker/Railway deployment configuration, connection examples and protocol/security tests; original v0.3 CLI retained.

@@ -1,0 +1,8 @@
+*
+!Dockerfile
+!requirements.txt
+!server.py
+!service.py
+!worker.py
+!scripts
+!scripts/*.py
