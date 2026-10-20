@@ -81,12 +81,12 @@ test("no outbound API requests; no shared user input retained between calls", as
   } finally { globalThis.fetch = original; }
 });
 
-test("deployment manifest has MCP only; Worker needs no Node/Python/runtime dependencies", async () => {
+test("deployment manifest has MCP only; read-only core needs no Node/Python/runtime dependencies", async () => {
   const manifest = JSON.parse(await readFile(new URL("../.openai/hosting.json", import.meta.url)));
   assert.deepEqual(manifest.capabilities, ["mcp"]);
   assert.equal(manifest.d1, null);
-  assert.equal(manifest.r2, null);
-  const source = await readFile(new URL("../worker/index.js", import.meta.url), "utf8");
+  assert.equal(manifest.r2, "BUCKET");
+  const source = await readFile(new URL("../worker/core.js", import.meta.url), "utf8");
   assert.doesNotMatch(source, /\bimport\s|\brequire\s*\(|\beval\s*\(|new Function\s*\(|\bfetch\s*\(\s*["']/);
 });
 
