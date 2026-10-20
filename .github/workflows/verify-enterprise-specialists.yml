@@ -1,7 +1,7 @@
 name: ALDOL enterprise specialist MCP handlers
 on:
   pull_request:
-    branches: [feat/studio-v8-contract-integration-20261020]
+    branches: [feat/studio-v8-contract-integration-20261020, feat/enterprise-specialist-mcp-handlers]
     paths:
       - 'enterprise_mcps/**'
       - 'examples/*-mcp-contract.json'
@@ -32,5 +32,7 @@ jobs:
         run: python -m pip install 'mcp==2.0.0'
       - name: Run deterministic specialist logic and error tests
         run: python -m unittest discover -s enterprise_mcps/tests -p test_logic.py -v
+      - name: Verify GitHub read adapter with mocked HTTPS and SDK
+        run: python -m unittest discover -s enterprise_mcps/tests -p test_github_read.py -v
       - name: Run real SDK in-memory and stdio tests
         run: python -m unittest discover -s enterprise_mcps/tests -p test_sdk.py -v
