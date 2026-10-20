@@ -5,9 +5,23 @@ import ast
 import difflib
 import hashlib
 from .common import json_input, string, safe_path, payload
+from .github_read import read_file as read_github_file
 
 def analyze_code(repository: str, focus: str | None = None) -> dict[str, str]:
-    data = json_input(repository, "repository", {"path", "language", "content"})
+    data = json_input(repository, "repository",
+                      {"source", "owner", "repo", "path", "ref", "language", "content"})
+    provenance = None
+    if data.get("source") == "github":
+        result = read_github_file(data)
+        provenance = {key: result[key] for key in ("source", "owner", "repo", "ref",
+                      "path", "git_blob_sha", "sha256", "source_url",
+                      "retrieved_at", "fetch_scope")}
+        data = {"path": result["path"],
+                "language": ("python" if result["path"].endswith(".py")
+                             else "json" if result["path"].endswith(".json") else "unsupported"),
+                "content": result["content"]}
+    elif set(data) != {"path", "language", "content"}:
+        raise ValueError("Local source requires exactly path, language and content")
     path = safe_path(data.get("path"))
     language = string(data.get("language"), "language", max_length=20).lower()
     content = string(data.get("content"), "content", max_length=3500, allow_empty=True)
@@ -60,7 +74,11 @@ def analyze_code(repository: str, focus: str | None = None) -> dict[str, str]:
     else:
         raise ValueError("language must be python or json for this MVP")
     findings["focus"] = focus or "general"
-    findings["limitations"] = "Static evidence only; no tests, dependencies or live repository fetched"
+    findings["limitations"] = ("Static analysis only; no repository-wide dependency scan or test execution."
+                               if provenance else
+                               "Static evidence only; no tests, dependencies or live repository fetched")
+    if provenance:
+        findings["github_provenance"] = provenance
     return {"summary": payload(findings), "risks": payload(risks)}
 
 def implement_change(repository: str, request: str) -> dict[str, str]:
