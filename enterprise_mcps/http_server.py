@@ -15,6 +15,7 @@ from typing import Any
 from mcp.server.transport_security import TransportSecuritySettings
 from starlette.responses import JSONResponse
 from .server import create_app
+from .owner_oauth import OwnerOAuth
 
 LOG = logging.getLogger("aldol.seum")
 HOST_RE = re.compile(r"^(?=.{1,253}$)[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$")
@@ -44,9 +45,10 @@ def _settings() -> tuple[bytes, TransportSecuritySettings]:
 
 
 class PrivateSEUM:
-    def __init__(self, inner: Any, secret: bytes):
+    def __init__(self, inner: Any, secret: bytes, oauth: OwnerOAuth | None = None):
         self.inner = inner
         self.secret = secret
+        self.oauth = oauth
 
     async def __call__(self, scope: dict, receive: Any, send: Any):
         if scope["type"] != "http":
@@ -56,18 +58,28 @@ class PrivateSEUM:
             # Health reveals no credential or GitHub source detail.
             return await JSONResponse({"service": "seum-mcp", "healthy": True})(
                 scope, receive, send)
+        if self.oauth is not None and (
+                path in ("/.well-known/oauth-protected-resource",
+                         "/.well-known/oauth-authorization-server")
+                or path.startswith("/oauth/")):
+            return await self.oauth.route(scope, receive, send)
         if path not in ("/mcp", "/status"):
             return await JSONResponse({"error": "not_found"}, status_code=404)(
                 scope, receive, send)
         # Examine raw ASGI headers to reject duplicate Authorization headers.
         values = [value for key, value in scope.get("headers", [])
                   if key.lower() == b"authorization"]
-        valid = len(values) == 1 and hmac.compare_digest(
+        valid = len(values) == 1 and (hmac.compare_digest(
             values[0], b"Bearer " + self.secret)
+            or (self.oauth is not None and self.oauth.authorized(values[0])))
         if not valid:
             return await JSONResponse(
                 {"error": "authorization_required"}, status_code=401,
-                headers={"www-authenticate": "Bearer", "cache-control": "no-store"})(
+                headers={"www-authenticate": (
+                    'Bearer resource_metadata="' + self.oauth.issuer +
+                    '/.well-known/oauth-protected-resource", scope="seum:read"'
+                    if self.oauth is not None else "Bearer"),
+                         "cache-control": "no-store"})(
                     scope, receive, send)
         if path == "/status":
             return await JSONResponse(
@@ -75,7 +87,8 @@ class PrivateSEUM:
                  os.environ.get("ALDOL_SEUM_GITHUB_READ_ENABLED") == "1",
                  "startup_probe": dict(PROBE),
                  "authenticated_http_probe": dict(HTTP_PROBE),
-                 "official_sdk_runtime": True},
+                 "official_sdk_runtime": True,
+                 "oauth_enabled": self.oauth is not None},
                 headers={"cache-control": "no-store"})(scope, receive, send)
         return await self.inner(scope, receive, send)
 
@@ -174,8 +187,15 @@ def create_http_app():
         host="0.0.0.0", streamable_http_path="/mcp",
         json_response=True, stateless_http=True, max_request_body_size=262144,
         transport_security=security)
+    oauth = None
+    if os.environ.get("ALDOL_SEUM_OAUTH_ENABLED") == "1":
+        host = (os.environ.get("ALDOL_SEUM_PUBLIC_HOST")
+                or os.environ.get("RAILWAY_PUBLIC_DOMAIN"))
+        if not host:
+            raise RuntimeError("OAuth requires the exact configured HTTPS public host")
+        oauth = OwnerOAuth(host.strip().lower())
     _startup_probe()
-    return PrivateSEUM(inner, secret)
+    return PrivateSEUM(inner, secret, oauth)
 
 
 app = create_http_app()
