@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-10-20T01:07:53.671Z",
+  "project_id": "appgprj_6ad6bde7a48881918c1767e3e9f1252f",
+  "deployment": {
+    "id": "appgdep_6ad6be26cc6c8191b6ef08e989c68636",
+    "project_id": "appgprj_6ad6bde7a48881918c1767e3e9f1252f",
+    "title": "ALDOL MCP Forge · Read-only",
+    "version_id": "appgprj_6ad6bde7a48881918c1767e3e9f1252f~appgver_71cff4eff8308191a94f5aaac984a9ce",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://aldol-forge-readonly-20261020.al-dori.chatgpt.site",
+    "has_mcp": true,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad6bde7a48881918c1767e3e9f1252f",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-20T01:04:48.133769+00:00"
+  },
+  "source_commit": "a669ccc43ca762c05445abee54af2493d3c70b6c",
+  "access": {
+    "owner_only": true,
+    "external_visitors": 0
+  },
+  "mcp_connection": {
+    "mcp_url": "https://aldol-forge-readonly-20261020.al-dori.chatgpt.site/mcp",
+    "oauth_resource": "https://aldol-forge-readonly-20261020.al-dori.chatgpt.site/mcp",
+    "plugin_id": "plugin_asdk_app_sites_62e21d5429008191a9b9c05bb8fe2990"
+  },
+  "plugin_installation": {
+    "confirmed": true,
+    "evidence": "suggest_plugins returned already_installed",
+    "chat_tool_namespace_available": false
+  },
+  "events": [
+    {
+      "timestamp": "2026-10-20T01:05:31.429Z",
+      "request_id": "e3e6777361f9889c0d82159c97525bec",
+      "method": "GET",
+      "path": "/",
+      "http_status": 200,
+      "outcome": "ok",
+      "cpu_ms": 0,
+      "wall_ms": 0
+    },
+    {
+      "timestamp": "2026-10-20T01:05:27.029Z",
+      "request_id": "a22231fa66c865e0e3e7b66be91c781a",
+      "method": "GET",
+      "path": "/",
+      "http_status": 200,
+      "outcome": "ok",
+      "cpu_ms": 0,
+      "wall_ms": 1
+    },
+    {
+      "timestamp": "2026-10-20T01:04:57.852Z",
+      "request_id": "e60a9b5b7b8583c2c904c5c8abe54c09",
+      "method": "POST",
+      "path": "/mcp",
+      "mcp_method": "tools/list",
+      "http_status": 200,
+      "outcome": "ok",
+      "cpu_ms": 0,
+      "wall_ms": 0
+    },
+    {
+      "timestamp": "2026-10-20T01:04:57.769Z",
+      "request_id": "eef0b695fd5810933e65795122c62c2e",
+      "method": "POST",
+      "path": "/mcp",
+      "mcp_method": "server/discover",
+      "http_status": 200,
+      "outcome": "ok",
+      "cpu_ms": 0,
+      "wall_ms": 0
+    }
+  ]
+}

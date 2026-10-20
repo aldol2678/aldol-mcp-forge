@@ -1,0 +1,7 @@
+{
+  "passed": false,
+  "checked_at": "2026-10-20T01:05:54.827Z",
+  "endpoint": "https://aldol-forge-readonly-20261020.al-dori.chatgpt.site/mcp",
+  "error": "server/discover: HTTP 401\n\n401 !== 200\n",
+  "rows": []
+}
