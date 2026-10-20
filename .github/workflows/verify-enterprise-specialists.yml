@@ -1,11 +1,13 @@
 name: ALDOL enterprise specialist MCP handlers
 on:
   pull_request:
-    branches: [feat/studio-v8-contract-integration-20261020, feat/enterprise-specialist-mcp-handlers]
+    branches: [feat/studio-v8-contract-integration-20261020, feat/enterprise-specialist-mcp-handlers, feat/seum-github-read-adapter]
     paths:
       - 'enterprise_mcps/**'
       - 'examples/*-mcp-contract.json'
       - 'contract_forge.py'
+      - 'Dockerfile.seum-mcp'
+      - 'railway.json'
       - '.github/workflows/verify-enterprise-specialists.yml'
   workflow_dispatch:
 permissions:
@@ -34,5 +36,7 @@ jobs:
         run: python -m unittest discover -s enterprise_mcps/tests -p test_logic.py -v
       - name: Verify GitHub read adapter with mocked HTTPS and SDK
         run: python -m unittest discover -s enterprise_mcps/tests -p test_github_read.py -v
+      - name: Verify HTTP authentication and safe host boundaries
+        run: python -m unittest discover -s enterprise_mcps/tests -p test_http.py -v
       - name: Run real SDK in-memory and stdio tests
         run: python -m unittest discover -s enterprise_mcps/tests -p test_sdk.py -v
