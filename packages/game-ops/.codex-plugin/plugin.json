@@ -1,0 +1,35 @@
+{
+  "name": "aldol-game-ops",
+  "version": "0.3.0",
+  "description": "ALDOL 게임 HTML·ZIP 정적·반응형·시나리오·회귀 QA 실행기와 플랫폼 독립 운영 워크플로",
+  "author": {
+    "name": "ALDOL"
+  },
+  "skills": "./skills/",
+  "keywords": [
+    "aldol",
+    "game-qa",
+    "release-gate",
+    "platform-agnostic",
+    "game-operations",
+    "collaboration",
+    "html-qa",
+    "playwright",
+    "responsive",
+    "regression",
+    "zip"
+  ],
+  "interface": {
+    "displayName": "ALDOL Game Ops",
+    "shortDescription": "HTML·ZIP QA 실행, 모바일 검사, 게임별 테스트, 버전 회귀 비교",
+    "longDescription": "플랫폼 독립 게임 운영 QA와 함께, 로컬 검사 실행기가 있는 환경에서 사용자가 제공한 HTML/ZIP을 정적 분석하고 Chromium/Playwright 화면·게임 시나리오 검증 및 동일 시나리오를 통한 버전 간 회귀 검사를 실행합니다. 브라우저 테스트는 set_content/모의 localStorage 기반이고 실제 기기·file://·운영 배포 상태와 구별합니다. 플러그인 자체는 신규 MCP 서버나 실행 권한을 제공하지 않습니다.",
+    "developerName": "ALDOL",
+    "category": "Other",
+    "capabilities": [],
+    "defaultPrompt": [
+      "ALDOL Game Ops로 이 HTML 게임을 파일 정적 검사하고 브라우저 반응형 QA를 진행해줘.",
+      "ALDOL Game Ops의 게임별 시나리오로 교배·전투·저장 동작을 검사해줘.",
+      "이전 버전과 새로운 HTML 게임 파일의 회귀 차이를 검사해줘."
+    ]
+  }
+}

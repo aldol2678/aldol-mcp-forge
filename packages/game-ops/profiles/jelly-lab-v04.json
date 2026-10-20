@@ -1,0 +1,55 @@
+{
+  "profile_name": "Jelly Lab v0.4 (read-only regression contract)",
+  "viewports": ["mobile320", "mobile360", "mobile390", "desktop"],
+  "responsive_tabs": [
+    {"id":"lab","selector":"button[data-tab='lab']:visible"},
+    {"id":"battle","selector":"button[data-tab='battle']:visible"},
+    {"id":"inventory","selector":"button[data-tab='inventory']:visible"},
+    {"id":"tasks","selector":"button[data-tab='tasks']:visible"},
+    {"id":"lineage","selector":"button[data-tab='lineage']:visible"},
+    {"id":"codex","selector":"button[data-tab='codex']:visible"}
+  ],
+  "touch_targets":[{"id":"reset","selector":"button[data-action='reset']","min_px":44}],
+  "scenarios":[
+    {
+      "id":"breed-save",
+      "steps":[
+        {"action":"assert_state","path":"births","equals":0},
+        {"action":"assert_state","path":"spores","equals":6},
+        {"action":"assert_count","selector":"#side-nav button[data-tab]","equals":6},
+        {"action":"click","selector":"button[data-action='breed']"},
+        {"action":"assert_state","path":"births","equals":1},
+        {"action":"assert_state","path":"spores","equals":5},
+        {"action":"assert_visible","selector":"[role='dialog']"},
+        {"action":"click","selector":"button[data-action='close-modal']"},
+        {"action":"assert_storage_key","key":"inha-jelly-lab-prototype-v1","present":true},
+        {"action":"reload_simulated"},
+        {"action":"assert_state","path":"births","equals":1},
+        {"action":"click","selector":"#side-nav button[data-tab='lineage']"},
+        {"action":"assert_text","selector":"#view","contains":"혈통 계보도"}
+      ]
+    },
+    {
+      "id":"combat-reward",
+      "steps":[
+        {"action":"click","selector":"#side-nav button[data-tab='battle']"},
+        {"action":"click","selector":"button[data-action='battle']"},
+        {"action":"click","selector":"button[data-action='skip-battle']"},
+        {"action":"assert_state","path":"battles","equals":1},
+        {"action":"assert_state","path":"spores","equals":7},
+        {"action":"click","selector":"#side-nav button[data-tab='inventory']"},
+        {"action":"assert_text","selector":"#view","contains":"연구실 재료 창고"}
+      ]
+    },
+    {
+      "id":"menu-research",
+      "steps":[
+        {"action":"click","selector":"#side-nav button[data-tab='tasks']"},
+        {"action":"assert_text","selector":"#view","contains":"연구 의뢰 게시판"},
+        {"action":"assert_count","selector":".research-mission","equals":5},
+        {"action":"click","selector":"#side-nav button[data-tab='codex']"},
+        {"action":"assert_text","selector":"#view","contains":"유전 법칙"}
+      ]
+    }
+  ]
+}

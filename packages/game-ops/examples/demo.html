@@ -1,0 +1,4 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Game Ops QA Demo</title><style>body{font-family:sans-serif;margin:1rem}button{min-width:44px;min-height:44px;padding:.5rem;margin:.25rem}</style></head>
+<body><h1>QA Demo</h1><button data-tab="lab">Lab</button><button data-action="breed">Make one</button><button data-action="reset">Reset</button>
+<script>let births=0;document.querySelector('[data-action="breed"]').addEventListener('click',()=>{births++});document.querySelector('[data-action="reset"]').addEventListener('click',()=>{births=0});window.__JELLY_LAB_DEBUG__={snapshot:()=>({births})};</script></body></html>
