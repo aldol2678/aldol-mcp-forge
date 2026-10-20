@@ -1,4 +1,4 @@
-"""ALDOL MCP Forge v0.3.2. Safe template and OpenAPI GET generator.
+"""ALDOL MCP Forge v0.4.0. Safe template, GET API and contract scaffold generator.
 
 Generated servers use the official MCP Python SDK v2 by default. Offline smoke tests
 use an explicitly named compatibility transport; they are not SDK validation.
@@ -23,6 +23,7 @@ from mcp_runtime import Tool, serve
 from sandbox import run_server, namespace_ready
 from templates import TEMPLATE_INFO, select_template
 from openapi_forge import parse_openapi, render_server as render_api_server, render_operations, readme as api_readme
+from contract_forge import parse_contract, render_server as render_contract_server, readme as contract_readme, input_schema as contract_input_schema
 
 ROOT = Path(__file__).resolve().parent
 SPACE = ROOT / 'workspace'
@@ -416,7 +417,164 @@ def _test_openapi(a):
             'official_sdk': sdk_status, 'official_sdk_details': details,
             'sdk_available_locally': sdk_available, 'compat_smoke_test': 'passed'}
 
+
+# v0.4 pathway: validated declarative contracts, never arbitrary source execution.
+CONTRACT_FILES = ('server.py', 'mcp_runtime.py', 'contract.json',
+                  'requirements.txt', 'README.md')
+
+
+def _preview_contract(a):
+    contract = parse_contract(a['contract_json'])
+    return {'supported': True, 'tools': [row['name'] for row in contract['tools']],
+            'count': len(contract['tools']), 'kind': 'declarative-scaffold',
+            'handlers_implemented': False, 'network_access': False,
+            'note': 'Scaffold only. All handlers reject calls with NOT_IMPLEMENTED.'}
+
+
+@_project_lock
+def _create_contract(a):
+    name = _name(a['project_name'])
+    contract = parse_contract(a['contract_json'])
+    PROJECTS.mkdir(parents=True, exist_ok=True)
+    target = _path(name)
+    if target.exists() or target.is_symlink():
+        raise ValueError('Project exists; refusing overwrite')
+    staging = Path(tempfile.mkdtemp(prefix='.forge-contract-', dir=PROJECTS))
+    try:
+        shutil.copyfile(ROOT / 'mcp_runtime.py', staging / 'mcp_runtime.py')
+        (staging / 'server.py').write_text(render_contract_server(name, contract['tools']), encoding='utf-8')
+        (staging / 'contract.json').write_text(
+            json.dumps(contract, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+        (staging / 'requirements.txt').write_text('mcp>=2,<3\n', encoding='utf-8')
+        (staging / 'README.md').write_text(contract_readme(name, contract['tools']), encoding='utf-8')
+        manifest = {'name': name, 'version': '0.4.0', 'forge_version': '0.4.0',
+                    'kind': 'declarative-scaffold',
+                    'tools': [row['name'] for row in contract['tools']],
+                    'created_at': datetime.now(timezone.utc).isoformat(),
+                    'files_sha256': {n: _hash(staging / n) for n in CONTRACT_FILES}}
+        (staging / 'manifest.json').write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+        _probe_contract(staging, name, contract['tools'], a.get('isolation', 'auto'))
+        staging.rename(target)
+    finally:
+        if staging.exists():
+            shutil.rmtree(staging)
+    return {'created': True, 'project_name': name, 'tools': manifest['tools'],
+            'path': str(target), 'version': '0.4.0',
+            'handlers_implemented': False, 'auto_deployed': False}
+
+
+def _is_contract_project(name):
+    manifest_path = _path(name) / 'manifest.json'
+    if not manifest_path.is_file() or manifest_path.is_symlink():
+        return False
+    return json.loads(manifest_path.read_text(encoding='utf-8')).get('kind') == 'declarative-scaffold'
+
+
+def _validated_contract(name):
+    folder = _path(name)
+    if not folder.is_dir() or folder.is_symlink():
+        raise ValueError('Unknown or unsafe contract project')
+    mpath = folder / 'manifest.json'
+    if not mpath.is_file() or mpath.is_symlink():
+        raise ValueError('Missing or unsafe contract manifest')
+    manifest = json.loads(mpath.read_text(encoding='utf-8'))
+    if (manifest.get('name') != name or manifest.get('kind') != 'declarative-scaffold'
+            or manifest.get('version') != '0.4.0' or manifest.get('forge_version') != '0.4.0'):
+        raise ValueError('Unsupported contract manifest')
+    if {p.name for p in folder.iterdir()} != set((*CONTRACT_FILES, 'manifest.json')):
+        raise ValueError('Unexpected or missing contract project files')
+    for filename in CONTRACT_FILES:
+        fp = folder / filename
+        if (not fp.is_file() or fp.is_symlink()
+                or _hash(fp) != manifest.get('files_sha256', {}).get(filename)):
+            raise ValueError('source checksum mismatch or unsafe file: ' + filename)
+    if (folder / 'mcp_runtime.py').read_bytes() != (ROOT / 'mcp_runtime.py').read_bytes():
+        raise ValueError('Curated runtime was changed')
+    contract = parse_contract((folder / 'contract.json').read_text(encoding='utf-8'))
+    if manifest.get('tools') != [x['name'] for x in contract['tools']]:
+        raise ValueError('Contract manifest tool mismatch')
+    expected_files = {
+        'server.py': render_contract_server(name, contract['tools']),
+        'README.md': contract_readme(name, contract['tools']),
+        'requirements.txt': 'mcp>=2,<3\n',
+        'contract.json': json.dumps(contract, indent=2, ensure_ascii=False) + '\n',
+    }
+    for filename, expected in expected_files.items():
+        if (folder / filename).read_text(encoding='utf-8') != expected:
+            raise ValueError('Generated contract project differs from trusted compiler: ' + filename)
+    return folder, manifest, contract
+
+
+def _probe_contract(folder, name, tools, isolation='auto'):
+    msgs = [
+        {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {}},
+        {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
+        {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/list', 'params': {}},
+    ]
+    for index, tool in enumerate(tools):
+        args = {f['name']: {'string': 'demo', 'integer': 2, 'number': 1.5, 'boolean': True}[f['type']]
+                for f in tool['inputs'] if f['required']}
+        msgs.extend([
+            {'jsonrpc': '2.0', 'id': 10 + index*2, 'method': 'tools/call',
+             'params': {'name': tool['name'], 'arguments': args}},
+            {'jsonrpc': '2.0', 'id': 11 + index*2, 'method': 'tools/call',
+             'params': {'name': tool['name'], 'arguments': {'__unknown__': 'bad'}}},
+        ])
+    wire = ''.join(json.dumps(m, ensure_ascii=False) + '\n' for m in msgs)
+    stdout, isolated = run_server(folder, wire, isolation=isolation)
+    responses = [json.loads(line) for line in stdout.splitlines() if line.strip()]
+    lookup = {r.get('id'): r for r in responses}
+    descriptors = lookup.get(2, {}).get('result', {}).get('tools', [])
+    checks = {
+        'identity': lookup.get(1, {}).get('result', {}).get('serverInfo', {}).get('name') == name,
+        'names': [x['name'] for x in descriptors] == [x['name'] for x in tools],
+        'schemas': all(x.get('inputSchema') == contract_input_schema(tool)
+                       for x, tool in zip(descriptors, tools)) and len(descriptors) == len(tools),
+        'responses': len(responses) == 2 + 2 * len(tools),
+    }
+    for i, tool in enumerate(tools):
+        call = lookup.get(10+i*2, {}).get('result', {})
+        invalid = lookup.get(11+i*2, {}).get('result', {})
+        checks[tool['name'] + '_not_implemented'] = (
+            call.get('isError') is True and
+            'NOT_IMPLEMENTED' in str(call.get('content', [])))
+        checks[tool['name'] + '_unknown_argument_rejected'] = (
+            invalid.get('isError') is True and
+            'unknown argument' in str(invalid.get('content', [])))
+    if not all(checks.values()):
+        raise RuntimeError('Contract scaffold compatibility test failed: ' + str(checks))
+    return checks, isolated
+
+
+def _test_contract(a):
+    folder, manifest, contract = _validated_contract(a['project_name'])
+    ast.parse((folder / 'server.py').read_text(encoding='utf-8'))
+    checks, isolated = _probe_contract(folder, folder.name, contract['tools'], a.get('isolation', 'auto'))
+    return {'passed': True, 'project_name': folder.name, 'checks': checks,
+            'compat_smoke_test': 'passed', 'official_sdk': 'not-run: scaffold only',
+            'handlers_implemented': False, 'implementation_verified': False,
+            'isolation': isolated, 'network_access': False}
+
+
+def _package_contract(a):
+    folder, manifest, contract = _validated_contract(a['project_name'])
+    result = _test_contract(a)
+    PACKAGES.mkdir(parents=True, exist_ok=True)
+    target = PACKAGES / (folder.name + '-v' + manifest['version'] + '.zip')
+    if target.exists() or target.is_symlink():
+        raise ValueError('Package already exists; refusing overwrite')
+    with ZipFile(target, 'x', compression=ZIP_DEFLATED) as archive:
+        for filename in (*CONTRACT_FILES, 'manifest.json'):
+            archive.write(folder / filename, arcname=folder.name + '/' + filename)
+    return {'packaged': True, 'path': str(target), 'sha256': _hash(target),
+            'deployed': False, 'handlers_implemented': False,
+            'official_sdk': result['official_sdk']}
+
+
 def _test(a):
+    if _is_contract_project(a['project_name']):
+        return _test_contract(a)
     if _is_api_project(a["project_name"]):
         return _test_openapi(a)
     folder, manifest, selected = _validated(a['project_name'])
@@ -481,6 +639,8 @@ def _add_tool(a):
 
 
 def _package(a):
+    if _is_contract_project(a['project_name']):
+        return _package_contract(a)
     if _is_api_project(a['project_name']):
         folder, manifest, parsed = _validated_openapi(a['project_name'])
         result = _test_openapi(a)
@@ -511,6 +671,8 @@ def _package(a):
 def _schema(required, optional=()):
     props = {key: {'type': 'string', 'minLength': 1,
                    'maxLength': 2000 if key == 'description' else 40} for key in (*required, *optional)}
+    if 'contract_json' in (*required, *optional):
+        props['contract_json'] = {'type': 'string', 'minLength': 2, 'maxLength': 120000}
     if 'spec_json' in (*required, *optional):
         props['spec_json'] = {'type': 'string', 'minLength': 2, 'maxLength': 120000}
     if 'isolation' in optional:
@@ -528,8 +690,10 @@ def main():
         Tool('forge_package', 'Create local ZIP after compatibility smoke test.', _schema(('project_name',), ('isolation',)), _package, read_only=False),
         Tool('forge_preview_openapi', 'Preview supported OpenAPI 3 JSON GET operations; no writes.', _schema(('spec_json',)), _preview_openapi),
         Tool('forge_import_openapi', 'Generate read-only GET MCP project from pasted OpenAPI JSON.', _schema(('project_name', 'spec_json'), ('isolation',)), _import_openapi, read_only=False),
+        Tool('forge_preview_contract', 'Preview a JSON tool contract without writes.', _schema(('contract_json',)), _preview_contract),
+        Tool('forge_create_contract', 'Generate an unimplemented MCP SDK scaffold from a JSON tool contract.', _schema(('project_name', 'contract_json'), ('isolation',)), _create_contract, read_only=False),
     ]
-    serve('aldol-mcp-forge', '0.3.2', tools)
+    serve('aldol-mcp-forge', '0.4.0', tools)
 
 
 if __name__ == '__main__':

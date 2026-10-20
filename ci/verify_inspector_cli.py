@@ -20,6 +20,7 @@ EXPECTED = {
     "forge_list_templates", "forge_preview", "forge_create",
     "forge_add_tool", "forge_test", "forge_package",
     "forge_preview_openapi", "forge_import_openapi",
+    "forge_preview_contract", "forge_create_contract",
 }
 
 
@@ -85,7 +86,7 @@ def verify():
         raise AssertionError(f"Inspector tools/list output unexpected: {tools_result!r}")
     tools = tools_result.get("tools", [])
     names = [item.get("name") for item in tools]
-    if set(names) != EXPECTED or len(names) != 8:
+    if set(names) != EXPECTED or len(names) != len(EXPECTED):
         raise AssertionError(f"Inspector tool discovery differs: {names!r}")
 
     preview = tool_result(request(
@@ -94,6 +95,25 @@ def verify():
     ))
     if preview.get("supported") is not True or preview.get("template") != "html_audit":
         raise AssertionError(f"Unexpected preview payload: {preview!r}")
+
+    contract_json = (ROOT / "examples" / "bonsae-mcp-contract.json").read_text(encoding="utf-8")
+    contract_preview = tool_result(request(
+        "tools/call", tool="forge_preview_contract",
+        args={"contract_json": contract_json},
+    ))
+    if contract_preview.get("count") != 3 or contract_preview.get("handlers_implemented") is not False:
+        raise AssertionError(f"Unexpected contract preview: {contract_preview!r}")
+    contract_created = tool_result(request(
+        "tools/call", tool="forge_create_contract",
+        args={"project_name": "inspector-bonsae", "contract_json": contract_json},
+    ))
+    if contract_created.get("created") is not True or contract_created.get("handlers_implemented") is not False:
+        raise AssertionError(f"Unexpected contract creation: {contract_created!r}")
+    contract_verified = tool_result(request(
+        "tools/call", tool="forge_test", args={"project_name": "inspector-bonsae"},
+    ))
+    if contract_verified.get("passed") is not True or contract_verified.get("implementation_verified") is not False:
+        raise AssertionError(f"Unexpected scaffold verification: {contract_verified!r}")
 
     created = tool_result(request(
         "tools/call", tool="forge_create",
@@ -126,6 +146,7 @@ def verify():
         "initialized": True,
         "tools_found": sorted(names),
         "preview_passed": True,
+        "contract_scaffold_tested": True,
         "create_passed": True,
         "generated_sdk_test_passed": True,
         "package_passed": True,

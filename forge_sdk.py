@@ -49,6 +49,8 @@ _ALLOWED_TOOL_KEYS: dict[str, frozenset[str]] = {
     "forge_package": frozenset({"project_name", "isolation"}),
     "forge_preview_openapi": frozenset({"spec_json"}),
     "forge_import_openapi": frozenset({"project_name", "spec_json", "isolation"}),
+    "forge_preview_contract": frozenset({"contract_json"}),
+    "forge_create_contract": frozenset({"project_name", "contract_json", "isolation"}),
 }
 
 
@@ -78,6 +80,7 @@ app = MCPServer("aldol-mcp-forge", middleware=[reject_unknown_tool_arguments])
 ProjectName = Annotated[str, Field(min_length=1, max_length=40)]
 Description = Annotated[str, Field(min_length=1, max_length=2000)]
 OpenAPISpec = Annotated[str, Field(min_length=2, max_length=120000)]
+ContractSpec = Annotated[str, Field(min_length=2, max_length=120000)]
 Isolation = Annotated[Literal["auto", "strict"], Field(min_length=1, max_length=40)]
 
 
@@ -146,6 +149,22 @@ def forge_import_openapi(
     """Create a local dry-run OpenAPI GET MCP project without live API calls."""
     return _expected_failure(forge._import_openapi, {"project_name": project_name, "spec_json": spec_json,
                                   "isolation": isolation})
+
+
+@app.tool()
+def forge_preview_contract(contract_json: ContractSpec) -> dict[str, Any]:
+    """Validate a declarative tool contract without files or execution."""
+    return _expected_failure(forge._preview_contract, {"contract_json": contract_json})
+
+
+@app.tool()
+def forge_create_contract(
+    project_name: ProjectName, contract_json: ContractSpec, isolation: Isolation = "auto"
+) -> dict[str, Any]:
+    """Generate a fail-closed SDK tool scaffold, not implementation or deployment."""
+    return _expected_failure(forge._create_contract,
+                             {"project_name": project_name, "contract_json": contract_json,
+                              "isolation": isolation})
 
 
 def main() -> None:

@@ -1,0 +1,90 @@
+{
+  "tools": [
+    {
+      "name": "research_market",
+      "description": "Gather dated evidence for market opportunities; implementation required.",
+      "inputs": [
+        {
+          "name": "question",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "evidence": {
+            "type": "string"
+          },
+          "uncertainties": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence",
+          "uncertainties"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "analyze_competitors",
+      "description": "Compare competitors from documented sources; implementation required.",
+      "inputs": [
+        {
+          "name": "product",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "competitors": {
+            "type": "string"
+          },
+          "differentiation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "competitors",
+          "differentiation"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "evaluate_opportunity",
+      "description": "Recommend GO HOLD or NO-GO based on documented research; implementation required.",
+      "inputs": [
+        {
+          "name": "brief",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "recommendation": {
+            "type": "string"
+          },
+          "risks": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "recommendation",
+          "risks"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
