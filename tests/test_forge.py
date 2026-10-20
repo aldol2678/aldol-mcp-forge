@@ -3,6 +3,7 @@
 SDK v2 interoperability is intentionally not claimed by these tests.
 """
 import hashlib
+import importlib.util
 import json
 import os
 import shutil
@@ -60,7 +61,7 @@ class ForgeTests(unittest.TestCase):
                 result = forge._test({'project_name': slug})
                 self.assertTrue(result['passed'])
                 self.assertEqual(result['compat_smoke_test'], 'passed')
-                self.assertEqual(result['official_sdk'], 'not-run: Python mcp SDK not installed')
+                self.assertEqual(result['official_sdk'], 'passed' if importlib.util.find_spec('mcp') else 'not-run: Python mcp SDK not installed')
                 self.assertTrue(all(result['checks'].values()))
                 package = forge._package({'project_name': slug})
                 self.assertTrue(Path(package['path']).exists())

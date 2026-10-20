@@ -1,0 +1,15 @@
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    ALDOL_API_BASE_URL="" \
+    ALDOL_API_ALLOWED_HOST="" \
+    PORT=8080
+WORKDIR /app
+RUN pip install --no-cache-dir "mcp==2.0.0" && \
+    useradd --uid 10001 --create-home --shell /usr/sbin/nologin forge
+COPY --chown=forge:forge forge.py verify_sdk.py sandbox.py mcp_runtime.py templates.py openapi_forge.py api_runtime.py ./
+COPY --chown=forge:forge bridge/sdk_job_gateway.py bridge/cloud_run_verifier.py bridge/
+COPY --chown=forge:forge ci/verify_studio_archive.py ci/
+USER forge
+EXPOSE 8080
+CMD ["python", "-m", "bridge.cloud_run_verifier"]

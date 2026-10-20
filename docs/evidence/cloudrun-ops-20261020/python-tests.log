@@ -1,0 +1,27 @@
+test_exact_generator_parity_accepts_curated_and_openapi (ci.test_studio_archive.StudioArchiveTests.test_exact_generator_parity_accepts_curated_and_openapi) ... ok
+test_execution_environment_does_not_inherit_server_credentials (ci.test_studio_archive.StudioArchiveTests.test_execution_environment_does_not_inherit_server_credentials) ... ok
+test_real_official_sdk_both_transports (ci.test_studio_archive.StudioArchiveTests.test_real_official_sdk_both_transports) ... ok
+test_reject_executable_even_when_all_hashes_are_repaired (ci.test_studio_archive.StudioArchiveTests.test_reject_executable_even_when_all_hashes_are_repaired) ... ok
+test_reject_hash_mismatch (ci.test_studio_archive.StudioArchiveTests.test_reject_hash_mismatch) ... ok
+test_reject_oversized_manifest_before_decompression (ci.test_studio_archive.StudioArchiveTests.test_reject_oversized_manifest_before_decompression) ... ok
+test_reject_traversal (ci.test_studio_archive.StudioArchiveTests.test_reject_traversal) ... ok
+test_reject_unknown_files (ci.test_studio_archive.StudioArchiveTests.test_reject_unknown_files) ... ok
+test_auth_and_bad_artifact_rejection (bridge.test_cloud_run_verifier.TestCloudRunVerify.test_auth_and_bad_artifact_rejection) ... ok
+test_cross_owner_ids_are_not_interchangeable (bridge.test_cloud_run_verifier.TestCloudRunVerify.test_cross_owner_ids_are_not_interchangeable) ... ok
+test_real_sdk_in_one_http_request_without_background_thread (bridge.test_cloud_run_verifier.TestCloudRunVerify.test_real_sdk_in_one_http_request_without_background_thread) ... ok
+test_sdk_version_must_be_exactly_pinned (bridge.test_cloud_run_verifier.TestCloudRunVerify.test_sdk_version_must_be_exactly_pinned) ... ok
+test_timeout_is_a_final_result_not_transport_unavailable (bridge.test_cloud_run_verifier.TestCloudRunVerify.test_timeout_is_a_final_result_not_transport_unavailable) ... ok
+test_deploy_refuses_default_runtime_identity (deploy.cloudrun_sdk.test_deploy.DeploymentGuardTests.test_deploy_refuses_default_runtime_identity) ... ok
+test_deploy_refuses_slack_named_secret (deploy.cloudrun_sdk.test_deploy.DeploymentGuardTests.test_deploy_refuses_slack_named_secret) ... ok
+test_dry_run_needs_neither_credentials_nor_region (deploy.cloudrun_sdk.test_deploy.DeploymentGuardTests.test_dry_run_needs_neither_credentials_nor_region) ... ok
+test_completed_result_survives_restart (bridge.test_sdk_job_gateway.JobLifecycleTests.test_completed_result_survives_restart) ... ok
+test_invalid_verifier_output_is_failure_not_timeout (bridge.test_sdk_job_gateway.JobLifecycleTests.test_invalid_verifier_output_is_failure_not_timeout) ... ok
+test_timeout_is_distinct_and_result_persists (bridge.test_sdk_job_gateway.JobLifecycleTests.test_timeout_is_distinct_and_result_persists) ... ok
+test_async_real_sdk_result_and_cross_user_rejection (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_async_real_sdk_result_and_cross_user_rejection) ... ok
+test_hmac_timestamp_and_exact_body (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_hmac_timestamp_and_exact_body) ... ok
+test_reject_tampering_and_bad_ids (bridge.test_sdk_job_gateway.SDKJobGatewayTests.test_reject_tampering_and_bad_ids) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 16.171s
+
+OK

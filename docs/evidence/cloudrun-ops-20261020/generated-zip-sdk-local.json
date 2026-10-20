@@ -1,0 +1,44 @@
+{
+  "environment": "LOCAL; not Cloud Run or browser E2E",
+  "results": {
+    "studio-html-v020": {
+      "project_name": "studio-ci-html",
+      "kind": "curated",
+      "version": "0.2.0",
+      "files_checked": 8,
+      "passed": true,
+      "official_sdk": "PASS",
+      "sdk_version": "2.0.0",
+      "inmemory": "PASS",
+      "stdio": "PASS",
+      "network_used": false,
+      "security_boundary": "trusted generator parity before execution"
+    },
+    "studio-curated-v021": {
+      "project_name": "studio-ci-curated",
+      "kind": "curated",
+      "version": "0.2.1",
+      "files_checked": 8,
+      "passed": true,
+      "official_sdk": "PASS",
+      "sdk_version": "2.0.0",
+      "inmemory": "PASS",
+      "stdio": "PASS",
+      "network_used": false,
+      "security_boundary": "trusted generator parity before execution"
+    },
+    "studio-openapi-get": {
+      "project_name": "studio-ci-openapi",
+      "kind": "openapi-get",
+      "version": "0.3.0",
+      "files_checked": 10,
+      "passed": true,
+      "official_sdk": "PASS",
+      "sdk_version": "2.0.0",
+      "inmemory": "PASS",
+      "stdio": "PASS",
+      "network_used": false,
+      "security_boundary": "trusted generator parity before execution"
+    }
+  }
+}

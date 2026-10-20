@@ -9,6 +9,9 @@ const output = resolve(process.argv[2] || "ci-results/studio-sdk-fixtures");
 await mkdir(output, { recursive: true });
 
 const cases = [
+  ["studio-html-v020", await generate(
+    {project_name:"studio-ci-html",description:"HTML 게임 검사"},
+  )],
   ["studio-curated-v021", await generate(
     { project_name: "studio-ci-curated", description: "HTML 게임 검사" },
     ["html_audit", "json_audit"],

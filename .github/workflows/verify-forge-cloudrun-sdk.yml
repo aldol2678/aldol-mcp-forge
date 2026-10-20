@@ -1,0 +1,60 @@
+name: Forge SDK - GCP Cloud Run reuse
+on:
+  pull_request:
+    branches: [main, feat/studio-sdk-private-integration-20261020]
+    paths:
+      - "bridge/cloud_run_verifier.py"
+      - "bridge/test_cloud_run_verifier.py"
+      - "adapters/sites/**"
+      - "ci/verify_studio_archive.py"
+      - "Dockerfile.forge-sdk-cloudrun"
+      - ".github/workflows/verify-forge-cloudrun-sdk.yml"
+      - "deploy/cloudrun_sdk/**"
+  push:
+    branches: [main]
+    paths:
+      - "bridge/cloud_run_verifier.py"
+      - "adapters/sites/**"
+      - "Dockerfile.forge-sdk-cloudrun"
+permissions:
+  contents: read
+jobs:
+  sdk-gcp-compatibility:
+    name: Existing Slack GCP project / independent Forge service / real SDK v2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ALDOL_API_BASE_URL: ""
+      ALDOL_API_ALLOWED_HOST: ""
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify Sites sync-bridge and legacy MCP compatibility
+        working-directory: adapters/sites
+        run: |
+          node --test tests/*.test.mjs
+          bash scripts/build.sh
+          node scripts/validate-artifact.mjs
+      - name: Export genuine Forge Studio ZIP
+        run: node ci/generate_studio_sdk_fixtures.mjs
+      - name: Install actual Python SDK v2
+        run: python -m pip install --no-input "mcp==2.0.0"
+      - name: Run signed Cloud Run HTTP verifier (real SDK memory and stdio)
+        run: python -m unittest bridge.test_cloud_run_verifier deploy.cloudrun_sdk.test_deploy -v
+      - name: Run regression with SDK actually installed
+        run: python -m unittest discover -s tests -v
+      - name: Verify existing downloaded ZIP verifier remains stable
+        run: python -m unittest ci.test_studio_archive -v
+      - name: Check Dockerfile protects Cloud Run deployment boundary
+        run: |
+          grep -q 'USER forge' Dockerfile.forge-sdk-cloudrun
+          grep -q '127.0.0.1' bridge/sdk_job_gateway.py
+          grep -q -- '--no-allow-unauthenticated' deploy/cloudrun_sdk/prepare_and_deploy.sh
