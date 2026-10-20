@@ -97,3 +97,9 @@ test('MCP contract tools hidden until verified write gate',async()=>{
  const zip=await call('forge_package',{project_id:created.structuredContent.id});
  assert.match(zip.structuredContent.sha256,/^[a-f0-9]{64}$/);
 });
+
+test('Studio browser client remains valid JavaScript with contract tab',()=>{
+ const source=fileURLToPath(new URL('../worker/client.js',import.meta.url));
+ const result=spawnSync(process.execPath,['--check',source],{encoding:'utf8'});
+ assert.equal(result.status,0,result.stderr);
+});
