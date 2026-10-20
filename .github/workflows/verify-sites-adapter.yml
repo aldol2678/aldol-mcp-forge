@@ -1,0 +1,44 @@
+name: Sites read-only MCP adapter
+on:
+  push:
+    branches: [main]
+    paths: ['adapters/sites/**', 'forge.py', 'templates.py', 'openapi_forge.py', '.github/workflows/verify-sites-adapter.yml']
+  pull_request:
+    branches: [main]
+    paths: ['adapters/sites/**', 'forge.py', 'templates.py', 'openapi_forge.py', '.github/workflows/verify-sites-adapter.yml']
+permissions:
+  contents: read
+concurrency:
+  group: sites-adapter-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  parity-and-protocol:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python parity and MCP protocol tests
+        working-directory: adapters/sites
+        run: |
+          mkdir -p ../../ci-results
+          set -o pipefail
+          node --test tests/*.test.mjs | tee ../../ci-results/sites-tests.tap
+      - name: Build and validate Worker artifact
+        working-directory: adapters/sites
+        run: |
+          bash scripts/build.sh
+          node scripts/validate-artifact.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sites-readonly-adapter-evidence
+          path: ci-results/sites-*
+          retention-days: 14
