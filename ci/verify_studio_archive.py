@@ -101,8 +101,15 @@ def verify(path: str) -> dict:
         project_root = Path(folder) / "projects"
         project_root.mkdir(mode=0o700)
         # Determine a candidate directory name without executing ZIP source.
+        # Bound the manifest BEFORE decompressing or trusting project names.
+        # This is essential even though the main validator checks sizes later.
+        if archive.stat().st_size > MAX_ZIP_BYTES:
+            raise ValueError("ZIP exceeds maximum size")
         with ZipFile(archive) as z:
-            manifest = json.loads(z.read("manifest.json").decode("utf-8"))
+            info = z.getinfo("manifest.json")
+            if info.file_size > 20_000 or info.flag_bits & 0x1:
+                raise ValueError("Unsafe or oversized manifest")
+            manifest = json.loads(z.read(info).decode("utf-8"))
         name = forge._name(manifest.get("name"))
         target = project_root / name
         target.mkdir(mode=0o700)
