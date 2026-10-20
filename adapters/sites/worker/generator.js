@@ -1,5 +1,6 @@
 import { ASSETS } from './assets.js';
 import { TOOLS, preview, previewOpenAPI, validate } from './core.js';
+import { parseContract, contractInputSchema, renderContractServer, contractReadme } from './contract.js';
 export const SOURCE_SHA='c33d6c1ab8066b90ec644bd19fe6516fdc0d4630';
 export const encoder=new TextEncoder();
 export async function digest(value){const bytes=typeof value==='string'?encoder.encode(value):value;return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('');}
@@ -39,7 +40,18 @@ export async function generate(args,selected=null,previous=null){
  const name=args.project_name;
  if(typeof name!=='string'||!/^[a-z][a-z0-9-]{2,39}$/.test(name)||name.includes('\n'))throw Error('프로젝트 이름은 소문자로 시작하는 3~40자의 영문 소문자·숫자·하이픈이어야 합니다.');
  const files={},created_at=new Date().toISOString();let tools,manifest,schemas;
- if(Object.hasOwn(args,'spec_json')){
+ if(Object.hasOwn(args,'contract_json')){
+  const parsed=parseContract(args.contract_json);
+  tools=parsed.tools.map(t=>t.name);
+  schemas=Object.fromEntries(parsed.tools.map(t=>[t.name,contractInputSchema(t)]));
+  files['server.py']=renderContractServer(name,parsed.tools,pyrepr);
+  files['mcp_runtime.py']=ASSETS['mcp_runtime.py'];
+  files['contract.json']=JSON.stringify(parsed,null,2)+'\n';
+  files['requirements.txt']='mcp>=2,<3\n';
+  files['README.md']=contractReadme(name,parsed.tools);
+  manifest={name,version:'0.4.0',forge_version:'0.4.0',kind:'declarative-scaffold',tools,
+            created_at,files_sha256:{}};
+ }else if(Object.hasOwn(args,'spec_json')){
   const ops=operations(args.spec_json),previewResult=previewOpenAPI({spec_json:args.spec_json});tools=ops.map(o=>o.name);schemas=Object.fromEntries(ops.map(o=>[o.name,inputSchema(o)]));
   files['server.py']=renderAPI(name,ops);files['operations.py']='"""Generated operation registry. Treat external specs as untrusted input."""\nOPERATIONS = '+pyrepr(ops.map(op=>({...op,schema:inputSchema(op)})))+'\n';
   files['api_runtime.py']=ASSETS['api_runtime.py'];files['mcp_runtime.py']=ASSETS['mcp_runtime.py'];files['requirements.txt']='mcp>=2,<3\n';files['openapi.json']=args.spec_json;
@@ -55,14 +67,28 @@ export async function generate(args,selected=null,previous=null){
   manifest={name,version,forge_version:'0.2.0',description:strip(args.description),templates:tools,created_at,files_sha256:{}};
   if(previous){manifest.previous_version=previous.version;manifest.previous_manifest_sha256=previous.hash;}
  }
- const hashFiles=manifest.kind==='openapi-get'?Object.keys(files):['mcp_runtime.py','templates.py','server.py','requirements.txt'];
+ const hashFiles=['openapi-get','declarative-scaffold'].includes(manifest.kind)?Object.keys(files):['mcp_runtime.py','templates.py','server.py','requirements.txt'];
  for(const f of hashFiles)manifest.files_sha256[f]=await digest(files[f]);files['manifest.json']=JSON.stringify(manifest,null,2)+'\n';
- return {project_name:name,description:args.description||'OpenAPI GET 프로젝트',kind:manifest.kind||'curated',tools,schemas,files,version:manifest.version,created_at,source_sha:SOURCE_SHA,validation:{generation:{status:'PASS',detail:'허용된 템플릿으로 파일 생성'},integrity:{status:'PASS',detail:'SHA-256 생성'},python_execution:{status:'SKIP',detail:'Sites Worker는 Python subprocess를 실행하지 않습니다.'},official_sdk:{status:'SKIP',detail:'생성 코드의 SDK v2 실행 검사는 Python 실행 환경이 필요합니다.'}},...(args.spec_json?{spec_json:args.spec_json}:{}),auto_deployed:false};
+ return {project_name:name,description:args.description||(manifest.kind==='declarative-scaffold'?'사용자 정의 MCP 골격':'OpenAPI GET 프로젝트'),kind:manifest.kind||'curated',tools,schemas,files,version:manifest.version,created_at,source_sha:SOURCE_SHA,validation:{generation:{status:'PASS',detail:manifest.kind==='declarative-scaffold'?'계약 검사 및 미구현 골격 생성':'허용된 템플릿으로 파일 생성'},integrity:{status:'PASS',detail:'SHA-256 생성'},python_execution:{status:'SKIP',detail:'Sites Worker는 Python subprocess를 실행하지 않습니다.'},official_sdk:{status:'SKIP',detail:'생성 코드의 SDK v2 실행 검사는 Python 실행 환경이 필요합니다.'}},...(args.spec_json?{spec_json:args.spec_json}:{}),...(args.contract_json?{contract_json:args.contract_json,handlers_implemented:false}:{}),auto_deployed:false};
 }
 export async function verifyProject(p){
  const checks={};const manifest=JSON.parse(p.files['manifest.json']);
+ if(p.kind==='declarative-scaffold'){
+  try{
+   const expected=new Set(['server.py','mcp_runtime.py','contract.json','requirements.txt','README.md','manifest.json']);
+   const actual=Object.keys(p.files);
+   if(actual.length!==expected.size||actual.some(k=>!expected.has(k)))throw Error('파일 목록 불일치');
+   const contract=parseContract(p.files['contract.json']);
+   if(JSON.stringify(contract)!==JSON.stringify(JSON.parse(p.files['contract.json'])))throw Error('계약 구조 불일치');
+   if(manifest.kind!=='declarative-scaffold'||manifest.version!=='0.4.0'||manifest.forge_version!=='0.4.0'||manifest.name!==p.project_name||JSON.stringify(manifest.tools)!==JSON.stringify(contract.tools.map(t=>t.name)))throw Error('manifest 불일치');
+   const expectedSource=renderContractServer(p.project_name,contract.tools,pyrepr);
+   if(p.files['server.py']!==expectedSource||p.files['requirements.txt']!=='mcp>=2,<3\n'||p.files['mcp_runtime.py']!==ASSETS['mcp_runtime.py']||p.files['README.md']!==contractReadme(p.project_name,contract.tools))throw Error('생성기 원본과 불일치');
+   if(Object.keys(manifest.files_sha256).length!==5||Object.keys(manifest.files_sha256).some(k=>!expected.has(k)))throw Error('무결성 목록 불일치');
+   checks.compiler_parity='PASS';
+  }catch(error){checks.compiler_parity='FAIL';}
+ }
  for(const [name,hash]of Object.entries(manifest.files_sha256))checks[name]=(await digest(p.files[name]||''))===hash?'PASS':'FAIL';
- return {checks,integrity:{status:Object.values(checks).every(s=>s==='PASS')?'PASS':'FAIL'},python_execution:{status:'SKIP'},official_sdk:{status:'SKIP'},note:'파일 무결성 검사입니다. Python 실행·SDK 검사가 아닙니다.'};
+ return {checks,integrity:{status:Object.values(checks).every(s=>s==='PASS')?'PASS':'FAIL'},python_execution:{status:'SKIP'},official_sdk:{status:'SKIP'},handlers_implemented:p.kind==='declarative-scaffold'?false:undefined,note:'정적 무결성/생성기 일치 검사이며 Python 실행·SDK 검사가 아닙니다.'};
 }
 // ZIP store method, UTF-8 filenames, CRC-32; no dependency or code execution.
 export function zipFiles(files){

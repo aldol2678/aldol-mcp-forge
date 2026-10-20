@@ -17,8 +17,10 @@ EXPECTED = {
     "forge_list_templates", "forge_preview", "forge_create",
     "forge_add_tool", "forge_test", "forge_package",
     "forge_preview_openapi", "forge_import_openapi",
+    "forge_preview_contract", "forge_create_contract",
 }
 SAMPLE_SPEC = (ROOT / "examples" / "pets_openapi.json").read_text(encoding="utf-8")
+SAMPLE_CONTRACT = (ROOT / "examples" / "seum-mcp-contract.json").read_text(encoding="utf-8")
 
 # Exact v0.3.2 legacy per-field semantics, ignoring SDK-generated titles/default.
 ARGUMENTS = {
@@ -36,6 +38,10 @@ ARGUMENTS = {
     "forge_import_openapi": ({"project_name": (1, 40),
                              "spec_json": (2, 120000),
                              "isolation": (1, 40)}, ("project_name", "spec_json")),
+    "forge_preview_contract": ({"contract_json": (2, 120000)}, ("contract_json",)),
+    "forge_create_contract": ({"project_name": (1, 40),
+                              "contract_json": (2, 120000),
+                              "isolation": (1, 40)}, ("project_name", "contract_json")),
 }
 
 
@@ -82,11 +88,42 @@ def payload(response):
     return data["result"] if isinstance(data.get("result"), dict) else data
 
 
+async def verify_generated_contract_sdk(project):
+    """Real SDK client checks the scaffold advertises tools but refuses execution."""
+    import importlib.util
+    from mcp import Client, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+
+    expected = ["analyze_code", "implement_change", "review_release"]
+
+    async def probe(client):
+        found = [item.name for item in (await client.list_tools()).tools]
+        if found != expected:
+            raise AssertionError(f"Scaffold SDK discovery mismatch: {found}")
+        answer = await client.call_tool("analyze_code", {"repository": "sample"})
+        message = " ".join(getattr(item, "text", "") for item in answer.content)
+        if not answer.is_error or "NOT_IMPLEMENTED" not in message:
+            raise AssertionError(f"Scaffold handler did not fail closed: {answer}")
+        return True
+
+    spec = importlib.util.spec_from_file_location("_forge_contract_scaffold", project / "server.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    async with Client(module.app, raise_exceptions=True) as client:
+        await probe(client)
+    params = StdioServerParameters(command=sys.executable,
+                                   args=["-B", str(project / "server.py")],
+                                   env={"PYTHONDONTWRITEBYTECODE": "1"})
+    async with Client(stdio_client(params), raise_exceptions=True) as client:
+        await probe(client)
+    return {"sdk_inmemory": True, "sdk_stdio": True, "implemented": False}
+
+
 async def check(client, mode):
     tools = (await client.list_tools()).tools
     names = {tool.name for tool in tools}
     if names != EXPECTED or len(tools) != len(EXPECTED):
-        raise AssertionError(f"8 public tools changed: {sorted(names)}")
+        raise AssertionError(f"Public tools changed: {sorted(names)}")
     schemas = contract_check(tools)
 
     # No mutation on invalid input; compare schema-validation and execution errors.
@@ -101,6 +138,7 @@ async def check(client, mode):
     await expect_rejected(client, "forge_test",
                           {"project_name": "not-created", "isolation": "unsafe"})
     await expect_rejected(client, "forge_preview_openapi", {"spec_json": "{"})
+    await expect_rejected(client, "forge_preview_contract", {"contract_json": "{"})
     await expect_rejected(client, "forge_preview_openapi",
                           {"spec_json": "{" + "x" * 120010 + "}"})
     await expect_rejected(client, "forge_test",
@@ -113,6 +151,9 @@ async def check(client, mode):
     api_preview = payload(await client.call_tool("forge_preview_openapi", {"spec_json": SAMPLE_SPEC}))
     assert api_preview.get("supported") is True and api_preview.get("count") == 2, api_preview
     assert api_preview.get("default_network_access") is False, api_preview
+    contract_preview = payload(await client.call_tool("forge_preview_contract",
+                                                       {"contract_json": SAMPLE_CONTRACT}))
+    assert contract_preview.get("count") == 3 and contract_preview["handlers_implemented"] is False, contract_preview
 
     # Both transports create, validate, and package into ephemeral workspaces.
     name = "ci-html-" + mode
@@ -129,6 +170,18 @@ async def check(client, mode):
     assert packaged.get("packaged") is True and packaged.get("deployed") is False, packaged
     assert Path(packaged["path"]).is_file(), packaged
 
+    contract_name = "ci-seum-" + mode
+    contract_created = payload(await client.call_tool("forge_create_contract",
+        {"project_name": contract_name, "contract_json": SAMPLE_CONTRACT}))
+    assert contract_created["created"] is True and contract_created["handlers_implemented"] is False
+    contract_test = payload(await client.call_tool("forge_test", {"project_name": contract_name}))
+    assert contract_test["passed"] is True and contract_test["implementation_verified"] is False
+    assert all(contract_test["checks"].values()), contract_test
+    contract_packaged = payload(await client.call_tool("forge_package", {"project_name": contract_name}))
+    assert contract_packaged["packaged"] is True and contract_packaged["deployed"] is False
+    contract_sdk = await verify_generated_contract_sdk(Path(contract_created["path"]))
+    assert contract_sdk["sdk_inmemory"] and contract_sdk["sdk_stdio"]
+
     if mode == "stdio":
         api_name = "ci-pets-openapi"
         imported = payload(await client.call_tool(
@@ -143,7 +196,8 @@ async def check(client, mode):
     return {"passed": True, "mode": mode, "tools": sorted(names),
             "contract": schemas, "errors_visible": True,
             "generated_mcp": name, "official_generated_sdk": "passed",
-            "openapi_dry_run": mode == "stdio"}
+            "openapi_dry_run": mode == "stdio", "contract_scaffold_tested": True,
+            "contract_sdk_inmemory_stdio": True}
 
 
 async def verify():

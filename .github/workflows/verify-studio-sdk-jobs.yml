@@ -1,7 +1,7 @@
 name: Forge Studio - signed SDK job end-to-end
 on:
   pull_request:
-    branches: [main, feat/studio-sdk-v2-artifact-verifier]
+    branches: [main, feat/studio-sdk-v2-artifact-verifier, feat/forge-sdk-cloudrun-slack-project]
     paths:
       - '.github/workflows/verify-studio-sdk-jobs.yml'
       - 'bridge/sdk_job_gateway.py'

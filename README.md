@@ -1,4 +1,39 @@
-# ALDOL MCP Forge v0.3.2 🔧
+# ALDOL MCP Forge v0.4.0 🔧
+
+**New: declarative tool-contract scaffolds for specialized MCP servers.** Existing
+curated templates and OpenAPI GET workflows are preserved.
+
+## v0.4 Contract workflow (implementation deliberately NOT generated)
+
+Provide a single JSON object with a tools array. Each tool has name,
+description, inputs (name, type, required, optional description), and
+output_schema (a closed JSON Schema object with scalar properties).
+Supported scalar types: string, integer, number, boolean.
+Limitations: 1..12 tools, 0..12 inputs per tool, 1..20 output properties,
+120000-character max JSON; no nested / referenced schemas or executable handlers.
+
+For example use examples/seum-mcp-contract.json,
+examples/bonsae-mcp-contract.json, examples/majung-mcp-contract.json.
+
+- forge_preview_contract(contract_json): validate and preview, no writes
+- forge_create_contract(project_name, contract_json, isolation="auto"):
+  generate immutable Python MCP SDK v2 project with contract.json,
+  source checksums and a manifest, then test compatibility transport
+- forge_test(project_name): verify compiler parity and that every scaffold
+  handler rejects with NOT_IMPLEMENTED. It does NOT verify an implementation.
+- forge_package(project_name): ZIP the trusted source and contract;
+  no deployment, external calls or implementation
+- Generated handlers fail closed with NOT_IMPLEMENTED until a developer
+  deliberately implements, reviews and tests them. The declared output
+  schema is documentation until then, not enforced runtime output validation.
+
+**Production Sites Forge Studio is unchanged.** The newly created tools are
+available only when running an updated local Forge entrypoint. They are NOT
+yet exposed by the deployed ChatGPT Sites adapter. The official SDK button
+in draft PR #8 is a separate workstream; scaffold compatibility checks are
+not an SDK execution PASS.
+
+## v0.3.2 previously verified baseline
 
 **자연어 템플릿 + OpenAPI에서 MCP 서버 소스코드를 생성하는 로컬 제작기.**
 외부 서비스에 등록하거나 자동 배포하지 않습니다. Python 3.11+ 필요.
@@ -69,7 +104,7 @@ python3 examples/run_openapi_demo.py
 
 Forge 자체는 기능이 제한된 stdio JSON-RPC 경량 런타임을 계속 사용합니다. **Forge 서버 자체가 공식 SDK 서버로 이전된 것은 아닙니다.**
 
-## 도구 총 8개
+## 도구: 기존 8개 + 신규 2개
 
 | 도구 | 기능 |
 |---|---|
@@ -81,6 +116,8 @@ Forge 자체는 기능이 제한된 stdio JSON-RPC 경량 런타임을 계속 �
 | `forge_package` | 로컬 ZIP 작성. 동일 버전 덮어쓰기 방지 |
 | `forge_preview_openapi` | OpenAPI 3 JSON의 지원 GET·제외 작업 미리보기 |
 | `forge_import_openapi` | `project_name`, `spec_json`, 선택적 `isolation`로 새 OpenAPI GET 프로젝트 생성 |
+| `forge_preview_contract` | JSON 계약 미리보기 및 안전성 검증(읽기 전용) |
+| `forge_create_contract` | JSON 계약으로 미구현 MCP SDK v2 골격 생성(호출 시 NOT_IMPLEMENTED) |
 
 예제 JSON은 `examples/pets_openapi.json`에 있습니다. 그대로 `forge_preview_openapi`나 `forge_import_openapi`의 `spec_json` 값으로 전달할 수 있습니다. Swagger/OpenAPI의 YAML, 서버 URL 직접 가져오기, `$ref`/요청 바디/고급 parameter encoding/인증/쓰기 작업 자동 생성은 지원하지 않습니다.
 
