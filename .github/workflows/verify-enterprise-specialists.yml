@@ -38,5 +38,7 @@ jobs:
         run: python -m unittest discover -s enterprise_mcps/tests -p test_github_read.py -v
       - name: Verify HTTP authentication and safe host boundaries
         run: python -m unittest discover -s enterprise_mcps/tests -p test_http.py -v
+      - name: Verify real loopback Streamable HTTP MCP bearer handshake and tool call
+        run: python -m unittest discover -s enterprise_mcps/tests -p test_live_server.py -v
       - name: Run real SDK in-memory and stdio tests
         run: python -m unittest discover -s enterprise_mcps/tests -p test_sdk.py -v
