@@ -31,6 +31,10 @@ jobs:
           mkdir -p ../../ci-results
           set -o pipefail
           node --test tests/*.test.mjs | tee ../../ci-results/sites-tests.tap
+      - name: Original Forge validators and official SDK for Studio output
+        run: |
+          python -m pip install --no-input "mcp==2.0.0"
+          python adapters/sites/tests/verify_generated.py --official-sdk > ci-results/sites-studio-sdk.json
       - name: Build and validate Worker artifact
         working-directory: adapters/sites
         run: |
