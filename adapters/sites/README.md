@@ -37,3 +37,16 @@ OpenAPI import retains original GET validation. Generation additionally requires
 ## Storage and exports
 
 The R2 project JSON includes metadata and generated file contents. ZIP is generated on demand; download requires the same user identity. It includes original Python files, requirements, README, manifest, client config, explicit validation statuses, SHA256SUMS; archive hash is returned in `X-Content-SHA256`. No ZIP object is publicly published. Browser storage holds only selected project ID as a navigation preference.
+
+## v0.3 · 범용 도구 계약 UI (Draft PR #10)
+
+- **MCP 만들기 → 범용 도구 계약** 모드에서 계약 JSON을 입력하거나 세움·본새·마중 예시를 선택합니다.
+- `/api/contracts/preview` 는 계약을 스키마·식별자·중복 키 기준으로 검사하는 정적 미리보기입니다. 저장하지 않습니다.
+- `/api/draft` 는 미저장 `declarative-scaffold` Python 서버 골격을 표시합니다.
+- 인증된 `/api/projects` 및 `forge_create_contract` 는 `contract.json`, `server.py`, `mcp_runtime.py`, `requirements.txt`, `README.md`, `manifest.json`을 기존 사용자별 R2 규칙에 따라 불변 저장합니다.
+- `forge_preview_contract`와 `forge_create_contract`는 Sites 쓰기 게이트가 검증된 경우에만 확장 MCP 도구 목록에 나타납니다. 미인증 사용자는 생성할 수 없습니다.
+- `forge_test` 및 ZIP 내보내기는 파일 SHA-256과 신뢰된 생성기 코드 일치 여부만 확인합니다. 모든 스텁은 `NOT_IMPLEMENTED` 오류를 반환합니다. `python_execution=SKIP`, `official_sdk=SKIP`이며 **실제 업무 기능의 PASS, 공개 배포 또는 출시 승인이 아닙니다.**
+- 저장된 개별 계약 파일은 도구 출력 스키마를 **선언**하지만 핸들러 실행·외부 API 연결·출력 유효성 검증은 생성하지 않습니다. 후속 구현은 별도의 검토와 실행 검증이 필요합니다.
+- 기존 curated 및 OpenAPI GET 생성·비공개 다운로드 경로는 보존됩니다. 새 계약은 기존 프로젝트의 도구 추가 기능으로 수정하지 않으며 새 이름으로 생성해야 합니다.
+
+**운영 상태:** 이 변경은 GitHub Draft PR에만 존재하며 실제 비공개 ChatGPT Site는 업데이트되지 않았습니다. 정식 배포 전에 Sites 인증·R2·모바일 화면 E2E를 별도로 검증해야 합니다.
