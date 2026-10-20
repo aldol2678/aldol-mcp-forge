@@ -6,12 +6,14 @@ Architecture: isolated `server.py` (MCP and authenticated HTTP), `service.py` (b
 
 Execution: native implementation in the current session, as requested; separate git branch. No additional approval required for authorized implementation, test, PR, deployment, or existing private plugin update. Merge deferred until review and complete acceptance evidence.
 
-- [ ] Test ingestion/rejection, static PASS/FAIL/UNKNOWN, persisted reports and conservative regression before implementing service.
-- [ ] Implement subprocess runner with artifact/ZIP/profile limits, execution deadline and minimal environment.
-- [ ] Test official SDK stdio tools/list and tools/call, invalid inputs and normal EOF shutdown; implement six decorated tools.
-- [ ] Test authenticated HTTP (no/wrong token rejected, correct token calls; remote path/browser blocked), implement HTTP wrapper and deployment files.
-- [ ] Run original selftest, Forge Python + Sites tests, controlled own-fixture browser QA and new protocol tests.
-- [ ] Commit/push, open PR and inspect CI/changed files; deploy isolated Railway service and read back.
-- [ ] Update existing PRIVATE plugin only with verified endpoint/config; inspect source readback and actual host tools, distinguish pending auth/mobile.
+- [x] Test ingestion/rejection, static PASS/FAIL/UNKNOWN, persisted reports and conservative regression before implementing service.
+- [x] Implement subprocess runner with artifact/ZIP/profile limits, execution deadline and minimal environment.
+- [x] Test official SDK stdio tools/list and tools/call, invalid inputs and normal EOF shutdown; implement six decorated tools.
+- [x] Test authenticated HTTP (no/wrong token rejected, correct token calls; remote path/browser blocked), implement HTTP wrapper and deployment files.
+- [x] Run original selftest, Forge Python + Sites tests, controlled own-fixture browser QA and new protocol tests.
+- [x] Commit/push, open PR and inspect CI/changed files; deploy isolated Railway service and read back.
+- [x] Update existing PRIVATE plugin only with verified endpoint/config; inspect source readback and actual host tools, distinguish pending auth/mobile.
 
 Review focus: ZIP duplicates/traversal/links/bombs; symlink path escapes; missing/degraded regression checks and mismatched test profiles; timeout/worker failure must be UNKNOWN; reports and uploads bounded, private and transient. CLI browser route is a trusted-local execution facility, not an OS sandbox. Report limitation explicitly.
+
+Acceptance distinction: implementation/stdio/authenticated HTTPS/PR/CI/private plugin saved and read back. Local browser UNKNOWN (Chromium absent); ChatGPT credential activation and actual Android invocation UNKNOWN. These blocked acceptance items are not marked completed by the implementation checklist.
