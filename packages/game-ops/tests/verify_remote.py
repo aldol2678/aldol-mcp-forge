@@ -7,7 +7,6 @@ import datetime
 import io
 import json
 from pathlib import Path
-import sys
 import zipfile
 import httpx2
 from mcp import ClientSession
@@ -71,6 +70,34 @@ async def main(args):
                         "candidate_id": evidence["html"]["qa_id"],
                     },
                 )
+                bad = {
+                    "filename": "bad.html",
+                    "content_base64": base64.b64encode(b"<title>Bad</title>").decode(),
+                }
+                failed = await call("run_static_qa", {"artifact": bad})
+                evidence["regression_detected"] = await call(
+                    "compare_game_versions",
+                    {
+                        "baseline_id": evidence["html"]["qa_id"],
+                        "candidate_id": failed["qa_id"],
+                    },
+                )
+                assert evidence["regression_detected"]["status"] == "FAIL"
+                uncertain = {
+                    "filename": "uncertain.html",
+                    "content_base64": base64.b64encode(
+                        b'<title>Bad</title><script src="https://example.com/external.js"></script>'
+                    ).decode(),
+                }
+                uncertain_report = await call("run_static_qa", {"artifact": uncertain})
+                evidence["masked_unknown"] = await call(
+                    "compare_game_versions",
+                    {
+                        "baseline_id": failed["qa_id"],
+                        "candidate_id": uncertain_report["qa_id"],
+                    },
+                )
+                assert evidence["masked_unknown"]["status"] == "UNKNOWN"
                 evidence["browser"] = await call(
                     "run_browser_qa", {"artifact": artifact}
                 )

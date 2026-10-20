@@ -184,3 +184,14 @@ def test_http_requires_secret(tmp_path):
         timeout=10,
     )
     assert r.returncode != 0 and b"GAME_OPS_TOKEN" in r.stderr
+
+
+def test_idle_connections_do_not_exhaust_request_capacity(http_server):
+    base, _ = http_server
+    clients = [httpx2.Client(trust_env=False, timeout=5) for _ in range(12)]
+    try:
+        for client in clients:
+            assert client.get(base + "/healthz").status_code == 200
+    finally:
+        for client in clients:
+            client.close()

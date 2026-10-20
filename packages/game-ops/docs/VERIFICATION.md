@@ -6,7 +6,7 @@ Base checked live: PR #17 merged; main db3cf756dcbcb3e79bfe7cf9c9ffada33c19c60b.
 
 - Official Python MCP SDK 2.3.0, real child-process stdio: initialize, all six tools/list, tools/call for actual HTML and ZIP ingestion, static QA PASS and FAIL, persisted QA JSON readback and PASS-to-FAIL regression detection. Invalid path/QA ID/unknown top-level arguments rejected. Normal stdin/transport shutdown succeeds. `evidence/stdio.json`.
 - HTTP subprocess with official SDK: unauthenticated/wrong token 401, valid bearer tools/list/call, hostile Origin 403 and oversized request 413. Browser policy UNKNOWN. HTTP refuses host paths. No-token startup fails closed.
-- New module tests: 33 PASS. ZIP traversal/absolute paths/Windows drive/backslash, duplicate members, symlink, count and expansion limits; invalid base64/type/hash; expired report cleanup and distinct profile uncertainty. Actual Node parse-only marker test proves uploaded JS does not execute in static checks.
+- New module tests: 34 PASS. ZIP traversal/absolute paths/Windows drive/backslash, duplicate members, symlink, count and expansion limits; invalid base64/type/hash; expired report cleanup and distinct profile uncertainty. Actual Node parse-only marker test proves uploaded JS does not execute in static checks.
 - Original CLI built-in test: 7 assertions PASS (`evidence/cli-selftest.log`).
 - Forge Python: 26 tests, OK, 1 pre-existing optional SDK test skipped in base Python (`evidence/forge-python.log`).
 - Forge Sites adapter: 207 PASS (`evidence/forge-sites.log`).
@@ -27,3 +27,9 @@ Touch viewports are emulation only. Android ChatGPT credential activation/call i
 ## Independent review and fixes
 
 Reviewer found four report/comparison flaws. All reproduced as failing tests, then corrected: FAIL cannot mask UNKNOWN evidence; incompatible profiles never assert regression; duplicate recorded check IDs yield UNKNOWN; worker failure never reports static coverage PASS. Added explicit regression fixtures. Official SDK generated-server checks and Forge runtime checks separately passed under SDK 2.3.0 (evidence/forge-sdk.log and forge-runtime-sdk.log).
+
+## Deployment follow-up
+
+Live SDK rechecks exposed HTTP 503 during sequential calls: Uvicorn's connection limit counted idle keepalive connections from the Railway proxy as active work. Reproduced locally with 12 open HTTP clients; the failing test now passes after moving the active-request cap to the authenticated ASGI wrapper (4 active bodies, 15s receive deadline), with a separate 64-connection transport ceiling and 2s keepalive. A further deployment and full remote SDK recheck are required for the corrected runtime.
+
+Existing PRIVATE plugin updated in place to 0.4.0, release pluginrel_6ad7ff1f1230819180a73b9d44fbea22; portable and generated compatibility MCP configuration read back. The original five skills, CLI, profiles, prompts, plugin ID, USER scope and PRIVATE audience remain. Host's available tools inventory does not yet expose this MCP server; API-key credential activation and actual Android ChatGPT calls remain UNKNOWN. Available plugin tools can update packages but expose no secure credential-entry operation, so owner entry in the connection prompt remains a user step. Do not paste the key in chat. The secret is stored as GAME_OPS_TOKEN on the isolated Railway service.

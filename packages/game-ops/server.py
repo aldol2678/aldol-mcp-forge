@@ -2,6 +2,7 @@
 """Official Python MCP SDK v2 entrypoint: stdio or authenticated static-only HTTP."""
 
 from __future__ import annotations
+import asyncio
 import argparse
 import hmac
 import os
@@ -94,10 +95,26 @@ class OwnerAuth:
     def __init__(self, app, token):
         self.app = app
         self.expected = ("Bearer " + token).encode()
+        self.active = asyncio.Semaphore(4)
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
             return await self.app(scope, receive, send)
+        # Limit active request bodies, not idle keep-alive connections from proxies.
+        if self.active.locked():
+            await send(
+                {
+                    "type": "http.response.start",
+                    "status": 429,
+                    "headers": [(b"retry-after", b"1")],
+                }
+            )
+            await send({"type": "http.response.body", "body": b"busy"})
+            return
+        async with self.active:
+            return await self._http(scope, receive, send)
+
+    async def _http(self, scope, receive, send):
 
         async def reject(code, body):
             await send(
@@ -126,7 +143,10 @@ class OwnerAuth:
         chunks = []
         size = 0
         while True:
-            event = await receive()
+            try:
+                event = await asyncio.wait_for(receive(), timeout=15)
+            except asyncio.TimeoutError:
+                return await reject(408, b'{"error":"request body timeout"}')
             if event["type"] == "http.disconnect":
                 return
             size += len(event.get("body", b""))
@@ -191,8 +211,8 @@ def main():
             app,
             host="0.0.0.0",
             port=int(os.environ.get("PORT", "8000")),
-            limit_concurrency=8,
-            timeout_keep_alive=5,
+            limit_concurrency=64,
+            timeout_keep_alive=2,
         )
     else:
         build_server(service).run()

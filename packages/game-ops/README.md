@@ -81,7 +81,7 @@ Regression FAIL means a matching check changed PASS→FAIL. Missing checks, UNKN
 
 Reports are single-owner, stored as private JSON for at most 24h and 128 reports, and have an individual size cap of 2 MiB. Railway storage is ephemeral; reports may disappear on restart/redeploy. Artifacts and browser outputs are temporary and removed after the call. There is no multi-tenant isolation or permanent evidence archive. Read the report into your own evidence store when needed.
 
-Limits: 2 MiB decoded upload; 3 MiB HTTP body; 100 ZIP entries; 8 MiB total expansion; 2 MiB per expanded file; compression-ratio guard; duplicate/traversal/drive paths, encrypted entries, links and special files refused. Profile 64 KB, at most 12 scenarios × 40 steps. Worker deadlines 30s static/90s local browser, CPU/file descriptor/output limits and process-group cleanup. Remote service memory/CPU limits are also set at Railway. No upstream security-scanner or full DOM/CSS validator claim.
+Limits: 2 MiB decoded upload; 3 MiB HTTP body; 100 ZIP entries; 8 MiB total expansion; 2 MiB per expanded file; compression-ratio guard; duplicate/traversal/drive paths, encrypted entries, links and special files refused. Profile 64 KB, at most 12 scenarios × 40 steps. At most 4 active HTTP request bodies, with 15s receive deadline; idle proxy connections do not consume this quota. Worker deadlines 30s static/90s local browser, CPU/file descriptor/output limits and process-group cleanup. Remote service memory/CPU limits are also set at Railway. No upstream security-scanner or full DOM/CSS validator claim.
 
 ## Tests
 
