@@ -48,7 +48,9 @@ jobs:
       - name: Install actual Python SDK v2
         run: python -m pip install --no-input "mcp==2.0.0"
       - name: Run signed Cloud Run HTTP verifier (real SDK memory and stdio)
-        run: python -m unittest bridge.test_cloud_run_verifier -v
+        run: python -m unittest bridge.test_cloud_run_verifier deploy.cloudrun_sdk.test_deploy -v
+      - name: Run regression with SDK actually installed
+        run: python -m unittest discover -s tests -v
       - name: Verify existing downloaded ZIP verifier remains stable
         run: python -m unittest ci.test_studio_archive -v
       - name: Check Dockerfile protects Cloud Run deployment boundary

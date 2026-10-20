@@ -4,6 +4,9 @@ The positive fixtures come from the actual JS Sites Worker exporter, not Python.
 """
 import hashlib
 import json
+import os
+import subprocess
+from unittest.mock import patch
 from pathlib import Path
 import sys
 import tempfile
@@ -101,8 +104,20 @@ class StudioArchiveTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "oversized manifest"):
             verify(str(bad))
 
+    def test_execution_environment_does_not_inherit_server_credentials(self):
+        real_run = subprocess.Popen
+        seen = []
+        def capture(*args, **kwargs):
+            seen.append(kwargs.get("env", {}))
+            return real_run(*args, **kwargs)
+        with patch.dict(os.environ, {"FORGE_SDK_BRIDGE_SECRET":"must-not-enter-sdk", "GOOGLE_APPLICATION_CREDENTIALS":"/secret/key.json"}), patch("ci.verify_studio_archive.subprocess.Popen", side_effect=capture):
+            self.assertTrue(verify(str(self.fixture()))["passed"])
+        self.assertTrue(seen)
+        self.assertFalse("FORGE_SDK_BRIDGE_SECRET" in seen[0], "SDK inherited HMAC secret")
+        self.assertFalse("GOOGLE_APPLICATION_CREDENTIALS" in seen[0], "SDK inherited cloud credentials")
+
     def test_real_official_sdk_both_transports(self):
-        for name in ("studio-curated-v021", "studio-openapi-get"):
+        for name in ("studio-html-v020", "studio-curated-v021", "studio-openapi-get"):
             with self.subTest(fixture=name):
                 r = verify(str(self.fixture(name)))
                 self.assertTrue(r["passed"], r)

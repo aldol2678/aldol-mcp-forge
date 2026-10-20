@@ -1,0 +1,440 @@
+✔ Cloud Run mode requires explicit server-side opt-in and valid HTTPS (1.560086ms)
+✔ real Studio ZIP yields verified PASS with durable Site R2 readback, no Python status call (38.677015ms)
+✔ Cloud Run mismatch, incomplete evidence and empty job never create false PASS (15.988522ms)
+✔ HMAC-only Cloud Run settings keep the execution button disabled (0.346884ms)
+✔ same immutable project result is reused without more billed verification (11.605761ms)
+✔ Cloud Run timeout is saved for refresh without becoming PASS (11.048942ms)
+✔ daily execution budget rejects further Cloud Run spending (168.907271ms)
+✔ a Slack or other project identity cannot be reused as the Forge caller (0.289858ms)
+✔ Google exchange failure never submits an HMAC job or persists false evidence (6.506499ms)
+✔ byte parity with original Python: curated-html_audit (13.485442ms)
+✔ byte parity with original Python: curated-json_audit (1.418803ms)
+✔ byte parity with original Python: curated-text_stats (1.199683ms)
+✔ byte parity with original Python: curated-html_audit,json_audit (1.110757ms)
+✔ byte parity with original Python: curated-html_audit,text_stats (1.351642ms)
+✔ byte parity with original Python: curated-json_audit,html_audit (0.967472ms)
+✔ byte parity with original Python: curated-json_audit,text_stats (1.42982ms)
+✔ byte parity with original Python: curated-text_stats,html_audit (0.969484ms)
+✔ byte parity with original Python: curated-text_stats,json_audit (1.005989ms)
+✔ byte parity with original Python: curated-html_audit,json_audit,text_stats (1.071289ms)
+✔ byte parity with original Python: curated-html_audit,text_stats,json_audit (0.877005ms)
+✔ byte parity with original Python: curated-json_audit,html_audit,text_stats (0.591083ms)
+✔ byte parity with original Python: curated-json_audit,text_stats,html_audit (0.79414ms)
+✔ byte parity with original Python: curated-text_stats,html_audit,json_audit (0.656982ms)
+✔ byte parity with original Python: curated-text_stats,json_audit,html_audit (0.815522ms)
+✔ byte parity with original Python: strip-'\x1cHTML 검사\x85' (0.709511ms)
+✔ byte parity with original Python: strip-'\ufeffHTML 검사\ufeff' (0.834721ms)
+✔ byte parity with original Python: strip-'HTML $$ 검사 🐈' (0.431512ms)
+✔ byte parity with original Python: openapi-'Read pets' (2.229598ms)
+✔ byte parity with original Python: openapi-"A 'quoted' summary" (1.1719ms)
+✔ byte parity with original Python: openapi-'a"b\'c\\d\nnext\tline' (1.359203ms)
+✔ byte parity with original Python: openapi-'한글 😺' (1.968809ms)
+✔ byte parity with original Python: openapi-'\u2028\x00\xa0' (1.074613ms)
+✔ ZIP read by independent Python zipfile; CRC, hashes and generated Python syntax (52.791467ms)
+✔ tampered source fails integrity check (3.802474ms)
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+✔ Sites discovery, tools/list schema parity and least-privilege annotations (11.045595ms)
+✔ Python parity: templates (1.313745ms)
+✔ Python parity: preview-0 (1.057948ms)
+✔ Python parity: preview-1 (0.733799ms)
+✔ Python parity: preview-2 (0.632105ms)
+✔ Python parity: preview-3 (0.585374ms)
+✔ Python parity: preview-4 (0.578013ms)
+✔ Python parity: preview-5 (0.45658ms)
+✔ Python parity: preview-6 (0.474687ms)
+✔ Python parity: preview-7 (0.868251ms)
+✔ Python parity: preview-8 (0.398351ms)
+✔ Python parity: preview-9 (0.470881ms)
+✔ Python parity: preview-10 (0.438102ms)
+✔ Python parity: preview-11 (0.381006ms)
+✔ Python parity: preview-12 (0.344311ms)
+✔ Python parity: preview-13 (0.262457ms)
+✔ Python parity: preview-14 (0.367695ms)
+✔ Python parity: preview-15 (0.35103ms)
+✔ Python parity: preview-16 (0.313834ms)
+✔ Python parity: preview-17 (0.511012ms)
+✔ Python parity: preview-18 (0.556731ms)
+✔ Python parity: preview-19 (0.318851ms)
+✔ Python parity: preview-20 (0.423649ms)
+✔ Python parity: preview-21 (0.650092ms)
+✔ Python parity: preview-22 (0.585735ms)
+✔ Python parity: preview-23 (0.42407ms)
+✔ Python parity: preview-24 (0.601408ms)
+✔ Python parity: arguments-forge_list_templates-0 (0.53584ms)
+✔ Python parity: arguments-forge_list_templates-1 (0.479434ms)
+✔ Python parity: arguments-forge_list_templates-2 (0.367455ms)
+✔ Python parity: arguments-forge_list_templates-3 (0.501237ms)
+✔ Python parity: arguments-forge_list_templates-4 (0.467386ms)
+✔ Python parity: arguments-forge_list_templates-5 (1.742442ms)
+✔ Python parity: arguments-forge_list_templates-6 (0.541568ms)
+✔ Python parity: arguments-forge_preview-0 (0.402749ms)
+✔ Python parity: arguments-forge_preview-1 (0.444501ms)
+✔ Python parity: arguments-forge_preview-2 (0.331631ms)
+✔ Python parity: arguments-forge_preview-3 (0.323789ms)
+✔ Python parity: arguments-forge_preview-4 (0.376889ms)
+✔ Python parity: arguments-forge_preview-5 (0.395758ms)
+✔ Python parity: arguments-forge_preview-6 (0.391171ms)
+✔ Python parity: arguments-forge_preview_openapi-0 (0.386604ms)
+✔ Python parity: arguments-forge_preview_openapi-1 (0.514497ms)
+✔ Python parity: arguments-forge_preview_openapi-2 (0.339543ms)
+✔ Python parity: arguments-forge_preview_openapi-3 (0.48301ms)
+✔ Python parity: arguments-forge_preview_openapi-4 (0.40393ms)
+✔ Python parity: arguments-forge_preview_openapi-5 (0.318391ms)
+✔ Python parity: arguments-forge_preview_openapi-6 (0.338511ms)
+✔ Python parity: preview-schema-0 (0.372512ms)
+✔ Python parity: preview-schema-1 (0.435148ms)
+✔ Python parity: preview-schema-2 (0.387225ms)
+✔ Python parity: preview-schema-3 (0.374757ms)
+✔ Python parity: preview-schema-4 (0.454477ms)
+✔ Python parity: preview-schema-5 (0.345472ms)
+✔ Python parity: basic (0.964106ms)
+✔ Python parity: example-pets (0.821401ms)
+✔ Python parity: version-'3.0.0' (0.455778ms)
+✔ Python parity: version-'3.1.10' (0.463951ms)
+✔ Python parity: version-'3.2.0' (0.389799ms)
+✔ Python parity: version-'2.0' (0.416779ms)
+✔ Python parity: version-'3.1.0\n' (0.46317ms)
+✔ Python parity: version-3 (0.363149ms)
+✔ Python parity: version-None (0.362448ms)
+✔ Python parity: doc-None (0.418482ms)
+✔ Python parity: doc-[] (0.33756ms)
+✔ Python parity: doc-{} (0.496921ms)
+✔ Python parity: doc-'invalid' (0.338852ms)
+✔ Python parity: doc-True (0.425383ms)
+✔ Python parity: info-None (0.47687ms)
+✔ Python parity: info-[] (0.454286ms)
+✔ Python parity: info-'text' (0.476931ms)
+✔ Python parity: info-0 (0.489239ms)
+✔ Python parity: paths-NoneType-0 (0.374005ms)
+✔ Python parity: paths-list-0 (0.45688ms)
+✔ Python parity: paths-dict-0 (0.445283ms)
+✔ Python parity: paths-dict-65 (0.614237ms)
+✔ Python parity: path-'/' (0.421347ms)
+✔ Python parity: path-'//example.com/x' (0.439774ms)
+✔ Python parity: path-'/../x' (0.383229ms)
+✔ Python parity: path-'/./x' (0.610002ms)
+✔ Python parity: path-'/a%2Fb' (0.454877ms)
+✔ Python parity: path-'/pets?x=1' (0.429469ms)
+✔ Python parity: path-'/a\\b' (0.70872ms)
+✔ Python parity: path-'/pets\n' (0.519865ms)
+✔ Python parity: path-'/x/{id' (0.494767ms)
+✔ Python parity: path-'/한글' (0.539234ms)
+✔ Python parity: path-'/a-b_c.d~1' (0.527076ms)
+✔ Python parity: path-'/a//b' (0.437421ms)
+✔ Python parity: path-item-87 (0.416759ms)
+✔ Python parity: path-item-88 (0.450831ms)
+✔ Python parity: path-item-89 (0.464712ms)
+✔ Python parity: path-item-90 (0.400975ms)
+✔ Python parity: path-item-91 (0.441126ms)
+✔ Python parity: path-item-92 (2.150453ms)
+✔ Python parity: path-item-93 (0.315237ms)
+✔ Python parity: operation-'class' (0.335677ms)
+✔ Python parity: operation-'async' (0.274014ms)
+✔ Python parity: operation-'True' (0.346564ms)
+✔ Python parity: operation-'_hidden' (0.241975ms)
+✔ Python parity: operation-'bad-name' (0.441126ms)
+✔ Python parity: operation-'x\n' (0.652425ms)
+✔ Python parity: operation-'app' (0.280474ms)
+✔ Python parity: operation-'sys' (0.214223ms)
+✔ Python parity: operation-'MCPServer' (0.240383ms)
+✔ Python parity: operation-'OPERATIONS' (0.296668ms)
+✔ Python parity: operation-'call_operation' (0.196777ms)
+✔ Python parity: operation-'Tool' (0.347856ms)
+✔ Python parity: operation-'serve' (0.29756ms)
+✔ Python parity: operation-'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' (0.754069ms)
+✔ Python parity: operation-'constructor' (0.289337ms)
+✔ Python parity: operation-'toString' (0.353965ms)
+✔ Python parity: operation-'get_pets' (0.305131ms)
+✔ Python parity: operation-'match' (0.460415ms)
+✔ Python parity: operation-'case' (0.290238ms)
+✔ Python parity: operation-None (0.435467ms)
+✔ Python parity: operation-3 (0.31774ms)
+✔ Python parity: op-count-12 (0.292883ms)
+✔ Python parity: op-count-13 (0.546936ms)
+✔ Python parity: duplicate-operations (0.258631ms)
+✔ Python parity: path-required (0.299893ms)
+✔ Python parity: path-missing (0.266042ms)
+✔ Python parity: path-surplus (0.320053ms)
+✔ Python parity: path-duplicate (0.417961ms)
+✔ Python parity: inherited (0.279803ms)
+✔ Python parity: inherited-duplicate (0.756082ms)
+✔ Python parity: params-shape-124 (0.336048ms)
+✔ Python parity: params-shape-125 (0.280223ms)
+✔ Python parity: params-shape-126 (0.466465ms)
+✔ Python parity: params-shape-127 (0.246432ms)
+✔ Python parity: params-shape-128 (0.591824ms)
+✔ Python parity: parameter-in-'header' (0.340625ms)
+✔ Python parity: parameter-in-'cookie' (0.527577ms)
+✔ Python parity: parameter-in-None (0.294434ms)
+✔ Python parity: parameter-name-'class' (0.236828ms)
+✔ Python parity: parameter-name-'bad-name' (0.991988ms)
+✔ Python parity: parameter-name-'id\n' (0.442519ms)
+✔ Python parity: parameter-name-None (0.221405ms)
+✔ Python parity: parameter-required-False (0.302307ms)
+✔ Python parity: parameter-required-1 (0.280103ms)
+✔ Python parity: parameter-required-None (0.341486ms)
+✔ Python parity: parameter-schema-None (0.606496ms)
+✔ Python parity: parameter-schema-{} (0.561137ms)
+✔ Python parity: parameter-schema-{'type': 'object'} (0.323719ms)
+✔ Python parity: parameter-schema-{'type': 'number'} (0.265651ms)
+✔ Python parity: parameter-schema-{'type': 'string', '$ref': '#/x'} (0.37046ms)
+✔ Python parity: parameter-content-{} (0.325602ms)
+✔ Python parity: parameter-style-'simple' (0.266182ms)
+✔ Python parity: parameter-explode-False (0.253973ms)
+✔ Python parity: parameter-allowReserved-False (0.254073ms)
+✔ Python parity: query-string (0.243157ms)
+✔ Python parity: query-integer (0.248585ms)
+✔ Python parity: query-boolean (0.21197ms)
+✔ Python parity: thirteen-params (0.404491ms)
+✔ Python parity: json-error-1 (0.208305ms)
+✔ Python parity: json-error-14 (0.237889ms)
+✔ Python parity: json-error-2 (1.798216ms)
+✔ Python parity: json-error-120001 (1.672236ms)
+✔ Python parity: path-ending-'\r' (0.25192ms)
+✔ Python parity: operation-ending-'\r' (0.283128ms)
+✔ Python parity: parameter-ending-'\r' (0.287444ms)
+✔ Python parity: version-ending-'\r' (0.246583ms)
+✔ Python parity: path-ending-'\u2028' (0.342928ms)
+✔ Python parity: operation-ending-'\u2028' (0.320745ms)
+✔ Python parity: parameter-ending-'\u2028' (0.263087ms)
+✔ Python parity: version-ending-'\u2028' (0.259713ms)
+✔ Python parity: path-ending-'\u2029' (0.286372ms)
+✔ Python parity: operation-ending-'\u2029' (0.22481ms)
+✔ Python parity: parameter-ending-'\u2029' (0.345231ms)
+✔ Python parity: version-ending-'\u2029' (0.538383ms)
+✔ Python parity: spec-exact-max (2.865509ms)
+✔ JSON-RPC errors, notifications, IDs and method routing (5.73915ms)
+✔ request bounds, invalid UTF-8, content type and cross-origin refusal (4.074965ms)
+✔ no outbound API requests; no shared user input retained between calls (1.148695ms)
+✔ deployment manifest has MCP only; read-only core needs no Node/Python/runtime dependencies (42.222227ms)
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":false,"writes_enabled":false}
+✔ real loopback HTTP tools/list and tools/call for all three tools (38.413377ms)
+✔ SDK service is disabled unless all private host settings exist (18.929075ms)
+✔ actual stored project ZIP is signed and posted; results are owner scoped (16.311049ms)
+✔ forged success and mismatched artifact hashes never count as PASS (7.865683ms)
+✔ missing authenticated Sites user is rejected before SDK network request (0.531703ms)
+✔ job states retain TIMEOUT and UNKNOWN; incomplete SDK evidence cannot PASS (12.156513ms)
+✔ served Studio UI includes real SDK verify button and explicit skip state (6.876928ms)
+✔ SDK status stays SKIP before a configured private host (0.691545ms)
+✔ served JavaScript exactly matches client source and contains SDK click handlers (6.889547ms)
+✔ Studio serves functional accessible workspace (5.535751ms)
+✔ identity and verification gate block writes and user-controlled principals (2.712868ms)
+✔ create, readback, immutable edit, ZIP, tenant exclusion and invalid inputs (27.751572ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":false}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ OpenAPI import accepts GET, keeps dry-run and rejects malformed specs (3.080293ms)
+✔ MCP write tools hidden until verified and never report Python execution as PASS (4.022226ms)
+✔ MCP mutation keeps original JSON-RPC envelope rejection (1.342628ms)
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+{"event":"forge-identity-boundary","authenticated":true,"writes_enabled":true}
+✔ all five Studio MCP tools dispatch through the actual JSON-RPC endpoint (11.918515ms)
+ℹ tests 224
+ℹ suites 0
+ℹ pass 224
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 432.197529

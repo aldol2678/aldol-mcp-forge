@@ -9,6 +9,8 @@ import sys
 import threading
 import time
 import unittest
+from unittest.mock import patch
+import subprocess
 from http.server import ThreadingHTTPServer
 from uuid import uuid4
 
@@ -81,6 +83,21 @@ class TestCloudRunVerify(unittest.TestCase):
         a = self.post(p)[1]
         b = self.post(other)[1]
         self.assertNotEqual(a["job_id"], b["job_id"])
+
+    def test_timeout_is_a_final_result_not_transport_unavailable(self):
+        p = self.payload()
+        with patch("bridge.cloud_run_verifier.verify", side_effect=subprocess.TimeoutExpired("sdk", 80)):
+            status, result = self.post(p)
+        self.assertEqual(status, 200)
+        self.assertEqual(result["status"], "TIMEOUT")
+        self.assertEqual(result["verification"]["official_sdk"], "TIMEOUT")
+
+    def test_sdk_version_must_be_exactly_pinned(self):
+        with patch("bridge.cloud_run_verifier.verify", return_value={
+            "passed": True, "official_sdk": "PASS", "inmemory": "PASS",
+            "stdio": "PASS", "network_used": False, "sdk_version": "2.1.0",
+        }):
+            self.assertEqual(run_sync(self.payload())["status"], "FAIL")
 
     def test_auth_and_bad_artifact_rejection(self):
         self.assertEqual(self.post(self.payload(), tamper=True)[0], 401)

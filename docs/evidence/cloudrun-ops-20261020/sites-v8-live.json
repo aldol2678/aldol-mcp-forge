@@ -1,0 +1,102 @@
+{
+  "environment": "DEPLOYED Sites v8; no Cloud Run execution",
+  "site": "https://aldol-forge-readonly-20261020.al-dori.chatgpt.site",
+  "version": 8,
+  "source_sha": "3dba694b497fafc992a7f42125bebc0f227f5806",
+  "deployment_id": "appgdep_6ad73e4377e88191a695c0ac0b0f739e",
+  "access_policy_preserved": true,
+  "plugin_id_preserved": true,
+  "sdk_bridge_enabled": false,
+  "tools": [
+    {
+      "name": "forge_list_templates",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_preview",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_preview_openapi",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_create",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_add_tool",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_import_openapi",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_test",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    },
+    {
+      "name": "forge_package",
+      "status": "PASS",
+      "kind": "actual connected Sites MCP invocation"
+    }
+  ],
+  "projects": [
+    {
+      "id": "32d67193-9a97-4a8e-8155-6612c066f33e",
+      "name": "gcp-v8-regression-20261020",
+      "version": "0.2.0",
+      "integrity": {
+        "status": "PASS"
+      },
+      "package": {
+        "project_id": "32d67193-9a97-4a8e-8155-6612c066f33e",
+        "sha256": "b85489900a076f4251126f73e13473877d49d7574f66e51e705867293aa8b553",
+        "bytes": 14792,
+        "download_path": "/api/projects/32d67193-9a97-4a8e-8155-6612c066f33e/package",
+        "python_execution": "SKIP"
+      },
+      "sdk": "SKIP"
+    },
+    {
+      "id": "9fc055d3-9b68-451d-ad00-82a11645f47f",
+      "name": "gcp-v8-regression-20261020",
+      "version": "0.2.1",
+      "integrity": {
+        "status": "PASS"
+      },
+      "package": {
+        "project_id": "9fc055d3-9b68-451d-ad00-82a11645f47f",
+        "sha256": "29c167415dbd2edfc225cf091e1fa73da896af6d9b473af7d88c0b662bd0c054",
+        "bytes": 15143,
+        "download_path": "/api/projects/9fc055d3-9b68-451d-ad00-82a11645f47f/package",
+        "python_execution": "SKIP"
+      },
+      "sdk": "SKIP"
+    },
+    {
+      "id": "41a01f51-208b-4c3a-a1fd-a998996621c1",
+      "name": "gcp-v8-openapi-20261020",
+      "version": "0.3.0",
+      "integrity": {
+        "status": "PASS"
+      },
+      "package": {
+        "project_id": "41a01f51-208b-4c3a-a1fd-a998996621c1",
+        "sha256": "07300ecff1e19c83cbabed08ae18c89ea34af6f2707828e2b7982b1466500704",
+        "bytes": 15773,
+        "download_path": "/api/projects/41a01f51-208b-4c3a-a1fd-a998996621c1/package",
+        "python_execution": "SKIP"
+      },
+      "sdk": "SKIP"
+    }
+  ]
+}

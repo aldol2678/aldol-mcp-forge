@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import re
+import signal
 import subprocess
 import sys
 import tempfile
@@ -114,16 +115,30 @@ def verify(path: str) -> dict:
         target = project_root / name
         target.mkdir(mode=0o700)
         metadata = validated_archive(archive, target)
-        env = dict(os.environ)
+        # Generated SDK servers never receive the parent HMAC/cloud credentials,
+        # Python injection settings or proxy configuration.
+        env = {"PATH": os.defpath, "LANG": "C.UTF-8", "PYTHONIOENCODING": "utf-8"}
         env["ALDOL_API_BASE_URL"] = ""
         env["ALDOL_API_ALLOWED_HOST"] = ""
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        result = subprocess.run(
+        # Own one process group for the verifier and every stdio descendant.
+        # A timeout must not leave a Python server running after the HTTP result.
+        with subprocess.Popen(
             [sys.executable, "-B", str(ROOT / "verify_sdk.py"),
              str(target), "--mode", "both"],
-            capture_output=True, text=True, timeout=90, check=False, env=env,
-            cwd=ROOT,
-        )
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env,
+            cwd=ROOT, start_new_session=True,
+        ) as process:
+            try:
+                stdout, stderr = process.communicate(timeout=75)
+            except BaseException:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.communicate()
+                raise
+            result = subprocess.CompletedProcess(process.args, process.returncode, stdout, stderr)
         try:
             report = json.loads(result.stdout.strip())
         except json.JSONDecodeError as exc:

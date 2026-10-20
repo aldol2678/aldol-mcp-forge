@@ -19,6 +19,9 @@ import os
 from pathlib import Path
 import re
 import tempfile
+import subprocess
+import threading
+from zipfile import BadZipFile
 import time
 
 from bridge.sdk_job_gateway import encode_json, verify_signature, MAX_BODY
@@ -61,24 +64,30 @@ def run_sync(value: object) -> dict:
     with tempfile.TemporaryDirectory(prefix="forge-sdk-cloudrun-") as folder:
         archive = Path(folder) / "export.zip"
         archive.write_bytes(raw)
-        report = verify(str(archive))
+        try:
+            report = verify(str(archive))
+        except subprocess.TimeoutExpired:
+            report = {"passed": False, "official_sdk": "TIMEOUT"}
+        except RuntimeError:
+            report = {"passed": False, "official_sdk": "FAIL"}
     passed = (report.get("passed") is True
               and report.get("official_sdk") == "PASS"
               and report.get("inmemory") == "PASS"
               and report.get("stdio") == "PASS"
               and report.get("network_used") is False
-              and str(report.get("sdk_version", "")).startswith("2."))
+              and report.get("sdk_version") == "2.0.0")
     verification = {
         key: report[key] for key in (
             "passed", "official_sdk", "sdk_version", "inmemory", "stdio",
             "network_used", "files_checked", "kind", "version"
         ) if key in report
     }
+    final_status = "PASS" if passed else "TIMEOUT" if report.get("official_sdk") == "TIMEOUT" else "FAIL"
     if not passed:
-        verification = {"passed": False, "official_sdk": "FAIL"}
+        verification = {"passed": False, "official_sdk": final_status}
     return {
         "job_id": job_id, "project_id": project, "sha256": sha,
-        "status": "PASS" if passed else "FAIL", "verification": verification,
+        "status": final_status, "verification": verification,
         "created_at": created_at, "finished_at": int(time.time()),
     }
 
@@ -86,6 +95,11 @@ def run_sync(value: object) -> dict:
 def make_handler(secret: str):
     if not isinstance(secret, str) or len(secret) < 32:
         raise ValueError("FORGE_SDK_BRIDGE_SECRET requires at least 32 characters")
+
+    # One verifier mutates the trusted generator's global project root at a time.
+    # Replayed signed requests reuse their final response instead of executing again.
+    gate = threading.Lock()
+    recent = {}
 
     class Handler(BaseHTTPRequestHandler):
         server_version = "ForgeCloudSDK/0.1"
@@ -124,20 +138,37 @@ def make_handler(secret: str):
             if not self.headers.get("Content-Type", "").startswith("application/json"):
                 self.reply(415, {"error": "JSON required"})
                 return
+            self.connection.settimeout(10)
             raw = self.rfile.read(int(length))
             if not verify_signature(secret, self.headers.get("X-Forge-Timestamp", ""),
                                     PATH, raw, self.headers.get("X-Forge-Signature", "")):
                 self.reply(401, {"error": "Unauthorized"})
                 return
+            if not gate.acquire(blocking=False):
+                self.reply(429, {"error": "Verifier busy"})
+                return
             try:
+                now = time.monotonic()
+                for k in list(recent):
+                    if recent[k][0] < now:
+                        del recent[k]
+                receipt = hashlib.sha256((self.headers.get("X-Forge-Timestamp", "") + "\n").encode() + raw).hexdigest()
+                if receipt in recent:
+                    self.reply(200, recent[receipt][1])
+                    return
                 data = json.loads(raw)
                 output = run_sync(data)
+                if len(recent) >= 128:
+                    recent.pop(next(iter(recent)))
+                recent[receipt] = (now + 90, output)
                 self.reply(200, output)
-            except (ValueError, TypeError, json.JSONDecodeError):
+            except (ValueError, TypeError, json.JSONDecodeError, BadZipFile, KeyError):
                 self.reply(400, {"error": "Invalid artifact"})
             except Exception:
                 # Never leak project code, filesystem paths or subprocess logs.
                 self.reply(503, {"error": "Verification unavailable"})
+            finally:
+                gate.release()
 
     return Handler
 
