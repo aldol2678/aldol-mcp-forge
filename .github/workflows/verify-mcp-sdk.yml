@@ -79,3 +79,37 @@ jobs:
         run: python -m pip install --no-input "mcp==2.0.0"
       - name: Verify Forge itself using real SDK clients
         run: python ci/verify_forge_sdk.py
+
+  inspector-client-interop:
+    name: Independent MCP Inspector CLI stdio client
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ALDOL_API_BASE_URL: ''
+      ALDOL_API_ALLOWED_HOST: ''
+      PYTHONDONTWRITEBYTECODE: '1'
+      npm_config_audit: 'false'
+      npm_config_fund: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official MCP SDK v2
+        run: python -m pip install --no-input "mcp==2.0.0"
+      - name: Verify independent MCP Inspector CLI client
+        run: python ci/verify_inspector_cli.py
+      - name: Upload independent client evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: inspector-client-verification
+          path: ci-results/inspector-client-verification.json
+          if-no-files-found: warn
+          retention-days: 14
