@@ -49,7 +49,7 @@ def create_app(company: str):
     if company == "seum":
         @app.tool()
         def analyze_code(repository: str, focus: str | None = None) -> dict[str, str]:
-            """Inspect caller-provided Python/JSON content without executing or fetching a repository."""
+            """Inspect provided code or opt-in GitHub.com file; static analysis only, no code execution."""
             return invoke(company, "analyze_code", {"repository": repository, "focus": focus})
         @app.tool()
         def implement_change(repository: str, request: str) -> dict[str, str]:

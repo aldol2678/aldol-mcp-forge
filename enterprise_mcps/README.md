@@ -70,3 +70,48 @@ Official Python MCP SDK v2 in-memory and real stdio:
 
 Canonical contract validation uses contract_forge.py from the same Forge
 repository. No private account credentials are needed for unit testing.
+
+## SEUM GitHub read-only adapter (opt-in)
+
+The existing `analyze_code(repository, focus?)` accepts an additional
+JSON locator instead of caller-supplied source text:
+
+```json
+{"source":"github","owner":"aldol2678","repo":"aldol-mcp-forge","path":"examples/pets_openapi.json","ref":"main"}
+```
+
+Explicitly enable external network reads in the SEUM server process:
+
+```sh
+ALDOL_SEUM_GITHUB_READ_ENABLED=1 python -m enterprise_mcps seum
+```
+
+For private repositories, provision an independent **read-only Contents** GitHub
+credential in the server environment as `ALDOL_SEUM_GITHUB_TOKEN`. Do not paste
+credentials in prompts or store them in GitHub source, the Forge Studio JSON,
+or the ChatGPT MCP tool arguments. This standalone Python server does not
+inherit the ChatGPT GitHub connector authentication or token. The public
+GitHub API may work without a token but is subject to anonymous rate limits.
+
+Properties and limitations:
+- Fixed HTTPS destination `api.github.com` with only GET; no custom API hosts,
+  redirects or environment proxies. No GitHub writes or CI triggers.
+- Only one small UTF-8 Python or JSON file at a time, <=3500 bytes. Large
+  projects and other file types fail with an explicit error, not truncated output.
+- The Git blob SHA-1 declared by the Contents API is recomputed from the
+  returned bytes; the result also records independent SHA-256, requested ref,
+  date and GitHub source URL. Branch refs are mutable; recording their name
+  does not guarantee future content stays identical.
+- Explicit opt-in defaults OFF. Unknown path, unsafe ref, directory, non-UTF8,
+  content mismatch, excessive size, HTTP redirect and authorization errors
+  fail closed. No secret is returned to the client.
+- The adapter performs static AST/JSON analysis only. It never executes source
+  or acquires Project Canon ownership, deployment rights or modification rights.
+- The connector is opt-in for a separately hosted Python specialist MCP,
+  **not** a feature of the deployed Forge Studio v9. Production credentials,
+  live GitHub read E2E and mobile or production Sites validation are not
+  claimed by the unit-test result.
+
+Tested with mocked GitHub HTTPS responses, malicious locators, incorrect Git
+hashes and actual official SDK in-memory calls; all existing offline/stdIO
+regressions remain in the specialist CI workflow.
