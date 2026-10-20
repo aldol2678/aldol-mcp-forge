@@ -19,6 +19,7 @@ from .server import create_app
 LOG = logging.getLogger("aldol.seum")
 HOST_RE = re.compile(r"^(?=.{1,253}$)[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$")
 PROBE: dict[str, Any] = {"status": "SKIP", "reason": "not requested"}
+HTTP_PROBE: dict[str, Any] = {"status": "SKIP", "reason": "not requested"}
 
 
 def _settings() -> tuple[bytes, TransportSecuritySettings]:
@@ -73,6 +74,7 @@ class PrivateSEUM:
                 {"service": "seum-mcp", "github_read_enabled":
                  os.environ.get("ALDOL_SEUM_GITHUB_READ_ENABLED") == "1",
                  "startup_probe": dict(PROBE),
+                 "authenticated_http_probe": dict(HTTP_PROBE),
                  "official_sdk_runtime": True},
                 headers={"cache-control": "no-store"})(scope, receive, send)
         return await self.inner(scope, receive, send)
@@ -107,6 +109,64 @@ def _startup_probe():
     LOG.warning("SEUM_LIVE_GITHUB_PROBE status=%s", PROBE["status"])
 
 
+
+def _probe_authenticated_http():
+    """Exercise the *real* local HTTP transport using the configured bearer.
+    
+    The already separate startup probe checks live GitHub. This second probe
+    checks authenticated SDK discovery + tool invocation over loopback.
+    No bearer value is logged or sent outside the container.
+    """
+    import asyncio
+    import time
+    from mcp import Client
+    from mcp.client.streamable_http import streamable_http_client
+    import httpx2
+
+    time.sleep(2)
+    token = os.environ["ALDOL_SEUM_MCP_BEARER_TOKEN"]
+    port = int(os.environ.get("PORT", "8080"))
+    domain = (os.environ.get("ALDOL_SEUM_PUBLIC_HOST")
+              or os.environ.get("RAILWAY_PUBLIC_DOMAIN") or "127.0.0.1")
+    locator = {"path": "checks/demo.py", "language": "python",
+               "content": "def hello():\n    return 42\n"}
+
+    async def check():
+        headers = {"Authorization": "Bearer " + token}
+        if domain != "127.0.0.1":
+            headers["Host"] = domain
+        async with httpx2.AsyncClient(
+            headers=headers,
+            timeout=httpx2.Timeout(8.0, read=15.0),
+            trust_env=False) as http:
+            transport = streamable_http_client(
+                "http://127.0.0.1:" + str(port) + "/mcp", http_client=http)
+            async with Client(transport, raise_exceptions=True) as client:
+                names = [x.name for x in (await client.list_tools()).tools]
+                if set(names) != {"analyze_code", "implement_change", "review_release"}:
+                    raise RuntimeError("SEUM tools discovery mismatch")
+                out = await client.call_tool("analyze_code",
+                                             {"repository": json.dumps(locator)})
+                if out.is_error:
+                    raise RuntimeError("Remote MCP tool call returned error")
+                result = out.structured_content
+                if isinstance(result, dict) and isinstance(result.get("result"), dict):
+                    result = result["result"]
+                if not isinstance(result, dict):
+                    raise RuntimeError("No structured MCP result")
+                summary = json.loads(result["summary"])
+                if summary.get("functions") != 1 or summary.get("parse_ok") is not True:
+                    raise RuntimeError("Incorrect SEUM tool output")
+    try:
+        # bounded loop allows uvicorn server to finish startup
+        asyncio.run(asyncio.wait_for(check(), timeout=26))
+        HTTP_PROBE.update(status="PASS", mode="bearer_streamable_http_localhost",
+                          tool="analyze_code", discovered_tools=3)
+    except Exception:
+        HTTP_PROBE.update(status="FAIL", reason="authenticated_http_probe_failed")
+    LOG.warning("SEUM_AUTHENTICATED_HTTP_PROBE status=%s", HTTP_PROBE["status"])
+
+
 def create_http_app():
     secret, security = _settings()
     sdk = create_app("seum")
@@ -123,8 +183,11 @@ app = create_http_app()
 
 if __name__ == "__main__":
     import uvicorn
+    import threading
     port = int(os.environ.get("PORT", "8080"))
     if not 1 <= port <= 65535:
         raise RuntimeError("PORT out of range")
+    if os.environ.get("ALDOL_SEUM_HTTP_PROBE_ENABLED") == "1":
+        threading.Thread(target=_probe_authenticated_http, daemon=True).start()
     uvicorn.run(app, host="0.0.0.0", port=port, log_level="warning",
                 workers=1, access_log=False)
