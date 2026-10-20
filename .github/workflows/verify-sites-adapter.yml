@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths: ['adapters/sites/**', 'forge.py', 'templates.py', 'openapi_forge.py', '.github/workflows/verify-sites-adapter.yml']
   pull_request:
-    branches: [main]
+    branches: [main, feat/forge-sdk-cloudrun-slack-project]
     paths: ['adapters/sites/**', 'forge.py', 'templates.py', 'openapi_forge.py', '.github/workflows/verify-sites-adapter.yml']
 permissions:
   contents: read
