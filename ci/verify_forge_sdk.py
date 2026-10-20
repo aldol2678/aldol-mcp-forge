@@ -88,6 +88,37 @@ def payload(response):
     return data["result"] if isinstance(data.get("result"), dict) else data
 
 
+async def verify_generated_contract_sdk(project):
+    """Real SDK client checks the scaffold advertises tools but refuses execution."""
+    import importlib.util
+    from mcp import Client, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+
+    expected = ["analyze_code", "implement_change", "review_release"]
+
+    async def probe(client):
+        found = [item.name for item in (await client.list_tools()).tools]
+        if found != expected:
+            raise AssertionError(f"Scaffold SDK discovery mismatch: {found}")
+        answer = await client.call_tool("analyze_code", {"repository": "sample"})
+        message = " ".join(getattr(item, "text", "") for item in answer.content)
+        if not answer.is_error or "NOT_IMPLEMENTED" not in message:
+            raise AssertionError(f"Scaffold handler did not fail closed: {answer}")
+        return True
+
+    spec = importlib.util.spec_from_file_location("_forge_contract_scaffold", project / "server.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    async with Client(module.app, raise_exceptions=True) as client:
+        await probe(client)
+    params = StdioServerParameters(command=sys.executable,
+                                   args=["-B", str(project / "server.py")],
+                                   env={"PYTHONDONTWRITEBYTECODE": "1"})
+    async with Client(stdio_client(params), raise_exceptions=True) as client:
+        await probe(client)
+    return {"sdk_inmemory": True, "sdk_stdio": True, "implemented": False}
+
+
 async def check(client, mode):
     tools = (await client.list_tools()).tools
     names = {tool.name for tool in tools}
@@ -148,6 +179,8 @@ async def check(client, mode):
     assert all(contract_test["checks"].values()), contract_test
     contract_packaged = payload(await client.call_tool("forge_package", {"project_name": contract_name}))
     assert contract_packaged["packaged"] is True and contract_packaged["deployed"] is False
+    contract_sdk = await verify_generated_contract_sdk(Path(contract_created["path"]))
+    assert contract_sdk["sdk_inmemory"] and contract_sdk["sdk_stdio"]
 
     if mode == "stdio":
         api_name = "ci-pets-openapi"
@@ -163,7 +196,8 @@ async def check(client, mode):
     return {"passed": True, "mode": mode, "tools": sorted(names),
             "contract": schemas, "errors_visible": True,
             "generated_mcp": name, "official_generated_sdk": "passed",
-            "openapi_dry_run": mode == "stdio", "contract_scaffold_tested": True}
+            "openapi_dry_run": mode == "stdio", "contract_scaffold_tested": True,
+            "contract_sdk_inmemory_stdio": True}
 
 
 async def verify():
