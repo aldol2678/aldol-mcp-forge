@@ -1,7 +1,7 @@
 name: ALDOL enterprise specialist MCP handlers
 on:
   pull_request:
-    branches: [feat/studio-v8-contract-integration-20261020, feat/enterprise-specialist-mcp-handlers, feat/seum-github-read-adapter]
+    branches: [feat/studio-v8-contract-integration-20261020, feat/enterprise-specialist-mcp-handlers, feat/seum-github-read-adapter, feat/seum-private-http-mcp-runtime]
     paths:
       - 'enterprise_mcps/**'
       - 'examples/*-mcp-contract.json'
@@ -40,5 +40,7 @@ jobs:
         run: python -m unittest discover -s enterprise_mcps/tests -p test_http.py -v
       - name: Verify real loopback Streamable HTTP MCP bearer handshake and tool call
         run: python -m unittest discover -s enterprise_mcps/tests -p test_live_server.py -v
+      - name: Verify OAuth 2.1 owner approval, DCR, PKCE and token rotation
+        run: python -m unittest discover -s enterprise_mcps/tests -p test_oauth.py -v
       - name: Run real SDK in-memory and stdio tests
         run: python -m unittest discover -s enterprise_mcps/tests -p test_sdk.py -v
