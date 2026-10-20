@@ -5,7 +5,7 @@ import { digest } from "./generator.js";
 import { getProject, packageProject, subject, writable } from "./store.js";
 
 const bad = (message, status = 503) => Object.assign(new Error(message), {status});
-const encoder = new TextEncoder();
+const sdkEncoder = new TextEncoder();
 const validId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const hex = arr => [...new Uint8Array(arr)].map(b => b.toString(16).padStart(2, "0")).join("");
 const base64 = bytes => {
@@ -38,10 +38,10 @@ async function signedPost(env, endpoint, payload, fetcher) {
   const raw = JSON.stringify(payload);
   const timestamp = String(Math.floor(Date.now() / 1000));
   const key = await crypto.subtle.importKey(
-    "raw", encoder.encode(env.SDK_BRIDGE_SECRET),
+    "raw", sdkEncoder.encode(env.SDK_BRIDGE_SECRET),
     {name: "HMAC", hash: "SHA-256"}, false, ["sign"],
   );
-  const toSign = encoder.encode(timestamp + "\n" + url.pathname + "\n" + raw);
+  const toSign = sdkEncoder.encode(timestamp + "\n" + url.pathname + "\n" + raw);
   const signature = hex(await crypto.subtle.sign("HMAC", key, toSign));
   const response = await fetcher(url.toString(), {
     method: "POST",
@@ -84,7 +84,7 @@ export async function createSdkJob(request, env, projectId, fetcher = fetch) {
   }, fetcher);
   if (!/^[0-9a-f]{64}$/.test(result.job_id || "") ||
       result.project_id !== projectId || result.sha256 !== zip.sha256 ||
-      !["QUEUED", "RUNNING", "PASS", "FAIL"].includes(result.status)) {
+      !["QUEUED", "RUNNING", "PASS", "FAIL", "REJECTED", "TIMEOUT", "INTERRUPTED"].includes(result.status)) {
     throw bad("SDK 검증 서버의 작업 식별이 올바르지 않습니다.", 502);
   }
   // Persistent user-owned pointer. Saving a job reference is NOT evidence of PASS.
