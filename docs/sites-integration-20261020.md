@@ -72,7 +72,7 @@ through MCP `isError: true`.
 
 Tests completed:
 
-- **163/163** adapter tests passed. This includes **157 Python differential cases**,
+- **175/175** adapter tests passed. This includes **169 Python differential cases**,
   schema parity, JSON-RPC protocol/HTTP errors, notification silence, code-point
   limits, request byte limits, malformed UTF-8, cross-origin refusal, identity
   input independence, no-outbound-network assertions, deployment artifact
@@ -86,7 +86,7 @@ Tests completed:
   evidence is from the inspected main CI, and the new PR runs those existing jobs
   again. Local Node parity tests are not called official Python SDK validation.
 - Hosted platform logs record authenticated discovery and list with HTTP 200.
-  The direct remote verification log records HTTP 401, not a tool success.
+  The direct remote verification log from the first private publication records HTTP 401, not a tool success. The second publication only tightens Python-equivalent regular-expression full matching; authentication is unchanged.
 
 Evidence: [adapter TAP](evidence/sites-20261020/sites-tests.tap),
 [Python regression](evidence/sites-20261020/forge-regression.log),
@@ -104,10 +104,10 @@ unchanged. CI evidence for this branch is the actual PR's run, not the baseline 
 - MCP: https://aldol-forge-readonly-20261020.al-dori.chatgpt.site/mcp
 - OAuth resource: same MCP URL (returned by Sites, not guessed).
 - Site ID: `appgprj_6ad6bde7a48881918c1767e3e9f1252f`.
-- Deployment: `appgdep_6ad6be26cc6c8191b6ef08e989c68636`.
-- Saved version: `appgprj_6ad6bde7a48881918c1767e3e9f1252f~appgver_71cff4eff8308191a94f5aaac984a9ce`.
+- Deployment: `appgdep_6ad6bfe4f7c481918f3df73c51a027aa`.
+- Saved version: `appgprj_6ad6bde7a48881918c1767e3e9f1252f~appgver_f880b9c2f1c08191b9e2977b278710d3`.
 - Private plugin: `plugin_asdk_app_sites_62e21d5429008191a9b9c05bb8fe2990`.
-- Sites source commit: `a669ccc43ca762c05445abee54af2493d3c70b6c` (private deployment
+- Sites source commit: `cf427564e81108663d745aa7a4b6c66d5d2483ae` (private deployment
   repository; separate from the upstream GitHub branch).
 
 Use **Plugins → Personal → Created by you → ALDOL MCP Forge · Read-only**.

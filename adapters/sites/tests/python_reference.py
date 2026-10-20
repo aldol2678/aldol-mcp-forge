@@ -106,6 +106,11 @@ for typ in ["string", "integer", "boolean"]:
 params_case("thirteen-params", [{"in": "query", "name": f"q{i}", "schema": {"type": "string"}} for i in range(13)], path="/pets")
 for text in ["{", "openapi: 3.1.0", "{}", "x" * 120001]:
     case(f"json-error-{len(text)}", "forge_preview_openapi", {"spec_json": text})
+for ending in ["\r", "\u2028", "\u2029"]:
+    api(f"path-ending-{ending!r}", {**spec, "paths": {"/pets" + ending: spec["paths"]["/pets"]}})
+    api(f"operation-ending-{ending!r}", {**spec, "paths": {"/pets": {"get": {"operationId": "getPets" + ending}}}})
+    params_case(f"parameter-ending-{ending!r}", [{**parameter, "name": "id" + ending}])
+    api(f"version-ending-{ending!r}", {**spec, "openapi": "3.1.0" + ending})
 max_spec = json.dumps(spec)
 case("spec-exact-max", "forge_preview_openapi", {"spec_json": max_spec + " " * (120000 - len(max_spec))})
 print(json.dumps({"schemas": SCHEMAS, "cases": cases}, ensure_ascii=False))

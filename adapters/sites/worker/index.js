@@ -12,7 +12,7 @@ const TEMPLATES = Object.freeze({
 const own = (object, key) => Object.hasOwn(object, key);
 const object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 const length = (value) => [...value].length; // Python len / JSON Schema code points.
-const full = (expression, value) => expression.test(value) && !value.endsWith("\n");
+const full = (expression, value) => expression.exec(value)?.[0] === value;
 const PY_KEYWORDS = new Set([
   "False", "None", "True", "and", "as", "assert", "async", "await", "break",
   "class", "continue", "def", "del", "elif", "else", "except", "finally", "for",

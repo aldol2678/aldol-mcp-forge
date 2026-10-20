@@ -2,987 +2,1059 @@ TAP version 13
 # Subtest: Sites discovery, tools/list schema parity and least-privilege annotations
 ok 1 - Sites discovery, tools/list schema parity and least-privilege annotations
   ---
-  duration_ms: 9.356016
+  duration_ms: 10.106961
   type: 'test'
   ...
 # Subtest: Python parity: templates
 ok 2 - Python parity: templates
   ---
-  duration_ms: 0.832374
+  duration_ms: 0.977643
   type: 'test'
   ...
 # Subtest: Python parity: preview-0
 ok 3 - Python parity: preview-0
   ---
-  duration_ms: 0.673395
+  duration_ms: 1.051164
   type: 'test'
   ...
 # Subtest: Python parity: preview-1
 ok 4 - Python parity: preview-1
   ---
-  duration_ms: 0.383598
+  duration_ms: 0.473293
   type: 'test'
   ...
 # Subtest: Python parity: preview-2
 ok 5 - Python parity: preview-2
   ---
-  duration_ms: 0.34525
+  duration_ms: 0.39143
   type: 'test'
   ...
 # Subtest: Python parity: preview-3
 ok 6 - Python parity: preview-3
   ---
-  duration_ms: 0.373974
+  duration_ms: 3.897733
   type: 'test'
   ...
 # Subtest: Python parity: preview-4
 ok 7 - Python parity: preview-4
   ---
-  duration_ms: 0.532433
+  duration_ms: 0.670029
   type: 'test'
   ...
 # Subtest: Python parity: preview-5
 ok 8 - Python parity: preview-5
   ---
-  duration_ms: 0.362126
+  duration_ms: 0.269736
   type: 'test'
   ...
 # Subtest: Python parity: preview-6
 ok 9 - Python parity: preview-6
   ---
-  duration_ms: 0.358259
+  duration_ms: 0.358991
   type: 'test'
   ...
 # Subtest: Python parity: preview-7
 ok 10 - Python parity: preview-7
   ---
-  duration_ms: 0.337719
+  duration_ms: 0.494766
   type: 'test'
   ...
 # Subtest: Python parity: preview-8
 ok 11 - Python parity: preview-8
   ---
-  duration_ms: 0.290168
+  duration_ms: 0.393813
   type: 'test'
   ...
 # Subtest: Python parity: preview-9
 ok 12 - Python parity: preview-9
   ---
-  duration_ms: 0.303247
+  duration_ms: 0.321624
   type: 'test'
   ...
 # Subtest: Python parity: preview-10
 ok 13 - Python parity: preview-10
   ---
-  duration_ms: 0.254934
+  duration_ms: 0.20594
   type: 'test'
   ...
 # Subtest: Python parity: preview-11
 ok 14 - Python parity: preview-11
   ---
-  duration_ms: 0.184097
+  duration_ms: 0.359352
   type: 'test'
   ...
 # Subtest: Python parity: preview-12
 ok 15 - Python parity: preview-12
   ---
-  duration_ms: 0.246641
+  duration_ms: 0.342366
   type: 'test'
   ...
 # Subtest: Python parity: preview-13
 ok 16 - Python parity: preview-13
   ---
-  duration_ms: 0.270557
+  duration_ms: 0.317228
   type: 'test'
   ...
 # Subtest: Python parity: preview-14
 ok 17 - Python parity: preview-14
   ---
-  duration_ms: 0.17878
+  duration_ms: 0.233602
   type: 'test'
   ...
 # Subtest: Python parity: preview-15
 ok 18 - Python parity: preview-15
   ---
-  duration_ms: 0.169135
+  duration_ms: 0.193561
   type: 'test'
   ...
 # Subtest: Python parity: preview-16
 ok 19 - Python parity: preview-16
   ---
-  duration_ms: 0.162194
+  duration_ms: 0.277598
   type: 'test'
   ...
 # Subtest: Python parity: preview-17
 ok 20 - Python parity: preview-17
   ---
-  duration_ms: 0.281884
+  duration_ms: 0.460884
   type: 'test'
   ...
 # Subtest: Python parity: preview-18
 ok 21 - Python parity: preview-18
   ---
-  duration_ms: 0.215144
+  duration_ms: 0.204738
   type: 'test'
   ...
 # Subtest: Python parity: preview-19
 ok 22 - Python parity: preview-19
   ---
-  duration_ms: 0.447475
+  duration_ms: 0.203757
   type: 'test'
   ...
 # Subtest: Python parity: preview-20
 ok 23 - Python parity: preview-20
   ---
-  duration_ms: 0.241854
+  duration_ms: 0.299882
   type: 'test'
   ...
 # Subtest: Python parity: preview-21
 ok 24 - Python parity: preview-21
   ---
-  duration_ms: 0.574826
+  duration_ms: 0.379773
   type: 'test'
   ...
 # Subtest: Python parity: preview-22
 ok 25 - Python parity: preview-22
   ---
-  duration_ms: 0.303558
+  duration_ms: 0.439522
   type: 'test'
   ...
 # Subtest: Python parity: preview-23
 ok 26 - Python parity: preview-23
   ---
-  duration_ms: 0.316917
+  duration_ms: 0.392572
   type: 'test'
   ...
 # Subtest: Python parity: preview-24
 ok 27 - Python parity: preview-24
   ---
-  duration_ms: 0.479553
+  duration_ms: 0.294163
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-0
 ok 28 - Python parity: arguments-forge_list_templates-0
   ---
-  duration_ms: 0.363998
+  duration_ms: 0.417139
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-1
 ok 29 - Python parity: arguments-forge_list_templates-1
   ---
-  duration_ms: 0.205019
+  duration_ms: 0.263998
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-2
 ok 30 - Python parity: arguments-forge_list_templates-2
   ---
-  duration_ms: 0.515677
+  duration_ms: 0.222145
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-3
 ok 31 - Python parity: arguments-forge_list_templates-3
   ---
-  duration_ms: 0.349036
+  duration_ms: 0.363138
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-4
 ok 32 - Python parity: arguments-forge_list_templates-4
   ---
-  duration_ms: 0.329426
+  duration_ms: 0.508987
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-5
 ok 33 - Python parity: arguments-forge_list_templates-5
   ---
-  duration_ms: 0.264499
+  duration_ms: 0.190948
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_list_templates-6
 ok 34 - Python parity: arguments-forge_list_templates-6
   ---
-  duration_ms: 0.369717
+  duration_ms: 0.254113
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-0
 ok 35 - Python parity: arguments-forge_preview-0
   ---
-  duration_ms: 0.235806
+  duration_ms: 0.288014
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-1
 ok 36 - Python parity: arguments-forge_preview-1
   ---
-  duration_ms: 0.321434
+  duration_ms: 0.36487
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-2
 ok 37 - Python parity: arguments-forge_preview-2
   ---
-  duration_ms: 0.303567
+  duration_ms: 0.267933
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-3
 ok 38 - Python parity: arguments-forge_preview-3
   ---
-  duration_ms: 0.243437
+  duration_ms: 0.374334
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-4
 ok 39 - Python parity: arguments-forge_preview-4
   ---
-  duration_ms: 0.271048
+  duration_ms: 0.171369
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-5
 ok 40 - Python parity: arguments-forge_preview-5
   ---
-  duration_ms: 0.383999
+  duration_ms: 0.163746
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview-6
 ok 41 - Python parity: arguments-forge_preview-6
   ---
-  duration_ms: 0.25918
+  duration_ms: 0.25882
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-0
 ok 42 - Python parity: arguments-forge_preview_openapi-0
   ---
-  duration_ms: 0.284709
+  duration_ms: 0.245009
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-1
 ok 43 - Python parity: arguments-forge_preview_openapi-1
   ---
-  duration_ms: 0.549488
+  duration_ms: 0.215946
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-2
 ok 44 - Python parity: arguments-forge_preview_openapi-2
   ---
-  duration_ms: 0.210107
+  duration_ms: 0.170126
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-3
 ok 45 - Python parity: arguments-forge_preview_openapi-3
   ---
-  duration_ms: 0.740556
+  duration_ms: 0.281765
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-4
 ok 46 - Python parity: arguments-forge_preview_openapi-4
   ---
-  duration_ms: 0.950062
+  duration_ms: 0.17952
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-5
 ok 47 - Python parity: arguments-forge_preview_openapi-5
   ---
-  duration_ms: 5.192854
+  duration_ms: 0.156796
   type: 'test'
   ...
 # Subtest: Python parity: arguments-forge_preview_openapi-6
 ok 48 - Python parity: arguments-forge_preview_openapi-6
   ---
-  duration_ms: 0.302676
+  duration_ms: 1.424297
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-0
 ok 49 - Python parity: preview-schema-0
   ---
-  duration_ms: 0.277007
+  duration_ms: 0.382747
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-1
 ok 50 - Python parity: preview-schema-1
   ---
-  duration_ms: 0.242695
+  duration_ms: 0.18629
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-2
 ok 51 - Python parity: preview-schema-2
   ---
-  duration_ms: 2.039733
+  duration_ms: 0.158749
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-3
 ok 52 - Python parity: preview-schema-3
   ---
-  duration_ms: 0.235765
+  duration_ms: 0.291419
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-4
 ok 53 - Python parity: preview-schema-4
   ---
-  duration_ms: 0.217608
+  duration_ms: 0.409076
   type: 'test'
   ...
 # Subtest: Python parity: preview-schema-5
 ok 54 - Python parity: preview-schema-5
   ---
-  duration_ms: 0.17956
+  duration_ms: 0.186512
   type: 'test'
   ...
 # Subtest: Python parity: basic
 ok 55 - Python parity: basic
   ---
-  duration_ms: 0.901979
+  duration_ms: 0.721808
   type: 'test'
   ...
 # Subtest: Python parity: example-pets
 ok 56 - Python parity: example-pets
   ---
-  duration_ms: 0.53066
+  duration_ms: 0.772664
   type: 'test'
   ...
 # Subtest: Python parity: version-'3.0.0'
 ok 57 - Python parity: version-'3.0.0'
   ---
-  duration_ms: 0.401905
+  duration_ms: 0.262335
   type: 'test'
   ...
 # Subtest: Python parity: version-'3.1.10'
 ok 58 - Python parity: version-'3.1.10'
   ---
-  duration_ms: 0.249025
+  duration_ms: 0.613875
   type: 'test'
   ...
 # Subtest: Python parity: version-'3.2.0'
 ok 59 - Python parity: version-'3.2.0'
   ---
-  duration_ms: 0.176806
+  duration_ms: 0.193522
   type: 'test'
   ...
 # Subtest: Python parity: version-'2.0'
 ok 60 - Python parity: version-'2.0'
   ---
-  duration_ms: 0.226111
+  duration_ms: 0.267503
   type: 'test'
   ...
 # Subtest: Python parity: version-'3.1.0\\n'
 ok 61 - Python parity: version-'3.1.0\\n'
   ---
-  duration_ms: 0.271178
+  duration_ms: 0.245139
   type: 'test'
   ...
 # Subtest: Python parity: version-3
 ok 62 - Python parity: version-3
   ---
-  duration_ms: 0.185749
+  duration_ms: 0.169575
   type: 'test'
   ...
 # Subtest: Python parity: version-None
 ok 63 - Python parity: version-None
   ---
-  duration_ms: 0.187413
+  duration_ms: 0.151038
   type: 'test'
   ...
 # Subtest: Python parity: doc-None
 ok 64 - Python parity: doc-None
   ---
-  duration_ms: 0.290538
+  duration_ms: 0.142835
   type: 'test'
   ...
 # Subtest: Python parity: doc-[]
 ok 65 - Python parity: doc-[]
   ---
-  duration_ms: 0.169726
+  duration_ms: 0.141894
   type: 'test'
   ...
 # Subtest: Python parity: doc-{}
 ok 66 - Python parity: doc-{}
   ---
-  duration_ms: 0.154473
+  duration_ms: 0.146761
   type: 'test'
   ...
 # Subtest: Python parity: doc-'invalid'
 ok 67 - Python parity: doc-'invalid'
   ---
-  duration_ms: 0.244358
+  duration_ms: 0.264218
   type: 'test'
   ...
 # Subtest: Python parity: doc-True
 ok 68 - Python parity: doc-True
   ---
-  duration_ms: 0.153231
+  duration_ms: 0.170687
   type: 'test'
   ...
 # Subtest: Python parity: info-None
 ok 69 - Python parity: info-None
   ---
-  duration_ms: 0.259811
+  duration_ms: 0.279811
   type: 'test'
   ...
 # Subtest: Python parity: info-[]
 ok 70 - Python parity: info-[]
   ---
-  duration_ms: 0.242245
+  duration_ms: 0.17297
   type: 'test'
   ...
 # Subtest: Python parity: info-'text'
 ok 71 - Python parity: info-'text'
   ---
-  duration_ms: 0.155244
+  duration_ms: 0.233121
   type: 'test'
   ...
 # Subtest: Python parity: info-0
 ok 72 - Python parity: info-0
   ---
-  duration_ms: 0.214373
+  duration_ms: 0.240032
   type: 'test'
   ...
 # Subtest: Python parity: paths-NoneType-0
 ok 73 - Python parity: paths-NoneType-0
   ---
-  duration_ms: 0.397889
+  duration_ms: 0.152589
   type: 'test'
   ...
 # Subtest: Python parity: paths-list-0
 ok 74 - Python parity: paths-list-0
   ---
-  duration_ms: 0.233752
+  duration_ms: 0.259461
   type: 'test'
   ...
 # Subtest: Python parity: paths-dict-0
 ok 75 - Python parity: paths-dict-0
   ---
-  duration_ms: 0.174703
+  duration_ms: 0.242446
   type: 'test'
   ...
 # Subtest: Python parity: paths-dict-65
 ok 76 - Python parity: paths-dict-65
   ---
-  duration_ms: 0.28527
+  duration_ms: 0.237097
   type: 'test'
   ...
 # Subtest: Python parity: path-'/'
 ok 77 - Python parity: path-'/'
   ---
-  duration_ms: 0.180252
+  duration_ms: 0.183005
   type: 'test'
   ...
 # Subtest: Python parity: path-'//example.com/x'
 ok 78 - Python parity: path-'//example.com/x'
   ---
-  duration_ms: 0.216797
+  duration_ms: 0.380293
   type: 'test'
   ...
 # Subtest: Python parity: path-'/../x'
 ok 79 - Python parity: path-'/../x'
   ---
-  duration_ms: 0.222706
+  duration_ms: 0.209586
   type: 'test'
   ...
 # Subtest: Python parity: path-'/./x'
 ok 80 - Python parity: path-'/./x'
   ---
-  duration_ms: 0.30531
+  duration_ms: 0.274944
   type: 'test'
   ...
 # Subtest: Python parity: path-'/a%2Fb'
 ok 81 - Python parity: path-'/a%2Fb'
   ---
-  duration_ms: 0.196235
+  duration_ms: 0.191128
   type: 'test'
   ...
 # Subtest: Python parity: path-'/pets?x=1'
 ok 82 - Python parity: path-'/pets?x=1'
   ---
-  duration_ms: 0.184528
+  duration_ms: 0.183406
   type: 'test'
   ...
 # Subtest: Python parity: path-'/a\\\\b'
 ok 83 - Python parity: path-'/a\\\\b'
   ---
-  duration_ms: 0.286172
+  duration_ms: 0.240392
   type: 'test'
   ...
 # Subtest: Python parity: path-'/pets\\n'
 ok 84 - Python parity: path-'/pets\\n'
   ---
-  duration_ms: 0.214694
+  duration_ms: 0.182986
   type: 'test'
   ...
 # Subtest: Python parity: path-'/x/{id'
 ok 85 - Python parity: path-'/x/{id'
   ---
-  duration_ms: 0.220162
+  duration_ms: 0.251429
   type: 'test'
   ...
 # Subtest: Python parity: path-'/한글'
 ok 86 - Python parity: path-'/한글'
   ---
-  duration_ms: 0.302315
+  duration_ms: 0.313993
   type: 'test'
   ...
 # Subtest: Python parity: path-'/a-b_c.d~1'
 ok 87 - Python parity: path-'/a-b_c.d~1'
   ---
-  duration_ms: 0.199611
+  duration_ms: 0.208985
   type: 'test'
   ...
 # Subtest: Python parity: path-'/a//b'
 ok 88 - Python parity: path-'/a//b'
   ---
-  duration_ms: 0.255936
+  duration_ms: 0.182636
   type: 'test'
   ...
 # Subtest: Python parity: path-item-87
 ok 89 - Python parity: path-item-87
   ---
-  duration_ms: 0.20514
+  duration_ms: 0.545241
   type: 'test'
   ...
 # Subtest: Python parity: path-item-88
 ok 90 - Python parity: path-item-88
   ---
-  duration_ms: 0.182115
+  duration_ms: 0.220172
   type: 'test'
   ...
 # Subtest: Python parity: path-item-89
 ok 91 - Python parity: path-item-89
   ---
-  duration_ms: 0.176125
+  duration_ms: 0.187662
   type: 'test'
   ...
 # Subtest: Python parity: path-item-90
 ok 92 - Python parity: path-item-90
   ---
-  duration_ms: 0.777051
+  duration_ms: 0.239521
   type: 'test'
   ...
 # Subtest: Python parity: path-item-91
 ok 93 - Python parity: path-item-91
   ---
-  duration_ms: 0.207392
+  duration_ms: 0.249946
   type: 'test'
   ...
 # Subtest: Python parity: path-item-92
 ok 94 - Python parity: path-item-92
   ---
-  duration_ms: 0.256226
+  duration_ms: 0.183126
   type: 'test'
   ...
 # Subtest: Python parity: path-item-93
 ok 95 - Python parity: path-item-93
   ---
-  duration_ms: 0.215915
+  duration_ms: 0.204969
   type: 'test'
   ...
 # Subtest: Python parity: operation-'class'
 ok 96 - Python parity: operation-'class'
   ---
-  duration_ms: 0.204548
+  duration_ms: 0.185229
   type: 'test'
   ...
 # Subtest: Python parity: operation-'async'
 ok 97 - Python parity: operation-'async'
   ---
-  duration_ms: 0.223487
+  duration_ms: 0.171258
   type: 'test'
   ...
 # Subtest: Python parity: operation-'True'
 ok 98 - Python parity: operation-'True'
   ---
-  duration_ms: 0.207042
+  duration_ms: 0.209816
   type: 'test'
   ...
 # Subtest: Python parity: operation-'_hidden'
 ok 99 - Python parity: operation-'_hidden'
   ---
-  duration_ms: 0.264218
+  duration_ms: 0.175014
   type: 'test'
   ...
 # Subtest: Python parity: operation-'bad-name'
 ok 100 - Python parity: operation-'bad-name'
   ---
-  duration_ms: 0.418931
+  duration_ms: 0.269156
   type: 'test'
   ...
 # Subtest: Python parity: operation-'x\\n'
 ok 101 - Python parity: operation-'x\\n'
   ---
-  duration_ms: 0.408705
+  duration_ms: 0.249996
   type: 'test'
   ...
 # Subtest: Python parity: operation-'app'
 ok 102 - Python parity: operation-'app'
   ---
-  duration_ms: 0.235545
+  duration_ms: 0.522547
   type: 'test'
   ...
 # Subtest: Python parity: operation-'sys'
 ok 103 - Python parity: operation-'sys'
   ---
-  duration_ms: 0.183256
+  duration_ms: 0.302045
   type: 'test'
   ...
 # Subtest: Python parity: operation-'MCPServer'
 ok 104 - Python parity: operation-'MCPServer'
   ---
-  duration_ms: 0.383728
+  duration_ms: 0.330739
   type: 'test'
   ...
 # Subtest: Python parity: operation-'OPERATIONS'
 ok 105 - Python parity: operation-'OPERATIONS'
   ---
-  duration_ms: 0.435046
+  duration_ms: 0.192851
   type: 'test'
   ...
 # Subtest: Python parity: operation-'call_operation'
 ok 106 - Python parity: operation-'call_operation'
   ---
-  duration_ms: 0.187853
+  duration_ms: 0.175765
   type: 'test'
   ...
 # Subtest: Python parity: operation-'Tool'
 ok 107 - Python parity: operation-'Tool'
   ---
-  duration_ms: 0.178499
+  duration_ms: 0.547125
   type: 'test'
   ...
 # Subtest: Python parity: operation-'serve'
 ok 108 - Python parity: operation-'serve'
   ---
-  duration_ms: 0.347554
+  duration_ms: 0.19854
   type: 'test'
   ...
 # Subtest: Python parity: operation-'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ok 109 - Python parity: operation-'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   ---
-  duration_ms: 0.182535
+  duration_ms: 0.186561
   type: 'test'
   ...
 # Subtest: Python parity: operation-'constructor'
 ok 110 - Python parity: operation-'constructor'
   ---
-  duration_ms: 0.233421
+  duration_ms: 0.179761
   type: 'test'
   ...
 # Subtest: Python parity: operation-'toString'
 ok 111 - Python parity: operation-'toString'
   ---
-  duration_ms: 0.26542
+  duration_ms: 0.173832
   type: 'test'
   ...
 # Subtest: Python parity: operation-'get_pets'
 ok 112 - Python parity: operation-'get_pets'
   ---
-  duration_ms: 0.185209
+  duration_ms: 0.208414
   type: 'test'
   ...
 # Subtest: Python parity: operation-'match'
 ok 113 - Python parity: operation-'match'
   ---
-  duration_ms: 0.17221
+  duration_ms: 1.228231
   type: 'test'
   ...
 # Subtest: Python parity: operation-'case'
 ok 114 - Python parity: operation-'case'
   ---
-  duration_ms: 0.168795
+  duration_ms: 0.181264
   type: 'test'
   ...
 # Subtest: Python parity: operation-None
 ok 115 - Python parity: operation-None
   ---
-  duration_ms: 1.519279
+  duration_ms: 0.25944
   type: 'test'
   ...
 # Subtest: Python parity: operation-3
 ok 116 - Python parity: operation-3
   ---
-  duration_ms: 0.201444
+  duration_ms: 0.232069
   type: 'test'
   ...
 # Subtest: Python parity: op-count-12
 ok 117 - Python parity: op-count-12
   ---
-  duration_ms: 0.245079
+  duration_ms: 0.23834
   type: 'test'
   ...
 # Subtest: Python parity: op-count-13
 ok 118 - Python parity: op-count-13
   ---
-  duration_ms: 0.229506
+  duration_ms: 0.228484
   type: 'test'
   ...
 # Subtest: Python parity: duplicate-operations
 ok 119 - Python parity: duplicate-operations
   ---
-  duration_ms: 0.267413
+  duration_ms: 0.218509
   type: 'test'
   ...
 # Subtest: Python parity: path-required
 ok 120 - Python parity: path-required
   ---
-  duration_ms: 0.208854
+  duration_ms: 0.239761
   type: 'test'
   ...
 # Subtest: Python parity: path-missing
 ok 121 - Python parity: path-missing
   ---
-  duration_ms: 0.184408
+  duration_ms: 0.190747
   type: 'test'
   ...
 # Subtest: Python parity: path-surplus
 ok 122 - Python parity: path-surplus
   ---
-  duration_ms: 0.279742
+  duration_ms: 0.187983
   type: 'test'
   ...
 # Subtest: Python parity: path-duplicate
 ok 123 - Python parity: path-duplicate
   ---
-  duration_ms: 0.283697
+  duration_ms: 0.352601
   type: 'test'
   ...
 # Subtest: Python parity: inherited
 ok 124 - Python parity: inherited
   ---
-  duration_ms: 0.445682
+  duration_ms: 0.476708
   type: 'test'
   ...
 # Subtest: Python parity: inherited-duplicate
 ok 125 - Python parity: inherited-duplicate
   ---
-  duration_ms: 0.636059
+  duration_ms: 0.722008
   type: 'test'
   ...
 # Subtest: Python parity: params-shape-124
 ok 126 - Python parity: params-shape-124
   ---
-  duration_ms: 0.231198
+  duration_ms: 0.241965
   type: 'test'
   ...
 # Subtest: Python parity: params-shape-125
 ok 127 - Python parity: params-shape-125
   ---
-  duration_ms: 0.206792
+  duration_ms: 0.217297
   type: 'test'
   ...
 # Subtest: Python parity: params-shape-126
 ok 128 - Python parity: params-shape-126
   ---
-  duration_ms: 0.333873
+  duration_ms: 0.209185
   type: 'test'
   ...
 # Subtest: Python parity: params-shape-127
 ok 129 - Python parity: params-shape-127
   ---
-  duration_ms: 0.181153
+  duration_ms: 0.226561
   type: 'test'
   ...
 # Subtest: Python parity: params-shape-128
 ok 130 - Python parity: params-shape-128
   ---
-  duration_ms: 0.161143
+  duration_ms: 0.167984
   type: 'test'
   ...
 # Subtest: Python parity: parameter-in-'header'
 ok 131 - Python parity: parameter-in-'header'
   ---
-  duration_ms: 0.316136
+  duration_ms: 0.160923
   type: 'test'
   ...
 # Subtest: Python parity: parameter-in-'cookie'
 ok 132 - Python parity: parameter-in-'cookie'
   ---
-  duration_ms: 0.178589
+  duration_ms: 0.230357
   type: 'test'
   ...
 # Subtest: Python parity: parameter-in-None
 ok 133 - Python parity: parameter-in-None
   ---
-  duration_ms: 0.227443
+  duration_ms: 0.366101
   type: 'test'
   ...
 # Subtest: Python parity: parameter-name-'class'
 ok 134 - Python parity: parameter-name-'class'
   ---
-  duration_ms: 0.164858
+  duration_ms: 0.172109
   type: 'test'
   ...
 # Subtest: Python parity: parameter-name-'bad-name'
 ok 135 - Python parity: parameter-name-'bad-name'
   ---
-  duration_ms: 0.200682
+  duration_ms: 0.1597
   type: 'test'
   ...
 # Subtest: Python parity: parameter-name-'id\\n'
 ok 136 - Python parity: parameter-name-'id\\n'
   ---
-  duration_ms: 0.215745
+  duration_ms: 0.160762
   type: 'test'
   ...
 # Subtest: Python parity: parameter-name-None
 ok 137 - Python parity: parameter-name-None
   ---
-  duration_ms: 0.160161
+  duration_ms: 0.157848
   type: 'test'
   ...
 # Subtest: Python parity: parameter-required-False
 ok 138 - Python parity: parameter-required-False
   ---
-  duration_ms: 0.159019
+  duration_ms: 0.275825
   type: 'test'
   ...
 # Subtest: Python parity: parameter-required-1
 ok 139 - Python parity: parameter-required-1
   ---
-  duration_ms: 0.155884
+  duration_ms: 0.200862
   type: 'test'
   ...
 # Subtest: Python parity: parameter-required-None
 ok 140 - Python parity: parameter-required-None
   ---
-  duration_ms: 0.157768
+  duration_ms: 0.170096
   type: 'test'
   ...
 # Subtest: Python parity: parameter-schema-None
 ok 141 - Python parity: parameter-schema-None
   ---
-  duration_ms: 0.242195
+  duration_ms: 0.163306
   type: 'test'
   ...
 # Subtest: Python parity: parameter-schema-{}
 ok 142 - Python parity: parameter-schema-{}
   ---
-  duration_ms: 0.163887
+  duration_ms: 0.227053
   type: 'test'
   ...
 # Subtest: Python parity: parameter-schema-{'type': 'object'}
 ok 143 - Python parity: parameter-schema-{'type': 'object'}
   ---
-  duration_ms: 0.154563
+  duration_ms: 0.162174
   type: 'test'
   ...
 # Subtest: Python parity: parameter-schema-{'type': 'number'}
 ok 144 - Python parity: parameter-schema-{'type': 'number'}
   ---
-  duration_ms: 0.195495
+  duration_ms: 0.196015
   type: 'test'
   ...
 # Subtest: Python parity: parameter-schema-{'type': 'string', '$ref': '\#/x'}
 ok 145 - Python parity: parameter-schema-{'type': 'string', '$ref': '\#/x'}
   ---
-  duration_ms: 0.204709
+  duration_ms: 0.205019
   type: 'test'
   ...
 # Subtest: Python parity: parameter-content-{}
 ok 146 - Python parity: parameter-content-{}
   ---
-  duration_ms: 0.337979
+  duration_ms: 0.310799
   type: 'test'
   ...
 # Subtest: Python parity: parameter-style-'simple'
 ok 147 - Python parity: parameter-style-'simple'
   ---
-  duration_ms: 0.214984
+  duration_ms: 0.394644
   type: 'test'
   ...
 # Subtest: Python parity: parameter-explode-False
 ok 148 - Python parity: parameter-explode-False
   ---
-  duration_ms: 0.216927
+  duration_ms: 0.250347
   type: 'test'
   ...
 # Subtest: Python parity: parameter-allowReserved-False
 ok 149 - Python parity: parameter-allowReserved-False
   ---
-  duration_ms: 0.203617
+  duration_ms: 0.317368
   type: 'test'
   ...
 # Subtest: Python parity: query-string
 ok 150 - Python parity: query-string
   ---
-  duration_ms: 0.237928
+  duration_ms: 0.197087
   type: 'test'
   ...
 # Subtest: Python parity: query-integer
 ok 151 - Python parity: query-integer
   ---
-  duration_ms: 0.162024
+  duration_ms: 0.187933
   type: 'test'
   ...
 # Subtest: Python parity: query-boolean
 ok 152 - Python parity: query-boolean
   ---
-  duration_ms: 0.233331
+  duration_ms: 0.293693
   type: 'test'
   ...
 # Subtest: Python parity: thirteen-params
 ok 153 - Python parity: thirteen-params
   ---
-  duration_ms: 0.231198
+  duration_ms: 0.230417
   type: 'test'
   ...
 # Subtest: Python parity: json-error-1
 ok 154 - Python parity: json-error-1
   ---
-  duration_ms: 0.3185
+  duration_ms: 0.278089
   type: 'test'
   ...
 # Subtest: Python parity: json-error-14
 ok 155 - Python parity: json-error-14
   ---
-  duration_ms: 0.270808
+  duration_ms: 0.169265
   type: 'test'
   ...
 # Subtest: Python parity: json-error-2
 ok 156 - Python parity: json-error-2
   ---
-  duration_ms: 0.151408
+  duration_ms: 0.137126
   type: 'test'
   ...
 # Subtest: Python parity: json-error-120001
 ok 157 - Python parity: json-error-120001
   ---
-  duration_ms: 1.267319
+  duration_ms: 1.468783
+  type: 'test'
+  ...
+# Subtest: Python parity: path-ending-'\\r'
+ok 158 - Python parity: path-ending-'\\r'
+  ---
+  duration_ms: 0.41808
+  type: 'test'
+  ...
+# Subtest: Python parity: operation-ending-'\\r'
+ok 159 - Python parity: operation-ending-'\\r'
+  ---
+  duration_ms: 0.288655
+  type: 'test'
+  ...
+# Subtest: Python parity: parameter-ending-'\\r'
+ok 160 - Python parity: parameter-ending-'\\r'
+  ---
+  duration_ms: 0.323808
+  type: 'test'
+  ...
+# Subtest: Python parity: version-ending-'\\r'
+ok 161 - Python parity: version-ending-'\\r'
+  ---
+  duration_ms: 0.161423
+  type: 'test'
+  ...
+# Subtest: Python parity: path-ending-'\\u2028'
+ok 162 - Python parity: path-ending-'\\u2028'
+  ---
+  duration_ms: 0.374465
+  type: 'test'
+  ...
+# Subtest: Python parity: operation-ending-'\\u2028'
+ok 163 - Python parity: operation-ending-'\\u2028'
+  ---
+  duration_ms: 0.277217
+  type: 'test'
+  ...
+# Subtest: Python parity: parameter-ending-'\\u2028'
+ok 164 - Python parity: parameter-ending-'\\u2028'
+  ---
+  duration_ms: 0.344359
+  type: 'test'
+  ...
+# Subtest: Python parity: version-ending-'\\u2028'
+ok 165 - Python parity: version-ending-'\\u2028'
+  ---
+  duration_ms: 0.301063
+  type: 'test'
+  ...
+# Subtest: Python parity: path-ending-'\\u2029'
+ok 166 - Python parity: path-ending-'\\u2029'
+  ---
+  duration_ms: 0.237768
+  type: 'test'
+  ...
+# Subtest: Python parity: operation-ending-'\\u2029'
+ok 167 - Python parity: operation-ending-'\\u2029'
+  ---
+  duration_ms: 0.182675
+  type: 'test'
+  ...
+# Subtest: Python parity: parameter-ending-'\\u2029'
+ok 168 - Python parity: parameter-ending-'\\u2029'
+  ---
+  duration_ms: 0.262796
+  type: 'test'
+  ...
+# Subtest: Python parity: version-ending-'\\u2029'
+ok 169 - Python parity: version-ending-'\\u2029'
+  ---
+  duration_ms: 1.363945
   type: 'test'
   ...
 # Subtest: Python parity: spec-exact-max
-ok 158 - Python parity: spec-exact-max
+ok 170 - Python parity: spec-exact-max
   ---
-  duration_ms: 2.503272
+  duration_ms: 2.377763
   type: 'test'
   ...
 # Subtest: JSON-RPC errors, notifications, IDs and method routing
-ok 159 - JSON-RPC errors, notifications, IDs and method routing
+ok 171 - JSON-RPC errors, notifications, IDs and method routing
   ---
-  duration_ms: 1.543766
+  duration_ms: 1.94411
   type: 'test'
   ...
 # Subtest: request bounds, invalid UTF-8, content type and cross-origin refusal
-ok 160 - request bounds, invalid UTF-8, content type and cross-origin refusal
+ok 172 - request bounds, invalid UTF-8, content type and cross-origin refusal
   ---
-  duration_ms: 3.440854
+  duration_ms: 2.23592
   type: 'test'
   ...
 # Subtest: no outbound API requests; no shared user input retained between calls
-ok 161 - no outbound API requests; no shared user input retained between calls
+ok 173 - no outbound API requests; no shared user input retained between calls
   ---
-  duration_ms: 0.748668
+  duration_ms: 0.75585
   type: 'test'
   ...
 # Subtest: deployment manifest has MCP only; Worker needs no Node/Python/runtime dependencies
-ok 162 - deployment manifest has MCP only; Worker needs no Node/Python/runtime dependencies
+ok 174 - deployment manifest has MCP only; Worker needs no Node/Python/runtime dependencies
   ---
-  duration_ms: 35.837751
+  duration_ms: 30.660662
   type: 'test'
   ...
 # Subtest: real loopback HTTP tools/list and tools/call for all three tools
-ok 163 - real loopback HTTP tools/list and tools/call for all three tools
+ok 175 - real loopback HTTP tools/list and tools/call for all three tools
   ---
-  duration_ms: 36.951379
+  duration_ms: 36.311158
   type: 'test'
   ...
-1..163
-# tests 163
+1..175
+# tests 175
 # suites 0
-# pass 163
+# pass 175
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 331.670552
+# duration_ms 316.226079
