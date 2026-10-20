@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "aldol-game-ops",
+  "version": "0.4.0",
+  "description": "ALDOL 게임 HTML·ZIP 정적·반응형·시나리오·회귀 QA 실행기와 플랫폼 독립 운영 워크플로",
+  "author": {
+    "name": "ALDOL"
+  },
+  "keywords": [
+    "aldol",
+    "game-qa",
+    "release-gate",
+    "platform-agnostic",
+    "game-operations",
+    "collaboration",
+    "html-qa",
+    "playwright",
+    "responsive",
+    "regression",
+    "zip"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ALDOL Game Ops",
+        "shortDescription": "HTML·ZIP 검사와 버전 회귀 분석",
+        "longDescription": "공식 Python MCP SDK 기반 원격 정적 QA·SHA-256 검증·검사 보고서 조회·버전 회귀 비교를 제공합니다. 소유자 API 키 연결이 필요합니다. 원격 브라우저·시나리오 실행은 차단되며 UNKNOWN으로 보고합니다. 기존 로컬 CLI·스킬과 PRIVATE 정체성은 유지합니다. 파일 등록·서버 배포·ChatGPT 인증·실제 호출 검증을 구별합니다.",
+        "developerName": "ALDOL",
+        "category": "Other",
+        "capabilities": [],
+        "defaultPrompt": [
+          "ALDOL Game Ops로 이 HTML 게임을 파일 정적 검사하고 브라우저 반응형 QA를 진행해줘.",
+          "ALDOL Game Ops의 게임별 시나리오로 교배·전투·저장 동작을 검사해줘.",
+          "이전 버전과 새로운 HTML 게임 파일의 회귀 차이를 검사해줘."
+        ]
+      }
+    }
+  }
+}

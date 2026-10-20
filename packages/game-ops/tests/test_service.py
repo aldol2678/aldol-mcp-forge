@@ -210,3 +210,59 @@ def test_js_syntax_failure(svc):
     assert r["status"] == "FAIL" and any(
         c["id"].startswith("static.js") and c["status"] == "FAIL" for c in r["checks"]
     )
+
+
+def test_existing_fail_does_not_mask_unknown_regression(svc):
+    base = svc.run_static_qa(upload("<title>x</title>"))
+    candidate = svc.run_static_qa(
+        upload('<title>x</title><script src="https://example.com/x.js"></script>')
+    )
+    assert base["status"] == candidate["status"] == "FAIL"
+    assert (
+        svc.compare_game_versions(base["qa_id"], candidate["qa_id"])["status"]
+        == "UNKNOWN"
+    )
+
+
+def test_incompatible_profiles_never_assert_regression(svc):
+    base = svc._save(
+        {
+            "kind": "browser",
+            "status": "PASS",
+            "profile_sha256": "threshold-44",
+            "checks": [{"id": "target.go", "status": "PASS"}],
+        }
+    )
+    candidate = svc._save(
+        {
+            "kind": "browser",
+            "status": "FAIL",
+            "profile_sha256": "threshold-60",
+            "checks": [{"id": "target.go", "status": "FAIL"}],
+        }
+    )
+    assert (
+        svc.compare_game_versions(base["qa_id"], candidate["qa_id"])["status"]
+        == "UNKNOWN"
+    )
+
+
+def test_duplicate_engine_ids_do_not_hide_regression(svc):
+    first = "a" * 80 + "1.png"
+    second = "a" * 80 + "2.png"
+    html = HTML + f'<img src="{first}"><img src="{second}">'
+    base = svc.run_static_qa(
+        zipped([("index.html", html), (first, "image"), (second, "image")])
+    )
+    candidate = svc.run_static_qa(zipped([("index.html", html), (second, "image")]))
+    assert base["status"] == "PASS" and candidate["status"] == "FAIL"
+    result = svc.compare_game_versions(base["qa_id"], candidate["qa_id"])
+    assert result["status"] == "UNKNOWN" and result["ambiguous_check_ids"]
+
+
+def test_failed_worker_does_not_claim_static_coverage(svc, tmp_path, monkeypatch):
+    import service
+
+    monkeypatch.setattr(service, "WORKER", tmp_path / "missing_worker.py")
+    result = svc.run_static_qa(upload())
+    assert result["status"] == result["coverage"]["static"] == "UNKNOWN"

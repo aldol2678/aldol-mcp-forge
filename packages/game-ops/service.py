@@ -1,6 +1,7 @@
 """Bounded MCP service over the preserved v0.3 CLI. No URL ingestion."""
 
 from __future__ import annotations
+from collections import Counter
 import base64
 import binascii
 import datetime as dt
@@ -376,7 +377,7 @@ class QAService:
                         for s in ("PASS", "FAIL", "UNKNOWN")
                     },
                     "coverage": {
-                        "static": "PASS" if kind == "static" else "UNKNOWN",
+                        "static": status(checks) if kind == "static" else "UNKNOWN",
                         "browser": "UNKNOWN"
                         if kind == "static" or blocked
                         else status(checks),
@@ -411,8 +412,17 @@ class QAService:
                 if b[k]["status"] == "PASS" and c[k]["status"] == "FAIL"
             ]
             missing = sorted(b.keys() - c.keys())
+            ambiguous = sorted(
+                {
+                    key
+                    for report in (base, candidate)
+                    for key, count in Counter(x["id"] for x in report["checks"]).items()
+                    if count > 1
+                }
+            )
             compatible = (
-                base["kind"] == candidate["kind"]
+                not ambiguous
+                and base["kind"] == candidate["kind"]
                 and base.get("profile_sha256") == candidate.get("profile_sha256")
                 and base["kind"] in ("static", "browser", "scenarios")
             )
@@ -421,10 +431,22 @@ class QAService:
                 or missing
                 or base["status"] == "UNKNOWN"
                 or candidate["status"] == "UNKNOWN"
+                or any(
+                    x["status"] == "UNKNOWN"
+                    for x in base["checks"] + candidate["checks"]
+                )
                 or not b
                 or not c
             )
-            verdict = "FAIL" if regressions else "UNKNOWN" if uncertain else "PASS"
+            verdict = (
+                "UNKNOWN"
+                if not compatible
+                else "FAIL"
+                if regressions
+                else "UNKNOWN"
+                if uncertain
+                else "PASS"
+            )
             return self._save(
                 {
                     "kind": "regression",
@@ -433,6 +455,7 @@ class QAService:
                     "baseline_id": baseline_id,
                     "candidate_id": candidate_id,
                     "new_regressions": regressions,
+                    "ambiguous_check_ids": ambiguous,
                     "missing_checks": missing,
                     "compatible_profiles": compatible,
                     "identical_input": base.get("artifact", {}).get("sha256")
