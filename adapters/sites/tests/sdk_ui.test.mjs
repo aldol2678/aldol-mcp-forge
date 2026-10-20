@@ -15,7 +15,7 @@ test("served Studio UI includes real SDK verify button and explicit skip state",
   assert.match(js,/공식 SDK 실행 검증/);
   assert.match(js,/SDK 결과 새로고침/);
   assert.match(js,/sdk_verifier_available/);
-  assert.match(js,//sdk/);
+  assert.ok(js.includes('/sdk'));
   const s=await worker.fetch(req("/api/session"));
   const status=await s.json();
   assert.equal(status.sdk_verifier_available,false);
