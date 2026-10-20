@@ -5,7 +5,7 @@ let requestId=0;
 let session={},projects=[],current=null,draft=null,preview=null,mode='natural',logs=[],templates={},lastHash='',lastValidation=null;
 const examples=['HTML 게임을 검사하는 MCP를 만들어줘.','텍스트 분석용 MCP 서버를 만들어줘.','JSON 데이터를 검사하는 MCP를 만들어줘.'];
 const specExample=JSON.stringify({openapi:'3.0.0',info:{title:'Games API',version:'1.0.0'},paths:{'/games':{get:{operationId:'listGames',summary:'게임 목록 조회',parameters:[{name:'limit',in:'query',schema:{type:'integer'}}]},post:{summary:'지원 범위 밖의 쓰기 작업'}}}},null,2);
-const remember=()=>{if(current)sessionStorage.setItem('forge-selected-project',current.id);};
+const remember=()=>{lastValidation=null;lastHash='';if(current)sessionStorage.setItem('forge-selected-project',current.id);};
 let form={description:examples[0],project_name:'html-game-audit',spec_json:specExample};
 const badge=(status,txt=status)=>`<span class="badge ${status==='FAIL'?'fail':['SKIP','UNKNOWN'].includes(status)?'warn':status==='PASS'?'':'neutral'}">${esc(txt)}</span>`;
 const head=(k,title,sub,action='')=>`<div class="page-head"><div><div class="eyebrow">${esc(k)}</div><h1>${esc(title)}</h1><p class="subtitle">${esc(sub)}</p></div>${action}</div>`;
@@ -32,7 +32,7 @@ function bind(){document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()
  if($('description'))$('description').oninput=()=>{capture();preview=null;const s=$('save');if(s)s.disabled=true;};if($('spec'))$('spec').oninput=()=>{capture();preview=null;const s=$('save');if(s)s.disabled=true;};
  if($('load-spec'))$('load-spec').onclick=()=>{form.spec_json=specExample;preview=null;render();};
  if($('preview'))$('preview').onclick=()=>action(async()=>{capture();preview=mode==='natural'?await rpc('forge_preview',{description:form.description}):await rpc('forge_preview_openapi',{spec_json:form.spec_json});render();notice(preview.supported?'실제 Forge 응답으로 도구 구성을 확인했습니다.':'지원 범위를 확인해 주세요.');});
- if($('draft'))$('draft').onclick=()=>action(async()=>{capture();draft=await api('/api/draft',args());current=null;location.hash='editor';render();notice('미저장 코드 미리보기입니다.');});
+ if($('draft'))$('draft').onclick=()=>action(async()=>{capture();draft=await api('/api/draft',args());current=null;lastValidation=null;lastHash='';location.hash='editor';render();notice('미저장 코드 미리보기입니다.');});
  if($('save'))$('save').onclick=()=>action(async()=>{capture();current=await api('/api/projects',args());remember();projects=(await api('/api/projects')).projects;draft=null;logs.unshift({time:new Date().toLocaleTimeString('ko-KR'),name:'forge_create / R2',status:'PASS',detail:current.project_name+' 저장 및 목록 재조회'});location.hash='editor';render();notice('프로젝트를 저장하고 목록에서 다시 확인했습니다.');});
  if($('file-select'))$('file-select').onchange=()=>{$('code-view').textContent=selectedProject().files[$('file-select').value];};
  if($('add-tool'))$('add-tool').onclick=()=>action(async()=>{current=await api('/api/projects/'+current.id+'/tools',{template:$('add-template').value});remember();projects=(await api('/api/projects')).projects;lastValidation=null;render();notice('도구를 추가한 새 버전을 저장했습니다. 이전 버전은 보존됩니다.');});
