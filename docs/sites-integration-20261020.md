@@ -8,14 +8,22 @@ The owner-private Site is deployed and an actual private plugin has been
 provisioned and installed. The three read-only Forge tools have an independent
 JavaScript implementation with Python differential and HTTP protocol tests.
 
-**End-to-end ChatGPT tool invocation is not yet verified.** Sites' own authenticated
-requests reached the deployed `/mcp` and returned HTTP 200 for `server/discover`
-and `tools/list`. All three `tools/call` operations succeeded in local loopback
-HTTP tests, but the new plugin's tool namespace is absent from this authoring
-conversation. A direct remote test using the ordinary Sites service credential
-received HTTP 401 at `/mcp`. No unauthenticated bypass or access expansion was
-added. Plugin installation and endpoint publication must not be substituted for
-a successful ChatGPT tool call.
+**End-to-end ChatGPT tool invocation verified on 2026-10-20 (Asia/Seoul).**
+A subsequent ChatGPT conversation exposed the provisioned
+`ALDOL MCP Forge · Read-only` plugin tool namespace and actually invoked all
+three tools. `forge_list_templates` returned the expected HTML/JSON/text
+templates; `forge_preview` with `description="HTML 게임 검사"` returned
+`supported=true`, `template="html_audit"`; `forge_preview_openapi` with
+a single GET `listGames` returned `count=1`, `operations=["listGames"]`,
+`default_network_access=false`. All three tool calls returned usable
+structured results, not merely installation metadata.
+Sites' own authenticated platform requests previously returned HTTP 200 for
+`server/discover` and `tools/list`. The **older** direct service-credential
+request received HTTP 401 at `/mcp`, which is still correctly recorded as a
+failed request through a different authentication path. No authentication
+bypass, public-access expansion or host deployment was needed. This
+ChatGPT invocation was observed through the connected plugin; it is not
+evidence of the five unimplemented write tools working.
 
 ## Source baseline and CI
 
@@ -46,7 +54,7 @@ subset. UNKNOWN means the exact capability has not been established.
 | Persistent file storage | SUPPORTED (documented) | Current Sites storage reference explicitly supports logical `r2` bindings. No R2 resource was provisioned or exercised; manifest value is null. |
 | Database | SUPPORTED (documented) | Current Sites storage reference explicitly supports `d1` bindings and managed schema migrations. No D1 resource was provisioned or exercised; manifest value is null. |
 | External process / Python subprocess | UNSUPPORTED | No supported process-execution surface exists in the Site Worker runtime. Development-container subprocess access is separate and was not treated as hosted capability. |
-| Register actual MCP tools as a ChatGPT plugin | SUPPORTED for provisioning; LIMITED end-to-end verification | Sites created the exact private plugin ID below, and Plugin Management returned `already_installed`. Actual calls through that plugin remain unverified because this conversation has no new tool namespace. |
+| Register actual MCP tools as a ChatGPT plugin | SUPPORTED (three read-only tools live-tested) | Sites provisioned the private plugin and the subsequent ChatGPT conversation successfully invoked all three read-only tools. The five write/test/package tools are not exposed. |
 | Separate private non-production preview | UNKNOWN / unavailable in selected starter | The managed preview reference says the Worker ESM starter has no preview entrypoint. Every Sites deployment URL is production, including owner-private URLs. This implementation uses owner-private publication; public publication was not performed. |
 
 Capability sources read from the installed official Sites package `1.0.1`:
@@ -59,9 +67,9 @@ references, not assumptions based on similarly named external services.
 
 | Tool | Implementation | Local HTTP `tools/call` | Live Sites ChatGPT call |
 | --- | --- | --- | --- |
-| `forge_list_templates` | Existing three-template mapping | Passed | Unverified |
-| `forge_preview` | Original keyword order, output and input bounds | Passed; HTML → `html_audit` | Unverified |
-| `forge_preview_openapi` | Original restricted JSON GET preview validation/output | Passed; sample operations discovered; network false | Unverified |
+| `forge_list_templates` | Existing three-template mapping | Passed | PASS: returned HTML/JSON/text templates |
+| `forge_preview` | Original keyword order, output and input bounds | Passed; HTML → `html_audit` | PASS: HTML 게임 검사 → `html_audit` |
+| `forge_preview_openapi` | Original restricted JSON GET preview validation/output | Passed; sample operations discovered; network false | PASS: `listGames`, count 1, no network |
 
 `adapters/sites/worker/index.js` is self-contained, dependency-free Worker ESM.
 It implements stateless MCP `2026-07-28` discovery/list/call and compatibility
@@ -86,7 +94,7 @@ Tests completed:
   evidence is from the inspected main CI, and the new PR runs those existing jobs
   again. Local Node parity tests are not called official Python SDK validation.
 - Hosted platform logs record authenticated discovery and list with HTTP 200.
-  The direct remote verification log from the first private publication records HTTP 401, not a tool success. The second publication only tightens Python-equivalent regular-expression full matching; authentication is unchanged.
+  The direct remote verification log from the first private publication records HTTP 401 and remains a failed **service-credential** request; this does not contradict the separately verified ChatGPT plugin calls. The second publication only tightened Python-equivalent regular-expression full matching; authentication is unchanged.
 
 Evidence: [adapter TAP](evidence/sites-20261020/sites-tests.tap),
 [Python regression](evidence/sites-20261020/forge-regression.log),
@@ -111,9 +119,10 @@ unchanged. CI evidence for this branch is the actual PR's run, not the baseline 
   repository; separate from the upstream GitHub branch).
 
 Use **Plugins → Personal → Created by you → ALDOL MCP Forge · Read-only**.
-The platform says it is already installed. Select/connect that plugin in a new
-conversation if its tools are not present in the current conversation. Reuse
-this provisioned plugin; no second app, public endpoint or paid host is needed.
+The three listed tools were subsequently observed and successfully called from
+a ChatGPT conversation on 2026-10-20. In a different conversation, the user may
+need to select/connect this same already provisioned plugin to expose its tools.
+Reuse this plugin; no second app, public endpoint or paid host is needed.
 
 Read-only verification prompts:
 
@@ -127,8 +136,8 @@ Read-only verification prompts:
 
 The third tool's input is **`spec_json` containing a JSON string**, not a URL or
 an already-parsed object. Expected output includes `operations: ["listPets"]`,
-`count: 1` and `default_network_access: false`. A live successful return from
-each tool is the remaining end-to-end completion condition.
+`count: 1` and `default_network_access: false`. Live success returns from all three tools have now been observed in ChatGPT.
+This validates the read-only adapter only, not the five Python-dependent tools.
 
 ## Future extension: smallest change to existing Forge
 
@@ -164,6 +173,9 @@ Proposed bridge (not implemented or deployed):
   only when persistent jobs/artifacts are actually implemented. No storage has
   been provisioned by this integration.
 
-No paid resources, public Site access, existing PR merges, main changes or formal
-releases were performed. The final status is: **implementation and owner-private
-deployment verified; live ChatGPT `tools/call` verification pending**.
+No paid resources, public Site access or formal releases were performed by
+this integration. At the original Work handoff, the PR was unmerged and main
+unchanged. After subsequent direct ChatGPT tool invocations, the result is:
+**owner-private deployment and all three ChatGPT `tools/call` invocations
+verified**; Python generation, write/test and packaging remain unimplemented
+in the Sites adapter. The PR's actual merge status is tracked on GitHub.
