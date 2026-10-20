@@ -29,7 +29,8 @@ def analyze_code(repository: str, focus: str | None = None) -> dict[str, str]:
         string(focus, "focus", max_length=200, allow_empty=True)
     risks = []
     findings = {"path": path, "language": language, "lines": len(content.splitlines()),
-                "sha256": hashlib.sha256(content.encode()).hexdigest(), "method": "offline-static-only"}
+                "sha256": hashlib.sha256(content.encode()).hexdigest(),
+                "method": "github-readonly-static" if provenance else "offline-static-only"}
     if language == "python":
         try:
             tree = ast.parse(content, filename=path)
