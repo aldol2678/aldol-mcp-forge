@@ -94,6 +94,13 @@ class StudioArchiveTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unexpected ZIP member"):
             validated_archive(bad, self.project())
 
+    def test_reject_oversized_manifest_before_decompression(self):
+        bad = self.root / "oversized-manifest.zip"
+        with ZipFile(bad, "w", ZIP_STORED) as z:
+            z.writestr("manifest.json", " " * 25_000)
+        with self.assertRaisesRegex(ValueError, "oversized manifest"):
+            verify(str(bad))
+
     def test_real_official_sdk_both_transports(self):
         for name in ("studio-curated-v021", "studio-openapi-get"):
             with self.subTest(fixture=name):
