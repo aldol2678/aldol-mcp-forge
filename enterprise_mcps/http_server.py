@@ -49,6 +49,11 @@ class PrivateSEUM:
         self.inner = inner
         self.secret = secret
         self.oauth = oauth
+        studio = os.environ.get("ALDOL_SEUM_STUDIO_BEARER_TOKEN", "")
+        if studio and (not 40 <= len(studio) <= 256 or not studio.isascii()
+                       or not all(33 <= ord(c) <= 126 for c in studio)):
+            raise RuntimeError("Invalid Studio service credential")
+        self.studio_secret = studio.encode("ascii") if studio else None
 
     async def __call__(self, scope: dict, receive: Any, send: Any):
         if scope["type"] != "http":
@@ -71,7 +76,9 @@ class PrivateSEUM:
                   if key.lower() == b"authorization"]
         valid = len(values) == 1 and (hmac.compare_digest(
             values[0], b"Bearer " + self.secret)
-            or (self.oauth is not None and self.oauth.authorized(values[0])))
+            or (self.oauth is not None and self.oauth.authorized(values[0]))
+            or (self.studio_secret is not None and hmac.compare_digest(
+                values[0], b"Bearer " + self.studio_secret)))
         if not valid:
             return await JSONResponse(
                 {"error": "authorization_required"}, status_code=401,
