@@ -21,7 +21,8 @@ export function sdkReady(env) {
     if (!writable(env) || env.SDK_BRIDGE_ENABLED !== "1" ||
         typeof env.SDK_BRIDGE_SECRET !== "string" || env.SDK_BRIDGE_SECRET.length < 32 ||
         typeof env.SDK_BRIDGE_URL !== "string" ||
-        typeof env.SDK_BRIDGE_ORIGIN !== "string") return false;
+        typeof env.SDK_BRIDGE_ORIGIN !== "string" ||
+        ![undefined, "async", "cloudrun-sync"].includes(env.SDK_BRIDGE_MODE)) return false;
     const url = new URL(env.SDK_BRIDGE_URL);
     return url.protocol === "https:" && !url.username && !url.password &&
       !url.search && !url.hash && url.pathname === "/v1/sdk/jobs" &&
@@ -52,7 +53,7 @@ async function signedPost(env, endpoint, payload, fetcher) {
       "X-Forge-Signature": signature,
     },
     body: raw,
-    signal: AbortSignal.timeout(25000),
+    signal: AbortSignal.timeout(env.SDK_BRIDGE_MODE === "cloudrun-sync" ? 95000 : 25000),
   });
   if (response.redirected || ![200, 202].includes(response.status)) {
     throw bad("공식 SDK 실행 호스트가 작업을 받지 못했습니다.", 502);
@@ -87,12 +88,22 @@ export async function createSdkJob(request, env, projectId, fetcher = fetch) {
       !["QUEUED", "RUNNING", "PASS", "FAIL", "REJECTED", "TIMEOUT", "INTERRUPTED"].includes(result.status)) {
     throw bad("SDK 검증 서버의 작업 식별이 올바르지 않습니다.", 502);
   }
-  // Persistent user-owned pointer. Saving a job reference is NOT evidence of PASS.
+  // Cloud Run request-based CPU: complete SDK validation before returning.
+  // Only signed verified final evidence can be saved in owner-scoped Sites R2.
+  const normalized = normalizeSdkResult(result);
+  if (env.SDK_BRIDGE_MODE === "cloudrun-sync") {
+    const expected = await digest(ownerHash + ":" + projectId + ":" + zip.sha256);
+    if (result.job_id !== expected || !["PASS", "FAIL"].includes(result.status)) {
+      throw bad("Cloud Run 공식 SDK 검증 결과가 완결되지 않았습니다.", 502);
+    }
+  }
+  // Durable project-owned result/pointer, never client-controlled.
   const pointer = {job_id: result.job_id, project_id: projectId,
-                   sha256: zip.sha256, created_at: Date.now()};
+                   sha256: zip.sha256, created_at: Date.now(),
+                   ...(env.SDK_BRIDGE_MODE === "cloudrun-sync" ? {final_result: normalized} : {})};
   await env.BUCKET.put((await ownerPrefix(request)) + "sdk-job-latest/" +
     projectId + ".json", JSON.stringify(pointer));
-  return normalizeSdkResult(result);
+  return normalized;
 }
 
 export async function readSdkJob(request, env, projectId, fetcher = fetch) {
@@ -110,6 +121,16 @@ export async function readSdkJob(request, env, projectId, fetcher = fetch) {
   if (pointer.project_id !== projectId ||
       !/^[0-9a-f]{64}$/.test(pointer.job_id || "")) {
     throw bad("저장된 SDK 작업 참조가 올바르지 않습니다.", 409);
+  }
+  if (env.SDK_BRIDGE_MODE === "cloudrun-sync") {
+    const expected = await digest(await digest(subject(request)) + ":" + projectId + ":" + pointer.sha256);
+    if (pointer.job_id !== expected || !pointer.final_result ||
+        pointer.final_result.job_id !== expected ||
+        pointer.final_result.project_id !== projectId ||
+        pointer.final_result.sha256 !== pointer.sha256) {
+      throw bad("SDK 실행 결과의 소유자·파일 해시가 일치하지 않습니다.", 409);
+    }
+    return {...normalizeSdkResult(pointer.final_result), available: true};
   }
   const result = await signedPost(env, "/v1/sdk/jobs/status", {
     subject_hash: await digest(subject(request)),
