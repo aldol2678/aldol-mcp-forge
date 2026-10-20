@@ -2,6 +2,7 @@ import { core, readBounded, json } from './core.js';
 import { SOURCE_SHA, generate, verifyProject } from './generator.js';
 import { writable, subject, requireWrite, listProjects, getProject, createProject, addTool, packageProject } from './store.js';
 import { PAGE, CLIENT, CSS } from './page.js';
+import { sdkReady, createSdkJob, readSdkJob } from './sdk-bridge.js';
 const extraTools=[
  {name:'forge_create',description:'Create and save an immutable curated Python MCP project in your Sites workspace; no execution or deployment.',inputSchema:{type:'object',properties:{project_name:{type:'string',pattern:'^[a-z][a-z0-9-]{2,39}$'},description:{type:'string',minLength:1,maxLength:2000}},required:['project_name','description'],additionalProperties:false}},
  {name:'forge_add_tool',description:'Add a curated tool as a new immutable project version. Existing version is preserved.',inputSchema:{type:'object',properties:{project_id:{type:'string'},template:{type:'string',enum:['html_audit','json_audit','text_stats']}},required:['project_id','template'],additionalProperties:false}},
@@ -37,7 +38,7 @@ export default {
  }
  if(!path.startsWith('/api/'))return json({error:'Not found'},404);
  try{
-  if(path==='/api/session'&&request.method==='GET')return json({authenticated:!!request.headers.get('oai-authenticated-user-id'),writes_enabled:writable(env)&&!!request.headers.get('oai-authenticated-user-id'),storage:env.BUCKET?'R2':'unavailable',local_qa:env.LOCAL_QA===true,source_sha:SOURCE_SHA,version:'0.2.0-studio',python_execution:'SKIP',sdk:'UNKNOWN'});
+  if(path==='/api/session'&&request.method==='GET')return json({authenticated:!!request.headers.get('oai-authenticated-user-id'),writes_enabled:writable(env)&&!!request.headers.get('oai-authenticated-user-id'),storage:env.BUCKET?'R2':'unavailable',local_qa:env.LOCAL_QA===true,source_sha:SOURCE_SHA,version:'0.2.0-studio',python_execution:'SKIP',sdk:'UNKNOWN',sdk_verifier_available:sdkReady(env)&&!!request.headers.get('oai-authenticated-user-id')});
   if(request.method==='POST'){
    if(request.headers.get('origin')!==url.origin)throw Object.assign(Error('동일한 사이트에서만 요청할 수 있습니다.'),{status:403});
    if(!(request.headers.get('content-type')||'').startsWith('application/json'))throw Error('JSON 형식으로 입력해 주세요.');
@@ -52,6 +53,18 @@ export default {
   if(path==='/api/projects'){
    if(request.method==='GET')return json(await listProjects(request,env));
    if(request.method==='POST'){requireWrite(request,env);return json(await createProject(request,env,JSON.parse(await readBounded(request))),201);}
+   return json({error:'지원하지 않는 요청 방식입니다.'},405);
+  }
+  const sdkMatch=path.match(/^\/api\/projects\/([a-f0-9-]{36})\/sdk$/);
+  if(sdkMatch){
+   if(request.method==='POST'){
+    requireWrite(request,env);
+    const payload=JSON.parse(await readBounded(request));
+    if(!payload||typeof payload!=='object'||Array.isArray(payload)||Object.keys(payload).length)
+     throw Object.assign(Error('SDK 검사 시작 요청은 빈 JSON 객체여야 합니다.'),{status:400});
+    return json(await createSdkJob(request,env,sdkMatch[1]),202);
+   }
+   if(request.method==='GET')return json(await readSdkJob(request,env,sdkMatch[1]));
    return json({error:'지원하지 않는 요청 방식입니다.'},405);
   }
   const m=path.match(/^\/api\/projects\/([a-f0-9-]+)(?:\/(tools|test|package))?$/);if(!m)return json({error:'Not found'},404);
