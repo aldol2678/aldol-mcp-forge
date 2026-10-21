@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "snapshot_as_of": "2026-10-21",
+  "source_note": "Conversation-derived discovery seed. No live game stage or version independently verified.",
+  "games": [
+    {
+      "game_id": "tiny-army-expedition",
+      "title": "꼬마 군단 원정대",
+      "aliases": [
+        "꼬마군단",
+        "little legion"
+      ],
+      "stage": "active",
+      "last_known_version": "0.9.11",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "1.0 기능 통합·모바일 전투 및 저장 QA 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/tiny-army-expedition"
+      }
+    },
+    {
+      "game_id": "no-not-like-that",
+      "title": "아니, 그게 아니라!",
+      "aliases": [
+        "No, Not Like That!"
+      ],
+      "stage": "active",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "최근 패치 통합본 및 EP.00 프롤로그 작업 구분 확인",
+      "links": {}
+    },
+    {
+      "game_id": "infinite-sword",
+      "title": "무한검 강화소",
+      "aliases": [],
+      "stage": "released",
+      "last_known_version": "0.5.2",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "HTML 버전과 포글플레이판 차이·패치 상태 확인",
+      "links": {}
+    },
+    {
+      "game_id": "time-clone-factory",
+      "title": "시간복제 공장",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.2.1",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "15초 녹화·복제 루프 및 모바일 조작 재검증",
+      "links": {}
+    },
+    {
+      "game_id": "dual-job",
+      "title": "겸직금지",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.5",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "오리지널 카드게임 버전의 마지막 실행본과 다음 패치 확인",
+      "links": {}
+    },
+    {
+      "game_id": "arrow-heir",
+      "title": "화살의 계승자",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.3.2",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "차징 사격과 타깃 선택의 최근 빌드 확인",
+      "links": {}
+    },
+    {
+      "game_id": "life-is-build",
+      "title": "인생은 빌드다",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.2.2",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "게임 진행·밸런스의 최신 테스트 상태 확인",
+      "links": {}
+    },
+    {
+      "game_id": "jelly-lab",
+      "title": "젤리연구실",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.4.1",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "정적 QA와 최신 실행 파일 확보 여부 확인",
+      "links": {}
+    },
+    {
+      "game_id": "induck-defense",
+      "title": "인덕 디펜스",
+      "aliases": [],
+      "stage": "paused",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "R0 QA HOLD 사유 및 해소 조건 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/induck-defense"
+      }
+    },
+    {
+      "game_id": "inhaori-classic",
+      "title": "인하오리 Classic",
+      "aliases": [
+        "인하오리"
+      ],
+      "stage": "released",
+      "last_known_version": "1.0",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "기존 아케이드 경로와 실배포 상태 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/inha-duck"
+      }
+    },
+    {
+      "game_id": "induck-up",
+      "title": "인덕업",
+      "aliases": [],
+      "stage": "released",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "게임 실행본 및 아케이드 연결 상태 확인",
+      "links": {}
+    },
+    {
+      "game_id": "raise-induck",
+      "title": "인덕이 키우기",
+      "aliases": [],
+      "stage": "released",
+      "last_known_version": "1.0",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "게임 실행본 및 아케이드 연결 상태 확인",
+      "links": {}
+    },
+    {
+      "game_id": "induck-survival",
+      "title": "인덕 서바이벌",
+      "aliases": [],
+      "stage": "unknown",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "소개 페이지와 실제 게임 실행본 존재 여부 확인",
+      "links": {}
+    },
+    {
+      "game_id": "inha-world",
+      "title": "INHA WORLD",
+      "aliases": [],
+      "stage": "platform",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "게임개발 MCP 기반 안정화 후 리뉴얼 계획으로 관리",
+      "links": {
+        "github": "https://github.com/aldol2678/inhagame"
+      }
+    },
+    {
+      "game_id": "cat-world",
+      "title": "CAT WORLD",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "3D 프로토타입 원본 및 실행 여부 확인",
+      "links": {}
+    },
+    {
+      "game_id": "our-class-2010",
+      "title": "그때, 우리 반: 2010",
+      "aliases": [
+        "그때 우리 반"
+      ],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "2010년 한국 중학교 오픈월드 핵심 플레이 루프 구체화",
+      "links": {}
+    },
+    {
+      "game_id": "aram-world",
+      "title": "아람월드",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "기존 3D 월드·플랫폼 프로젝트와 중복 관계 확인",
+      "links": {}
+    },
+    {
+      "game_id": "korea-hanyang",
+      "title": "KOREA: 한양에서의 하루",
+      "aliases": [
+        "한국월드",
+        "KOREA Alpha"
+      ],
+      "stage": "active",
+      "last_known_version": "Alpha 0.2",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "GLB 모델 및 Alpha 0.2 QA 후속 작업 상태 확인",
+      "links": {}
+    },
+    {
+      "game_id": "origin-lab",
+      "title": "기원의 실험실",
+      "aliases": [
+        "Origin Lab"
+      ],
+      "stage": "prototype",
+      "last_known_version": "0.3",
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "에셋 ZIP과 통합 실행본의 일치 여부 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/origin-lab"
+      }
+    },
+    {
+      "game_id": "evolution-lab",
+      "title": "진화랩",
+      "aliases": [
+        "진화 연구 게임"
+      ],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "기원의 실험실과 동일 프로젝트인지 계보 확인",
+      "links": {}
+    },
+    {
+      "game_id": "fruit-world-concepts",
+      "title": "사과월드·과일월드·음식월드",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "독립 프로젝트 여부와 게임별 ID 분할 필요성 확인",
+      "links": {}
+    },
+    {
+      "game_id": "short-travel",
+      "title": "숏트래블",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "기획 원본과 개발 시작 여부 확인",
+      "links": {}
+    },
+    {
+      "game_id": "janheun",
+      "title": "잔흔",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "기획 원본과 독립 게임 여부 확인",
+      "links": {}
+    }
+  ]
+}
