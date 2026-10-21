@@ -1,0 +1,10 @@
+{
+  "name": "aldol-bonsae-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/compile-worker.mjs && bash scripts/build.sh",
+    "validate": "node scripts/validate-artifact.mjs",
+    "dev": "node scripts/serve-preview.mjs"
+  }
+}

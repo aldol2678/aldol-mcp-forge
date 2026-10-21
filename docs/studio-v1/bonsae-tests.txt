@@ -1,0 +1,47 @@
+test_actual_supplied_png_decoding_with_hash_and_no_whole_screen_pass (test_bonsae_extended.BonsaeExtendedTests.test_actual_supplied_png_decoding_with_hash_and_no_whole_screen_pass) ... ok
+test_browser_unavailable_never_becomes_pass (test_bonsae_extended.BonsaeExtendedTests.test_browser_unavailable_never_becomes_pass) ... ok
+test_detected_render_failure_is_not_silenced_by_partial_pixels (test_bonsae_extended.BonsaeExtendedTests.test_detected_render_failure_is_not_silenced_by_partial_pixels) ... ok
+test_internal_css_and_unexamined_defaults_are_not_automatic_defects (test_bonsae_extended.BonsaeExtendedTests.test_internal_css_and_unexamined_defaults_are_not_automatic_defects) ... ok
+test_invalid_image_and_url_are_rejected_without_fetch (test_bonsae_extended.BonsaeExtendedTests.test_invalid_image_and_url_are_rejected_without_fetch) ... ok
+test_native_nested_labels_and_image_button_names (test_bonsae_extended.BonsaeExtendedTests.test_native_nested_labels_and_image_button_names) ... ok
+test_remote_screenshot_reference_never_counts_as_inspection (test_bonsae_extended.BonsaeExtendedTests.test_remote_screenshot_reference_never_counts_as_inspection) ... ok
+test_render_adaptor_rejects_unbounded_viewports_and_no_html (test_bonsae_extended.BonsaeExtendedTests.test_render_adaptor_rejects_unbounded_viewports_and_no_html) ... ok
+test_responsive_design_handoff_keeps_meaning_and_declared_states (test_bonsae_extended.BonsaeExtendedTests.test_responsive_design_handoff_keeps_meaning_and_declared_states) ... ok
+test_source_findings_have_actionable_locations (test_bonsae_extended.BonsaeExtendedTests.test_source_findings_have_actionable_locations) ... ok
+test_business_economics_advisory_only (test_logic.CanonicalContractTests.test_business_economics_advisory_only) ... ok
+test_checksum_guarded_diff_without_write (test_logic.CanonicalContractTests.test_checksum_guarded_diff_without_write) ... ok
+test_competitor_price_math_and_currency_rejection (test_logic.CanonicalContractTests.test_competitor_price_math_and_currency_rejection) ... ok
+test_design_spec_preserves_explicit_intent (test_logic.CanonicalContractTests.test_design_spec_preserves_explicit_intent) ... ok
+test_exact_tool_inventory_and_output_contracts (test_logic.CanonicalContractTests.test_exact_tool_inventory_and_output_contracts) ... ok
+test_html_semantics_and_anti_clipping (test_logic.CanonicalContractTests.test_html_semantics_and_anti_clipping) ... ok
+test_json_parse_validation (test_logic.CanonicalContractTests.test_json_parse_validation) ... ok
+test_python_ast_detection_no_source_execution (test_logic.CanonicalContractTests.test_python_ast_detection_no_source_execution) ... ok
+test_sourced_market_evidence_no_fake_verification (test_logic.CanonicalContractTests.test_sourced_market_evidence_no_fake_verification) ... ok
+test_technical_release_gate_no_launch (test_logic.CanonicalContractTests.test_technical_release_gate_no_launch) ... ok
+test_visual_gate_never_fakes_pixel_inspection (test_logic.CanonicalContractTests.test_visual_gate_never_fakes_pixel_inspection) ... ok
+test_inmemory_and_stdio (test_sdk.SDKTests.test_inmemory_and_stdio) ... ok
+test_01_public_health_is_minimal_and_status_requires_auth (test_specialist_http.PrivateSpecialistHTTPTests.test_01_public_health_is_minimal_and_status_requires_auth) ... ok
+test_02_no_auth_duplicate_auth_and_cross_company_tokens_rejected (test_specialist_http.PrivateSpecialistHTTPTests.test_02_no_auth_duplicate_auth_and_cross_company_tokens_rejected) ... ok
+test_03_body_limit_and_route_method_restrictions (test_specialist_http.PrivateSpecialistHTTPTests.test_03_body_limit_and_route_method_restrictions) ... ok
+test_04_factory_rejects_unknown_company_and_invalid_secrets (test_specialist_http.PrivateSpecialistHTTPTests.test_04_factory_rejects_unknown_company_and_invalid_secrets) ... ok
+test_05_official_sdk_v2_real_http_discovers_and_calls_six_tools (test_specialist_http.PrivateSpecialistHTTPTests.test_05_official_sdk_v2_real_http_discovers_and_calls_six_tools) ... HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:56665/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:56665/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:56665/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:56665/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:56665/mcp "HTTP/1.1 200 OK"
+ok
+test_06_sdk_unknown_tool_and_invalid_input_are_denied (test_specialist_http.PrivateSpecialistHTTPTests.test_06_sdk_unknown_tool_and_invalid_input_are_denied) ... HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:32771/mcp "HTTP/1.1 200 OK"
+ok
+test_07_seum_implementation_and_three_tool_contract_are_unchanged (test_specialist_http.PrivateSpecialistHTTPTests.test_07_seum_implementation_and_three_tool_contract_are_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 4.150s
+
+OK
