@@ -164,7 +164,7 @@ def test_dual_and_default_mode(tmp_path, idp):
                         async with streamable_http_client("http://localhost:8000/mcp", http_client=c) as streams:
                             async with ClientSession(streams[0], streams[1]) as s:
                                 await s.initialize()
-                                assert len((await s.list_tools()).tools) == 6
+                                assert len((await s.list_tools()).tools) == 9
                     c.headers.pop("Authorization")
                     if mode == "bearer":
                         assert (await c.get("/.well-known/oauth-protected-resource")).status_code == 401
