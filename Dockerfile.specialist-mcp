@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/playwright/python:v1.58.0-noble
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=8080 PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+WORKDIR /srv/specialist
+COPY enterprise_mcps/requirements-studio.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && useradd -r -u 10001 -m specialist && chmod -R a+rX /ms-playwright
+COPY contract_forge.py ./
+COPY examples ./examples
+COPY enterprise_mcps ./enterprise_mcps
+USER specialist
+EXPOSE 8080
+CMD ["python", "-m", "enterprise_mcps.specialist_http"]
