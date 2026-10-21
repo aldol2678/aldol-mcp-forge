@@ -1,4 +1,4 @@
-# ALDOL Game Ops MCP v0.4.0
+# ALDOL Game Ops MCP v0.4.1
 
 MIT game artifact QA toolkit and an **official Python MCP SDK server**. Reuses the recovered v0.3 CLI without changing Forge runtime. Stdio executes local QA; authenticated Streamable HTTP provides bounded static QA. No new repository is necessary: the module and dependencies remain isolated here.
 
@@ -69,9 +69,9 @@ Profiles use the existing `viewports`, `responsive_tabs`, `touch_targets`, `scen
 GAME_OPS_PUBLIC_HOST=your-verified-host.example .venv/bin/python server.py --http
 ```
 
-`/mcp` requires `Authorization: Bearer <owner token>` on **every** request; all unauthenticated discovery/calls are rejected. `/healthz` only exposes service version and the browser-blocked state. Browser Origin headers are refused. Configure the exact host via Railway's `RAILWAY_PUBLIC_DOMAIN` or `GAME_OPS_PUBLIC_HOST`. No OAuth claim is made: use a client supporting bearer headers or ChatGPT API-key authentication.
+`/mcp` requires `Authorization: Bearer <owner token>` on **every** request; all unauthenticated discovery/calls are rejected. `/healthz` only exposes service version and the browser-blocked state. Browser Origin headers are refused. Configure the exact host via Railway's `RAILWAY_PUBLIC_DOMAIN` or `GAME_OPS_PUBLIC_HOST`. The default remains bearer authentication for compatible machine clients. ChatGPT does not support this custom API-key connection flow. Version 0.4.1 adds an opt-in, single-owner OAuth resource-server adapter; an established IdP and real ChatGPT App registration are still required. See [OAuth/mobile integration](docs/OAUTH-MOBILE.md).
 
-`Dockerfile` runs as UID 10001, includes Node for parse-only JS checking, excludes Playwright/Chromium. Railway: root `/packages/game-ops`, Dockerfile `Dockerfile`, port 8000, health `/healthz`, one replica, 0.5 vCPU / 0.5 GiB. Only the new service's configuration is changed. `examples/mcp-http.json` describes the connection without containing credentials. In ChatGPT, configure the API key in the connection's secure credential prompt. Package registration alone is **not** a successful ChatGPT connection.
+`Dockerfile` runs as UID 10001, includes Node for parse-only JS checking, excludes Playwright/Chromium. Railway: root `/packages/game-ops`, Dockerfile `Dockerfile`, port 8000, health `/healthz`, one replica, 0.5 vCPU / 0.5 GiB. Only the new service's configuration is changed. `examples/mcp-http.json` describes the connection without containing credentials. Do not paste the owner API key into ChatGPT or a mobile page. OAuth activation and registered App mapping remain blocked pending verified provider/account configuration. Package registration alone is **not** a successful ChatGPT connection.
 
 ## Evidence and verdicts
 

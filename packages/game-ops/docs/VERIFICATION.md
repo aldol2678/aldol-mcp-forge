@@ -1,5 +1,7 @@
 # Game Ops v0.4 verification — 2026-10-21 KST
 
+> Historical v0.4.0 evidence below. The API-key-in-ChatGPT setup assumption was incorrect. Current integration work and blockers: [OAUTH-MOBILE.md](OAUTH-MOBILE.md).
+
 Base checked live: PR #17 merged; main db3cf756dcbcb3e79bfe7cf9c9ffada33c19c60b. Working branch feat/game-ops-mcp-v04-20261021. Original private plugin v0.3.0 release pluginrel_6ad6150fdf6081918e38d771417d5b7d read before update.
 
 ## Executed local evidence
@@ -45,6 +47,6 @@ Existing PRIVATE plugin updated in place to 0.4.0, release pluginrel_6ad7ff1f123
 
 ## Next version / remaining tasks
 
-1. Activate owner API-key connection in ChatGPT and perform one Android static QA plus get_qa_report readback. Read GAME_OPS_TOKEN in the isolated Railway service's Variables UI and enter it only into ChatGPT's credential prompt; do not send it in chat. Available package-management tools do not supply a credential-entry operation.
+1. Superseded: activate a real OAuth provider and register a ChatGPT App using the sequence in OAUTH-MOBILE.md. The earlier API-key prompt assumption is invalid; never transfer GAME_OPS_TOKEN into chat or a mobile frontend.
 2. Provide a trusted local Chromium installation and rerun responsive/touch/scenario fixtures. Arbitrary remote HTML remains blocked until OS/network/resource isolation is independently established.
 3. If longer evidence retention or larger games become necessary, add durable owner-scoped report storage and bounded chunked upload. Current limits are intentionally documented; no separate repository/service platform is introduced for these future items.

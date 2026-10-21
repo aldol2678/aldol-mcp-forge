@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends nodejs && rm -r
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && useradd --uid 10001 --create-home gameops
-COPY server.py service.py worker.py ./
+COPY server.py service.py worker.py oauth_resource.py ./
 COPY scripts ./scripts
 RUN mkdir /app/reports && chown gameops:gameops /app/reports
 USER 10001:10001

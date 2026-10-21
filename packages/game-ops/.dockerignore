@@ -4,5 +4,6 @@
 !server.py
 !service.py
 !worker.py
+!oauth_resource.py
 !scripts
 !scripts/*.py

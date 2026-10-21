@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "aldol-game-ops",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "ALDOL 게임 HTML·ZIP 정적·반응형·시나리오·회귀 QA 실행기와 플랫폼 독립 운영 워크플로",
   "author": {
     "name": "ALDOL"
@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "ALDOL Game Ops",
         "shortDescription": "HTML·ZIP 검사와 버전 회귀 분석",
-        "longDescription": "공식 Python MCP SDK 기반 원격 정적 QA·SHA-256 검증·검사 보고서 조회·버전 회귀 비교를 제공합니다. 소유자 API 키 연결이 필요합니다. 원격 브라우저·시나리오 실행은 차단되며 UNKNOWN으로 보고합니다. 기존 로컬 CLI·스킬과 PRIVATE 정체성은 유지합니다. 파일 등록·서버 배포·ChatGPT 인증·실제 호출 검증을 구별합니다.",
+        "longDescription": "HTML·ZIP 정적 QA·SHA-256 검증·비공개 보고서 조회·버전 회귀 비교를 제공합니다. 원격 서버는 현재 소유자 Bearer 인증을 유지합니다. OAuth 연동 코드는 준비됐으나 인증 공급자 설정과 ChatGPT 앱 등록·웹 호출·Android 검증은 미완료입니다. 원격 브라우저·시나리오 실행은 차단되며 UNKNOWN으로 보고합니다. 기존 로컬 CLI와 스킬을 유지합니다.",
         "developerName": "ALDOL",
         "category": "Other",
         "capabilities": [],

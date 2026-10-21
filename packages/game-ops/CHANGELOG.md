@@ -23,3 +23,10 @@
 - Bounded HTML/ZIP ingestion, optional SHA verification, private QA report IDs and conservative regression comparison.
 - Default-denied browser/scenario execution, with local trusted-operator opt-in only; HTTP always blocks HTML execution.
 - Docker/Railway deployment configuration, connection examples and protocol/security tests; original v0.3 CLI retained.
+
+## 0.4.1
+
+- Opt-in single-owner OAuth resource-server adapter with protected resource discovery, JWT/JWKS validation and per-tool auth metadata. Established IdP login/code+PKCE remains an external prerequisite.
+- Preserve default bearer authentication, PRIVATE plugin identity, six tools and remote browser blocking. Reject ambiguous duplicate credentials.
+- Correct unsupported ChatGPT API-key setup instructions; document verified-App mapping gate and design-only authenticated mobile QA fallback.
+- ChatGPT web OAuth login/tool calls and physical Android acceptance remain unverified; no app ID invented and no public QA interface deployed.

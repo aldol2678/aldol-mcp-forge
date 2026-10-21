@@ -188,7 +188,7 @@ class QAService:
             p.unlink(missing_ok=True)
         report.update(
             qa_id=uuid.uuid4().hex,
-            version="0.4.0",
+            version="0.4.1",
             created_at=dt.datetime.now(dt.timezone.utc).isoformat(),
         )
         target = self.report_root / (report["qa_id"] + ".json")
