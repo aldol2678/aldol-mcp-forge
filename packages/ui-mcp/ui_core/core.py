@@ -70,7 +70,7 @@ def _parse(source: str) -> dict[str, Any]:
         raise ValueError("spec_json must be a string of at most 30000 characters")
     try:
         spec = json.loads(source, parse_constant=lambda x: (_ for _ in ()).throw(ValueError("nonfinite number")))
-    except (json.JSONDecodeError, ValueError) as exc:
+    except (json.JSONDecodeError, ValueError, RecursionError) as exc:
         raise ValueError(f"invalid JSON: {exc}") from exc
     if not isinstance(spec, dict):
         raise ValueError("root document must be an object")
@@ -232,7 +232,7 @@ def review_markup(html_source: str, exceptions_json: str = "[]") -> dict[str, An
         raise ValueError("exceptions_json must be a JSON string at most 6000 characters")
     try:
         exceptions = json.loads(exceptions_json)
-    except (json.JSONDecodeError, ValueError) as exc:
+    except (json.JSONDecodeError, ValueError, RecursionError) as exc:
         raise ValueError("invalid exceptions_json") from exc
     if not isinstance(exceptions, list) or len(exceptions) > 6:
         raise ValueError("exceptions must be a list of at most 6 entries")

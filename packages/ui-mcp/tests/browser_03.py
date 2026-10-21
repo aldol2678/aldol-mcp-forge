@@ -5,10 +5,11 @@ No remote requests. Open self-contained HTML with page.set_content.
 from pathlib import Path
 import json
 import shutil
+import os
 from playwright.sync_api import sync_playwright
 
 root=Path(__file__).resolve().parents[1]
-chromium=shutil.which('chromium') or shutil.which('google-chrome')
+chromium=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium') or shutil.which('google-chrome')
 if not chromium: raise SystemExit('Chrome/Chromium required')
 results=[]
 with sync_playwright() as p:
