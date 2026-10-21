@@ -83,7 +83,7 @@ export default function AldolUI({mode = "web", values = {}, onAction}: AldolUIPr
   }
   return <main className={mode === "hud" ? "alui-hud-overlay" : "alui-app"} aria-label={__TITLE__}
     onKeyDown={event => {if(event.key === "Escape") setExpanded(current => Object.fromEntries(Object.keys(panelDefaults).map(id => [id, false])));}}>
-    {make(spec.root, "0")}
+    {make(spec, "0")}
   </main>;
 }
 '''

@@ -1,15 +1,18 @@
 # ALDOL UI MCP Alpha 0.3.2
 
-Source restored from the owned Library ZIP and integrated with two additional anti-slop rules.
-See UI_MCP_README.md, docs/ANTI_AI_SLOP.md and VERIFICATION.md.
+Source inherited from PR #19 and the matching Library archive. UI schema versions 0.1/0.2/0.3 and all seven MCP tool signatures remain supported.
 
-## Run tests
+See `OPERATIONS.md` for authenticated stdio/HTTP setup, `OPERATIONAL_VERIFICATION_20261021.md` for current evidence, and `VERIFICATION.md` for the earlier historical snapshot.
 
-```sh
-python -m unittest discover -s tests -q
-python tests/browser_03.py
+Install `requirements.txt` (official MCP SDK 2.3.0) and run:
+```
+python -m unittest discover -s tests -v
+python tests/sdk_smoke.py
+python tests/local_http.py /tmp/ui-mcp-http
 ```
 
-## MCP entrypoint
+Private endpoint: https://ui-mcp-api-production.up.railway.app/mcp
+Bearer API key required; credentials are stored in the UI Railway service, not the repository or plugin package. Public `/health` contains no UI/user data.
 
-`python -m ui_core.server` needs official Python MCP SDK v2.0 or compatible release. This runtime could not access the dependency index; actual SDK connection is NOT VERIFIED. This code is not an already-deployed remote server.
+ChatGPT private plugin: https://chatgpt.com/plugins/plugins_6ad810ca2dd08191a4a44e8dc1bc68c6
+Creation is verified; installation/authentication and host tool calls remain BLOCKED pending user connection. Keep PR #19 Draft.

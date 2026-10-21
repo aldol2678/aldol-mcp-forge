@@ -36,3 +36,8 @@ jobs:
               os.environ['CHROMIUM_EXECUTABLE']=p.chromium.executable_path
           subprocess.run([sys.executable,'tests/browser_03.py'],check=True)
           PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --prefix tests/react-runtime
+      - run: python tests/react_browser.py

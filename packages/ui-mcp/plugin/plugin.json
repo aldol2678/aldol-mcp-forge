@@ -1,0 +1,16 @@
+{
+ "$schema":"https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+ "name":"aldol-ui-mcp",
+ "version":"0.3.2",
+ "description":"Private ALDOL UI document validation, anti-slop review and web/game UI generation over authenticated MCP.",
+ "author":{"name":"ALDOL"},
+ "extensions":{"com.openai":{"interface":{
+   "displayName":"ALDOL UI MCP",
+   "shortDescription":"UI 검증·안티 슬롭·코드 생성",
+   "longDescription":"버전 0.1–0.3 UI 문서 검증, 설명 가능한 안티 슬롭 검사, HTML/CSS 검토, 웹·게임 HUD·React 코드 생성. Bearer API 키가 필요한 비공개 MCP 서비스입니다.",
+   "developerName":"ALDOL",
+   "category":"Productivity",
+   "capabilities":[],
+   "defaultPrompt":"ALDOL UI MCP로 UI 문서를 검증하고 안티 슬롭 문제를 검토해줘."
+ }}}
+}

@@ -1,3 +1,5 @@
+> Historical integration snapshot before operational work. For current runtime instructions and evidence see OPERATIONS.md and OPERATIONAL_VERIFICATION_20261021.md. The old unavailable-SDK statement below is historical.
+
 # ALDOL UI MCP Alpha 0.3.2 검증 (2026-10-21)
 
 ## Source
