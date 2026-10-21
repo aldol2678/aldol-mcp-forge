@@ -33,7 +33,7 @@ def invoke(company: str, name: str, arguments: dict[str, Any]) -> dict[str, str]
             raise ValueError("Missing input: " + field["name"])
     for key, value in arguments.items():
         if value is not None:
-            string(value, key, max_length=4096)
+            string(value, key, max_length=4096 if company == "seum" else 262144)
     result = FUNCTIONS[company][name](**arguments)
     return verify_output(company, name, result)
 
@@ -63,7 +63,7 @@ def create_app(company: str):
     elif company == "bonsae":
         @app.tool()
         def analyze_design(reference: str, target: str | None = None) -> dict[str, str]:
-            """Inspect caller-provided HTML/CSS semantics, not rendered pixels."""
+            """Parse provided HTML/CSS semantics, accessibility and responsive design warnings."""
             return invoke(company, "analyze_design", {"reference": reference, "target": target})
         @app.tool()
         def generate_design_spec(brief: str) -> dict[str, str]:
@@ -71,13 +71,13 @@ def create_app(company: str):
             return invoke(company, "generate_design_spec", {"brief": brief})
         @app.tool()
         def review_visual(artifact: str) -> dict[str, str]:
-            """Record design evidence gaps and hold visual PASS until pixels are inspected."""
+            """Inspect supplied image bytes or offline HTML render; retain HOLD for uninspected visual scope."""
             return invoke(company, "review_visual", {"artifact": artifact})
 
     elif company == "majung":
         @app.tool()
         def research_market(question: str, region: str | None = None) -> dict[str, str]:
-            """Organize caller-supplied dated market evidence without web searches."""
+            """Research public market sources when configured; separate retrieved evidence from supplied claims."""
             return invoke(company, "research_market", {"question": question, "region": region})
         @app.tool()
         def analyze_competitors(product: str) -> dict[str, str]:

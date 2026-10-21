@@ -1,0 +1,23 @@
+name: Specialist Studio v1
+on:
+  pull_request:
+    branches: ['feat/enterprise-specialist-mcp-handlers', 'feat/specialist-private-runtime-v1-20261021']
+    paths: ['enterprise_mcps/**', 'Dockerfile.specialist-mcp', '.github/workflows/verify-studio-v1.yml']
+permissions:
+  contents: read
+concurrency:
+  group: studio-v1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  sdk-security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r enterprise_mcps/requirements-studio.txt
+      - run: python -m unittest discover -s enterprise_mcps/tests -v
