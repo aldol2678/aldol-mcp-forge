@@ -1,0 +1,20 @@
+{
+  "company": "bonsae",
+  "site_url": "https://aldol-bonsae-studio.al-dori.chatgpt.site",
+  "site_id": "appgprj_6ad80e7b84608191bda1a75f02359571",
+  "version": 1,
+  "deployment_id": "appgdep_6ad8101774888191adb23f114b3fd78b",
+  "sites_app_id": "asdk_app_sites_78c5bec852b88191bf66e243a35e96b8",
+  "site_commit": "157524e9e3f0fb95a2c4b09e61081ea12487c3f6",
+  "audience": "owner_private;1 allowed owner;0 external",
+  "plugin_state": "PRIVATE USER 1.0.0; already_installed returned by Plugin Management",
+  "chatgpt_tool_calls": "NOT_VERIFIED; current session exposes no matching tool namespace",
+  "railway_project_id": null,
+  "railway_service_id": null,
+  "railway_mcp_url": null,
+  "railway_state": "BLOCKED_RESOURCE_LIMIT",
+  "android": "NOT_TESTED",
+  "responsive_ui": "390px/820px/1280px iframe layout and 390px navigation/input/error UI; no Android device",
+  "asset_factory": "Native metadata audit returned PASS structure, UNKNOWN bytes/pixels/rights; cross-Site MCP transport returned401",
+  "plugin_id": "plugin_asdk_app_sites_78c5bec852b88191bf66e243a35e96b8"
+}
