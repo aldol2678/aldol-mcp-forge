@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2 - source patch only (2026-10-21)
+- Add 23 evidence-labeled, historically observed ALDOL games/concepts in a Git-tracked read-only catalog.
+- Expose `list_games`, `get_game`, `get_game_resume` as three additional owner-protected MCP tools (now nine total); no remote fetch, SQL storage or mutation endpoint.
+- Keep existing six QA operations, security and local/HTTP execution boundaries. New registry is included in the Docker build; add unit/protocol/OAuth coverage.
+- All catalog stages and versions remain UNVERIFIED; release readiness UNKNOWN. No deploy, plugin upgrade, ChatGPT App mapping or production status claim.
+
 ## 0.2.0 - 2026-10-19
 - Removed GitHub/PR/CI as default assumptions. GitHub is one optional delivery route.
 - Added game-by-game environment detection and source/version authority checks.
