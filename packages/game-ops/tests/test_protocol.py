@@ -23,6 +23,9 @@ TOOLS = {
     "run_game_scenarios",
     "compare_game_versions",
     "get_qa_report",
+    "list_games",
+    "get_game",
+    "get_game_resume",
 }
 
 
@@ -35,6 +38,13 @@ async def exercise(session):
     await session.initialize()
     listing = await session.list_tools()
     assert {t.name for t in listing.tools} == TOOLS
+    inventory = payload(await session.call_tool("list_games", {"query": "군단"}))
+    assert inventory["total"] >= 1 and inventory["verification"] == "UNVERIFIED"
+    game = payload(await session.call_tool("get_game", {"game_id": "tiny-army-expedition"}))
+    assert game["title"] == "꼬마 군단 원정대" and game["verification"] == "UNVERIFIED"
+    resume = payload(await session.call_tool("get_game_resume", {"game_id": "tiny-army-expedition"}))
+    assert resume["release_readiness"] == "UNKNOWN" and resume["next_action"]
+    assert (await session.call_tool("get_game", {"game_id": "does-not-exist"})).is_error
     a = payload(await session.call_tool("run_static_qa", {"artifact": upload()}))
     assert a["status"] == "PASS"
     z = payload(
