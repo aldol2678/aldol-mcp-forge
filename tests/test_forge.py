@@ -184,8 +184,8 @@ except OSError:
                            text=True, capture_output=True, timeout=5, cwd=ROOT)
         self.assertEqual(p.returncode, 0, p.stderr)
         data = {row['id']: row for row in (json.loads(line) for line in p.stdout.splitlines())}
-        self.assertEqual(data[1]['result']['serverInfo']['version'], '0.3.2')
-        self.assertEqual(len(data[2]['result']['tools']), 8)
+        self.assertEqual(data[1]['result']['serverInfo']['version'], '0.4.0')
+        self.assertEqual(len(data[2]['result']['tools']), 10)
         self.assertTrue(json.loads(data[3]['result']['content'][0]['text'])['supported'])
 
 

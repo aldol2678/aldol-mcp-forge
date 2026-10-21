@@ -1,0 +1,95 @@
+{
+  "tools": [
+    {
+      "name": "analyze_code",
+      "description": "Inspect source code and report technical risks; implementation required.",
+      "inputs": [
+        {
+          "name": "repository",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "focus",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "risks": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "summary",
+          "risks"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "implement_change",
+      "description": "Propose a source modification within approved scope; implementation required.",
+      "inputs": [
+        {
+          "name": "repository",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "request",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "change_summary": {
+            "type": "string"
+          },
+          "verification": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "change_summary",
+          "verification"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "review_release",
+      "description": "Review technical release evidence; implementation required.",
+      "inputs": [
+        {
+          "name": "release_ref",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "verdict": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "evidence"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "tools": [
+    {
+      "name": "analyze_design",
+      "description": "Analyze design intent and interface hierarchy; implementation required.",
+      "inputs": [
+        {
+          "name": "reference",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "findings": {
+            "type": "string"
+          },
+          "improvements": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "findings",
+          "improvements"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "generate_design_spec",
+      "description": "Draft UI pattern and component behavior contract; implementation required.",
+      "inputs": [
+        {
+          "name": "brief",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "specification": {
+            "type": "string"
+          },
+          "constraints": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "specification",
+          "constraints"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "review_visual",
+      "description": "Inspect design quality with an evidence gate; implementation required.",
+      "inputs": [
+        {
+          "name": "artifact",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "verdict": {
+            "type": "string"
+          },
+          "findings": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "findings"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
