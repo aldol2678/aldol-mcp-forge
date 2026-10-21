@@ -1,0 +1,50 @@
+test_business_economics_advisory_only (test_logic.CanonicalContractTests.test_business_economics_advisory_only) ... ok
+test_checksum_guarded_diff_without_write (test_logic.CanonicalContractTests.test_checksum_guarded_diff_without_write) ... ok
+test_competitor_price_math_and_currency_rejection (test_logic.CanonicalContractTests.test_competitor_price_math_and_currency_rejection) ... ok
+test_design_spec_preserves_explicit_intent (test_logic.CanonicalContractTests.test_design_spec_preserves_explicit_intent) ... ok
+test_exact_tool_inventory_and_output_contracts (test_logic.CanonicalContractTests.test_exact_tool_inventory_and_output_contracts) ... ok
+test_html_semantics_and_anti_clipping (test_logic.CanonicalContractTests.test_html_semantics_and_anti_clipping) ... ok
+test_json_parse_validation (test_logic.CanonicalContractTests.test_json_parse_validation) ... ok
+test_python_ast_detection_no_source_execution (test_logic.CanonicalContractTests.test_python_ast_detection_no_source_execution) ... ok
+test_sourced_market_evidence_no_fake_verification (test_logic.CanonicalContractTests.test_sourced_market_evidence_no_fake_verification) ... ok
+test_technical_release_gate_no_launch (test_logic.CanonicalContractTests.test_technical_release_gate_no_launch) ... ok
+test_visual_gate_never_fakes_pixel_inspection (test_logic.CanonicalContractTests.test_visual_gate_never_fakes_pixel_inspection) ... ok
+test_break_even_and_explicit_scenarios_do_not_invent_demand (test_majung_live.MajungLiveTests.test_break_even_and_explicit_scenarios_do_not_invent_demand) ... ok
+test_direct_source_respects_robots_and_hashes_observed_bytes (test_majung_live.MajungLiveTests.test_direct_source_respects_robots_and_hashes_observed_bytes) ... ok
+test_extreme_money_input_cannot_produce_infinite_json (test_majung_live.MajungLiveTests.test_extreme_money_input_cannot_produce_infinite_json) ... ok
+test_failed_feed_is_not_empty_success (test_majung_live.MajungLiveTests.test_failed_feed_is_not_empty_success) ... ok
+test_fetch_does_not_resolve_unallowlisted_hosts (test_majung_live.MajungLiveTests.test_fetch_does_not_resolve_unallowlisted_hosts) ... ok
+test_free_target_and_competitors_keep_zero_and_undefined_ratios (test_majung_live.MajungLiveTests.test_free_target_and_competitors_keep_zero_and_undefined_ratios) ... ok
+test_irrelevant_provider_response_is_not_research_success (test_majung_live.MajungLiveTests.test_irrelevant_provider_response_is_not_research_success) ... ok
+test_paid_tavily_requires_server_approval_and_does_not_leak_key (test_majung_live.MajungLiveTests.test_paid_tavily_requires_server_approval_and_does_not_leak_key) ... ok
+test_plain_topic_calls_fixed_public_feed_and_records_provenance (test_majung_live.MajungLiveTests.test_plain_topic_calls_fixed_public_feed_and_records_provenance) ... ok
+test_rss_external_entities_rejected (test_majung_live.MajungLiveTests.test_rss_external_entities_rejected) ... ok
+test_ssrf_url_and_dns_guards (test_majung_live.MajungLiveTests.test_ssrf_url_and_dns_guards) ... ok
+test_supplied_evidence_does_not_silently_enable_network (test_majung_live.MajungLiveTests.test_supplied_evidence_does_not_silently_enable_network) ... ok
+test_unknown_price_stays_unknown_and_annual_units_normalize (test_majung_live.MajungLiveTests.test_unknown_price_stays_unknown_and_annual_units_normalize) ... ok
+test_inmemory_and_stdio (test_sdk.SDKTests.test_inmemory_and_stdio) ... ok
+test_01_public_health_is_minimal_and_status_requires_auth (test_specialist_http.PrivateSpecialistHTTPTests.test_01_public_health_is_minimal_and_status_requires_auth) ... ok
+test_02_no_auth_duplicate_auth_and_cross_company_tokens_rejected (test_specialist_http.PrivateSpecialistHTTPTests.test_02_no_auth_duplicate_auth_and_cross_company_tokens_rejected) ... ok
+test_03_body_limit_and_route_method_restrictions (test_specialist_http.PrivateSpecialistHTTPTests.test_03_body_limit_and_route_method_restrictions) ... ok
+test_04_factory_rejects_unknown_company_and_invalid_secrets (test_specialist_http.PrivateSpecialistHTTPTests.test_04_factory_rejects_unknown_company_and_invalid_secrets) ... ok
+test_05_official_sdk_v2_real_http_discovers_and_calls_six_tools (test_specialist_http.PrivateSpecialistHTTPTests.test_05_official_sdk_v2_real_http_discovers_and_calls_six_tools) ... HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60163/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60163/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60163/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60163/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60163/mcp "HTTP/1.1 200 OK"
+ok
+test_06_sdk_unknown_tool_and_invalid_input_are_denied (test_specialist_http.PrivateSpecialistHTTPTests.test_06_sdk_unknown_tool_and_invalid_input_are_denied) ... HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+HTTP Request: POST http://127.0.0.1:60425/mcp "HTTP/1.1 200 OK"
+ok
+test_07_seum_implementation_and_three_tool_contract_are_unchanged (test_specialist_http.PrivateSpecialistHTTPTests.test_07_seum_implementation_and_three_tool_contract_are_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 4.439s
+
+OK
