@@ -1,0 +1,20 @@
+{
+  "company": "majung",
+  "site_url": "https://aldol-majung-studio.al-dori.chatgpt.site",
+  "site_id": "appgprj_6ad80e8978f8819183a7aecc03d11e72",
+  "version": 1,
+  "deployment_id": "appgdep_6ad81044187c819181947f55b5e5590b",
+  "sites_app_id": "asdk_app_sites_ecc0455e87a48191a5b82752b111b323",
+  "site_commit": "d6872c339ecaf774a7ad5eb9f15a173272b356ee",
+  "audience": "owner_private;1 allowed owner;0 external",
+  "plugin_state": "PRIVATE USER 1.0.0; already_installed returned by Plugin Management",
+  "chatgpt_tool_calls": "NOT_VERIFIED; current session exposes no matching tool namespace",
+  "railway_project_id": null,
+  "railway_service_id": null,
+  "railway_mcp_url": null,
+  "railway_state": "BLOCKED_RESOURCE_LIMIT",
+  "android": "NOT_TESTED",
+  "responsive_ui": "390px/820px/1280px iframe layout and 390px navigation/input/error UI; no Android device",
+  "asset_factory": null,
+  "plugin_id": "plugin_asdk_app_sites_ecc0455e87a48191a5b82752b111b323"
+}

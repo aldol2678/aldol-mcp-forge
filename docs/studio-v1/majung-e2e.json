@@ -1,0 +1,139 @@
+{
+  "checked_at": "2026-10-21T01:04:19+00:00",
+  "provider": {
+    "checked_at": "2026-10-21T01:04:19+00:00",
+    "credits_used": 0,
+    "limitations": [
+      "Experimental public feed; no API SLA",
+      "Ranking and snippets may be incomplete",
+      "Feed item date is not asserted to be original publication date"
+    ],
+    "provider": "bing_public_rss",
+    "relevance_heuristic": "keyword overlap only; not a semantic relevance verdict",
+    "status": "SUCCESS"
+  },
+  "topic": "Godot Unity pricing",
+  "search_results": [
+    {
+      "checked_at": "2026-10-21T01:04:19+00:00",
+      "claim_verified": false,
+      "feed_item_date": "Tue, 20 Oct 2026 01:19:00 GMT",
+      "host": "godotengine.org",
+      "method": "bing_public_rss_best_effort",
+      "observed_at": "2026-10-21",
+      "published_at": null,
+      "relevance": "CANDIDATE_MATCH",
+      "retrieval_verified": true,
+      "source_content_verified": false,
+      "title": "Godot Engine - Free and open source 2D and 3D game engine",
+      "topic_matches": [
+        "godot"
+      ],
+      "trust": "search_feed_candidate; original page unverified",
+      "url": "https://godotengine.org/"
+    },
+    {
+      "checked_at": "2026-10-21T01:04:19+00:00",
+      "claim_verified": false,
+      "feed_item_date": "Mon, 19 Oct 2026 23:03:00 GMT",
+      "host": "godotengine.org",
+      "method": "bing_public_rss_best_effort",
+      "observed_at": "2026-10-21",
+      "published_at": null,
+      "relevance": "CANDIDATE_MATCH",
+      "retrieval_verified": true,
+      "source_content_verified": false,
+      "title": "Download for Windows – Godot Engine",
+      "topic_matches": [
+        "godot"
+      ],
+      "trust": "search_feed_candidate; original page unverified",
+      "url": "https://godotengine.org/download/windows/"
+    },
+    {
+      "checked_at": "2026-10-21T01:04:19+00:00",
+      "claim_verified": false,
+      "feed_item_date": "Mon, 19 Oct 2026 05:30:00 GMT",
+      "host": "en.wikipedia.org",
+      "method": "bing_public_rss_best_effort",
+      "observed_at": "2026-10-21",
+      "published_at": null,
+      "relevance": "CANDIDATE_MATCH",
+      "retrieval_verified": true,
+      "source_content_verified": false,
+      "title": "Godot (game engine) - Wikipedia",
+      "topic_matches": [
+        "godot"
+      ],
+      "trust": "search_feed_candidate; original page unverified",
+      "url": "https://en.wikipedia.org/wiki/Godot_(game_engine)"
+    },
+    {
+      "checked_at": "2026-10-21T01:04:19+00:00",
+      "claim_verified": false,
+      "feed_item_date": "Fri, 09 Oct 2026 23:36:00 GMT",
+      "host": "github.com",
+      "method": "bing_public_rss_best_effort",
+      "observed_at": "2026-10-21",
+      "published_at": null,
+      "relevance": "CANDIDATE_MATCH",
+      "retrieval_verified": true,
+      "source_content_verified": false,
+      "title": "GitHub - godotengine/godot: Godot Engine – Multi-platform 2D and 3D ...",
+      "topic_matches": [
+        "godot"
+      ],
+      "trust": "search_feed_candidate; original page unverified",
+      "url": "https://github.com/godotengine/godot"
+    },
+    {
+      "checked_at": "2026-10-21T01:04:19+00:00",
+      "claim_verified": false,
+      "feed_item_date": "Tue, 20 Oct 2026 11:41:00 GMT",
+      "host": "www.gdquest.com",
+      "method": "bing_public_rss_best_effort",
+      "observed_at": "2026-10-21",
+      "published_at": null,
+      "relevance": "CANDIDATE_MATCH",
+      "retrieval_verified": true,
+      "source_content_verified": false,
+      "title": "Learn to Make Games · GDQuest",
+      "topic_matches": [
+        "godot"
+      ],
+      "trust": "search_feed_candidate; original page unverified",
+      "url": "https://www.gdquest.com/"
+    }
+  ],
+  "distinct_domains": 4,
+  "editorial_independence_verified": false,
+  "direct_source_observations": [
+    {
+      "url": "https://godotengine.org/license/",
+      "status": "UNVERIFIED",
+      "error_type": "gaierror",
+      "reason": "[Errno -3] Temporary failure in name resolution"
+    },
+    {
+      "url": "https://www.unrealengine.com/en-US/license",
+      "status": "UNVERIFIED",
+      "error_type": "gaierror",
+      "reason": "[Errno -3] Temporary failure in name resolution"
+    },
+    {
+      "url": "https://unity.com/products/pricing",
+      "status": "UNVERIFIED",
+      "error_type": "gaierror",
+      "reason": "[Errno -3] Temporary failure in name resolution"
+    }
+  ],
+  "source_content_verified": false,
+  "market_claims_verified": false,
+  "limits": [
+    "Search provider excerpts are candidate evidence; no independent market fact confirmation",
+    "Distinct domains are not proof of ownership/editorial independence",
+    "Direct URL reads honor robots, exact host allowlist, public DNS pin and deny redirects",
+    "No current competitor prices established from snippets",
+    "Android/device and hosted MCP testing are parent task scope"
+  ]
+}
