@@ -1,0 +1,69 @@
+name: Forge Studio exported ZIP - official SDK v2
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ci/verify_studio_archive.py'
+      - 'ci/test_studio_archive.py'
+      - 'ci/generate_studio_sdk_fixtures.mjs'
+      - '.github/workflows/verify-studio-sdk-export.yml'
+      - 'adapters/sites/worker/**'
+      - 'forge.py'
+      - 'verify_sdk.py'
+      - 'templates.py'
+      - 'openapi_forge.py'
+  push:
+    branches: [main]
+    paths:
+      - 'ci/verify_studio_archive.py'
+      - 'ci/test_studio_archive.py'
+      - 'ci/generate_studio_sdk_fixtures.mjs'
+      - '.github/workflows/verify-studio-sdk-export.yml'
+      - 'adapters/sites/worker/**'
+      - 'forge.py'
+      - 'verify_sdk.py'
+      - 'templates.py'
+      - 'openapi_forge.py'
+permissions:
+  contents: read
+jobs:
+  downloaded-studio-sdk:
+    name: Site-generated ZIP / original Forge parity / real MCP SDK v2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      ALDOL_API_BASE_URL: ''
+      ALDOL_API_ALLOWED_HOST: ''
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Export ZIP fixtures with production Sites generator
+        run: node ci/generate_studio_sdk_fixtures.mjs
+      - name: Install official MCP SDK v2
+        run: python -m pip install --no-input "mcp==2.0.0"
+      - name: Validate ZIP safety and actual SDK memory/stdio transports
+        run: python -m unittest ci.test_studio_archive -v
+      - name: Machine-readable verification for both Sites exports
+        run: |
+          mkdir -p ci-results/studio-sdk
+          python ci/verify_studio_archive.py ci-results/studio-sdk-fixtures/studio-curated-v021.zip > ci-results/studio-sdk/curated.json
+          python ci/verify_studio_archive.py ci-results/studio-sdk-fixtures/studio-openapi-get.zip > ci-results/studio-sdk/openapi.json
+          cat ci-results/studio-sdk/curated.json
+          cat ci-results/studio-sdk/openapi.json
+      - name: Save sanitized evidence only (not code/ZIP)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-studio-sdk-v2-evidence
+          path: ci-results/studio-sdk/*.json
+          if-no-files-found: warn
+          retention-days: 14
