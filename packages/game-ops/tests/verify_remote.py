@@ -34,7 +34,11 @@ async def main(args):
             async with ClientSession(streams[0], streams[1]) as session:
                 await session.initialize()
                 evidence["tools"] = [x.name for x in (await session.list_tools()).tools]
-                assert len(evidence["tools"]) == 6
+                assert len(evidence["tools"]) == 9
+                inventory = await call("list_games", {"query": "군단"})
+                assert inventory["total"] >= 1 and inventory["verification"] == "UNVERIFIED"
+                resume = await call("get_game_resume", {"game_id": "tiny-army-expedition"})
+                assert resume["release_readiness"] == "UNKNOWN"
 
                 async def call(name, arguments):
                     r = await session.call_tool(name, arguments)
