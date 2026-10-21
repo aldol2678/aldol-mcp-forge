@@ -1,4 +1,4 @@
-# ALDOL Game Ops MCP v0.4.1
+# ALDOL Game Ops MCP v0.4.2 (Draft source; not deployed)
 
 MIT game artifact QA toolkit and an **official Python MCP SDK server**. Reuses the recovered v0.3 CLI without changing Forge runtime. Stdio executes local QA; authenticated Streamable HTTP provides bounded static QA. No new repository is necessary: the module and dependencies remain isolated here.
 
@@ -31,6 +31,9 @@ python scripts/html_qa.py examples/demo.html --output /tmp/gameops-cli
 | `run_game_scenarios` | `artifact`, `profile` | Local game-specific JSON steps |
 | `compare_game_versions` | `baseline_id`, `candidate_id` | Conservative comparison of stored QA reports |
 | `get_qa_report` | `qa_id` | Exact persisted JSON readback |
+| `list_games` | optional `stage`, `query`, `limit`, `offset` | Paginated historical inventory; stage and version UNVERIFIED |
+| `get_game` | `game_id` | Historical game card, known links and provenance |
+| `get_game_resume` | `game_id` | Conservative next step; release readiness always UNKNOWN until reverified |
 
 Artifact is `{ "filename": "index.html", "content_base64": "..." }`, optionally `expected_sha256`. Stdio additionally accepts `{ "filename":"index.html", "path":"game/index.html" }` relative to the operator-configured artifact root. Exactly one input source. No URL fetching. HTTP never accepts filesystem paths.
 
@@ -54,6 +57,14 @@ async def main():
             print(result)
 asyncio.run(main())
 ```
+
+## Game catalog (new in 0.4.2)
+
+The Git-tracked `games.json` is a **discovery seed**, not a database of live releases. It starts with 23 conversation-derived game/game-concept records and labels every stage/version as `UNVERIFIED`. `registry.py` reads it without any remote fetch or write action. Known repository URLs are references only, not evidence that a given build is current. No ChatGPT App registration, mobile invocation, automatic GitHub sync or production update is part of this patch.
+
+Call `list_games` to filter, `get_game` for a specific ID, and `get_game_resume` before resuming work. Verify the actual repo HEAD, PR, play URL and QA independently. To add or update entries, edit `games.json` in a reviewed Git branch and update its `snapshot_as_of`; use `UNVERIFIED` until independent current evidence is established. Never reclassify a record as officially released based on its seed text alone. No new storage server or SQL database is necessary.
+
+The catalog is shipped inside the package's Docker image and is read-only at runtime. Existing QA reports still have independent ephemeral retention. Rebuilding and deploying the service to update its catalog is a separate, **not performed** action; the authenticated ChatGPT integration blocker still applies.
 
 ## Local browser/scenario execution
 
