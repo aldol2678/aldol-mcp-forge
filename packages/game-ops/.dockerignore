@@ -5,5 +5,7 @@
 !service.py
 !worker.py
 !oauth_resource.py
+!registry.py
+!games.json
 !scripts
 !scripts/*.py
