@@ -1,6 +1,6 @@
 # Game Ops v0.4 verification — 2026-10-21 KST
 
-> Historical v0.4.0 evidence below. The API-key-in-ChatGPT setup assumption was incorrect. Current integration work and blockers: [OAUTH-MOBILE.md](OAUTH-MOBILE.md).
+> Historical v0.4.0 evidence below. The API-key-in-ChatGPT setup assumption was incorrect. Current executed acceptance: [OAUTH-VERIFICATION.md](OAUTH-VERIFICATION.md). Integration design and blockers: [OAUTH-MOBILE.md](OAUTH-MOBILE.md).
 
 Base checked live: PR #17 merged; main db3cf756dcbcb3e79bfe7cf9c9ffada33c19c60b. Working branch feat/game-ops-mcp-v04-20261021. Original private plugin v0.3.0 release pluginrel_6ad6150fdf6081918e38d771417d5b7d read before update.
 

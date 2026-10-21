@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-21 KST",
+  "runtime_commit": "593ead94630e80ba586edb8bd694571fb6ab6fc7",
+  "deployment": {
+    "id": "598a6d3a-de90-4df1-9f7c-8bb502499367",
+    "status": "SUCCESS"
+  },
+  "local_tests": 57,
+  "cli_assertions": 7,
+  "ci": [
+    {
+      "id": 39527046280,
+      "name": "Game Ops source smoke",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 39527046310,
+      "name": "ALDOL MCP Forge - official SDK v2 verification",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "plugin": {
+    "plugin_id": "plugins_6ad5fa125cb08191846ad446225fb5f8",
+    "name": "aldol-game-ops",
+    "description": "ALDOL 게임 HTML·ZIP 정적·반응형·시나리오·회귀 QA 실행기와 플랫폼 독립 운영 워크플로",
+    "version": "0.4.1",
+    "current_release_id": "pluginrel_6ad81448e90881918381729a749aea03",
+    "scope": "USER",
+    "discoverability": "PRIVATE",
+    "skills_preserved": 5,
+    "prompts_preserved": true,
+    "app_mapping": "NOT_CREATED_NO_VERIFIED_APP_ID"
+  },
+  "railway_security": {
+    "variables_unchanged": true,
+    "non_source_config_unchanged": true,
+    "default_mode": "bearer",
+    "browser_execution": "BLOCKED"
+  },
+  "oauth_status": "RESOURCE_SERVER_IMPLEMENTED_AND_LOCALLY_TESTED; LIVE_IDP_NOT_CONFIGURED",
+  "chatgpt_web": "NOT_VERIFIED: observed logged-out Cloud Browser; no registered Game Ops App ID",
+  "android": "NOT_VERIFIED: no physical Android control; official custom MCP connection setup is web-only",
+  "mobile_web": "DESIGN_ONLY_NOT_DEPLOYED",
+  "pr": "DRAFT_UNMERGED"
+}
