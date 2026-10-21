@@ -1,0 +1,210 @@
+{
+  "version": "0.3",
+  "title": "ALDOL Studio · 제작 현황",
+  "preset": "studio",
+  "tokens": {
+    "font": "system",
+    "density": "cozy",
+    "radius": "soft"
+  },
+  "root": {
+    "type": "stack",
+    "children": [
+      {
+        "type": "row",
+        "children": [
+          {
+            "type": "text",
+            "text": "ALDOL / STUDIO",
+            "variant": "eyebrow"
+          },
+          {
+            "type": "badge",
+            "text": "데모 데이터",
+            "tone": "success"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "text": "디자인 자산 현황",
+        "variant": "heading"
+      },
+      {
+        "type": "text",
+        "text": "같은 UI 규격을 웹과 게임에서 재사용합니다.",
+        "variant": "muted"
+      },
+      {
+        "type": "grid",
+        "columns": 4,
+        "children": [
+          {
+            "type": "card",
+            "children": [
+              {
+                "type": "metric",
+                "label": "활성 프로젝트",
+                "value": "12",
+                "bind": "project-count"
+              },
+              {
+                "type": "text",
+                "text": "다양한 화면에 재사용",
+                "variant": "muted"
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "children": [
+              {
+                "type": "metric",
+                "label": "컴포넌트",
+                "value": "12"
+              },
+              {
+                "type": "text",
+                "text": "통합 규격",
+                "variant": "muted"
+              }
+            ]
+          },
+          {
+            "type": "metric",
+            "label": "검증",
+            "value": "미연결",
+            "tone": "warning",
+            "bind": "qa-status"
+          },
+          {
+            "type": "metric",
+            "label": "운영 상태",
+            "value": "로컬 데모"
+          }
+        ]
+      },
+      {
+        "type": "grid",
+        "columns": 2,
+        "children": [
+          {
+            "type": "panel",
+            "label": "프로젝트 상태",
+            "children": [
+              {
+                "type": "text",
+                "text": "프로젝트 상태",
+                "variant": "heading"
+              },
+              {
+                "type": "row",
+                "children": [
+                  {
+                    "type": "badge",
+                    "text": "웹 / 반응형",
+                    "tone": "success"
+                  },
+                  {
+                    "type": "badge",
+                    "text": "게임 / HUD",
+                    "tone": "neutral"
+                  }
+                ]
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "text",
+                "text": "샘플 작업 진행률",
+                "variant": "muted"
+              },
+              {
+                "type": "progress",
+                "label": "샘플 작업 진행률",
+                "value": 66,
+                "max": 100,
+                "bind": "work-progress"
+              },
+              {
+                "type": "notice",
+                "text": "UI 데이터는 예시이며, 실제 프로젝트 정보나 운영 상태와 연결되어 있지 않습니다.",
+                "tone": "warning"
+              },
+              {
+                "type": "button",
+                "label": "검증 이벤트 보내기",
+                "action": {
+                  "type": "emit",
+                  "name": "studio:review"
+                }
+              }
+            ]
+          },
+          {
+            "type": "panel",
+            "label": "공통 UI 라이브러리",
+            "children": [
+              {
+                "type": "text",
+                "text": "공통 UI 라이브러리",
+                "variant": "heading"
+              },
+              {
+                "type": "text",
+                "text": "디자인 토큰, 카드, 그리드, 알림, 상태표시, 진행률 컴포넌트를 화면에 맞게 조합하세요.",
+                "variant": "muted"
+              },
+              {
+                "type": "row",
+                "children": [
+                  {
+                    "type": "button",
+                    "label": "가이드 펼치기",
+                    "variant": "secondary",
+                    "action": {
+                      "type": "toggle",
+                      "target": "guide"
+                    }
+                  },
+                  {
+                    "type": "button",
+                    "label": "미리보기 요청",
+                    "action": {
+                      "type": "emit",
+                      "name": "studio:preview"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "panel",
+                "id": "guide",
+                "hidden": true,
+                "label": "디자인 가이드",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "디자인 가이드",
+                    "variant": "heading"
+                  },
+                  {
+                    "type": "text",
+                    "text": "컴포넌트와 디자인 토큰은 여러 화면에 동일하게 적용됩니다.",
+                    "variant": "muted"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "design": {
+    "context": "product",
+    "brand_note": "작업자가 상태와 다음 행동을 빠르게 구분하는 조용한 편집기형 화면"
+  },
+  "data_mode": "demo"
+}

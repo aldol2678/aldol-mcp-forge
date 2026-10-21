@@ -1,0 +1,8 @@
+{
+ "$schema":"https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+ "mcpServers":{"aldol-ui-mcp":{
+   "type":"streamable-http",
+   "url":"https://ui-mcp-api-production.up.railway.app/mcp",
+   "extensions":{"com.openai":{"auth":{"type":"api_key","headerScheme":"bearer"}}}
+ }}
+}

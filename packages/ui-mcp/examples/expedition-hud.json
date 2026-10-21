@@ -1,0 +1,40 @@
+{
+  "version": "0.2",
+  "title": "꼬마 군단 원정대 · 전투 HUD",
+  "theme": {"primary": "#E9B35E", "background": "#172638", "foreground": "#F7F9FF"},
+  "root": {"type": "stack", "children": [
+    {"type": "panel", "label": "전투 상태 요약", "children": [
+      {"type": "row", "children": [
+        {"type": "text", "text": "제2장 · 숲의 길목", "variant": "eyebrow"},
+        {"type": "badge", "text": "● 전투 중", "tone": "success"}
+      ]},
+      {"type": "text", "text": "군단 체력   72 / 100", "variant": "heading"},
+      {"type": "progress", "label": "군단 체력", "value": 72, "max": 100},
+      {"type": "row", "children": [
+        {"type": "badge", "text": "12명 편성", "tone": "neutral"},
+        {"type": "badge", "text": "적 2명 남음", "tone": "warning"}
+      ]}
+    ]},
+    {"type": "panel", "label": "전투 조작 및 정보", "children": [
+      {"type": "text", "text": "전투 명령", "variant": "eyebrow"},
+      {"type": "row", "children": [
+        {"type": "button", "label": "⚔ 전술", "variant": "primary", "action": {"type": "toggle", "target": "tactics"}},
+        {"type": "button", "label": "✦ 상태이상", "variant": "secondary", "action": {"type": "toggle", "target": "conditions"}}
+      ]},
+      {"type": "panel", "id": "tactics", "hidden": true, "label": "전술 정보", "children": [
+        {"type": "text", "text": "전술 정보", "variant": "heading"},
+        {"type": "text", "text": "방패병은 전열을 유지하고, 궁수는 후방 적을 우선 공격합니다.", "variant": "muted"},
+        {"type": "button", "label": "반격 요청", "variant": "primary", "action": {"type": "emit", "name": "battle:counter"}}
+      ]},
+      {"type": "panel", "id": "conditions", "hidden": true, "label": "상태이상 정보", "children": [
+        {"type": "text", "text": "상태이상", "variant": "heading"},
+        {"type": "row", "children": [
+          {"type": "badge", "text": "중독 · 2턴", "tone": "danger"},
+          {"type": "badge", "text": "방어 강화", "tone": "success"}
+        ]},
+        {"type": "text", "text": "상태이상은 전투 턴마다 갱신됩니다. 이 화면은 예시 데이터입니다.", "variant": "muted"}
+      ]},
+      {"type": "text", "text": "자동 전투 진행 중 · 버튼을 눌러 상세 정보를 확인하세요", "variant": "muted"}
+    ]}
+  ]}
+}
