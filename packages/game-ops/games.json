@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "snapshot_as_of": "2026-10-21",
-  "source_note": "Conversation-derived discovery seed. No live game stage or version independently verified.",
+  "snapshot_as_of": "2026-10-22",
+  "source_note": "Evidence reconciliation as of 2026-10-22 (KST), not a live sync. Schema 1 requires record-level verification=UNVERIFIED; bounded source/deployment observations are recorded separately below. A candidate, package version, source main or HTTP 200 is not a full runtime/release approval. Private evidence identifiers/links are retained in the private audit handoff, not exported here.",
   "games": [
     {
       "game_id": "tiny-army-expedition",
@@ -11,13 +11,78 @@
         "little legion"
       ],
       "stage": "active",
-      "last_known_version": "0.9.11",
+      "last_known_version": "1.0 private RC2",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "1.0 기능 통합·모바일 전투 및 저장 QA 확인",
+      "provenance": "github_source_snapshot;private_drive_metadata;private_slack_qa_report;conversation_history",
+      "next_action": "운영 과거값 0.9.11·GitHub 0.8.2 스냅샷·1.0 비공개 RC2(UI 0.9.11)를 구분. 운영 조회 403 및 실기기/전체 출시 검증 미완료 유지",
       "links": {
-        "github": "https://github.com/aldol2678/tiny-army-expedition"
-      }
+        "github": "https://github.com/aldol2678/tiny-army-expedition",
+        "production": "https://littlelegion.aldol.app/"
+      },
+      "seed_last_known_version": "0.9.11",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "private_candidate",
+      "production": {
+        "version": "0.9.11",
+        "verification": "UNVERIFIED",
+        "scope": "historical operational version; current readback blocked",
+        "note": "Provided project records identify 0.9.11. This audit's production HTTPS read returned 403; current version/runtime not verified. Vercel alias lookup also did not resolve; this is not evidence of outage."
+      },
+      "development_candidate": {
+        "version": "1.0 private RC2",
+        "verification": "REPORTED",
+        "scope": "isolated artifact identity and bounded QA report",
+        "note": "UI label remains v0.9.11; LR29-r2+SG2P2. Private ZIP metadata confirms 87272267 bytes. Retrieved 2026-10-22 QA reports first expedition/combat/reward/reload in isolated Chromium 141 1280x800, not physical hardware or release approval.",
+        "artifact": "tinyarmy-lightweight-1.0-private-rc2-20261021.zip",
+        "entrypoint": "candidate/lightweight-records.html",
+        "reported_sha256": "4f16aef6c3701383103b8079380b7ebb87dcafe87e810dfab9bcedad204f81ea",
+        "artifact_hash_verification": "UNVERIFIED in this audit; reported matching by QA author",
+        "ui_version": "0.9.11"
+      },
+      "evidence": [
+        {
+          "kind": "github_source",
+          "reference": "root README.md",
+          "observed_on": "2026-10-22",
+          "note": "v0.8.2 source snapshot, not deployment authority.",
+          "url": "https://github.com/aldol2678/tiny-army-expedition/blob/main/README.md"
+        },
+        {
+          "kind": "private_drive_metadata",
+          "reference": "tinyarmy-lightweight-1.0-private-rc2-20261021.zip",
+          "observed_on": "2026-10-22",
+          "note": "87272267 bytes; modified 2026-10-22. Private locator withheld from public registry."
+        },
+        {
+          "kind": "private_slack_qa_report",
+          "reference": "2026-10-22 RC2 first-expedition request/result thread",
+          "observed_on": "2026-10-22",
+          "note": "Request and replies read. Reported 1 win/10 gold preserved after reload, no console errors. Some boot/cancel/conflict states unobserved; no release approval."
+        },
+        {
+          "kind": "private_artifact_readback",
+          "reference": "TinyArmy_ARK_D_E_QA_20261021.md",
+          "observed_on": "2026-10-22",
+          "note": "Older SG1 bounded source/evidence PASS with release HOLD. Not interchangeable with newer RC2."
+        },
+        {
+          "kind": "https_readback",
+          "reference": "production origin",
+          "observed_on": "2026-10-22",
+          "note": "403 during audit; current operational version unverified.",
+          "url": "https://littlelegion.aldol.app/"
+        }
+      ],
+      "review_note": "RC2 is not production 1.0. A UI 0.9.11 label does not identify the private candidate as the old production build. No public RC2 URL established.",
+      "other_variants": [
+        {
+          "version": "0.8.2",
+          "verification": "VERIFIED",
+          "scope": "GitHub source snapshot label",
+          "note": "README explicitly says code snapshot; no complete hosted/full-asset playable release.",
+          "source": "https://github.com/aldol2678/tiny-army-expedition"
+        }
+      ]
     },
     {
       "game_id": "no-not-like-that",
@@ -26,44 +91,178 @@
         "No, Not Like That!"
       ],
       "stage": "active",
-      "last_known_version": null,
+      "last_known_version": "0.8.1",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "최근 패치 통합본 및 EP.00 프롤로그 작업 구분 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "v0.8.1 독립 HTML을 기준으로 후속본 대조. EP.00 프롤로그 아트와 실제 게임 패치를 분리해 확인",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.8.1",
+        "verification": "VERIFIED",
+        "scope": "artifact version metadata only",
+        "note": "HTML contains v0.8.1 title-note/footer and Genre Episodes Update. Full prologue/gameplay integration and any later hosted build not established.",
+        "artifact": "no_not_like_that_v081.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "no_not_like_that_v081.html",
+          "observed_on": "2026-10-22",
+          "note": "HTML contains v0.8.1 title-note/footer and Genre Episodes Update. Full prologue/gameplay integration and any later hosted build not established."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
     },
     {
       "game_id": "infinite-sword",
       "title": "무한검 강화소",
       "aliases": [],
       "stage": "released",
-      "last_known_version": "0.5.2",
+      "last_known_version": "0.5.2.1",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "HTML 버전과 포글플레이판 차이·패치 상태 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "독립 HTML v0.5.2.1과 포글플레이 v13/v14 기록을 별개로 대조하고 현재 플랫폼 공개 버전 확인",
+      "links": {},
+      "seed_last_known_version": "0.5.2",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.5.2.1",
+        "verification": "VERIFIED",
+        "scope": "artifact version metadata only",
+        "note": "HTML title confirms v0.5.2.1. Independent HTML and Fogleplay releases are separate delivery variants.",
+        "artifact": "infinite_sword_forge_v0521.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "infinite_sword_forge_v0521.html",
+          "observed_on": "2026-10-22",
+          "note": "HTML title confirms v0.5.2.1. Independent HTML and Fogleplay releases are separate delivery variants."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "other_variants": [
+        {
+          "version": "v13",
+          "verification": "UNVERIFIED",
+          "scope": "historical Fogleplay publication label",
+          "note": "Conversation reported published v13 / v14 patch work. No current platform readback or synchronization with HTML established."
+        }
+      ]
     },
     {
       "game_id": "time-clone-factory",
       "title": "시간복제 공장",
       "aliases": [],
       "stage": "prototype",
-      "last_known_version": "0.2.1",
+      "last_known_version": "0.3",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "15초 녹화·복제 루프 및 모바일 조작 재검증",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "v0.3 전달본을 기준으로 재개. 운영 배포 여부·실기기 조작·사람 플레이는 미검증으로 유지",
+      "links": {},
+      "seed_last_known_version": "0.2.1",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.3",
+        "verification": "REPORTED",
+        "scope": "version and historical bounded QA report",
+        "note": "Read report: v0.3, 41 engine/save checks and 44 browser checks reported PASS. Physical phone and human learning/fun effects unverified; not rerun in this audit.",
+        "artifact": "time_clone_factory_v0_3.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "time_clone_factory_v0_3.html",
+          "observed_on": "2026-10-22",
+          "note": "v0.3 report identifies delivered HTML/source and preserves older v0.1/v0.2. Production unchanged in report."
+        },
+        {
+          "kind": "private_qa_report",
+          "reference": "TIME_CLONE_FACTORY_v0_3_report.md",
+          "observed_on": "2026-10-22",
+          "note": "Retrieved historical QA report only; no new runtime test and no production claim."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
     },
     {
       "game_id": "dual-job",
       "title": "겸직금지",
       "aliases": [],
-      "stage": "prototype",
-      "last_known_version": "0.5",
+      "stage": "released",
+      "last_known_version": "0.6.16",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "오리지널 카드게임 버전의 마지막 실행본과 다음 패치 확인",
-      "links": {}
+      "provenance": "github_source;vercel_deployment_readback;https_asset_readback",
+      "next_action": "v0.6.16 운영 메타데이터 확인됨. Android/iPhone 실기기 터치·전체화면 검증은 별도이며 후속 후보를 운영과 분리해 기록",
+      "links": {
+        "github": "https://github.com/aldol2678/dualjob",
+        "production": "https://dualjob.aldol.app/",
+        "deployment_record": "https://github.com/aldol2678/dualjob/blob/6d0acf389f7479abe5c18b66fdaeafdd0f782384/docs/DEPLOYMENT.md"
+      },
+      "seed_last_known_version": "0.5",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "production_metadata",
+      "production": {
+        "version": "0.6.16",
+        "verification": "VERIFIED",
+        "scope": "version label, production deployment and served JS identity",
+        "note": "Vercel READY, target production, domain alias and main SHA agree. HTTPS index 200; served game JS exposes v0.6.16. No new gameplay/mobile acceptance performed.",
+        "source_ref": "6d0acf389f7479abe5c18b66fdaeafdd0f782384",
+        "deployment_id": "dpl_FYyCegp81hGceJUcZL1V6uURp34S",
+        "asset_sha256": "7d10ab184313338a1d26ee7f3eee73c5579d24e38e9c206ae34e13af7b00fa47"
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "successor to production 0.6.16",
+        "note": "No separate later candidate established; 0.6.15 is historical, not current production."
+      },
+      "evidence": [
+        {
+          "kind": "github_source",
+          "reference": "README.md + docs/DEPLOYMENT.md @ 6d0acf3",
+          "observed_on": "2026-10-22",
+          "note": "Public test v0.6.16; 9 named districts/encounter content patch.",
+          "url": "https://github.com/aldol2678/dualjob/blob/6d0acf389f7479abe5c18b66fdaeafdd0f782384/README.md"
+        },
+        {
+          "kind": "deployment_readback",
+          "reference": "dpl_FYyCegp81hGceJUcZL1V6uURp34S",
+          "observed_on": "2026-10-22",
+          "note": "READY production, main 6d0acf3, dualjob.aldol.app alias."
+        },
+        {
+          "kind": "https_readback",
+          "reference": "assets/game-7d10ab184313338a.js",
+          "observed_on": "2026-10-22",
+          "note": "220712 bytes, SHA-256 recorded above; UI/public-test label v0.6.16.",
+          "url": "https://dualjob.aldol.app/"
+        }
+      ],
+      "review_note": "Seed 0.5 and conversation 0.6.15 are superseded by current production version metadata 0.6.16. This does not assert full game or physical-device QA."
     },
     {
       "game_id": "arrow-heir",
@@ -72,9 +271,34 @@
       "stage": "prototype",
       "last_known_version": "0.3.2",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "차징 사격과 타깃 선택의 최근 빌드 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "v0.3.2 HTML 기준 타깃 선택·차징 사격 실기기 검증 및 후속 배포본 존재 확인",
+      "links": {},
+      "seed_last_known_version": "0.3.2",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.3.2",
+        "verification": "VERIFIED",
+        "scope": "artifact version metadata only",
+        "note": "HTML title confirms v0.3.2 mobile combat improvements. No hosted build or new gameplay test verified.",
+        "artifact": "hwasal_heir_mobile_v032.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "hwasal_heir_mobile_v032.html",
+          "observed_on": "2026-10-22",
+          "note": "HTML title confirms v0.3.2 mobile combat improvements. No hosted build or new gameplay test verified."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
     },
     {
       "game_id": "life-is-build",
@@ -84,8 +308,38 @@
       "last_known_version": "0.2.2",
       "verification": "UNVERIFIED",
       "provenance": "conversation_history",
-      "next_action": "게임 진행·밸런스의 최신 테스트 상태 확인",
-      "links": {}
+      "next_action": "대화의 v0.2.2를 과거값으로 유지. 발견한 life-build-korea-v0.1.zip과 최신 실행본 계보·버전부터 확인",
+      "links": {},
+      "seed_last_known_version": "0.2.2",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "historical_conversation_snapshot",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.2.2",
+        "verification": "UNVERIFIED",
+        "scope": "latest candidate identity",
+        "note": "Historical conversation seed only; not independently established as the latest source or a deployed build."
+      },
+      "evidence": [
+        {
+          "kind": "conversation_snapshot",
+          "reference": "existing 2026-10-21 discovery seed + provided project context",
+          "observed_on": "2026-10-22",
+          "note": "Historical stage/version claims retained unless stronger evidence below resolves them."
+        },
+        {
+          "kind": "private_artifact_metadata",
+          "reference": "life-build-korea-v0.1.zip",
+          "observed_on": "2026-10-22",
+          "note": "Archive exists; readable content unavailable. Filename alone cannot supersede historical v0.2.2 or establish identity/lineage."
+        }
+      ],
+      "review_note": "v0.2.2 remains conversation-only UNVERIFIED. The v0.1-named ZIP was discovered but not inspected/executed; no downgrade inferred."
     },
     {
       "game_id": "jelly-lab",
@@ -94,22 +348,80 @@
       "stage": "prototype",
       "last_known_version": "0.4.1",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "정적 QA와 최신 실행 파일 확보 여부 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "v0.4.1 회귀 보고서 범위를 유지하고 실제 origin 영구 저장·실기기·운영 여부 별도 확인",
+      "links": {},
+      "seed_last_known_version": "0.4.1",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.4.1",
+        "verification": "REPORTED",
+        "scope": "version and historical bounded QA report",
+        "note": "Report records 60/60 checks and 15/15 mobile touch emulation PASS; mocked storage/page.set_content with network isolation. Native persistent storage, physical Android/iOS and production unverified.",
+        "artifact": "jelly_lab_v0_4_1.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "jelly_lab_v0_4_1.html",
+          "observed_on": "2026-10-22",
+          "note": "QA report confirms v0.4.1 artifact and a separate original v0.4."
+        },
+        {
+          "kind": "private_qa_report",
+          "reference": "JELLY_LAB_v0.4.1_PATCH_QA_REPORT.md",
+          "observed_on": "2026-10-22",
+          "note": "Retrieved historical QA report only; no new runtime test and no production claim."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
     },
     {
       "game_id": "induck-defense",
       "title": "인덕 디펜스",
       "aliases": [],
       "stage": "paused",
-      "last_known_version": null,
+      "last_known_version": "R1-B",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "R0 QA HOLD 사유 및 해소 조건 확인",
+      "provenance": "github_pr",
+      "next_action": "R0·R1 브리지·R1-B Draft를 분리 유지. 독립 QA·시험 수치 승인·실기기 미검증 및 병합/배포 HOLD 유지",
       "links": {
         "github": "https://github.com/aldol2678/induck-defense"
-      }
+      },
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "draft_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "R1-B",
+        "verification": "VERIFIED",
+        "scope": "Draft PR source metadata",
+        "note": "PR #3 stacked on #2/#1; opt-in equipment/traits/inheritance. CI/local checks reported in PR, not rerun; physical device UNKNOWN and design values pending.",
+        "source_ref": "8c974d4",
+        "source_pr": "https://github.com/aldol2678/induck-defense/pull/3"
+      },
+      "evidence": [
+        {
+          "kind": "github_pr",
+          "reference": "Draft PR #1 R0 + #2 bridge + #3 R1-B",
+          "observed_on": "2026-10-22",
+          "note": "All open; no merge/deploy. PR #3 reports 86 unit and 15 browser checks, physical devices UNKNOWN.",
+          "url": "https://github.com/aldol2678/induck-defense/pull/3"
+        }
+      ],
+      "review_note": "Source work exists beyond R0. Keep paused/HOLD workflow status; implementation progress is not release approval."
     },
     {
       "game_id": "inhaori-classic",
@@ -118,13 +430,56 @@
         "인하오리"
       ],
       "stage": "released",
-      "last_known_version": "1.0",
+      "last_known_version": "1.0.1",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "기존 아케이드 경로와 실배포 상태 확인",
+      "provenance": "github_catalog;https_readback",
+      "next_action": "운영 진입 문서 확인 범위만 인정. 게임 실행·계정·저장·실기기 QA와 후속 후보 버전은 별도 확인",
       "links": {
-        "github": "https://github.com/aldol2678/inha-duck"
-      }
+        "github": "https://github.com/aldol2678/inhagame",
+        "production": "https://duck.inhagame.app/",
+        "catalog": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+      },
+      "seed_last_known_version": "1.0",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "production_label",
+      "production": {
+        "version": "1.0.1",
+        "verification": "VERIFIED",
+        "scope": "served HTML version label only",
+        "note": "live footer v1.0.1 · ruleset 2.2; HTTP 200 and main catalog says playable. No new gameplay/account/save test. Package/tool versions are not substituted for the live game version.",
+        "availability": "VERIFIED_HTTP_200"
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "successor candidate",
+        "note": "No independently identified successor release label in reviewed evidence."
+      },
+      "evidence": [
+        {
+          "kind": "github_catalog",
+          "reference": "main game-catalog.json @ 81b3fa79",
+          "observed_on": "2026-10-22",
+          "note": "Playable host explicitly listed; source is shared infrastructure but games remain independent.",
+          "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+        },
+        {
+          "kind": "https_readback",
+          "reference": "production HTML",
+          "observed_on": "2026-10-22",
+          "note": "live footer v1.0.1 · ruleset 2.2; HTTP 200.",
+          "url": "https://duck.inhagame.app/"
+        }
+      ],
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA.",
+      "other_variants": [
+        {
+          "version": "1.0.0",
+          "verification": "VERIFIED",
+          "scope": "source package.json metadata",
+          "note": "Tool/package metadata differs from served footer v1.0.1; live label retained as production version."
+        }
+      ]
     },
     {
       "game_id": "induck-up",
@@ -133,9 +488,54 @@
       "stage": "released",
       "last_known_version": null,
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "게임 실행본 및 아케이드 연결 상태 확인",
-      "links": {}
+      "provenance": "github_catalog;https_readback",
+      "next_action": "운영 진입 문서 확인 범위만 인정. 게임 실행·계정·저장·실기기 QA와 후속 후보 버전은 별도 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/inhagame",
+        "production": "https://induckup.inhagame.app/",
+        "catalog": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+      },
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "production_version_unknown",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production entry version",
+        "note": "live HTML title 인덕업; version not exposed in entry document; HTTP 200 and main catalog says playable. No new gameplay/account/save test. Package/tool versions are not substituted for the live game version.",
+        "availability": "VERIFIED_HTTP_200"
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "successor candidate",
+        "note": "No independently identified successor release label in reviewed evidence."
+      },
+      "evidence": [
+        {
+          "kind": "github_catalog",
+          "reference": "main game-catalog.json @ 81b3fa79",
+          "observed_on": "2026-10-22",
+          "note": "Playable host explicitly listed; source is shared infrastructure but games remain independent.",
+          "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+        },
+        {
+          "kind": "https_readback",
+          "reference": "production HTML",
+          "observed_on": "2026-10-22",
+          "note": "live HTML title 인덕업; version not exposed in entry document; HTTP 200.",
+          "url": "https://induckup.inhagame.app/"
+        }
+      ],
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA.",
+      "other_variants": [
+        {
+          "version": "0.1.0",
+          "verification": "VERIFIED",
+          "scope": "source package.json metadata only",
+          "note": "Not proof of a deployed game version; production version remains null."
+        }
+      ]
     },
     {
       "game_id": "raise-induck",
@@ -144,20 +544,101 @@
       "stage": "released",
       "last_known_version": "1.0",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "게임 실행본 및 아케이드 연결 상태 확인",
-      "links": {}
+      "provenance": "github_catalog;https_readback",
+      "next_action": "운영 진입 문서 확인 범위만 인정. 게임 실행·계정·저장·실기기 QA와 후속 후보 버전은 별도 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/inhagame",
+        "production": "https://grow.inhagame.app/",
+        "catalog": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+      },
+      "seed_last_known_version": "1.0",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "production_label",
+      "production": {
+        "version": "1.0",
+        "verification": "VERIFIED",
+        "scope": "served HTML version label only",
+        "note": "live HTML title v1.0; HTTP 200 and main catalog says playable. No new gameplay/account/save test. Package/tool versions are not substituted for the live game version.",
+        "availability": "VERIFIED_HTTP_200"
+      },
+      "development_candidate": {
+        "version": "V2 foundation / life engine",
+        "verification": "VERIFIED",
+        "scope": "main source subtree, not operational replacement",
+        "note": "Separate v2/ modules and README, 36 provisional majors / 12 foundational majors. README contains historical draft limits; source presence does not prove a V2 live route or 36 playable majors."
+      },
+      "evidence": [
+        {
+          "kind": "github_catalog",
+          "reference": "main game-catalog.json @ 81b3fa79",
+          "observed_on": "2026-10-22",
+          "note": "Playable host explicitly listed; source is shared infrastructure but games remain independent.",
+          "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+        },
+        {
+          "kind": "https_readback",
+          "reference": "production HTML",
+          "observed_on": "2026-10-22",
+          "note": "live HTML title v1.0; HTTP 200.",
+          "url": "https://grow.inhagame.app/"
+        },
+        {
+          "kind": "github_source",
+          "reference": "apps/induck-grow/v2/README.md @ 81b3fa79",
+          "observed_on": "2026-10-22",
+          "note": "Separate V2 foundation and life engine; production remains independently observed v1.0.",
+          "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/induck-grow/v2/README.md"
+        }
+      ],
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA."
     },
     {
       "game_id": "induck-survival",
       "title": "인덕 서바이벌",
       "aliases": [],
-      "stage": "unknown",
-      "last_known_version": null,
+      "stage": "released",
+      "last_known_version": "P2",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "소개 페이지와 실제 게임 실행본 존재 여부 확인",
-      "links": {}
+      "provenance": "github_catalog;https_readback",
+      "next_action": "운영 진입 문서 확인 범위만 인정. 게임 실행·계정·저장·실기기 QA와 후속 후보 버전은 별도 확인",
+      "links": {
+        "github": "https://github.com/aldol2678/inhagame",
+        "production": "https://survival.inhagame.app/",
+        "catalog": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+      },
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "production_label",
+      "production": {
+        "version": "P2",
+        "verification": "VERIFIED",
+        "scope": "served HTML version label only",
+        "note": "live HTML title 인덕 서바이벌 · P2; HTTP 200 and main catalog says playable. No new gameplay/account/save test. Package/tool versions are not substituted for the live game version.",
+        "availability": "VERIFIED_HTTP_200"
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "successor candidate",
+        "note": "No independently identified successor release label in reviewed evidence."
+      },
+      "evidence": [
+        {
+          "kind": "github_catalog",
+          "reference": "main game-catalog.json @ 81b3fa79",
+          "observed_on": "2026-10-22",
+          "note": "Playable host explicitly listed; source is shared infrastructure but games remain independent.",
+          "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/world/data/game-catalog.json"
+        },
+        {
+          "kind": "https_readback",
+          "reference": "production HTML",
+          "observed_on": "2026-10-22",
+          "note": "live HTML title 인덕 서바이벌 · P2; HTTP 200.",
+          "url": "https://survival.inhagame.app/"
+        }
+      ],
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA."
     },
     {
       "game_id": "inha-world",
@@ -166,22 +647,100 @@
       "stage": "platform",
       "last_known_version": null,
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "게임개발 MCP 기반 안정화 후 리뉴얼 계획으로 관리",
+      "provenance": "github_source;github_pr;https_readback;conversation_decision",
+      "next_action": "게임개발 MCP/공통 기반 안정화 후 리뉴얼 방향 유지. 운영 캠퍼스와 #435~#440 엔진·Studio Draft를 구분",
       "links": {
-        "github": "https://github.com/aldol2678/inhagame"
-      }
+        "github": "https://github.com/aldol2678/inhagame",
+        "production": "https://inhagame.app/campus/",
+        "arcade": "https://inhagame.app/arcade/",
+        "tooling_pr": "https://github.com/aldol2678/inhagame/pull/440"
+      },
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "operational_version_unknown",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "deployed game version",
+        "note": "Campus entry HTTP 200/title confirmed; no unambiguous product version identified. Arcade #427 merged and /arcade/ HTTP 200; no gameplay/save acceptance inferred.",
+        "availability": "VERIFIED_HTTP_200"
+      },
+      "development_candidate": {
+        "version": "ALDOL 3D Studio P2.1 integration",
+        "verification": "VERIFIED",
+        "scope": "separate tooling Draft source, not INHA WORLD release",
+        "note": "Open stacked Draft #440; WorldForge/Cat/Studio work is tooling, not an operating campus game version."
+      },
+      "evidence": [
+        {
+          "kind": "github_pr",
+          "reference": "Arcade PR #427",
+          "observed_on": "2026-10-22",
+          "note": "Metadata says merged; historical PR prose still says merge preparation. Actual state outranks stale prose.",
+          "url": "https://github.com/aldol2678/inhagame/pull/427"
+        },
+        {
+          "kind": "https_readback",
+          "reference": "Campus and arcade entry documents",
+          "observed_on": "2026-10-22",
+          "note": "Both HTTP 200 with correct titles; runtime not tested.",
+          "url": "https://inhagame.app/campus/"
+        },
+        {
+          "kind": "github_pr",
+          "reference": "Tooling Draft #440",
+          "observed_on": "2026-10-22",
+          "note": "Separate P2.1 GLB/editor work; unmerged.",
+          "url": "https://github.com/aldol2678/inhagame/pull/440"
+        },
+        {
+          "kind": "conversation_decision",
+          "reference": "2026-10-20 priority direction",
+          "observed_on": "2026-10-22",
+          "note": "Stabilize game-development MCP foundation before INHA WORLD renewal."
+        }
+      ],
+      "review_note": "Main/source and operating version are not equated. Reuse of infrastructure does not establish a new shipped platform or consolidate independent games."
     },
     {
       "game_id": "cat-world",
       "title": "CAT WORLD",
       "aliases": [],
       "stage": "prototype",
-      "last_known_version": null,
+      "last_known_version": "Alpha 0.6",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "3D 프로토타입 원본 및 실행 여부 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "Alpha 0.6 파일/화면과 title Alpha 0.5 불일치 확인. 독립 HTML과 WorldForge Cat 예제 계보는 별도 유지",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "Alpha 0.6",
+        "verification": "CONFLICT",
+        "scope": "version labels within the same HTML",
+        "note": "Filename and visible brand say alpha 0.6; HTML <title> remains Alpha 0.5. Preserve this label conflict; no new runtime QA.",
+        "artifact": "catworld_alpha_0_6.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "catworld_alpha_0_6.html",
+          "observed_on": "2026-10-22",
+          "note": "Filename and visible brand say alpha 0.6; HTML <title> remains Alpha 0.5. Preserve this label conflict; no new runtime QA."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "note": "Standalone CAT WORLD HTML and WorldForge examples/worldforge-cat share a motif, but synchronization/lineage is not proven. No merge with ARAM WORLD or INHA WORLD."
+      }
     },
     {
       "game_id": "our-class-2010",
@@ -189,37 +748,154 @@
       "aliases": [
         "그때 우리 반"
       ],
-      "stage": "planned",
-      "last_known_version": null,
+      "stage": "prototype",
+      "last_known_version": "Alpha 0.1",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "2010년 한국 중학교 오픈월드 핵심 플레이 루프 구체화",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "첫 등교 Alpha 0.1 산출물에서 이어서 진행. 2010년 한국 중학교 설정 유지, 실기기·역사/생활 고증·운영 여부 별도 확인",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "local_artifact_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "Alpha 0.1",
+        "verification": "VERIFIED",
+        "scope": "artifact version metadata only",
+        "note": "HTML title and cover identify first-school-day Alpha 0.1 at fictional Hanbit middle school, 2010-03-02. Artifact exists; gameplay/history fidelity/hosting not tested.",
+        "artifact": "그때_우리반_2010_Alpha01_존댓말수정.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "그때_우리반_2010_Alpha01_존댓말수정.html",
+          "observed_on": "2026-10-22",
+          "note": "HTML title and cover identify first-school-day Alpha 0.1 at fictional Hanbit middle school, 2010-03-02. Artifact exists; gameplay/history fidelity/hosting not tested."
+        }
+      ],
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
     },
     {
       "game_id": "aram-world",
       "title": "아람월드",
       "aliases": [],
-      "stage": "planned",
-      "last_known_version": null,
+      "stage": "prototype",
+      "last_known_version": "Alpha 0.2",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "기존 3D 월드·플랫폼 프로젝트와 중복 관계 확인",
-      "links": {}
+      "provenance": "github_pr",
+      "next_action": "Alpha 0.2 private Draft와 Alpha 0.1 병합 소스를 구분. 원격 운영·OAuth·공개 출시 미확인 상태 유지",
+      "links": {
+        "github": "https://github.com/aldol2678/aldol-worldforge",
+        "source_pr": "https://github.com/aldol2678/aldol-worldforge/pull/4"
+      },
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "private_draft_candidate",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "Alpha 0.2",
+        "verification": "VERIFIED",
+        "scope": "private Draft source metadata",
+        "note": "PR #4 follows merged Alpha 0.1 #3. Editing, revision-guarded store, scoped bearer MCP. PR explicitly says no deployed remote endpoint; CI reported, not rerun.",
+        "source_ref": "588a7388f36fbced40ad648ec6498ac018eabbf4"
+      },
+      "evidence": [
+        {
+          "kind": "github_pr",
+          "reference": "WorldForge Draft PR #4",
+          "observed_on": "2026-10-22",
+          "note": "Alpha 0.2 source/CI record; no deployed endpoint/public release.",
+          "url": "https://github.com/aldol2678/aldol-worldforge/pull/4"
+        }
+      ],
+      "review_note": "Seed planned stage outdated: source prototype exists. Source/CI is not a live MCP endpoint or game deployment.",
+      "identity_review": {
+        "status": "SEPARATE",
+        "note": "Independent WorldForge sandbox/example; no evidence it is the same game as INHA WORLD, CAT WORLD or KOREA. Office-world PR #7 is a related read-only bridge candidate, not silently folded into a game release."
+      }
     },
     {
       "game_id": "korea-hanyang",
       "title": "KOREA: 한양에서의 하루",
       "aliases": [
         "한국월드",
-        "KOREA Alpha"
+        "KOREA Alpha",
+        "한양월드",
+        "한가람"
       ],
       "stage": "active",
-      "last_known_version": "Alpha 0.2",
+      "last_known_version": "Alpha 0.4",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "GLB 모델 및 Alpha 0.2 QA 후속 작업 상태 확인",
-      "links": {}
+      "provenance": "github_pr;github_qa_artifact;vercel_deployment_readback;https_readback;conversation_naming",
+      "next_action": "Alpha 0.4 QA(f322abea)와 종전 Alpha 0.1을 분리 유지. 실기기·장시간 성능 및 한가람 명칭의 소스 반영 여부는 미검증",
+      "links": {
+        "github": "https://github.com/aldol2678/aldol-worldforge",
+        "source_pr": "https://github.com/aldol2678/aldol-worldforge/pull/9",
+        "candidate": "https://korea-hanyang-alpha02-qa.vercel.app/"
+      },
+      "seed_last_known_version": "Alpha 0.2",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "qa_candidate",
+      "production": {
+        "version": "Alpha 0.1",
+        "verification": "UNVERIFIED",
+        "scope": "last reported baseline; current operational version",
+        "note": "PR #9 says Alpha 0.1 operation was unchanged. Its current URL/build was not independently resolved; do not promote Alpha 0.4 QA to production."
+      },
+      "development_candidate": {
+        "version": "Alpha 0.4",
+        "verification": "VERIFIED",
+        "scope": "QA deployment version, source commit and served bundle hash",
+        "note": "64x64m districts x3, resident delivery, forest gathering, expanded save data. QA URL returns Alpha 0.4 title and bundle matches PR evidence. Physical Android/iOS and long-run memory/performance remain UNVERIFIED.",
+        "source_ref": "f322abea24c388c57ceca06bcf8152fa36cd59fa",
+        "pr_head_observed": "373a8ebc854761a164f6dbfadfc882bf2ed29fa0",
+        "deployment_id": "dpl_CPmiggqshYYfAe3NzJU6wycYygmc",
+        "asset_sha256": "d9ff0f8566b790eaa8cbe9bb627731d1d9d079d4295146c61a44b7bb2ce0640a"
+      },
+      "evidence": [
+        {
+          "kind": "github_pr",
+          "reference": "WorldForge Draft PR #9",
+          "observed_on": "2026-10-22",
+          "note": "Open/unmerged; Alpha 0.4 QA evidence, previous Alpha 0.1 unchanged.",
+          "url": "https://github.com/aldol2678/aldol-worldforge/pull/9"
+        },
+        {
+          "kind": "github_qa_artifact",
+          "reference": "qa/chunks/browser-report.json @ f322abea",
+          "observed_on": "2026-10-22",
+          "note": "Recorded software WebGL2/mobile emulation: two round trips, harvest, retry, no errors; not rerun during inventory audit.",
+          "url": "https://github.com/aldol2678/aldol-worldforge/blob/f322abea24c388c57ceca06bcf8152fa36cd59fa/examples/worldforge-korea/qa/chunks/browser-report.json"
+        },
+        {
+          "kind": "deployment_and_https_readback",
+          "reference": "QA deployment + app.js",
+          "observed_on": "2026-10-22",
+          "note": "READY metadata, QA title Alpha 0.4, app.js 2296283 bytes and SHA-256 match.",
+          "url": "https://korea-hanyang-alpha02-qa.vercel.app/"
+        },
+        {
+          "kind": "conversation_decision",
+          "reference": "2026-10-22 naming discussion",
+          "observed_on": "2026-10-22",
+          "note": "한가람 selected for the broader Han River setting from Neolithic to modern Seoul; current prototype source still uses KOREA/한양 title."
+        }
+      ],
+      "review_note": "Alpha 0.2 is an older candidate. PR HEAD is an evidence/document successor to deployed f322abea; do not substitute HEAD for the served build.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "note": "한가람/한양월드 added as conversation aliases, not a source rename or a new game. Broader historical scope is a design direction; not implemented-era coverage. No merge with ARAM WORLD, CAT WORLD or INHA WORLD."
+      }
     },
     {
       "game_id": "origin-lab",
@@ -230,10 +906,53 @@
       "stage": "prototype",
       "last_known_version": "0.3",
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "에셋 ZIP과 통합 실행본의 일치 여부 확인",
+      "provenance": "github_merged_pr;github_source;private_drive_artifact_metadata",
+      "next_action": "main의 v0.3/R1 58키 연결과 전달 HTML 정합성 확인. 과거 Draft 문구를 현재 PR 상태로 오인하지 말고 운영 여부는 별도 확인",
       "links": {
-        "github": "https://github.com/aldol2678/origin-lab"
+        "github": "https://github.com/aldol2678/origin-lab",
+        "source_pr": "https://github.com/aldol2678/origin-lab/pull/4"
+      },
+      "seed_last_known_version": "0.3",
+      "reviewed_on": "2026-10-22",
+      "version_scope": "merged_source_and_local_artifact",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "0.3 Asset R1 closeout",
+        "verification": "VERIFIED",
+        "scope": "merged source and delivered local artifact metadata",
+        "note": "PR #4 is merged (cede5a4), despite historical body/README saying Draft. 58/58 asset keys in source. No independent hosted production build established."
+      },
+      "evidence": [
+        {
+          "kind": "github_pr",
+          "reference": "Origin Lab PR #4",
+          "observed_on": "2026-10-22",
+          "note": "merged=true; merge commit cede5a4e879d1122f37bd6d8b469db6060507df1. State supersedes stale Draft prose.",
+          "url": "https://github.com/aldol2678/origin-lab/pull/4"
+        },
+        {
+          "kind": "github_source",
+          "reference": "main README.md",
+          "observed_on": "2026-10-22",
+          "note": "v0.3 engine/research/save and R1 58/58 asset integration documented.",
+          "url": "https://github.com/aldol2678/origin-lab/blob/main/README.md"
+        },
+        {
+          "kind": "private_drive_artifact_metadata",
+          "reference": "origin-lab-v0.3-asset-r1-closeout.html",
+          "observed_on": "2026-10-22",
+          "note": "366732-byte standalone file discovered; not executed or hash-verified in this audit."
+        }
+      ],
+      "review_note": "Version remains 0.3 with improved source/asset evidence. Merged code is not production deployment.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "note": "Possible relationship to 진화랩 is unresolved. Similar evolution/ecosystem subject alone is not identity proof; preserve both IDs."
       }
     },
     {
@@ -246,8 +965,37 @@
       "last_known_version": null,
       "verification": "UNVERIFIED",
       "provenance": "conversation_history",
-      "next_action": "기원의 실험실과 동일 프로젝트인지 계보 확인",
-      "links": {}
+      "next_action": "기원의 실험실과의 계보를 명시한 원기록 확보 전까지 별도 구상으로 유지",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "historical_conversation_snapshot",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "latest candidate identity",
+        "note": "Historical conversation seed only; not independently established as the latest source or a deployed build."
+      },
+      "evidence": [
+        {
+          "kind": "conversation_snapshot",
+          "reference": "existing 2026-10-21 discovery seed + provided project context",
+          "observed_on": "2026-10-22",
+          "note": "Historical stage/version claims retained unless stronger evidence below resolves them."
+        }
+      ],
+      "review_note": "Reviewed against accessible repository inventory, project context and relevant artifact discovery. Missing evidence is not proof of no implementation or no deployment.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "related_game_id": "origin-lab",
+        "note": "Possible predecessor/alias only; no explicit current lineage evidence found. Preserve separate game_id and planned stage."
+      }
     },
     {
       "game_id": "fruit-world-concepts",
@@ -256,20 +1004,78 @@
       "stage": "planned",
       "last_known_version": null,
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "독립 프로젝트 여부와 게임별 ID 분할 필요성 확인",
-      "links": {}
+      "provenance": "private_artifact_readback;conversation_history",
+      "next_action": "FRUIT WORLD Proto-0(v02 파일)과 사과·과일·음식 구상 매핑을 확인하기 전 ID 분할·통합 금지",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "grouped_concepts_with_one_artifact",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": "Proto-0 / filename v02",
+        "verification": "CONFLICT",
+        "scope": "one FRUIT WORLD artifact; not the whole concept group",
+        "note": "fruit_world_proto_v02.html title says FRUIT WORLD Proto-0. Source for that artifact exists; numbering relation and mapping to 사과/과일/음식 concepts are not resolved.",
+        "artifact": "fruit_world_proto_v02.html"
+      },
+      "evidence": [
+        {
+          "kind": "private_artifact_readback",
+          "reference": "fruit_world_proto_v02.html",
+          "observed_on": "2026-10-22",
+          "note": "Title FRUIT WORLD Proto-0. This proves a fruit prototype artifact, not all three concepts or a release."
+        }
+      ],
+      "review_note": "One prototype artifact found inside a previously grouped concept entry; do not claim three implemented games.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "note": "Existing record groups 사과월드·과일월드·음식월드. Do not split or merge without mapping evidence; keep existing ID and group stage, record artifact separately."
+      }
     },
     {
       "game_id": "short-travel",
       "title": "숏트래블",
       "aliases": [],
-      "stage": "planned",
+      "stage": "unknown",
       "last_known_version": null,
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "기획 원본과 개발 시작 여부 확인",
-      "links": {}
+      "provenance": "private_project_plan_readback;conversation_history",
+      "next_action": "숏트래블이 독립 게임명인지 프로그램·양식명인지 원기록으로 확인. 잔흔과 자동 병합하지 않고 중복 가능성 유지",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "historical_conversation_snapshot",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "latest candidate identity",
+        "note": "Historical conversation seed only; not independently established as the latest source or a deployed build."
+      },
+      "evidence": [
+        {
+          "kind": "private_project_plan_readback",
+          "reference": "잔흔_숏트래블_최초기획서_CSharp수정본.docx",
+          "observed_on": "2026-10-22",
+          "note": "Game title field: 잔흔; PC / Unity 2022 / C# / nonlinear psychological deduction. 숏트래블 appears as cover/template/program heading."
+        }
+      ],
+      "review_note": "Independent game identity not established. Existing ID retained; unknown stage reflects unresolved identity, not a cancelled project.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "related_game_id": "janheun",
+        "note": "Read planning document cover/header says 숏 트래블 Short Travel / INGAME; game-information table says game title 잔흔. Strong duplicate/program-label risk, but no merge/delete authorized by evidence."
+      }
     },
     {
       "game_id": "janheun",
@@ -278,9 +1084,44 @@
       "stage": "planned",
       "last_known_version": null,
       "verification": "UNVERIFIED",
-      "provenance": "conversation_history",
-      "next_action": "기획 원본과 독립 게임 여부 확인",
-      "links": {}
+      "provenance": "private_project_plan_readback;conversation_history",
+      "next_action": "잔흔 기획 원본을 기준으로 현재 개발 착수·Unity 실행본 여부 확인. 숏트래블과의 관계는 미확정 유지",
+      "links": {},
+      "seed_last_known_version": null,
+      "reviewed_on": "2026-10-22",
+      "version_scope": "historical_conversation_snapshot",
+      "production": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "production version and acceptance",
+        "note": "No independently confirmed current production version in the reviewed evidence."
+      },
+      "development_candidate": {
+        "version": null,
+        "verification": "UNVERIFIED",
+        "scope": "latest candidate identity",
+        "note": "Historical conversation seed only; not independently established as the latest source or a deployed build."
+      },
+      "evidence": [
+        {
+          "kind": "private_project_plan_readback",
+          "reference": "잔흔_숏트래블_최초기획서_CSharp수정본.docx",
+          "observed_on": "2026-10-22",
+          "note": "Game title field 잔흔; PC Unity 2022/C#, 1890s London mystery, four endings proposed. Planning evidence only, no current playable build."
+        }
+      ],
+      "review_note": "Planning identity supported; development/production versions remain null and UNVERIFIED.",
+      "identity_review": {
+        "status": "UNVERIFIED",
+        "related_game_id": "short-travel",
+        "note": "잔흔 is the explicit game title in a 숏트래블 template/program document. Keep both existing IDs pending lineage resolution; do not count two verified games."
+      }
     }
-  ]
+  ],
+  "review_policy": {
+    "last_known_version": "Latest evidenced source/artifact label, qualified by version_scope; never implicitly the production version.",
+    "verification": "Record-level UNVERIFIED remains for schema/API compatibility and incomplete whole-game acceptance. Track-level VERIFIED applies only to its stated scope; REPORTED is a retrieved third-party QA claim, not a new test.",
+    "scope": "23 existing IDs preserved; no merge, deploy, production write, automatic GitHub sync, new service, or new management system.",
+    "private_evidence": "Private artifact names and bounded findings only; no private Slack/Drive URLs, account identifiers, saves or credentials exported."
+  }
 }
