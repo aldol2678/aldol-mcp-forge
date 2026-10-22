@@ -77,6 +77,19 @@ class RightsTests(unittest.TestCase):
             self.assertEqual(check_usage(aid)["status"], "READY_FOR_HUMAN_REVIEW")
             self.assertFalse(check_usage(aid)["legal_clearance"])
 
+    def test_no_silent_partial_report_above_limit(self):
+        for i in range(501):
+            register_asset(f"Asset {i}", "image", "UNKNOWN")
+        with self.assertRaisesRegex(ValueError, "More than 500 assets"):
+            rights_report()
+
+    def test_db_file_private_on_posix(self):
+        import stat
+        self.asset()
+        if os.name == "posix":
+            mode = Path(os.environ["ALDOL_RIGHTS_DB"]).stat().st_mode
+            self.assertEqual(stat.S_IMODE(mode), 0o600)
+
     def test_report_aggregates(self):
         self.asset("CC-BY-NC-4.0")
         self.asset("CC-BY-4.0")
