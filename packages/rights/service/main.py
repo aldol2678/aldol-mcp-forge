@@ -14,12 +14,14 @@ from models import AssetInput,Login,CheckInput,KeyInput,Usage
 from policy import evaluate,credits,LICENSES,LABELS,VERSION,DISCLAIMER,markdown_text
 from uploads import validate_file,MAX_FILE
 from remote import transport,AuthenticatedMCP
+import legal
 
 PUBLIC=Path(__file__).parent/'public'
 @asynccontextmanager
 async def lifespan(app):
     async with transport.router.lifespan_context(transport):yield
 app=FastAPI(title='ALDOL RIGHTS',version=VERSION,lifespan=lifespan,docs_url=None,redoc_url=None,openapi_url=None)
+app.include_router(legal.router)
 
 class Guard:
     def __init__(self,app):self.app=app
@@ -73,7 +75,7 @@ async def identity(request:Request):
     return {'id':user['id'],'email':user.get('email',''),'token':token}
 
 @app.get('/api/health')
-async def health():return {'service':'ALDOL RIGHTS','version':VERSION,'transport':'Streamable HTTP','mcp_auth':'read-only bearer connection key','legal_clearance':False}
+async def health():return {'service':'ALDOL RIGHTS','version':VERSION,'legal_patch':'0.3.0-draft','transport':'Streamable HTTP','mcp_auth':'read-only bearer connection key','legal_clearance':False}
 
 @app.get('/api/licenses')
 async def licenses():return {'licenses':LICENSES,'labels':LABELS,'disclaimer':DISCLAIMER}
@@ -84,8 +86,9 @@ async def login(data:Login):
     r=JSONResponse({'email':result['user'].get('email','')});cookies(r,result);return r
 
 @app.post('/api/auth/signup')
-async def signup(data:Login):
-    result=await store.call('POST','/auth/v1/signup',body=data.model_dump())
+async def signup(data:legal.SignupAgreement):
+    await legal.signup_preflight(data.terms_id,data.terms_accepted)
+    result=await store.call('POST','/auth/v1/signup',body={'email':data.email,'password':data.password})
     r=JSONResponse({'message':'가입 요청을 접수했습니다. 이메일 확인이 필요한 경우 받은 편지함을 확인하세요.'})
     if result.get('access_token'):cookies(r,result)
     return r
@@ -124,7 +127,7 @@ async def one_asset(aid,user):
 async def assets(user=Depends(identity)):return {'assets':await all_assets(user)}
 
 @app.post('/api/assets')
-async def register(data:AssetInput,user=Depends(identity)):
+async def register(data:AssetInput,user=Depends(legal.require_terms)):
     # Stable client UUID makes a retried registration idempotent.
     aid=str(data.asset_id)
     existing=await store.rows('rights_assets',user['token'],'select=*&asset_id=eq.'+aid)
@@ -136,7 +139,7 @@ async def register(data:AssetInput,user=Depends(identity)):
     return (await store.insert('rights_assets',user['token'],body))[0]
 
 @app.patch('/api/assets/{aid}')
-async def update(aid:UUID,data:AssetInput,request:Request,user=Depends(identity)):
+async def update(aid:UUID,data:AssetInput,request:Request,user=Depends(legal.require_terms)):
     await one_asset(aid,user)
     rev=request.headers.get('if-match','')
     if not rev.isdigit() or str(aid)!=str(data.asset_id):raise HTTPException(409,'자산 버전을 새로 불러온 뒤 수정하세요.')
@@ -152,7 +155,7 @@ async def detail(aid:UUID,user=Depends(identity)):
     return {'asset':a,'history':history}
 
 @app.post('/api/assets/{aid}/check')
-async def check(aid:UUID,data:CheckInput,user=Depends(identity)):
+async def check(aid:UUID,data:CheckInput,user=Depends(legal.require_terms)):
     a=await one_asset(aid,user)
     cid=str(data.check_id)
     existing=await store.rows('rights_checks',user['token'],'select=*&check_id=eq.'+cid)
@@ -171,7 +174,7 @@ async def history(user=Depends(identity)):
     return {'items':await store.rows('rights_checks',user['token'],'select=check_id,asset_id,asset_revision,result,created_at&order=created_at.desc&limit=100'),'limit':100}
 
 @app.post('/api/assets/{aid}/upload')
-async def upload(aid:UUID,request:Request,role:str='source',file:UploadFile=File(...),user=Depends(identity)):
+async def upload(aid:UUID,request:Request,role:str='source',file:UploadFile=File(...),user=Depends(legal.require_terms)):
     a=await one_asset(aid,user)
     if role not in ('source','evidence'):raise HTTPException(422,'파일 역할을 확인하세요.')
     data=await file.read(MAX_FILE+1)
@@ -197,7 +200,7 @@ async def keys(user=Depends(identity)):
     return {'keys':await store.rows('rights_connection_keys',user['token'],'select=key_id,label,expires_at,revoked,created_at,scope&order=created_at.desc')}
 
 @app.post('/api/keys')
-async def create_key(data:KeyInput,user=Depends(identity)):
+async def create_key(data:KeyInput,user=Depends(legal.require_terms)):
     token='ar_'+secrets.token_urlsafe(48)
     body={'key_id':str(uuid4()),'owner_id':user['id'],'label':data.label,'token_hash':hashlib.sha256(token.encode()).hexdigest(),'expires_at':(datetime.now(timezone.utc)+timedelta(days=data.days)).isoformat()}
     rows=await store.insert('rights_connection_keys',user['token'],body)
