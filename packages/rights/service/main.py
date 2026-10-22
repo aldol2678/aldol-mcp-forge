@@ -1,11 +1,13 @@
 from __future__ import annotations
-import hashlib,json,secrets,os,html
+import hashlib,json,secrets,os,html,asyncio
 from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import quote,urlsplit
 from uuid import UUID,uuid4
 from datetime import datetime,timezone,timedelta
 from fastapi import FastAPI,HTTPException,Request,Depends,UploadFile,File
+from pydantic import BaseModel,Field
+from typing import Literal
 from fastapi.responses import JSONResponse,FileResponse,Response,HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
@@ -15,6 +17,7 @@ from policy import evaluate,credits,LICENSES,LABELS,VERSION,DISCLAIMER,markdown_
 from uploads import validate_file,MAX_FILE
 from remote import transport,AuthenticatedMCP
 import legal
+import site_policy
 
 PUBLIC=Path(__file__).parent/'public'
 @asynccontextmanager
@@ -73,6 +76,31 @@ async def identity(request:Request):
     user=await store.call('GET','/auth/v1/user',token)
     if not user.get('id') or user.get('is_anonymous'):raise HTTPException(401,'정식 계정 로그인이 필요합니다.')
     return {'id':user['id'],'email':user.get('email',''),'token':token}
+
+class ExternalSiteScan(BaseModel):
+    url:str=Field(min_length=12,max_length=1600)
+
+class ExternalDocumentReview(BaseModel):
+    kind:Literal['privacy','terms']
+    document_text:str=Field(min_length=1,max_length=30000)
+    jurisdiction:Literal['KR','GENERAL']='KR'
+    verified_facts_json:str=Field(default='{}',max_length=10000)
+
+@app.post('/api/site-policy/scan')
+async def scan_external_site(data:ExternalSiteScan,user=Depends(identity)):
+    if os.getenv('RIGHTS_SITE_SCAN_ENABLED')!='1':
+        raise HTTPException(503,'외부 HTTPS 스캔은 보안·사용량 점검 후 사용 가능합니다. 문서 붙여넣기 검사를 이용하세요.')
+    try:return await asyncio.wait_for(asyncio.to_thread(site_policy.scan_site,data.url),timeout=18)
+    except (ValueError,TimeoutError,OSError):
+        raise HTTPException(422,'공개 HTTPS 페이지에 접근할 수 없거나 검사 조건에 맞지 않습니다. 주소와 공개 설정을 확인하세요.')
+
+@app.post('/api/site-policy/audit')
+async def audit_external_document(data:ExternalDocumentReview,user=Depends(identity)):
+    try:
+        audit=site_policy.analyze(data.kind,data.document_text,data.jurisdiction)
+        plan=site_policy.patch_plan(data.kind,data.document_text,data.verified_facts_json)
+    except ValueError as e:raise HTTPException(422,str(e))
+    return {'audit':audit,'plan':plan}
 
 @app.get('/api/health')
 async def health():return {'service':'ALDOL RIGHTS','version':VERSION,'legal_patch':'0.3.0-draft','transport':'Streamable HTTP','mcp_auth':'read-only bearer connection key','legal_clearance':False}
