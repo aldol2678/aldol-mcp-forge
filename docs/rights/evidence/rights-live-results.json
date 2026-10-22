@@ -1,0 +1,86 @@
+[
+  {
+    "test": "web_login_0",
+    "status": "PASS"
+  },
+  {
+    "test": "web_login_1",
+    "status": "PASS"
+  },
+  {
+    "test": "asset_register",
+    "status": "PASS"
+  },
+  {
+    "test": "registration_idempotency",
+    "status": "PASS"
+  },
+  {
+    "test": "cross_user_read_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "cross_user_edit_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "check_conflict_saved",
+    "status": "PASS"
+  },
+  {
+    "test": "check_retry_idempotency",
+    "status": "PASS"
+  },
+  {
+    "test": "private_file_upload",
+    "status": "PASS"
+  },
+  {
+    "test": "private_file_download",
+    "status": "PASS"
+  },
+  {
+    "test": "cross_user_file_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "fake_mime_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "report_json",
+    "status": "PASS"
+  },
+  {
+    "test": "report_markdown",
+    "status": "PASS"
+  },
+  {
+    "test": "read_key_issue",
+    "status": "PASS"
+  },
+  {
+    "test": "other_read_key_issue",
+    "status": "PASS"
+  },
+  {
+    "test": "persistent_new_http_client",
+    "status": "PASS"
+  },
+  {
+    "test": "direct_RLS_read_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "direct_RLS_update_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "public_file_url_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "MCP_DB_cross_owner_denied",
+    "status": "PASS"
+  }
+]

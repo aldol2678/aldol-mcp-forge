@@ -1,0 +1,80 @@
+[
+  {
+    "test": "initialize_user_0",
+    "status": "PASS",
+    "protocol": "2025-11-25"
+  },
+  {
+    "test": "tools_list_user_0",
+    "status": "PASS"
+  },
+  {
+    "test": "inspect_license_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "list_assets_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "check_usage_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "generate_credits_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "rights_report_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "review_history_user_0",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "initialize_user_1",
+    "status": "PASS",
+    "protocol": "2025-11-25"
+  },
+  {
+    "test": "tools_list_user_1",
+    "status": "PASS"
+  },
+  {
+    "test": "inspect_license_user_1",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "list_assets_user_1",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "check_usage_user_1",
+    "status": "PASS",
+    "expected_denial": true
+  },
+  {
+    "test": "generate_credits_user_1",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "rights_report_user_1",
+    "status": "PASS",
+    "expected_denial": false
+  },
+  {
+    "test": "review_history_user_1",
+    "status": "PASS",
+    "expected_denial": false
+  }
+]
