@@ -10,6 +10,8 @@ import os
 import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from ui_core import bonsae_bridge, core
 
 source_root = Path(os.environ["BONSAE_SOURCE_ROOT"]).resolve()
