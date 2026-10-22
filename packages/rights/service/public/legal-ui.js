@@ -73,7 +73,7 @@ async function adminPolicies(){
       <label class="field"><span>본문 (일반 텍스트, 400~30000자)</span>
       <textarea name="content" rows="18" minlength="400" maxlength="30000" required></textarea></label>
       <div class="form-error"></div><div class="actions"><button class="primary" type="submit">초안 저장</button>
-      ${d?'<button type="button" id="publish">검토 후 게시</button>':''}</div></form>`;
+      ${d?'<button type="button" id="publish">검토 후 게시</button>':''}</div></form>${d?`<div class="notice"><strong>게시 전 필수 확인 (개별 확인)</strong><label class="check"><input type="checkbox" id="verify-operator">운영자 정보·연락처 확인</label><label class="check"><input type="checkbox" id="verify-retention">보존기간·파기 절차 확인</label><label class="check"><input type="checkbox" id="verify-vendors">위탁 및 국외이전 사실 확인</label><label class="check"><input type="checkbox" id="verify-human">문안 및 법적 검토 완료</label></div>`:""}`;
     const form=$('#legal-editor');form.elements.content.value=text;
     form.onsubmit=async e=>{e.preventDefault();busy(form,true);try{
       const body={content:form.elements.content.value,effective_on:form.elements.effective_on.value};
@@ -82,7 +82,8 @@ async function adminPolicies(){
       toast('미게시 초안이 저장됐습니다.');await adminPolicies();
     }catch(err){showFormError(form,err)}finally{busy(form,false)}};
     if(d)$('#publish').onclick=async()=>{
-      if(!confirm('운영자 연락처, 보존기간, 위탁·국외이전, 법률 검수를 직접 확인했습니까? 게시된 문서는 수정할 수 없습니다.'))return;
+      if(!['verify-operator','verify-retention','verify-vendors','verify-human'].every(id=>$('#'+id).checked)){toast('네 가지 검토 항목을 각각 확인해야 게시할 수 있습니다.');return}
+      if(!confirm('게시된 문서는 수정할 수 없습니다. 공식 문서로 게시하시겠습니까?'))return;
       try {
         const body={revision:d.revision,verified_operator_contact:true,verified_retention_disposal:true,
           verified_vendors_transfers:true,reviewed_by_human:true};
