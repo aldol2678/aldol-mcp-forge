@@ -30,3 +30,4 @@ jobs:
       - run: python -m compileall -q packages/rights/service
       - run: node --check packages/rights/service/public/app.js
       - run: node --check packages/rights/service/public/legal-ui.js
+      - run: node --check packages/rights/service/public/site-policy-ui.js
