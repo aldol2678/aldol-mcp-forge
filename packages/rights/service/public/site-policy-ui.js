@@ -24,6 +24,7 @@ function sitePolicyWorkspace() {
       <p>보고서를 바탕으로 기존 문서와 변경안을 비교한 후, 사이트 소유자의 권한으로 코드 저장소에 변경안을 제출해야 합니다.</p>
       <div class="notice warn">이 화면에서는 다른 사이트에 글을 게시하거나 정책을 자동 교체하지 않습니다. 키워드 검사 결과는 준법 또는 위반 판정이 아닙니다.</div>
     </section>`;
+  addGithubPRUI();
   const scan=$('#external-site-scan');
   scan.onsubmit=async e=>{e.preventDefault();busy(scan,true);$('.form-error',scan).innerHTML='';
     try {

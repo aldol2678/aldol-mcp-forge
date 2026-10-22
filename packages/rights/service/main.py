@@ -18,6 +18,7 @@ from uploads import validate_file,MAX_FILE
 from remote import transport,AuthenticatedMCP
 import legal
 import site_policy
+import github_policy_pr as github_pr
 
 PUBLIC=Path(__file__).parent/'public'
 @asynccontextmanager
@@ -101,6 +102,44 @@ async def audit_external_document(data:ExternalDocumentReview,user=Depends(ident
         plan=site_policy.patch_plan(data.kind,data.document_text,data.verified_facts_json)
     except ValueError as e:raise HTTPException(422,str(e))
     return {'audit':audit,'plan':plan}
+
+class GitHubPolicyReview(BaseModel):
+    site_url:str=Field(min_length=12,max_length=300)
+    repository:str=Field(min_length=3,max_length=130)
+    document_path:str=Field(min_length=3,max_length=220)
+    proposed_text:str=Field(min_length=20,max_length=30000)
+
+class GitHubPolicySubmit(GitHubPolicyReview):
+    expected_preview_digest:str=Field(min_length=64,max_length=64)
+    confirmed:bool=False
+
+@app.post('/api/site-policy/github/prepare')
+async def github_policy_preview(data:GitHubPolicyReview,user=Depends(legal.require_terms)):
+    # Only RIGHTS-authenticated users with preverified server-side site->repo grants
+    # may use an app installation scoped to the mapped repository.
+    try:
+        grant=github_pr.get_grant(user['id'],data.site_url,data.repository,data.document_path)
+        async with github_pr.GitHubAppAPI(grant) as api:
+            return await github_pr.prepare(api,user['id'],data.site_url,data.repository,
+                                          data.document_path,data.proposed_text)
+    except github_pr.GitHubGateError as e:
+        raise HTTPException(403,str(e))
+
+@app.post('/api/site-policy/github/submit')
+async def github_policy_submit(data:GitHubPolicySubmit,user=Depends(legal.require_terms)):
+    if os.getenv('RIGHTS_GITHUB_PR_ENABLED')!='1':
+        raise HTTPException(503,'Draft PR 쓰기 기능은 인증·보안 검증 및 명시적 운영 설정 전까지 비활성화됩니다.')
+    try:
+        grant=github_pr.get_grant(user['id'],data.site_url,data.repository,data.document_path)
+        async with github_pr.GitHubAppAPI(grant) as api:
+            return await github_pr.open_draft_pr(
+                api,user['id'],data.site_url,data.repository,data.document_path,
+                data.proposed_text,data.expected_preview_digest,data.confirmed)
+    except github_pr.GitHubPartialWrite as e:
+        raise HTTPException(409,{"status":"PARTIAL_NEEDS_READBACK","branch":e.branch,
+                                 "message":"GitHub에 일부 변경이 반영됐을 수 있습니다. 브랜치/PR을 확인하기 전 재시도하지 마세요."})
+    except github_pr.GitHubGateError as e:
+        raise HTTPException(403,str(e))
 
 @app.get('/api/health')
 async def health():return {'service':'ALDOL RIGHTS','version':VERSION,'legal_patch':'0.3.0-draft','transport':'Streamable HTTP','mcp_auth':'read-only bearer connection key','legal_clearance':False}
