@@ -22,8 +22,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: python -m pip install -r packages/rights/requirements.txt pytest==9.1.1
+      # Forge offline tests deliberately expect no installed MCP SDK.
       - run: python -m unittest discover -s tests -v
+      - run: python -m pip install -r packages/rights/requirements.txt pytest==9.1.1
       - run: pytest packages/rights/service/tests -q
       - run: python packages/rights/service/tests/legacy_sdk.py
       - run: node --check packages/rights/service/public/app.js
