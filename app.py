@@ -70,14 +70,34 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
 
+_MOBILE_STATIC = {
+    "/mobile", "/mobile/", "/mobile/index.html", "/mobile/app.js", "/mobile/styles.css",
+    "/mobile/manifest.webmanifest", "/mobile/sw.js", "/mobile/icon-192.png", "/mobile/icon-512.png",
+}
+
 @app.middleware("http")
 async def bearer_auth(request: Request, call_next):
-    if request.url.path == "/health" and request.method == "GET":
+    path = request.url.path
+    if path == "/health" and request.method == "GET":
         return JSONResponse({"status": "ok", "service": "aldol-design-mcp-preview"})
+    if path in _MOBILE_STATIC and request.method == "GET":
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-cache"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["X-Robots-Tag"] = "noindex"
+        return response
+    if path.startswith("/mobile/api/"):
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["X-Robots-Tag"] = "noindex"
+        return response
     key = os.getenv("ALDOL_DESIGN_MCP_KEY", "")
     if len(key) < 32:
         return JSONResponse({"error": "service_not_configured"}, status_code=503)
-    if request.url.path not in ("/ui/mcp", "/bonsae/mcp"):
+    if path not in ("/ui/mcp", "/bonsae/mcp"):
         return JSONResponse({"error": "not_found"}, status_code=404)
     origin = request.headers.get("origin")
     if origin and origin not in ("https://chatgpt.com", "https://chat.openai.com"):
@@ -96,5 +116,8 @@ async def bearer_auth(request: Request, call_next):
     response.headers["Cache-Control"] = "no-store"
     return response
 
+from mobile_pwa.routes import router as mobile_router
+
+app.include_router(mobile_router)
 app.mount("/ui", ui_asgi)
 app.mount("/bonsae", bonsae_asgi)
