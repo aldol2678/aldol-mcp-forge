@@ -68,7 +68,12 @@ async def site_policy_scan(url: str) -> dict:
     Any site may be inspected (public pages only); no login, JavaScript execution or site modifications.
     """
     import asyncio
-    return await asyncio.to_thread(site_policy.scan_site, url)
+    if os.getenv("RIGHTS_SITE_SCAN_ENABLED")!="1":
+        return {"status":"BLOCKED","reason":"External-site scan requires explicit security/rate-limit enablement; use site_policy_audit for supplied text.","changes_applied":False}
+    try:
+        return await asyncio.wait_for(asyncio.to_thread(site_policy.scan_site, url),timeout=18)
+    except (ValueError,TimeoutError,OSError):
+        return {"status":"UNAVAILABLE","reason":"Public HTTPS inspection failed or address not eligible.","changes_applied":False}
 
 @mcp.tool(annotations=READ)
 async def site_policy_audit(kind: str, document_text: str, jurisdiction: str="KR") -> dict:
