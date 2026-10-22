@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1c1915">
+  <title>알돌 디자인 모바일</title>
+  <link rel="manifest" href="/mobile/manifest.webmanifest">
+  <link rel="icon" href="/mobile/icon-192.png">
+  <link rel="stylesheet" href="/mobile/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">ALDOL UI MCP × BONSAE</p>
+      <h1>모바일 디자인 초안</h1>
+      <p class="lede">ChatGPT Android 앱 안에서 개인 MCP를 직접 부른 화면이 아닙니다. 같은 Vercel 앱의 별도 모바일 웹입니다.</p>
+    </header>
+
+    <p id="offline" class="banner" hidden role="status">오프라인입니다. 도구는 호출하지 않았고, 저장된 화면을 성공으로 보지 않습니다.</p>
+    <p id="config" class="banner" hidden role="status"></p>
+
+    <section id="auth" class="panel" aria-labelledby="auth-title">
+      <h2 id="auth-title">서버 세션</h2>
+      <p class="help">키를 한 번 서버로 보내 확인합니다. 페이지, 저장소, 브라우저 저장소에는 남기지 않습니다. 30분 뒤 세션이 끝납니다.</p>
+      <form id="login-form">
+        <label for="key">인증키</label>
+        <input id="key" name="key" type="password" autocomplete="off" spellcheck="false" inputmode="text">
+        <div class="row">
+          <button class="primary" type="submit">세션 시작</button>
+        </div>
+      </form>
+      <p id="session-on" class="help" hidden>세션이 연결되어 있습니다.</p>
+      <button id="logout" class="ghost" type="button" hidden>세션 끝내기</button>
+    </section>
+
+    <section id="composer" class="panel" hidden aria-labelledby="composer-title">
+      <h2 id="composer-title">초안 요청</h2>
+      <p class="help">실행하면 본새 <code>generate_design_spec</code>, UI <code>ui_import_bonsae</code>, <code>ui_generate</code>만 이 순서로 호출합니다.</p>
+      <div class="row">
+        <button id="example" class="ghost" type="button">예시 채우기</button>
+        <button id="add-component" class="ghost" type="button">구성요소 추가</button>
+      </div>
+      <form id="flow-form">
+        <label for="goal">목표</label>
+        <textarea id="goal" name="goal" maxlength="400"></textarea>
+        <label for="preset">UI 프리셋</label>
+        <select id="preset" name="preset">
+          <option value="forest">forest</option>
+          <option value="studio">studio</option>
+          <option value="slate">slate</option>
+        </select>
+        <div id="components"></div>
+        <p class="help">이 화면은 구성요소 8개까지 보냅니다. 상태·동작·접근성 문장은 아래 미구현 목록으로만 돌아가고, 버튼으로 만들어지지 않습니다.</p>
+        <button id="run" class="primary" type="submit">세 도구 실행</button>
+      </form>
+    </section>
+
+    <section id="tools" class="panel" hidden aria-labelledby="tools-title">
+      <h2 id="tools-title">서버가 보고한 도구</h2>
+      <div id="tool-list"></div>
+    </section>
+
+    <p id="loading" class="banner" hidden role="status">본새 명세를 UI 초안으로 넘기는 중입니다.</p>
+    <p id="empty" class="panel" role="status">아직 생성 결과가 없습니다.</p>
+    <p id="error" class="panel error" hidden role="alert"></p>
+
+    <section id="result" hidden aria-live="polite">
+      <section class="panel" aria-labelledby="preview-title">
+        <h2 id="preview-title">구조 미리보기</h2>
+        <p class="help">자리표시자 카드입니다. 스크립트는 제거했고 iframe도 실행 권한이 없습니다. 동작, 데이터, 360/390 레이아웃 구현이 아닙니다.</p>
+        <iframe id="preview" sandbox title="구조 미리보기. 스크립트는 실행하지 않습니다."></iframe>
+      </section>
+      <section class="panel unimplemented" aria-labelledby="gap-title">
+        <p class="badge">NOT_IMPLEMENTED</p>
+        <h2 id="gap-title">아직 구현하지 않은 요구</h2>
+        <div id="gaps"></div>
+      </section>
+      <section class="panel">
+        <h2>호출 기록</h2>
+        <ul id="steps"></ul>
+        <details>
+          <summary>UI 명세 JSON</summary>
+          <pre id="spec"></pre>
+        </details>
+      </section>
+    </section>
+
+    <p class="meta">Android Chrome에서 이 주소를 홈 화면에 추가하면 PWA로 설치할 수 있습니다. 이 저장소의 검증은 설치 가능 조건을 갖춘 것이며, 실기기 설치를 확인한 것은 아닙니다.</p>
+  </main>
+  <script src="/mobile/app.js" defer></script>
+</body>
+</html>
