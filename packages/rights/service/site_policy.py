@@ -101,6 +101,8 @@ def _fetch_html(url: str) -> tuple[str, str]:
             raise ValueError("사이트가 다른 주소로 이동시켰습니다. 최종 공개 HTTPS 주소를 직접 제공하세요.")
         if resp.status != 200:
             raise ValueError(f"공개 페이지를 가져올 수 없습니다 (HTTP {resp.status}).")
+        if resp.getheader("Content-Encoding", "identity").lower() not in ("", "identity"):
+            raise ValueError("압축 응답은 이 최소 스캐너에서 지원하지 않습니다.")
         content_type=resp.getheader("Content-Type","").lower()
         if "text/html" not in content_type:
             raise ValueError("HTML 공개 페이지만 지원합니다.")
@@ -119,21 +121,26 @@ def _fetch_html(url: str) -> tuple[str, str]:
 class _Extract(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.skip=0; self.links=[]; self.text=[]
+        self.skip=0; self.links=[]; self.text=[]; self.active_link=None
     def handle_starttag(self,tag,attrs):
         if tag in ("script","style","noscript","svg","iframe"): self.skip+=1
         if tag=="a":
             a=dict(attrs)
             href=a.get("href","")
-            if href:self.links.append([href,""])
+            if href:
+                self.links.append([href,""])
+                self.active_link=len(self.links)-1
         if tag in ("p","h1","h2","h3","li","section","br"):self.text.append("\n")
     def handle_endtag(self,tag):
         if tag in ("script","style","noscript","svg","iframe") and self.skip:self.skip-=1
+        if tag=="a":self.active_link=None
     def handle_data(self,data):
         if not self.skip:
             value=data.strip()
             if value:self.text.append(value+" ")
-            if self.links and value:self.links[-1][1]=(self.links[-1][1]+" "+value).strip()[:130]
+            if self.active_link is not None and value:
+                i=self.active_link
+                self.links[i][1]=(self.links[i][1]+" "+value).strip()[:130]
     def result(self):
         return re.sub(r"[ \t]+"," ","".join(self.text)).strip()[:MAX_TEXT]
 
