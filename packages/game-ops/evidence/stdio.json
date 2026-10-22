@@ -1,0 +1,14 @@
+{
+  "tools": [
+    "compare_game_versions",
+    "get_qa_report",
+    "inspect_game_artifact",
+    "run_browser_qa",
+    "run_game_scenarios",
+    "run_static_qa"
+  ],
+  "static_status": "PASS",
+  "qa_id": "c4036f69bd3f4e16802da7a93c45547d",
+  "regression": "FAIL",
+  "normal_shutdown": true
+}

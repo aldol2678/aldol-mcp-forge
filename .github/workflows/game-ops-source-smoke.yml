@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install isolated Game Ops MCP dependencies
+        run: python -m pip install -r packages/game-ops/requirements.txt pytest
+      - name: MCP protocol and input security tests
+        run: python -m pytest packages/game-ops/tests -q
       - name: Compile Python
         run: python -m compileall -q packages/game-ops/scripts
       - name: Run seven built-in offline tests

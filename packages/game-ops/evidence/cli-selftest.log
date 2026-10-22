@@ -1,0 +1,8 @@
+PASS single HTML ingestion and SHA-256
+PASS valid HTML static test
+PASS bundled JS embedded for offline QA
+PASS ZIP path traversal rejection
+PASS regression PASS-to-FAIL detection
+PASS regression FAIL-to-PASS detection
+PASS identical-input control
+SELFTEST PASSED: 7 assertions

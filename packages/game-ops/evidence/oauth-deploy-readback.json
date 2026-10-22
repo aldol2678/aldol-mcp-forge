@@ -1,0 +1,25 @@
+{
+  "executed_at": "2026-10-21T01:25:50.689708+00:00",
+  "runtime_commit": "593ead94630e80ba586edb8bd694571fb6ab6fc7",
+  "endpoint": "https://game-ops-mcp-api-production.up.railway.app/mcp",
+  "authenticated_remote_call": "NOT_EXECUTED: existing Railway token values withheld by connector; secret unchanged",
+  "health_status": 200,
+  "health": {
+    "service": "aldol-game-ops",
+    "version": "0.4.1",
+    "browser": "BLOCKED",
+    "auth_mode": "bearer"
+  },
+  "anonymous": {
+    "status": 401,
+    "challenge": "Bearer realm=\"aldol-game-ops\""
+  },
+  "wrong_bearer": {
+    "status": 401,
+    "challenge": "Bearer realm=\"aldol-game-ops\""
+  },
+  "oauth_discovery_in_bearer_mode": {
+    "status": 401,
+    "challenge": "Bearer realm=\"aldol-game-ops\""
+  }
+}

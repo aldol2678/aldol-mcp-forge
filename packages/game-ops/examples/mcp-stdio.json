@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "aldol-game-ops": {
+      "command": "/absolute/path/to/.venv/bin/python",
+      "args": ["/absolute/path/to/packages/game-ops/server.py"],
+      "env": {"GAME_OPS_ARTIFACT_ROOT": "/absolute/path/to/artifacts", "GAME_OPS_REPORT_ROOT": "/absolute/path/to/reports"}
+    }
+  }
+}
