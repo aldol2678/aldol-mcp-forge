@@ -41,6 +41,9 @@ class Handler(BaseHTTPRequestHandler):
         if self.path in ("/", "/mobile.html"):
             self._headers(200, "text/html; charset=utf-8")
             self.wfile.write(HTML.read_bytes())
+        elif self.path == "/mobile.js":
+            self._headers(200, "text/javascript; charset=utf-8")
+            self.wfile.write(HTML.with_name("mobile.js").read_bytes())
         elif self.path == "/health":
             self._send(200, {"status": "alive", "version": "0.1.0"})
         elif self.path == "/api/capabilities":
