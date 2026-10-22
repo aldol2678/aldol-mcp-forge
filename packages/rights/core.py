@@ -47,8 +47,10 @@ def _db_path() -> Path:
 @contextmanager
 def _db():
     path = _db_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
     connection = sqlite3.connect(str(path), timeout=10)
+    if os.name == "posix":
+        os.chmod(path, 0o600)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA busy_timeout = 10000")
     connection.execute("""CREATE TABLE IF NOT EXISTS assets (
@@ -132,7 +134,9 @@ def _selected(asset_ids_json: str) -> list[dict[str, Any]]:
         raise ValueError("asset_ids_json must be a JSON array of at most 500 strings")
     if not ids:
         with _db() as conn:
-            rows = conn.execute("SELECT * FROM assets ORDER BY created_at,asset_id LIMIT 500").fetchall()
+            rows = conn.execute("SELECT * FROM assets ORDER BY created_at,asset_id LIMIT 501").fetchall()
+        if len(rows) > 500:
+            raise ValueError("More than 500 assets; supply asset_ids_json explicitly. An incomplete report is not allowed.")
         return [dict(x) for x in rows]
     assets = [_get_asset(x) for x in dict.fromkeys(ids)]
     missing = [x for x, a in zip(dict.fromkeys(ids), assets) if a is None]
