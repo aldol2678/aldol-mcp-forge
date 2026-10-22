@@ -16,3 +16,14 @@ Bearer API key required; credentials are stored in the UI Railway service, not t
 
 ChatGPT private plugin: https://chatgpt.com/plugins/plugins_6ad810ca2dd08191a4a44e8dc1bc68c6
 Creation is verified; installation/authentication and host tool calls remain BLOCKED pending user connection. Keep PR #19 Draft.
+
+## BONSAE design handoff (source-only Draft)
+
+This branch adds `ui_import_bonsae(bonsae_output_json, preset='forest')` as the eighth MCP tool.
+It accepts BONSAE `generate_design_spec` output (the JSON-encoded `specification` and `constraints` fields),
+and produces a validated **structural preview**, with an explicit report of unimplemented states,
+actions, responsive layout and accessibility. It never claims functional or visual completion.
+See [docs/BONSAE_HANDOFF.md](docs/BONSAE_HANDOFF.md) for the contract and review gates.
+
+The existing deployed endpoint and plugin are still on the prior seven-tool version until
+separately redeployed and verified. A source branch/PR is not a production rollout.
