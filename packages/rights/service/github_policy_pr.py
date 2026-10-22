@@ -125,12 +125,12 @@ class GitHubAppAPI:
     async def __aexit__(self,*args):
         if self.client:await self.client.aclose()
         self.token=None
-    async def request(self,method:str,path:str,payload:dict|None=None,ok=(200,)):
+    async def request(self,method:str,path:str,payload:dict|None=None,ok=(200,),params:dict|None=None):
         # No arbitrary URL accepted; paths always assembled from validated repo/path.
         if not path.startswith("/") or "://" in path or "?" in path or "//" in path:
             raise GitHubGateError("허용되지 않은 GitHub API 경로입니다.")
         try:
-            r=await self.client.request(method,path,headers=_github_headers(self.token),json=payload)
+            r=await self.client.request(method,path,headers=_github_headers(self.token),json=payload,params=params)
         except httpx.HTTPError as e:
             raise GitHubGateError("GitHub API 네트워크 연결에 실패했습니다.") from e
         if r.status_code not in ok:
@@ -145,7 +145,7 @@ async def repo_context(api,grant:Grant)->dict:
     return r
 
 async def read_doc(api,grant:Grant,path:str,base:str)->dict:
-    doc=await api.request("GET","/repos/"+grant.repository+"/contents/"+quote(path,safe="/")+"?ref="+quote(base,safe=""))
+    doc=await api.request("GET","/repos/"+grant.repository+"/contents/"+quote(path,safe="/"),params={"ref":base})
     if doc.get("type")!="file" or doc.get("size",MAX_GITHUB_BYTES+1)>MAX_GITHUB_BYTES or doc.get("encoding")!="base64":
         raise GitHubGateError("파일 유형/크기를 검사할 수 없습니다.")
     raw=base64.b64decode(doc.get("content","").replace("\n",""),validate=True)
