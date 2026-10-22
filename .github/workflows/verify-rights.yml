@@ -31,3 +31,4 @@ jobs:
       - run: node --check packages/rights/service/public/app.js
       - run: node --check packages/rights/service/public/legal-ui.js
       - run: node --check packages/rights/service/public/site-policy-ui.js
+      - run: node --check packages/rights/service/public/github-policy-ui.js
