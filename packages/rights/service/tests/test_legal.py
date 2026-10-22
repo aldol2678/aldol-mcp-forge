@@ -77,3 +77,19 @@ def test_publish_validation_blocks_unverified_approval(monkeypatch):
             'reviewed_by_human':True})
         assert r.status_code==422
     finally:app.dependency_overrides.clear()
+
+def test_public_html_policy_escapes_untrusted_policy_text(monkeypatch):
+    async def policy(kind):
+        return {'kind':kind,'version':1,'effective_on':'2026-10-23',
+                'content':'<script>alert("x")</script>\n'+'저작권 검토 참고 문구 '*25}
+    monkeypatch.setattr(legal,'published',policy)
+    r=client.get('/privacy')
+    assert r.status_code==200
+    assert '&lt;script&gt;' in r.text
+    assert '<script>alert' not in r.text
+    assert '개인정보처리방침' in r.text
+
+def test_no_public_html_document_before_approval(monkeypatch):
+    async def missing(kind):return None
+    monkeypatch.setattr(legal,'published',missing)
+    assert client.get('/terms').status_code==503
