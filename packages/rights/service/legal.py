@@ -1,5 +1,6 @@
 """ALDOL RIGHTS policy lifecycle and privacy-rights routes, scoped to RIGHTS only."""
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from typing import Literal
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -62,7 +63,8 @@ async def admin_identity(user=Depends(user_identity)):
 async def published(kind: str):
     if kind not in ("privacy","terms"):
         raise HTTPException(404, "지원하지 않는 문서입니다.")
-    docs = await store.rows("rights_legal_documents", None, "select=doc_id,kind,version,content,effective_on,published_at&kind=eq."+kind+"&status=eq.published&order=version.desc&limit=1")
+    today=datetime.now(ZoneInfo("Asia/Seoul")).date().isoformat()
+    docs = await store.rows("rights_legal_documents", None, "select=doc_id,kind,version,content,effective_on,published_at&kind=eq."+kind+"&status=eq.published&effective_on=lte."+today+"&order=version.desc&limit=1")
     return docs[0] if docs else None
 
 async def require_terms(user=Depends(user_identity)):
@@ -148,7 +150,7 @@ async def publish_document(doc_id:UUID,data:PublishApproval,user=Depends(admin_i
     doc=current[0]
     if any(x in doc["content"] for x in ("[확인 필요]","[작성 필요]","TODO","미확정","TBD")):
         raise HTTPException(422,"검토되지 않은 안내 문구가 남아 있습니다.")
-    if doc["effective_on"]<datetime.now(timezone.utc).date().isoformat():
+    if doc["effective_on"]<datetime.now(ZoneInfo("Asia/Seoul")).date().isoformat():
         raise HTTPException(422,"시행일을 과거로 소급할 수 없습니다.")
     if doc["kind"]=="privacy":
         required=("처리 목적","보유","파기","정보주체","연락처","위탁","국외")
@@ -177,11 +179,16 @@ async def privacy_requests(user=Depends(user_identity)):
 @router.get("/my-data")
 async def my_data(user=Depends(user_identity)):
     # Metadata-only; original binary files are intentionally excluded.
-    assets=await store.rows("rights_assets",user["token"],"select=*&order=created_at.desc&limit=500")
+    assets=await store.rows("rights_assets",user["token"],"select=*&order=created_at.desc&limit=501")
+    if len(assets)>500:
+        raise HTTPException(413,"자산이 500개를 초과했습니다. 이 화면의 내보내기를 생략하고 완전한 열람을 요청하세요.")
     keys=await store.rows("rights_connection_keys",user["token"],
         "select=key_id,label,scope,expires_at,revoked,created_at&limit=100")
     checks=await store.rows("rights_checks",user["token"],
         "select=check_id,asset_id,created_at,result&order=created_at.desc&limit=100")
+    acceptances=await store.rows("rights_policy_acceptances",user["token"],"select=doc_id,accepted_at&order=accepted_at.desc&limit=100")
+    requests=await store.rows("rights_privacy_requests",user["token"],"select=request_id,request_type,status,created_at,resolved_at&order=created_at.desc&limit=100")
     return {"account":{"id":user["id"],"email":user["email"]},
             "assets":assets,"connection_key_metadata":keys,"recent_checks":checks,
+            "policy_acceptances":acceptances,"privacy_requests":requests,
             "notice":"메타데이터 열람용입니다. 원본 파일 전체와 과거 검사기록 전체를 포함하지 않습니다. 완전한 열람은 별도 요청하세요."}
