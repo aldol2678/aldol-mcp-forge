@@ -60,8 +60,8 @@ async function adminPolicies(){
     `<div class="notice warn">관리자 역할은 RIGHTS 전용 허가 목록으로 제한됩니다. 초안 게시 전 운영자·연락처·보존기간·국외이전/처리위탁의 실제 상태를 확인하세요.</div>
     <div class="two">${show('privacy')}${show('terms')}</div><section class="card" id="editor"><p>문서를 선택해 편집하세요. 사용자에게는 게시된 문서만 공개됩니다.</p></section>
     <section class="card"><h2>권리 행사 요청 <small>최근 100건</small></h2>${data.privacy_requests.map(r=>`<p>${esc(r.request_type)} · ${esc(r.status)} · ${esc(date(r.created_at))} · ID ${esc(r.request_id)}</p>`).join('')||'<p class="muted">접수된 요청이 없습니다.</p>'}</section>`;
-  async function editor(d) {
-    const isNew=!d;let text=d?.content||'',kind=d?.kind||'privacy';
+  async function editor(d,chosenKind) {
+    const isNew=!d;let text=d?.content||'',kind=d?.kind||chosenKind||'privacy';
     if(isNew) {
       const source=latest(kind);
       if(source)text=source.content;
@@ -93,5 +93,5 @@ async function adminPolicies(){
     $('#editor').scrollIntoView({block:'nearest'});
   }
   for(const btn of document.querySelectorAll('.edit-doc')) btn.onclick=()=>editor(docs.find(d=>d.doc_id===btn.dataset.id));
-  for(const btn of document.querySelectorAll('.new-doc')) btn.onclick=()=>editor({kind:btn.dataset.kind,content:latest(btn.dataset.kind)?.content||'',effective_on:new Date().toISOString().slice(0,10),_new:true}).then(()=>{});
+  for(const btn of document.querySelectorAll('.new-doc')) btn.onclick=()=>editor(null,btn.dataset.kind);
 }
