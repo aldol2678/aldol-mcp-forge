@@ -77,8 +77,9 @@ async def require_terms(user=Depends(user_identity)):
 
 async def signup_preflight(terms_id: UUID, accepted: bool):
     terms = await published("terms")
-    if not terms:
-        raise HTTPException(503, "회원가입 전에 이용약관 게시가 필요합니다.")
+    privacy = await published("privacy")
+    if not terms or not privacy:
+        raise HTTPException(503, "회원가입 전에 개인정보처리방침과 이용약관 게시가 필요합니다.")
     if not accepted or terms["doc_id"] != str(terms_id):
         raise HTTPException(409, "최신 이용약관을 읽고 동의해 주세요.")
     return terms
