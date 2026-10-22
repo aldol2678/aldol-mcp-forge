@@ -30,7 +30,7 @@ async def main():
     async with connection() as s:
         listed=await s.list_tools()
         names={t.name for t in listed.tools}
-        assert names=={'ui_catalog','ui_validate','ui_audit','ui_review','ui_review_markup','ui_generate','ui_presets'},names
+        assert names=={'ui_catalog','ui_validate','ui_audit','ui_review','ui_review_markup','ui_generate','ui_presets','ui_import_bonsae'},names
         results.append({'test':'discovery_and_schemas','status':'PASS','tools':[t.model_dump(mode='json') for t in listed.tools]})
         async def call(name,args,label,check,error=False):
             r=await s.call_tool(name,args)
@@ -42,6 +42,21 @@ async def main():
         spec=json.dumps(doc,ensure_ascii=False)
         for name,args in [('ui_catalog',{}),('ui_presets',{}),('ui_validate',{'spec_json':spec}),('ui_audit',{'spec_json':spec}),('ui_review',{'spec_json':spec})]:
             await call(name,args,name,lambda d:bool(d))
+        bonsae_fixture=json.dumps({'specification':json.dumps({
+            'goal':'원정 상태', 'tokens':{'primary':'#E9B35E'},
+            'components':[{'name':'Energy', 'role':'남은 에너지 표시',
+                           'states':['default','loading','error'],
+                           'mobile_behavior':'390px에서도 수치 표시',
+                           'interaction':'실제 값은 호스트에서 공급'}],
+            'layouts':{'390':'한 열','820':'두 열','1280':'세 열'},
+            'motion':'reduced motion', 'accessibility':'레이블'},ensure_ascii=False),
+            'constraints':json.dumps({'release_authorized':False})},ensure_ascii=False)
+        await call('ui_import_bonsae',{'bonsae_output_json':bonsae_fixture},
+                   'bonsae_handoff',lambda d:d['ui_validation']['valid'] and
+                   d['status']=='HANDOFF_REVIEW_REQUIRED' and
+                   d['release_authorized'] is False)
+        await call('ui_import_bonsae',{'bonsae_output_json':'{}'},
+                   'bonsae_bad_input',None,True)
         for v in ('0.1','0.2','0.3'):
             old=json.dumps({'version':v,'title':'저장','root':{'type':'button','label':'저장'}})
             await call('ui_validate',{'spec_json':old},'schema_'+v,lambda d:d['valid'])
@@ -62,7 +77,7 @@ async def main():
             await call(name,args,'invalid_'+str(len(results)),None,True)
         await call('ui_review_markup',{'html_source':'<script>fetch("http://127.0.0.1/secret")</script>'},'script_inspect_only',lambda d:d['context']=='markup')
     async with connection() as s:
-        assert len((await s.list_tools()).tools)==7
+        assert len((await s.list_tools()).tools)==8
         results.append({'test':'disconnect_reconnect','status':'PASS'})
     print(json.dumps({'sdk':'2.3.0','transport':'https' if os.environ.get('MCP_TEST_URL','').startswith('https:') else 'http' if os.environ.get('MCP_TEST_URL') else 'stdio','results':results,'passed':len(results)},ensure_ascii=False,indent=2))
 

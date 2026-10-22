@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Literal
 from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
-from . import core
+from . import core, bonsae_bridge
 
 app = MCPServer("aldol-ui-mcp")
 
@@ -48,6 +48,17 @@ def ui_presets() -> dict[str, Any]:
     """Return available curated design themes and typography/density token choices."""
     return {"presets": core.PRESETS, "fonts": list(core.FONTS),
             "densities": list(core.DENSITIES), "radii": list(core.RADII)}
+
+
+@app.tool()
+def ui_import_bonsae(bonsae_output_json: str, preset: Literal["forest", "studio", "slate"] = "forest") -> dict[str, Any]:
+    """Turn BONSAE generate_design_spec output into a review-only structural UI draft.
+
+    Preserves states, interactions, responsive guidance and unimplemented intent
+    in a handoff report; never implies functional or visual acceptance.
+    """
+    try: return bonsae_bridge.import_bonsae(bonsae_output_json, preset)
+    except ValueError as exc: raise ToolError(str(exc)) from exc
 
 
 def main() -> None:
