@@ -60,3 +60,12 @@ Offline unit tests verify path policy, secret redaction, status honesty, parser 
 ## License and upstream
 
 MIT for this package (see LICENSE). Trivy, OSV-Scanner and Syft are external open-source projects with their own licenses and separate distribution requirements.
+
+
+## Vercel protected preview deployment (container)
+
+A Dockerfile.vercel is included for Vercel Container Functions. The image verifies the SHA-256 digests of pinned Trivy v0.76.0, Syft v1.54.1 and OSV-Scanner v2.6.0 binaries during build. This only demonstrates binary installation. Trivy vulnerability DB is not bundled (vulnerability checks may report UNKNOWN), and OSV outbound requests remain disabled. The mounted workspace is limited to the source files included in this image; no arbitrary GitHub repository scanning is available.
+
+Create a separate Vercel team project linked to the repository, set the rootDirectory to packages/security and target only the reviewed feature branch, enable Vercel Authentication for all deployments and inject ALDOL_SECURITY_TOKEN as a sensitive preview secret (never commit tokens). The container listens on PORT and binds 0.0.0.0, with Vercel's HTTPS edge in front.
+
+Do not claim official MCP remote transport or permissioned repository scanning from the web UI. Any future remote MCP endpoint requires dedicated OAuth authorization, tenant-scoped repositories and execution isolation.

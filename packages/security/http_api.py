@@ -99,7 +99,7 @@ def main():
     if not os.getenv("ALDOL_SECURITY_ROOT"):
         raise SystemExit("Set ALDOL_SECURITY_ROOT to an allowed mounted workspace")
     host = os.getenv("ALDOL_SECURITY_HOST", "127.0.0.1")
-    port = int(os.getenv("ALDOL_SECURITY_PORT", "8765"))
+    port = int(os.getenv("PORT", os.getenv("ALDOL_SECURITY_PORT", "8765")))
     if not 1 <= port <= 65535:
         raise SystemExit("invalid port")
     server = ThreadingHTTPServer((host, port), Handler)

@@ -1,0 +1,34 @@
+# Preview-only private security control plane. Binaries are version/sha256 pinned.
+# No untrusted repositories are downloaded or executed.
+FROM python:3.12-slim-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl tar \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN set -eux; \
+  curl -fLsS --retry 3 -o /tmp/trivy.tar.gz https://github.com/aquasecurity/trivy/releases/download/v0.76.0/trivy_0.76.0_Linux-64bit.tar.gz; \
+  echo "e24b1c51293c1b15e4ba8d45bbc7891ba053f90278ec2698f3562c993e145fe7  /tmp/trivy.tar.gz" | sha256sum -c -; \
+  tar -xzOf /tmp/trivy.tar.gz trivy > /usr/local/bin/trivy; chmod 755 /usr/local/bin/trivy; \
+  curl -fLsS --retry 3 -o /tmp/syft.tar.gz https://github.com/anchore/syft/releases/download/v1.54.1/syft_1.54.1_linux_amd64.tar.gz; \
+  echo "c069905b391cc4c20a5ba65ad5c10be2a7ba074f8ea6ad203e24d14e303dad47  /tmp/syft.tar.gz" | sha256sum -c -; \
+  tar -xzOf /tmp/syft.tar.gz syft > /usr/local/bin/syft; chmod 755 /usr/local/bin/syft; \
+  curl -fLsS --retry 3 -o /usr/local/bin/osv-scanner https://github.com/google/osv-scanner/releases/download/v2.6.0/osv-scanner_linux_amd64; \
+  echo "ca69b3d3cd08f889a49dc0a383122f71cc528b83803671df5fd874d97485b108  /usr/local/bin/osv-scanner" | sha256sum -c -; \
+  chmod 755 /usr/local/bin/osv-scanner; \
+  rm -f /tmp/trivy.tar.gz /tmp/syft.tar.gz
+
+WORKDIR /app
+COPY engine.py http_api.py mobile.html mobile.js mcp_server.py requirements.txt /app/code/
+RUN useradd --uid 10001 --no-create-home --system --shell /usr/sbin/nologin scanner \
+ && chmod -R a+rX /app/code
+WORKDIR /app/code
+USER scanner
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    ALDOL_SECURITY_ROOT=/app/code \
+    ALDOL_SECURITY_HOST=0.0.0.0 \
+    ALDOL_SECURITY_OSV_NETWORK=0
+
+# Vercel sets PORT for containerized Functions; http_api.py also defaults to 8765 locally.
+CMD ["python", "-B", "http_api.py"]
