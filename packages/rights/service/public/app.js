@@ -92,6 +92,7 @@ async function route(){const token=++state.route;const hash=location.hash.slice(
   if(!state.user){if(hash==='privacy-center'){login();toast('로그인 후 개인정보 관리 기능을 이용할 수 있습니다.')}else login();return}
   $('#nav').hidden=false;
   if(hash==='privacy-center'){try{await privacyCenter()}catch(e){main.innerHTML=errorBox(e.message)}return}
+  if(hash==='site-policies'){sitePolicyWorkspace();return}
   if(hash==='policies'){try{await adminPolicies()}catch(e){main.innerHTML=errorBox(e.message)}return}
   try{const agreement=await api('/legal/acceptance');if(!agreement.accepted){await legalAcceptanceGate(agreement);return}}catch(e){main.innerHTML=errorBox(e.message);return}
   for(const a of $('#nav').querySelectorAll('a'))a.classList.toggle('active',a.hash===('#'+hash)||hash.startsWith('asset/')&&a.hash==='#assets');main.innerHTML='<p role="status">작업 공간을 불러오고 있습니다…</p>';try{
