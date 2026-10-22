@@ -1,0 +1,42 @@
+[
+  {
+    "test": "MCP_missing_auth_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "MCP_invalid_auth_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "recheck_saved_new_usage",
+    "status": "PASS"
+  },
+  {
+    "test": "usage_persistent_and_old_history_retained",
+    "status": "PASS"
+  },
+  {
+    "test": "report_uses_current_saved_usage",
+    "status": "PASS"
+  },
+  {
+    "test": "post_redeployment_persistence",
+    "status": "PASS"
+  },
+  {
+    "test": "revoke_key",
+    "status": "PASS"
+  },
+  {
+    "test": "revoked_MCP_auth_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "oversize_upload_denied",
+    "status": "PASS"
+  },
+  {
+    "test": "deployed_CSRF_denied",
+    "status": "PASS"
+  }
+]
