@@ -84,3 +84,5 @@ Example metadata ONLY (never include actual keys):
 Allowed provider categories: github, vercel, supabase, gcp, openai, railway, other. Inputs are allowlisted, and fields containing secret/key/value content are rejected. Risk codes include USER_REPORTED_EXPOSURE (based ONLY on supplied metadata), EXPIRED_BY_METADATA, ROTATION_OVERDUE_BY_METADATA, BROAD_PRIVILEGE_REVIEW, ROTATION_DATE_UNKNOWN, OWNER_UNKNOWN, and DOTENV_WORLD_READABLE. Key names and paths are represented by stable hashed references in results. Never consider UNKNOWN/INCOMPLETE/BLOCKED safe. No scheduled job is installed. Use existing read-only mounts and access-token protections.
 
 Offline checks: python -m unittest discover -s tests -v
+
+Additional guardrails: operator-assigned credential aliases are SHA-256 hashed in every report, and directory traversal errors mark coverage incomplete. Dotenv values are never returned or persisted by this module.

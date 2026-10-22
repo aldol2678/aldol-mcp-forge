@@ -79,6 +79,11 @@ class GuardianTests(unittest.TestCase):
         (self.root / "outside").symlink_to("/etc")
         self.assertEqual(g.report()["status"], "BLOCKED")
 
+    def test_metadata_alias_is_hashed(self):
+        marker = "sensitiveIdentifierThatMustNeverBeShown123"
+        self.manifest([{"ref": marker, "owner": "team", "last_rotated_at": "2026-10-01"}])
+        self.assertNotIn(marker, json.dumps(g.report()))
+
     def test_date_failure_is_incomplete(self):
         self.manifest([{"ref": "token1", "last_rotated_at": "2099-01-01"}])
         self.assertEqual(g.report()["status"], "INCOMPLETE")

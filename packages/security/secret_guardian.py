@@ -66,6 +66,8 @@ def _metadata(root: Path, today: dt.date) -> tuple[list[dict], list[dict], bool,
             if not isinstance(ref, str) or not REF_RE.fullmatch(ref) or ref in used:
                 raise ValueError("invalid ref")
             used.add(ref)
+            # Hash operator aliases too: an accidentally pasted credential must not leak.
+            ref = "meta-" + hashlib.sha256(ref.encode("utf-8")).hexdigest()[:16]
             provider = item.get("provider", "other")
             environment = item.get("environment", "unknown")
             privilege = item.get("privilege", "unknown")
@@ -107,7 +109,9 @@ def _is_env(name: str) -> bool:
 def _dotenv(root: Path) -> tuple[list[dict], list[dict], int, bool]:
     records, issues = [], []
     file_count, incomplete = 0, False
-    for current, dirs, files in os.walk(root, followlinks=False):
+    walk_errors: list[bool] = []
+    for current, dirs, files in os.walk(root, followlinks=False,
+                                         onerror=lambda _: walk_errors.append(True)):
         dirs[:] = [name for name in dirs if name not in SKIP_DIRS]
         for name in files:
             if not _is_env(name):
@@ -148,7 +152,7 @@ def _dotenv(root: Path) -> tuple[list[dict], list[dict], int, bool]:
                 incomplete = True
         if file_count > MAX_ENV_FILES or len(records) >= MAX_ITEMS:
             break
-    return records, issues, min(file_count, MAX_ENV_FILES), incomplete
+    return records, issues, min(file_count, MAX_ENV_FILES), incomplete or bool(walk_errors)
 
 def report(subpath: str = ".") -> dict[str, Any]:
     checked_at = _timestamp()
