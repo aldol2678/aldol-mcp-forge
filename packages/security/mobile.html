@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>ALDOL SECURITY</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;background:#101725;color:#f2f6ff}
+*{box-sizing:border-box}body{margin:0;padding:20px 16px 40px;max-width:660px;margin-inline:auto}
+h1{font-size:1.55rem;letter-spacing:.03em;margin-bottom:4px}
+p,small{color:#a9bacd;line-height:1.5}
+.panel{background:#1c2939;border:1px solid #35485e;border-radius:16px;padding:18px;margin:20px 0}
+label{display:block;font-weight:650;margin:14px 0 6px}
+input,select,button{width:100%;min-height:48px;border-radius:10px;font:inherit}
+input,select{background:#111e2c;color:#f1f5fc;border:1px solid #607387;padding:10px}
+button{background:#73d8c8;color:#10212b;border:0;font-weight:750;margin-top:18px}
+button:disabled{opacity:.55}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e6c97a}
+#output{white-space:pre-wrap;overflow-wrap:anywhere;font: .89rem/1.6 ui-monospace,monospace}
+.status{font-weight:700}footer{font-size:.8rem;margin-top:30px}
+</style>
+</head>
+<body>
+<header><h1>🛡️ ALDOL SECURITY</h1><p>허용된 프로젝트를 읽기 전용으로 검사합니다. 탐지된 비밀값은 화면에 표시하지 않습니다.</p></header>
+<main>
+<section class="panel">
+<label for="token">접근 토큰</label>
+<input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="서버 관리자에게 받은 토큰">
+<small>토큰은 이 페이지의 메모리에서만 사용하며 저장하지 않습니다.</small>
+<label for="path">프로젝트 하위 경로</label>
+<input id="path" type="text" value="." spellcheck="false" maxlength="220">
+<label for="tool">검사 종류</label>
+<select id="tool"><option value="all">종합 검사</option><option value="trivy">Trivy 취약점·시크릿</option><option value="osv">OSV 의존성 취약점</option><option value="syft">Syft SBOM 구성요소</option></select>
+<button id="scan">검사 시작</button>
+</section>
+<section class="panel" aria-live="polite" aria-label="검사 결과">
+<div class="status" id="state">검사 전</div>
+<pre id="output">보안 검사 결과가 여기에 표시됩니다.</pre>
+</section>
+</main>
+<footer>검사 없음 = 안전 인증이 아닙니다. UNKNOWN·BLOCKED는 검증 누락입니다.</footer>
+<script>
+const button=document.getElementById('scan');
+const state=document.getElementById('state');
+const output=document.getElementById('output');
+button.addEventListener('click',async()=>{
+  const token=document.getElementById('token').value;
+  const subpath=document.getElementById('path').value;
+  const tool=document.getElementById('tool').value;
+  if(!token){state.textContent='토큰이 필요합니다';return}
+  button.disabled=true;state.textContent='검사 중';output.textContent='';
+  try{
+    const response=await fetch('/api/scan',{method:'POST',headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({subpath,tool}),cache:'no-store'});
+    const data=await response.json();
+    state.textContent=response.ok?(data.overall||data.status||'완료'):'오류 '+response.status;
+    output.textContent=JSON.stringify(data,null,2);
+  }catch(_){state.textContent='연결 실패';output.textContent='서버 연결 상태를 확인하세요'}
+  finally{button.disabled=false}
+});
+</script>
+</body>
+</html>
