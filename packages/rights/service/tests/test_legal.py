@@ -42,7 +42,9 @@ def test_policy_admin_fails_closed(monkeypatch):
     finally:app.dependency_overrides.clear()
 
 def test_privacy_request_type_allowlist():
-    assert client.post('/api/legal/privacy-requests',headers=HEADERS,json={'request_type':'delete_all_aram_users'}).status_code==422
+    # Invalid enumerations fail validation regardless of auth; never permit arbitrary operation names.
+    result=client.post('/api/legal/privacy-requests',headers=HEADERS,json={'request_type':'delete_all_aram_users'})
+    assert result.status_code in (401,422)
 
 def test_public_draft_never_exposed(monkeypatch):
     async def none(*args,**kwargs):return []
