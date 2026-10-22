@@ -31,7 +31,7 @@ def workspace(path):
 async def check(client):
     expected = {
         "security_capabilities", "security_scan_trivy", "security_scan_osv",
-        "security_inventory_sbom", "security_scan_all"
+        "security_inventory_sbom", "security_scan_all", "security_secret_guardian"
     }
     found = {tool.name for tool in (await client.list_tools()).tools}
     assert found == expected, f"unexpected MCP tools: {found}"

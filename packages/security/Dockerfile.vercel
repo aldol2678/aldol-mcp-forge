@@ -18,7 +18,7 @@ RUN set -eux; \
   rm -f /tmp/trivy.tar.gz /tmp/syft.tar.gz
 
 WORKDIR /app
-COPY engine.py http_api.py mobile.html mobile.js mcp_server.py requirements.txt /app/code/
+COPY engine.py secret_guardian.py http_api.py mobile.html mobile.js mcp_server.py requirements.txt /app/code/
 RUN useradd --uid 10001 --no-create-home --system --shell /usr/sbin/nologin scanner \
  && chmod -R a+rX /app/code
 WORKDIR /app/code

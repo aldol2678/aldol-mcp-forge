@@ -30,7 +30,7 @@ button:disabled{opacity:.55}button:focus-visible,input:focus-visible,select:focu
 <label for="path">프로젝트 하위 경로</label>
 <input id="path" type="text" value="." spellcheck="false" maxlength="220">
 <label for="tool">검사 종류</label>
-<select id="tool"><option value="all">종합 검사</option><option value="trivy">Trivy 취약점·시크릿</option><option value="osv">OSV 의존성 취약점</option><option value="syft">Syft SBOM 구성요소</option></select>
+<select id="tool"><option value="all">종합 검사</option><option value="trivy">Trivy 취약점·시크릿</option><option value="osv">OSV 의존성 취약점</option><option value="syft">Syft SBOM 구성요소</option><option value="guardian">Secret Guardian · API 키 위험도</option></select>
 <button id="scan">검사 시작</button>
 </section>
 <section class="panel" aria-live="polite" aria-label="검사 결과">

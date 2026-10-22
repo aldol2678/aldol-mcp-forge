@@ -69,3 +69,18 @@ A Dockerfile.vercel is included for Vercel Container Functions. The image verifi
 Create a separate Vercel team project linked to the repository, set the rootDirectory to packages/security and target only the reviewed feature branch, enable Vercel Authentication for all deployments and inject ALDOL_SECURITY_TOKEN as a sensitive preview secret (never commit tokens). The container listens on PORT and binds 0.0.0.0, with Vercel's HTTPS edge in front.
 
 Do not claim official MCP remote transport or permissioned repository scanning from the web UI. Any future remote MCP endpoint requires dedicated OAuth authorization, tenant-scoped repositories and execution isolation.
+
+
+## Secret Guardian v0.1 (2026-10-23)
+
+Read-only workspace inventory using local .env variable NAMES and an optional operator-managed secret-guardian.inventory.json metadata file. It does not collect key values, fetch cloud secrets, auto-rotate credentials, or prove that a key leaked. External repository/account coverage is not supported by v0.1.
+
+MCP tool: security_secret_guardian(subpath="."). Authenticated HTTP: POST /api/scan with {"tool":"guardian","subpath":"."}. The existing Android-friendly browser selector also offers Secret Guardian; this is not remote ChatGPT MCP transport.
+
+Example metadata ONLY (never include actual keys):
+
+    {"schema_version":1,"credentials":[{"ref":"openai-prod-1","provider":"openai","environment":"production","privilege":"write","owner":"engineering","last_rotated_at":"2026-10-01","expires_at":"2027-01-01","rotation_policy_days":90,"exposure_status":"unknown"}]}
+
+Allowed provider categories: github, vercel, supabase, gcp, openai, railway, other. Inputs are allowlisted, and fields containing secret/key/value content are rejected. Risk codes include USER_REPORTED_EXPOSURE (based ONLY on supplied metadata), EXPIRED_BY_METADATA, ROTATION_OVERDUE_BY_METADATA, BROAD_PRIVILEGE_REVIEW, ROTATION_DATE_UNKNOWN, OWNER_UNKNOWN, and DOTENV_WORLD_READABLE. Key names and paths are represented by stable hashed references in results. Never consider UNKNOWN/INCOMPLETE/BLOCKED safe. No scheduled job is installed. Use existing read-only mounts and access-token protections.
+
+Offline checks: python -m unittest discover -s tests -v

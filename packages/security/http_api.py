@@ -9,6 +9,7 @@ from pathlib import Path
 import threading
 
 from engine import capabilities, scan, scan_all
+from secret_guardian import report as guardian_report
 
 LOCK = threading.BoundedSemaphore(1)
 MAX_REQUEST = 2048
@@ -71,7 +72,7 @@ class Handler(BaseHTTPRequestHandler):
                 raise ValueError("unexpected fields")
             tool = data.get("tool", "all")
             subpath = data.get("subpath", ".")
-            if tool not in ("all", "trivy", "osv", "syft") or not isinstance(subpath, str):
+            if tool not in ("all", "trivy", "osv", "syft", "guardian") or not isinstance(subpath, str):
                 raise ValueError("invalid scan options")
         except (ValueError, UnicodeDecodeError):
             self._send(400, {"error": "invalid JSON or scan options"})
@@ -80,7 +81,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send(429, {"error": "another scan is already running"})
             return
         try:
-            result = scan_all(subpath) if tool == "all" else scan(tool, subpath)
+            result = guardian_report(subpath) if tool == "guardian" else (scan_all(subpath) if tool == "all" else scan(tool, subpath))
             self._send(200, result)
         except Exception:
             self._send(500, {"error": "scan failed; internal details withheld"})
