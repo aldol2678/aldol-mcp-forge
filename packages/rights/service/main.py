@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
 import store
 from models import AssetInput,Login,CheckInput,KeyInput,Usage
-from policy import evaluate,credits,LICENSES,LABELS,VERSION,DISCLAIMER
+from policy import evaluate,credits,LICENSES,LABELS,VERSION,DISCLAIMER,markdown_text
 from uploads import validate_file,MAX_FILE
 from remote import transport,AuthenticatedMCP
 
@@ -217,9 +217,9 @@ async def report(project:str='',format:str='json',user=Depends(identity)):
     out={'version':VERSION,'project':project,'generated_at':datetime.now(timezone.utc).isoformat(),'count':len(data),'counts':{k:sum(r['decision']==k for r in results) for k in LABELS},'items':results,'credits':credits(data),'review_needed':[r['asset_id'] for r in results if r['decision']!='SUITABLE'],'legal_clearance':False,'disclaimer':DISCLAIMER}
     if format=='json':return out
     if format!='markdown':raise HTTPException(422,'지원하지 않는 보고서 형식입니다.')
-    lines=['# ALDOL RIGHTS 프로젝트 점검표',f"생성: {out['generated_at']}",f'프로젝트: {project or "전체"}',DISCLAIMER,'']
+    lines=['# ALDOL RIGHTS 프로젝트 점검표',f"생성: {out['generated_at']}",f'프로젝트: {markdown_text(project or "전체")}',DISCLAIMER,'']
     for r in results:
-        lines.extend([f"## {r['title']} — {r['status_label']}",f"라이선스: {r['license_id']} · 검사: {r['checked_at']}",f"신뢰 수준: {r['confidence']}"]+[f'- {x}' for x in r['basis']+r['blocked_reasons']+r['conditions']+r['missing_evidence']+r['human_review']]+[''])
+        lines.extend([f"## {markdown_text(r['title'])} — {r['status_label']}",f"라이선스: {r['license_id']} · 검사: {r['checked_at']}",f"신뢰 수준: {r['confidence']}"]+[f'- {x}' for x in r['basis']+r['blocked_reasons']+r['conditions']+r['missing_evidence']+r['human_review']]+[''])
     lines+=['## 저작자 표시 초안',out['credits']['credits']]
     return Response('\n'.join(lines),media_type='text/markdown; charset=utf-8',headers={'Content-Disposition':'attachment; filename="ALDOL-RIGHTS-report.md"'})
 

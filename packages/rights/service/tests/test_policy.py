@@ -29,3 +29,9 @@ def test_uploaded_proof_is_not_authenticity_guarantee():
     a=asset(); a['evidence_url']='';a['evidence_path']='user/a/proof.pdf'
     r=evaluate(a,dict(attribution_planned=True))
     assert r['legal_clearance'] is False and '원본' in ' '.join(r['human_review'])
+
+def test_exported_credits_do_not_render_user_html_or_markdown_images():
+    from policy import credits
+    a=asset();a['title']='<img src=https://attacker.invalid> ![x](https://attacker.invalid/a)'
+    rendered=credits([a])['credits']
+    assert '<img' not in rendered and '![' not in rendered

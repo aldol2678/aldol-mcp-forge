@@ -57,6 +57,7 @@ create schema if not exists rights_private;
 revoke all on schema rights_private from public,anon,authenticated;
 create function rights_private.bump_revision() returns trigger language plpgsql set search_path='' as $$
 begin new.revision=old.revision+1; new.updated_at=now(); new.owner_id=old.owner_id; new.created_at=old.created_at; return new; end $$;
+revoke all on function rights_private.bump_revision() from public,anon,authenticated;
 create trigger rights_revision before update on public.rights_assets for each row execute function rights_private.bump_revision();
 
 -- The sole intentional SECURITY DEFINER: opaque-key authentication, read-only,

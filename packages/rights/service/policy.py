@@ -1,5 +1,6 @@
 """Shared v0.2 policy wrapper. User records are claims, never legal clearance."""
 import sys
+import html,re
 from pathlib import Path
 from datetime import datetime, timezone
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -51,9 +52,13 @@ def evaluate(asset, usage):
                 confidence='입력 조건 비교: 높음 / 실제 권리 확인: 미검증' if not manual and lic!='UNKNOWN' else '낮음 — 원문·권리 범위 검토 필요',
                 license_reference=LICENSES.get(lic,{}).get('url',''),usage=usage,asset_revision=asset.get('revision',1),disclaimer=DISCLAIMER)
 
+def markdown_text(value):
+    return re.sub(r'([\\`*_{}\[\]()#+.!|>~-])', r'\\\1', html.escape(str(value), quote=False)).replace('\n',' ')
+
 def credits(assets):
     lines=[];missing=[]
     for a in assets:
-        lines.append(f"{a['title']} | {a.get('creator') or '저작자 미확인'} | {a['license_id']} | {a.get('source_url') or '출처 누락'} | {a.get('license_url') or LICENSES[a['license_id']].get('url','') or '라이선스 링크 누락'}")
+        values=[a['title'],a.get('creator') or '저작자 미확인',a['license_id'],a.get('source_url') or '출처 누락',a.get('license_url') or LICENSES[a['license_id']].get('url','') or '라이선스 링크 누락']
+        lines.append(' | '.join(markdown_text(v) for v in values))
         if not a.get('creator') or not a.get('source_url') or not (a.get('evidence_url') or a.get('evidence_path')): missing.append(a['asset_id'])
     return dict(status='DRAFT_REQUIRES_REVIEW',credits='\n'.join(lines),incomplete=missing,count=len(assets),disclaimer=DISCLAIMER)
