@@ -23,6 +23,12 @@ jobs:
       - run: python tests/sdk_smoke.py
       - run: python tests/local_http.py /tmp/ui-mcp-http
       - run: python -m playwright install --with-deps chromium
+      - name: Actual BONSAE source to UI MCP to Chromium
+        run: |
+          git fetch --no-tags --depth=1 origin a7acd54f9a4fe7fb3bf7dffd73960028ae3052a3
+          git worktree add --detach /tmp/aldol-bonsae-e2e FETCH_HEAD
+          test "$(git -C /tmp/aldol-bonsae-e2e rev-parse HEAD)" = "a7acd54f9a4fe7fb3bf7dffd73960028ae3052a3"
+          BONSAE_SOURCE_ROOT=/tmp/aldol-bonsae-e2e python tests/bonsae_actual_pipeline.py
       - name: Browser regression
         run: |
           python - <<'PY'
