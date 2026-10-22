@@ -86,3 +86,19 @@ Allowed provider categories: github, vercel, supabase, gcp, openai, railway, oth
 Offline checks: python -m unittest discover -s tests -v
 
 Additional guardrails: operator-assigned credential aliases are SHA-256 hashed in every report, and directory traversal errors mark coverage incomplete. Dotenv values are never returned or persisted by this module.
+
+
+## Isolated HTTP + simulated mobile-client integration checks
+
+CI runs a real loopback-only HTTP server (\`127.0.0.1:0\`) with a disposable temporary workspace and **synthetic test-only values**, then exercises:
+- HTTP bearer authentication, invalid payload rejection, existing OSV block behavior, health and capability responses.
+- Secret Guardian JSON redaction, path safety, and unchanged bytes in the allowed workspace.
+- HTTP serving of the mobile HTML/JavaScript and the unchanged UI client's button-click code run through Node's simulated DOM, making real loopback HTTP requests and testing success/401/missing-token paths.
+
+Run locally with Python 3.11+ and Node.js 22+:
+
+\`\`\`sh
+python -m unittest discover -s packages/security/tests -v
+\`\`\`
+
+These tests never call cloud providers and do not expose HTTP to the public internet. Simulated DOM verification does **not** verify real Android browser layout, touch handling, protected Vercel preview, remote MCP/OAuth integration, or external API key inventory. A private, explicitly authorized device test is still needed before claiming those capabilities.
