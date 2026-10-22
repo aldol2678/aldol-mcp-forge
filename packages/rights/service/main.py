@@ -1,12 +1,12 @@
 from __future__ import annotations
-import hashlib,json,secrets,os
+import hashlib,json,secrets,os,html
 from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import quote,urlsplit
 from uuid import UUID,uuid4
 from datetime import datetime,timezone,timedelta
 from fastapi import FastAPI,HTTPException,Request,Depends,UploadFile,File
-from fastapi.responses import JSONResponse,FileResponse,Response
+from fastapi.responses import JSONResponse,FileResponse,Response,HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.exceptions import RequestValidationError
 import store
@@ -225,6 +225,21 @@ async def report(project:str='',format:str='json',user=Depends(identity)):
         lines.extend([f"## {markdown_text(r['title'])} — {r['status_label']}",f"라이선스: {r['license_id']} · 검사: {r['checked_at']}",f"신뢰 수준: {r['confidence']}"]+[f'- {x}' for x in r['basis']+r['blocked_reasons']+r['conditions']+r['missing_evidence']+r['human_review']]+[''])
     lines+=['## 저작자 표시 초안',out['credits']['credits']]
     return Response('\n'.join(lines),media_type='text/markdown; charset=utf-8',headers={'Content-Disposition':'attachment; filename="ALDOL-RIGHTS-report.md"'})
+
+@app.get('/privacy',response_class=HTMLResponse)
+async def public_privacy():
+    return await public_legal_page('privacy')
+
+@app.get('/terms',response_class=HTMLResponse)
+async def public_terms():
+    return await public_legal_page('terms')
+
+async def public_legal_page(kind):
+    doc=await legal.published(kind)
+    if not doc:raise HTTPException(503,'공식 문서 게시 준비 중입니다.')
+    title='개인정보처리방침' if kind=='privacy' else '서비스 이용약관'
+    content=html.escape(doc['content'])
+    return HTMLResponse('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+' | ALDOL RIGHTS</title><link rel="stylesheet" href="/static/style.css"></head><body><main><h1>'+title+'</h1><p>v'+str(doc['version'])+' · 시행일 '+html.escape(doc['effective_on'])+'</p><section class="card legal-document"><pre class="legal-content">'+content+'</pre></section><p><a href="/">ALDOL RIGHTS 홈으로 돌아가기</a></p></main></body></html>')
 
 @app.get('/')
 async def home():return FileResponse(PUBLIC/'index.html')
