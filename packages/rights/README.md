@@ -13,7 +13,7 @@ python packages/rights/server.py
 
 Configure any MCP client to launch `python /ABSOLUTE/PATH/aldol-mcp-forge/packages/rights/server.py` over stdio. **Not hosted or registered with ChatGPT automatically.** Run pure unit tests without dependencies via `python -m unittest discover -s packages/rights/tests -v`.
 
-Default database: `$XDG_DATA_HOME/aldol-rights/rights.sqlite3` or `~/.local/share/aldol-rights/rights.sqlite3`. Set `ALDOL_RIGHTS_DB` to an absolute path to override. Avoid synced/public directories containing rights records. Do not commit the database. Evidence links are supplied by the user, not fetched or validated. No automatic external calls, file scans, scraping, deletions, public postings or uploads.
+Default database: `$XDG_DATA_HOME/aldol-rights/rights.sqlite3` or `~/.local/share/aldol-rights/rights.sqlite3`. Set `ALDOL_RIGHTS_DB` to an absolute path to override. Avoid synced/public directories containing rights records. On POSIX the database file is chmod 0600 and newly created parent directory uses mode 0700. Do not commit the database. Evidence links are supplied by the user, not fetched or validated. No automatic external calls, file scans, scraping, deletions, public postings or uploads.
 
 ## Decisions and boundaries
 
@@ -21,7 +21,7 @@ Default database: `$XDG_DATA_HOME/aldol-rights/rights.sqlite3` or `~/.local/shar
 - Asset registration is only an **unverified claim**, even when the evidence_url field is populated. `READY_FOR_HUMAN_REVIEW` is **not** licensing approval. `BLOCKED` is a detected contradiction under the license *recorded by the user*, pending any separate grants.
 - Checks are deliberately conservative. CC ND only blocks **sharing** an adaptation, not making a private modification. CC SA when redistributing an adaptation still needs a human compatibility check. Credit output is a draft; full license notice and modification notes must be verified before distribution.
 - Any missing source or evidence URL produces `NEEDS_EVIDENCE` unless there is a direct blocking rule. URLs are accepted as metadata but never downloaded or considered authentic. A fully populated record still needs source-level inspection.
-- `asset_ids_json="[]"` means first 500 registered assets (not an exhaustive report above 500). To target particular assets, pass a JSON string array of IDs. No asset changes or deletions after registration in this MVP; corrections require a reviewed future workflow.
+- `asset_ids_json="[]"` means all assets, but returns an explicit error if more than 500 are registered (no silently incomplete reports). To target particular assets, pass a JSON string array of IDs. No asset changes or deletions after registration in this MVP; corrections require a reviewed future workflow.
 
 ## Example (import core with `PYTHONPATH=packages/rights`)
 
