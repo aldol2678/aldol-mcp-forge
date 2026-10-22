@@ -42,7 +42,7 @@ function login(){
     const out=await api('/auth/'+(signup?'signup':'login'),{method:'POST',body:data});
     if(signup){toast(out.message+' 동의 기록은 첫 로그인 후 저장됩니다.');return}
     state.user=await api('/session');location.hash='#dashboard';await route();
-  }catch(e){showFormError(f,e)}finally{busy(f,false)}}}
+  }catch(e){showFormError(f,e)}finally{busy(f,false)}}
  f.onsubmit=e=>{e.preventDefault();submit()};$('#signup').onclick=()=>{const n=$('#signup-terms');if(n.hidden){n.hidden=false;toast('이용약관을 확인한 뒤 계정 만들기를 다시 누르세요.');return}submit(true)};
 }
 function dashboard(){
