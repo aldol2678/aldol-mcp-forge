@@ -40,7 +40,7 @@ def capabilities() -> dict[str, Any]:
     }
 
 
-def _scoped_path(subpath: str) -> tuple[Path, Path]:
+def _scoped_path(subpath: str, *, validate_tree: bool = True) -> tuple[Path, Path]:
     raw = subpath.strip() if isinstance(subpath, str) else ""
     if not raw or len(raw) > 220 or "\x00" in raw:
         raise ValueError("invalid relative subpath")
@@ -52,14 +52,24 @@ def _scoped_path(subpath: str) -> tuple[Path, Path]:
     root = Path(configured).expanduser().resolve(strict=True)
     if not root.is_dir():
         raise ValueError("workspace root must be a directory")
-    target = root.joinpath(raw).resolve(strict=True)
+    candidate = root
+    for part in PurePath(raw).parts:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            raise ValueError("symbolic links are not permitted in scan targets")
+    target = candidate.resolve(strict=True)
     if not target.is_relative_to(root):
         raise ValueError("target escapes configured workspace")
     if not target.is_dir():
         raise ValueError("target must be an existing directory")
+    # Guardian performs its own bounded descriptor-relative traversal.
+    if not validate_tree:
+        return root, target
     # Reject symlinks rather than trusting scanner-dependent traversal behavior.
+    def walk_error(_):
+        raise ValueError("workspace traversal failed")
     seen = 0
-    for current, dirs, names in os.walk(target, followlinks=False):
+    for current, dirs, names in os.walk(target, followlinks=False, onerror=walk_error):
         for name in dirs + names:
             seen += 1
             if seen > MAX_ENTRIES:

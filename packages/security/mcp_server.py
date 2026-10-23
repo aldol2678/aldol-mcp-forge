@@ -2,6 +2,7 @@
 from typing import Any
 from mcp.server import MCPServer
 from engine import capabilities, scan, scan_all
+from secret_guardian import report as guardian_report
 
 app = MCPServer("aldol-security")
 
@@ -34,6 +35,12 @@ def security_inventory_sbom(subpath: str = ".") -> dict[str, Any]:
 def security_scan_all(subpath: str = ".") -> dict[str, Any]:
     """Run three scoped scanners and preserve UNKNOWN/BLOCKED gaps."""
     return scan_all(subpath)
+
+
+@app.tool()
+def security_secret_guardian(subpath: str = ".") -> dict[str, Any]:
+    """Read-only local credential-name inventory and metadata risk assessment."""
+    return guardian_report(subpath)
 
 
 if __name__ == "__main__":

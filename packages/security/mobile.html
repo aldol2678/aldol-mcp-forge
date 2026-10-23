@@ -30,7 +30,7 @@ button:disabled{opacity:.55}button:focus-visible,input:focus-visible,select:focu
 <label for="path">프로젝트 하위 경로</label>
 <input id="path" type="text" value="." spellcheck="false" maxlength="220">
 <label for="tool">검사 종류</label>
-<select id="tool"><option value="all">종합 검사</option><option value="trivy">Trivy 취약점·시크릿</option><option value="osv">OSV 의존성 취약점</option><option value="syft">Syft SBOM 구성요소</option></select>
+<select id="tool"><option value="all">종합 검사</option><option value="trivy">Trivy 취약점·시크릿</option><option value="osv">OSV 의존성 취약점</option><option value="syft">Syft SBOM 구성요소</option><option value="guardian">Secret Guardian · API 키 위험도</option></select>
 <button id="scan">검사 시작</button>
 </section>
 <section class="panel" aria-live="polite" aria-label="검사 결과">
@@ -38,7 +38,7 @@ button:disabled{opacity:.55}button:focus-visible,input:focus-visible,select:focu
 <pre id="output">보안 검사 결과가 여기에 표시됩니다.</pre>
 </section>
 </main>
-<footer>검사 없음 = 안전 인증이 아닙니다. UNKNOWN·BLOCKED는 검증 누락입니다.</footer>
+<footer>검사 없음 = 안전 인증이 아닙니다. UNKNOWN·INCOMPLETE·BLOCKED·FINDINGS_WITH_GAPS는 검증 누락입니다. INVENTORIED는 목록 수집 상태이며 안전 판정이 아닙니다.</footer>
 <script src="/mobile.js" defer></script>
 </body>
 </html>

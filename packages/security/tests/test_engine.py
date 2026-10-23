@@ -27,6 +27,20 @@ class TestEngine(unittest.TestCase):
         a, b = engine._scoped_path(".")
         self.assertEqual(a, b)
 
+    def test_walk_errors_fail_closed(self):
+        def failed_walk(*args, **kwargs):
+            kwargs['onerror'](PermissionError('synthetic-private-path'))
+            return iter(())
+        with patch('engine.os.walk', side_effect=failed_walk):
+            result = engine.scan('trivy')
+        self.assertEqual(result['status'], 'BLOCKED')
+        self.assertNotIn('synthetic-private-path', json.dumps(result))
+
+    def test_symlink_subpath_is_blocked_even_inside_root(self):
+        (self.root / 'real').mkdir()
+        (self.root / 'alias').symlink_to(self.root / 'real')
+        self.assertEqual(engine.scan('trivy', 'alias')['status'], 'BLOCKED')
+
     def test_parent_traversal(self):
         with self.assertRaises(ValueError):
             engine._scoped_path("../")
