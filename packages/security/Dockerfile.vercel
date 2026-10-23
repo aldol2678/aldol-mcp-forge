@@ -1,6 +1,13 @@
 # Preview-only private security control plane. Binaries are version/sha256 pinned.
 # No untrusted repositories are downloaded or executed.
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-bookworm AS guardian-package
+WORKDIR /app
+# Shared source stage; isolated CI smoke does not download scanner binaries.
+COPY engine.py guardian_io.py secret_guardian.py http_api.py mobile.html mobile.js mcp_server.py requirements.txt /app/code/
+WORKDIR /app/code
+RUN PYTHONDONTWRITEBYTECODE=1 python -B -c "import http_api; import secret_guardian; import guardian_io"
+
+FROM guardian-package AS runtime
 
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl tar \
  && rm -rf /var/lib/apt/lists/*
@@ -18,7 +25,6 @@ RUN set -eux; \
   rm -f /tmp/trivy.tar.gz /tmp/syft.tar.gz
 
 WORKDIR /app
-COPY engine.py secret_guardian.py http_api.py mobile.html mobile.js mcp_server.py requirements.txt /app/code/
 RUN useradd --uid 10001 --no-create-home --system --shell /usr/sbin/nologin scanner \
  && chmod -R a+rX /app/code
 WORKDIR /app/code

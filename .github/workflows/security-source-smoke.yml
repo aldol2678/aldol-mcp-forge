@@ -41,3 +41,13 @@ jobs:
           name: security-verification
           path: security-*.log
           retention-days: 14
+
+  packaging-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build standard Dockerfile source stage and test Guardian loopback
+        run: bash packages/security/tests/docker_packaging_smoke.sh
