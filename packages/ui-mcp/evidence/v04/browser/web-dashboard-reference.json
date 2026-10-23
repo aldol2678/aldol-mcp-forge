@@ -1,0 +1,1088 @@
+{
+  "analysis_version": "0.4",
+  "status": "DRAFT_REVIEW_REQUIRED",
+  "screens": [
+    {
+      "id": "s1",
+      "basis": "single supplied static document",
+      "routes_verified": false
+    }
+  ],
+  "components": [
+    {
+      "id": "c1",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e1",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c2",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e2",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c3",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e3",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c4",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e4",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c5",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e5",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c6",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e6",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c7",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e7",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c8",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e8",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c9",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e9",
+      "confidence": "medium",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    }
+  ],
+  "layout_regions": [
+    {
+      "id": "c1",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e1",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c2",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e2",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c3",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e3",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c4",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e4",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c5",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e5",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c6",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e6",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c7",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e7",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c8",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e8",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c9",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e9",
+      "confidence": "medium",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    }
+  ],
+  "repeated_components": [
+    {
+      "role": "button",
+      "count": 3,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "card",
+      "count": 2,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "panel",
+      "count": 3,
+      "basis": "same semantic role; not proven reusable component"
+    }
+  ],
+  "interaction_candidates": [
+    {
+      "component": "c1",
+      "kind": "handler_or_declarative_binding",
+      "evidence": "e1",
+      "behavior_verified": false
+    },
+    {
+      "component": "c5",
+      "kind": "activation",
+      "evidence": "e5",
+      "behavior_verified": false
+    },
+    {
+      "component": "c5",
+      "kind": "handler_or_declarative_binding",
+      "evidence": "e5",
+      "behavior_verified": false
+    },
+    {
+      "component": "c7",
+      "kind": "activation",
+      "evidence": "e7",
+      "behavior_verified": false
+    },
+    {
+      "component": "c7",
+      "kind": "expand_collapse",
+      "evidence": "e7",
+      "behavior_verified": false
+    },
+    {
+      "component": "c7",
+      "kind": "handler_or_declarative_binding",
+      "evidence": "e7",
+      "behavior_verified": false
+    },
+    {
+      "component": "c8",
+      "kind": "activation",
+      "evidence": "e8",
+      "behavior_verified": false
+    },
+    {
+      "component": "c8",
+      "kind": "handler_or_declarative_binding",
+      "evidence": "e8",
+      "behavior_verified": false
+    },
+    {
+      "component": "c9",
+      "kind": "handler_or_declarative_binding",
+      "evidence": "e9",
+      "behavior_verified": false
+    }
+  ],
+  "responsive_evidence": [
+    {
+      "kind": "device_width_viewport",
+      "observed": true
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "480px"
+        }
+      ],
+      "sheet": 0,
+      "line": 99
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 97
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "600px"
+        }
+      ],
+      "sheet": 0,
+      "line": 92
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 88
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 59
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 57
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "480px"
+        }
+      ],
+      "sheet": 0,
+      "line": 54
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "600px"
+        }
+      ],
+      "sheet": 0,
+      "line": 53
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 49
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "480px"
+        }
+      ],
+      "sheet": 0,
+      "line": 46
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 44
+    }
+  ],
+  "tokens": [
+    {
+      "property": "font-size",
+      "value": "27px",
+      "observed": true,
+      "sheet": 0,
+      "line": 96
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 95
+    },
+    {
+      "property": "width",
+      "value": "49px",
+      "observed": true,
+      "sheet": 0,
+      "line": 94
+    },
+    {
+      "property": "font-size",
+      "value": "29px",
+      "observed": true,
+      "sheet": 0,
+      "line": 94
+    },
+    {
+      "property": "border-radius",
+      "value": "14px",
+      "observed": true,
+      "sheet": 0,
+      "line": 94
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 92
+    },
+    {
+      "property": "border-radius",
+      "value": "999px",
+      "observed": true,
+      "sheet": 0,
+      "line": 88
+    },
+    {
+      "property": "color",
+      "value": "#fff",
+      "observed": true,
+      "sheet": 0,
+      "line": 88
+    },
+    {
+      "property": "color",
+      "value": "#ffffff74",
+      "observed": true,
+      "sheet": 0,
+      "line": 86
+    },
+    {
+      "property": "color",
+      "value": "#ffdda8a8",
+      "observed": true,
+      "sheet": 0,
+      "line": 84
+    },
+    {
+      "property": "color",
+      "value": "#fff",
+      "observed": true,
+      "sheet": 0,
+      "line": 83
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 78
+    },
+    {
+      "property": "color",
+      "value": "#e3f8e8b0",
+      "observed": true,
+      "sheet": 0,
+      "line": 72
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 68
+    },
+    {
+      "property": "width",
+      "value": "90px",
+      "observed": true,
+      "sheet": 0,
+      "line": 62
+    },
+    {
+      "property": "border-radius",
+      "value": "50%",
+      "observed": true,
+      "sheet": 0,
+      "line": 62
+    },
+    {
+      "property": "border-radius",
+      "value": "0",
+      "observed": true,
+      "sheet": 0,
+      "line": 54
+    },
+    {
+      "property": "border-radius",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 51
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 48
+    },
+    {
+      "property": "font-size",
+      "value": "13px",
+      "observed": true,
+      "sheet": 0,
+      "line": 48
+    },
+    {
+      "property": "padding",
+      "value": "16px",
+      "observed": true,
+      "sheet": 0,
+      "line": 46
+    },
+    {
+      "property": "border-radius",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 46
+    },
+    {
+      "property": "padding",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 46
+    },
+    {
+      "property": "border-radius",
+      "value": "3px",
+      "observed": true,
+      "sheet": 0,
+      "line": 45
+    },
+    {
+      "property": "border-radius",
+      "value": "3px",
+      "observed": true,
+      "sheet": 0,
+      "line": 44
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 43
+    },
+    {
+      "property": "gap",
+      "value": "7px",
+      "observed": true,
+      "sheet": 0,
+      "line": 43
+    },
+    {
+      "property": "border-radius",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 38
+    },
+    {
+      "property": "font-size",
+      "value": "13px",
+      "observed": true,
+      "sheet": 0,
+      "line": 38
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 37
+    },
+    {
+      "property": "color",
+      "value": "#ffc1bc",
+      "observed": true,
+      "sheet": 0,
+      "line": 36
+    },
+    {
+      "property": "color",
+      "value": "#ffe1a1",
+      "observed": true,
+      "sheet": 0,
+      "line": 35
+    },
+    {
+      "property": "color",
+      "value": "#9cf2c5",
+      "observed": true,
+      "sheet": 0,
+      "line": 34
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 32
+    },
+    {
+      "property": "gap",
+      "value": "7px",
+      "observed": true,
+      "sheet": 0,
+      "line": 31
+    },
+    {
+      "property": "padding",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 29
+    },
+    {
+      "property": "border-radius",
+      "value": "8px",
+      "observed": true,
+      "sheet": 0,
+      "line": 19
+    },
+    {
+      "property": "font-size",
+      "value": "15px",
+      "observed": true,
+      "sheet": 0,
+      "line": 19
+    },
+    {
+      "property": "color",
+      "value": "#ffb8b2",
+      "observed": true,
+      "sheet": 0,
+      "line": 18
+    },
+    {
+      "property": "color",
+      "value": "#ffe1a1",
+      "observed": true,
+      "sheet": 0,
+      "line": 17
+    },
+    {
+      "property": "color",
+      "value": "#abf5d2",
+      "observed": true,
+      "sheet": 0,
+      "line": 16
+    },
+    {
+      "property": "gap",
+      "value": "7px",
+      "observed": true,
+      "sheet": 0,
+      "line": 14
+    },
+    {
+      "property": "border-radius",
+      "value": "5px",
+      "observed": true,
+      "sheet": 0,
+      "line": 14
+    },
+    {
+      "property": "color",
+      "value": "#f2f6fb",
+      "observed": true,
+      "sheet": 0,
+      "line": 14
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 14
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 13
+    },
+    {
+      "property": "color",
+      "value": "#c5d0d9",
+      "observed": true,
+      "sheet": 0,
+      "line": 12
+    },
+    {
+      "property": "font-size",
+      "value": "14px",
+      "observed": true,
+      "sheet": 0,
+      "line": 12
+    },
+    {
+      "property": "custom-property",
+      "value": "#98B7FF",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "custom-property",
+      "value": "#131D32",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "custom-property",
+      "value": "#F7F9FF",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "custom-property",
+      "value": "#000000",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "custom-property",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "custom-property",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "max-width",
+      "value": "1100px",
+      "observed": true,
+      "sheet": 0,
+      "line": 1
+    },
+    {
+      "property": "width",
+      "value": "66.00%",
+      "observed": true,
+      "sheet": 3,
+      "line": 1
+    }
+  ],
+  "source_evidence": [
+    {
+      "id": "e1",
+      "element_index": 7,
+      "line": 99,
+      "tag": "main",
+      "observed": true
+    },
+    {
+      "id": "e2",
+      "element_index": 15,
+      "line": 99,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e3",
+      "element_index": 20,
+      "line": 99,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e4",
+      "element_index": 32,
+      "line": 99,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e5",
+      "element_index": 43,
+      "line": 99,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e6",
+      "element_index": 44,
+      "line": 99,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e7",
+      "element_index": 48,
+      "line": 99,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e8",
+      "element_index": 49,
+      "line": 99,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e9",
+      "element_index": 50,
+      "line": 99,
+      "tag": "section",
+      "observed": true
+    }
+  ],
+  "confidence": {
+    "structure": "medium",
+    "runtime": "unknown",
+    "geometry": "unknown"
+  },
+  "unknowns": [
+    "Computed geometry, overflow, visibility and cascade require browser QA",
+    "Executable/embed content ignored: 1",
+    "Interactions and state transitions are candidates, not verified behavior",
+    "No screenshot understanding adapter is connected"
+  ],
+  "unmapped_features": [
+    "Arbitrary CSS layout and runtime logic are not translated into UI JSON",
+    "Draft components are review placeholders; source copy, links and actions are not transferred"
+  ],
+  "ui_spec_draft": {
+    "version": "0.3",
+    "title": "Static reference structure review",
+    "preset": "forest",
+    "root": {
+      "type": "stack",
+      "children": [
+        {
+          "type": "text",
+          "text": "Static reference structure review",
+          "variant": "heading"
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c1 content",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "content",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c2 card",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "card",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c3 card",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "card",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c4 panel",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "panel",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c5 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c6 panel",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "panel",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c7 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c8 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c9 panel",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "panel",
+              "variant": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    "design": {
+      "context": "product",
+      "brand_note": "BONSAE structural preview only; actions and data require implementation."
+    },
+    "data_mode": "demo"
+  },
+  "bonsae_spec_draft": {
+    "goal": "Static reference structure review",
+    "device": "unspecified",
+    "tokens": {},
+    "components": [
+      {
+        "name": "c1 content",
+        "role": "content",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c2 card",
+        "role": "card",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c3 card",
+        "role": "card",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c4 panel",
+        "role": "panel",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c5 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c6 panel",
+        "role": "panel",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c7 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c8 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c9 panel",
+        "role": "panel",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      }
+    ]
+  },
+  "counts": {
+    "recognized_components": 9,
+    "returned_components": 9
+  },
+  "functional_ui_complete": false,
+  "release_authorized": false
+}

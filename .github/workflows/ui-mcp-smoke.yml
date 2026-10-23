@@ -1,7 +1,7 @@
 name: UI MCP integration
 on:
   pull_request:
-    paths: ['packages/ui-mcp/**', '.github/workflows/ui-mcp-smoke.yml']
+    paths: ['packages/ui-mcp/**', 'requirements.txt', '.github/workflows/ui-mcp-smoke.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,12 +17,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -r requirements.txt playwright
+      - run: pip install -r requirements.txt -r ../../requirements.txt playwright==1.64.1
       - run: python -m compileall -q ui_core tests
       - run: python -m unittest discover -s tests -v
       - run: python tests/sdk_smoke.py
+      - run: python tests/sdk_v04.py
       - run: python tests/local_http.py /tmp/ui-mcp-http
+      - run: python tests/design_http_v04.py /tmp/ui-mcp-design-http
       - run: python -m playwright install --with-deps chromium
+      - name: Reference and visual regression evidence
+        run: python tests/browser_v04.py
       - name: Actual BONSAE source to UI MCP to Chromium
         run: |
           git fetch --no-tags --depth=1 origin a7acd54f9a4fe7fb3bf7dffd73960028ae3052a3
@@ -47,3 +51,8 @@ jobs:
           node-version: '24'
       - run: npm ci --prefix tests/react-runtime
       - run: python tests/react_browser.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ui-reference-visual-evidence
+          path: packages/ui-mcp/evidence/v04/browser

@@ -1,0 +1,61 @@
+{
+  "analysis_version": "0.4",
+  "comparison_mode": "region",
+  "viewport": {
+    "category": "mobile",
+    "reference": {
+      "width": 390,
+      "height": 844
+    },
+    "candidate": {
+      "width": 390,
+      "height": 844
+    },
+    "reference_aspect_ratio": 0.462085,
+    "candidate_aspect_ratio": 0.462085
+  },
+  "layout_similarity": 0.966175,
+  "pixel_difference": {
+    "ratio": 0.009227,
+    "changed_pixels": 3037,
+    "total_pixels": 329160
+  },
+  "changed_regions": [
+    {
+      "x": 0,
+      "y": 106,
+      "width": 200,
+      "height": 159,
+      "cells": 24,
+      "basis": "coarse connected difference tiles",
+      "possible_cause": "layout, missing content or capture-state difference; not semantically classified"
+    }
+  ],
+  "dimension_mismatch": false,
+  "diff_artifact": {
+    "mime_type": "image/png",
+    "encoding": "base64",
+    "kind": "binary_difference_mask",
+    "stored": false,
+    "width": 390,
+    "height": 844,
+    "test_artifact_path": "web-dashboard-390-missing-diff.png"
+  },
+  "warnings": [
+    "Image metrics do not certify UX, accessibility or functional completeness"
+  ],
+  "evidence": {
+    "state_match": "caller_asserted",
+    "alignment": "exact dimensions; no resize or crop",
+    "tolerance": 24,
+    "coordinate_space": "image pixels (not CSS pixels)",
+    "alpha_background": "white",
+    "exif_orientation": "not_applied",
+    "edge_pixels": 60666,
+    "edge_threshold": 32,
+    "edge_tolerance_pixels": 1
+  },
+  "status": "COMPARED",
+  "release_authorized": false,
+  "layout_change_summary": "1 changed coarse regions in region mode"
+}

@@ -77,7 +77,8 @@ assert "에너지 현황" in html and "원정 시작" in html
 
 browser_results = []
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+    browser = p.chromium.launch(executable_path=os.getenv('CHROMIUM_EXECUTABLE', p.chromium.executable_path),
+                                headless=True, args=["--no-sandbox"])
     for width in (390, 820, 1280):
         page = browser.new_page(viewport={"width": width, "height": 840}, device_scale_factor=1)
         errors = []

@@ -1,0 +1,50 @@
+{
+  "properties": {
+    "reference_image": {
+      "title": "Reference Image",
+      "type": "string"
+    },
+    "candidate_image": {
+      "title": "Candidate Image",
+      "type": "string"
+    },
+    "comparison_mode": {
+      "default": "layout",
+      "enum": [
+        "layout",
+        "pixel",
+        "region"
+      ],
+      "title": "Comparison Mode",
+      "type": "string"
+    },
+    "viewport": {
+      "default": "unspecified",
+      "enum": [
+        "mobile",
+        "tablet",
+        "desktop",
+        "unspecified"
+      ],
+      "title": "Viewport",
+      "type": "string"
+    },
+    "tolerance": {
+      "default": 24,
+      "title": "Tolerance",
+      "type": "integer"
+    },
+    "same_state": {
+      "default": false,
+      "title": "Same State",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reference_image",
+    "candidate_image"
+  ],
+  "title": "ui_visual_compareArguments",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

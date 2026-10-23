@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "changed_regions",
+    "warnings",
+    "viewport",
+    "evidence",
+    "dimension_mismatch",
+    "release_authorized",
+    "analysis_version",
+    "status",
+    "comparison_mode",
+    "layout_similarity",
+    "pixel_difference",
+    "diff_artifact",
+    "layout_change_summary"
+  ],
+  "properties": {
+    "changed_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "width",
+          "height",
+          "cells",
+          "basis",
+          "possible_cause"
+        ],
+        "properties": {
+          "x": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cells": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array"
+    },
+    "viewport": {
+      "type": "object"
+    },
+    "evidence": {
+      "type": "object"
+    },
+    "dimension_mismatch": {
+      "type": "boolean"
+    },
+    "release_authorized": {
+      "const": false
+    },
+    "analysis_version": {
+      "const": "0.4"
+    },
+    "status": {
+      "enum": [
+        "COMPARED",
+        "INCOMPARABLE"
+      ]
+    },
+    "comparison_mode": {
+      "enum": [
+        "layout",
+        "pixel",
+        "region"
+      ]
+    },
+    "layout_similarity": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pixel_difference": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "diff_artifact": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "layout_change_summary": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

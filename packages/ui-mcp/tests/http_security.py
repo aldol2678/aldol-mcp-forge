@@ -6,9 +6,9 @@ key=os.environ['UI_MCP_API_KEY']
 base={'Authorization':'Bearer '+key,'Accept':'application/json, text/event-stream','Content-Type':'application/json'}
 request={'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-03-26','capabilities':{},'clientInfo':{'name':'security-test','version':'1'}}}
 results=[]
-with httpx2.Client(timeout=30) as c:
+with httpx2.Client(timeout=30, trust_env=not url.startswith(('http://127.0.0.1:', 'http://localhost:'))) as c:
     cases=[('anonymous',{},json.dumps(request),401),('wrong_key',{'Authorization':'Bearer invalid'},json.dumps(request),401),
-           ('malformed_json',base,'{',400),('body_limit',base,'x'*512001,413),
+           ('malformed_json',base,'{',400),('body_limit',base,'x'*(int(os.environ.get('MCP_BODY_LIMIT','512000'))+1),413),
            ('untrusted_origin',{**base,'Origin':'https://evil.example'},json.dumps(request),403)]
     if url.startswith('http://127.'):
         cases.append(('host_rebinding',{**base,'Host':'evil.example'},json.dumps(request),421))
