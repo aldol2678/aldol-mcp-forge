@@ -18,7 +18,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from http.server import ThreadingHTTPServer
-from http_api import Handler
+from http_api import Handler, LOCK
 
 FAKE_TOKEN = "LOCAL_TEST_ONLY_" + "a" * 42
 FAKE_VALUE = "FAKE_ONLY_NEVER_A_REAL_SECRET_123456"
@@ -149,6 +149,109 @@ class TestLoopbackHTTP(unittest.TestCase):
                                 text=True, check=False)
         self.assertEqual(result.returncode, 0,
                          "Node mobile flow failed (details omitted to avoid data leaks)")
+
+    def raw_call(self, body, extra_headers=None):
+        connection = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+        headers = {'Authorization': 'Bearer ' + FAKE_TOKEN, 'Content-Type': 'application/json'}
+        headers.update(extra_headers or {})
+        try:
+            connection.request('POST', '/api/scan', body=body, headers=headers)
+            response = connection.getresponse()
+            return response.status, response.read()
+        finally:
+            connection.close()
+
+    def test_malformed_json_types_and_framing(self):
+        for raw in (b'{', b'\xff', b'[]', b'null', b'{"tool":[]}', b'{"subpath":1}',
+                    b'{"tool":"guardian","tool":"all"}', b'{"tool":NaN}',
+                    b'[' * 1000 + b']' * 1000):
+            self.assertEqual(self.raw_call(raw)[0], 400)
+        self.assertEqual(self.raw_call(b'{}', {'Transfer-Encoding': 'chunked'})[0], 400)
+        self.assertEqual(self.raw_call(b'{}', {'Content-Type': 'text/plain'})[0], 400)
+        self.assertEqual(self.raw_call(b'', {'Content-Length': '0'})[0], 413)
+        self.assertEqual(self.raw_call(b'', {'Content-Length': '2049'})[0], 413)
+        self.assertEqual(self.raw_call(b'', {'Content-Length': 'invalid'})[0], 400)
+
+    def test_non_ascii_auth_rejected_without_exception(self):
+        self.assertEqual(self.call('POST', '/api/scan', {'tool': 'guardian'}, '\u00e9' * 40)[0], 401)
+
+    def test_duplicate_headers_and_protocol_errors_sanitized(self):
+        for duplicate, expected in (('Authorization', 401), ('Content-Length', 400)):
+            connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=5)
+            try:
+                connection.putrequest('POST', '/api/scan')
+                for name, value in (('Authorization', 'Bearer ' + FAKE_TOKEN),
+                                    ('Content-Length', '2'), ('Content-Type', 'application/json')):
+                    connection.putheader(name, value)
+                    if name == duplicate:
+                        connection.putheader(name, value)
+                connection.endheaders(b'{}')
+                response = connection.getresponse()
+                self.assertEqual(response.status, expected)
+                response.read()
+            finally:
+                connection.close()
+        code, _, body = self.call('SYNTHETIC_PRIVATE_METHOD', '/private-path')
+        self.assertEqual(code, 501)
+        self.assertNotIn(b'SYNTHETIC_PRIVATE_METHOD', body)
+        self.assertNotIn(b'/private-path', body)
+
+    def test_incomplete_body_times_out(self):
+        original = Handler.setup
+        def short_timeout(handler):
+            original(handler)
+            handler.connection.settimeout(0.1)
+        with patch.object(Handler, 'setup', short_timeout):
+            self.assertEqual(self.raw_call(b'{', {'Content-Length': '10'})[0], 408)
+
+    def test_concurrent_scan_rejected_and_slot_released(self):
+        entered, release = threading.Event(), threading.Event()
+        replies = []
+        def slow(_):
+            entered.set()
+            if not release.wait(4):
+                raise RuntimeError('synthetic timeout')
+            return {'status': 'UNKNOWN'}
+        with patch('http_api.guardian_report', side_effect=slow):
+            worker = threading.Thread(target=lambda: replies.append(self.call(
+                'POST', '/api/scan', {'tool': 'guardian'}, FAKE_TOKEN)[0]))
+            worker.start()
+            try:
+                self.assertTrue(entered.wait(2))
+                self.assertEqual(self.call('POST', '/api/scan', {'tool': 'guardian'}, FAKE_TOKEN)[0], 429)
+            finally:
+                release.set()
+                worker.join(5)
+        self.assertEqual(replies, [200])
+        self.assertTrue(LOCK.acquire(blocking=False))
+        LOCK.release()
+
+    def test_internal_failure_sanitized_and_recovers(self):
+        import contextlib
+        import io
+        captured = io.StringIO()
+        with contextlib.redirect_stderr(captured), patch('http_api.guardian_report',
+                side_effect=RuntimeError(FAKE_VALUE + str(self.root))):
+            code, _, body = self.call('POST', '/api/scan', {'tool': 'guardian'}, FAKE_TOKEN)
+        self.assertEqual(code, 500)
+        for marker in (FAKE_VALUE, str(self.root), FAKE_TOKEN):
+            self.assertNotIn(marker, body.decode() + captured.getvalue())
+        self.assertEqual(self.call('POST', '/api/scan', {'tool': 'guardian'}, FAKE_TOKEN)[0], 200)
+
+    def test_existing_scanner_http_dispatch_and_aggregation(self):
+        # Real HTTP, mocked external executables: no network/database claims.
+        reports = {'trivy': {'Results': []}, 'osv': {'results': []},
+                   'syft': {'components': [{}, {}]}}
+        with patch.dict(os.environ, {'ALDOL_SECURITY_OSV_NETWORK': '1'}), \
+                patch('engine._invoke', side_effect=lambda name, *args: reports[name]):
+            for tool, status in (('trivy', 'NO_FINDINGS_IN_SCOPE'),
+                                 ('osv', 'NO_FINDINGS_IN_SCOPE'), ('syft', 'INVENTORIED')):
+                code, _, body = self.call('POST', '/api/scan', {'tool': tool}, FAKE_TOKEN)
+                self.assertEqual(code, 200)
+                self.assertEqual(json.loads(body)['status'], status)
+            code, _, body = self.call('POST', '/api/scan', {'tool': 'all'}, FAKE_TOKEN)
+            self.assertEqual(code, 200)
+            self.assertEqual(json.loads(body)['overall'], 'NO_FINDINGS_IN_COMPLETED_CHECKS')
 
 if __name__ == "__main__":
     unittest.main()

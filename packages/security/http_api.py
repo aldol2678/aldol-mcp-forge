@@ -9,7 +9,7 @@ from pathlib import Path
 import threading
 
 from engine import capabilities, scan, scan_all
-from secret_guardian import report as guardian_report
+from secret_guardian import report as guardian_report, _unique_object, _invalid_constant
 
 LOCK = threading.BoundedSemaphore(1)
 MAX_REQUEST = 2048
@@ -18,6 +18,14 @@ HTML = Path(__file__).with_name("mobile.html")
 
 class Handler(BaseHTTPRequestHandler):
     server_version = "ALDOLSecurity/0.1"
+
+    def setup(self):
+        super().setup()
+        self.connection.settimeout(10)
+
+    def send_error(self, code, message=None, explain=None):
+        # Base handler errors can otherwise echo attacker-controlled input.
+        self._send(code, {"error": "invalid HTTP request"})
 
     def _headers(self, code: int, content_type: str = "application/json; charset=utf-8"):
         self.send_response(code)
@@ -36,7 +44,9 @@ class Handler(BaseHTTPRequestHandler):
     def _authorized(self) -> bool:
         expected = os.environ["ALDOL_SECURITY_TOKEN"]
         supplied = self.headers.get("Authorization", "")
-        return len(supplied) <= 260 and hmac.compare_digest(supplied, "Bearer " + expected)
+        return (len(self.headers.get_all("Authorization", [])) == 1
+                and len(supplied) <= 260
+                and hmac.compare_digest(supplied.encode("utf-8"), ("Bearer " + expected).encode("utf-8")))
 
     def do_GET(self):
         if self.path in ("/", "/mobile.html"):
@@ -63,18 +73,30 @@ class Handler(BaseHTTPRequestHandler):
             self._send(401, {"error": "unauthorized"})
             return
         try:
+            if (self.headers.get("Transfer-Encoding") is not None
+                    or len(self.headers.get_all("Content-Length", [])) != 1):
+                raise ValueError("ambiguous request framing")
+            if self.headers.get_content_type() != "application/json":
+                raise ValueError("JSON required")
             size = int(self.headers.get("Content-Length", "0"))
             if not 0 < size <= MAX_REQUEST:
                 self._send(413, {"error": "invalid request size"})
                 return
-            data = json.loads(self.rfile.read(size).decode("utf-8"))
+            raw = self.rfile.read(size)
+            if len(raw) != size:
+                raise ValueError("incomplete request body")
+            data = json.loads(raw.decode("utf-8"),
+                              object_pairs_hook=_unique_object, parse_constant=_invalid_constant)
             if not isinstance(data, dict) or set(data) - {"tool", "subpath"}:
                 raise ValueError("unexpected fields")
             tool = data.get("tool", "all")
             subpath = data.get("subpath", ".")
             if tool not in ("all", "trivy", "osv", "syft", "guardian") or not isinstance(subpath, str):
                 raise ValueError("invalid scan options")
-        except (ValueError, UnicodeDecodeError):
+        except TimeoutError:
+            self._send(408, {"error": "request timed out"})
+            return
+        except (ValueError, UnicodeDecodeError, RecursionError):
             self._send(400, {"error": "invalid JSON or scan options"})
             return
         if not LOCK.acquire(blocking=False):

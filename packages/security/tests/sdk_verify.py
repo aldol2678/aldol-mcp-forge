@@ -28,7 +28,7 @@ def workspace(path):
                 os.environ[key] = value
 
 
-async def check(client):
+async def check(client, root):
     expected = {
         "security_capabilities", "security_scan_trivy", "security_scan_osv",
         "security_inventory_sbom", "security_scan_all", "security_secret_guardian"
@@ -43,22 +43,48 @@ async def check(client):
     if isinstance(payload, dict) and "result" in payload:
         payload = payload["result"]
     assert payload.get("status") == "BLOCKED", payload
-    return {"tool_count": len(found), "osv_offline_state": payload["status"]}
+    async def guardian(subpath="."):
+        before = {p.name: (p.read_bytes(), p.stat().st_mode, p.stat().st_mtime_ns)
+                  for p in root.iterdir() if p.is_file()}
+        result = await client.call_tool("security_secret_guardian", {"subpath": subpath})
+        assert not result.is_error and result.structured_content, "Guardian structured call failed"
+        serialized = json.dumps(result.model_dump(mode="json"))
+        assert all(value not in serialized for value in (
+            "SYNTHETIC_SDK_VALUE", "OPENAI_API_KEY", "sdk-alias", str(root))), "redaction failed"
+        after = {p.name: (p.read_bytes(), p.stat().st_mode, p.stat().st_mtime_ns)
+                 for p in root.iterdir() if p.is_file()}
+        assert before == after, "workspace mutation"
+        data = result.structured_content
+        return data.get("result", data)
+
+    normal = await guardian()
+    assert normal["credential_count"] == 1 and normal["status"] == "INVENTORIED"
+    assert (await guardian("../"))["status"] == "BLOCKED"
+    manifest = root / "secret-guardian.inventory.json"
+    manifest.write_text('{"schema_version":1,"credentials":[{"ref":"sdk-alias","secret":"SYNTHETIC_SDK_VALUE"}]}')
+    assert (await guardian())["status"] == "INCOMPLETE"
+    manifest.unlink()
+    return {"tool_count": len(found), "osv_offline_state": payload["status"],
+            "guardian": {"normal": "INVENTORIED", "unsafe_path": "BLOCKED",
+                         "invalid_manifest": "INCOMPLETE", "redacted": True, "readonly": True}}
 
 
 async def main():
     from mcp import Client, StdioServerParameters
     from mcp.client.stdio import stdio_client
     with tempfile.TemporaryDirectory() as directory, workspace(directory):
+        root = Path(directory)
+        (root / ".env").write_text("OPENAI_API_KEY=SYNTHETIC_SDK_VALUE\n")
+        (root / ".env").chmod(0o600)
         async with Client(app, raise_exceptions=True) as client:
-            memory = await check(client)
+            memory = await check(client, root)
         params = StdioServerParameters(
             command=sys.executable,
             args=["-B", str(Path(__file__).resolve().parents[1] / "mcp_server.py")],
             env={"ALDOL_SECURITY_ROOT": directory, "ALDOL_SECURITY_OSV_NETWORK": "0"},
         )
         async with Client(stdio_client(params), raise_exceptions=True) as client:
-            stdio = await check(client)
+            stdio = await check(client, root)
     return {"sdk_version": importlib.metadata.version("mcp"), "inmemory": memory,
             "stdio": stdio, "passed": True, "network_used": False}
 

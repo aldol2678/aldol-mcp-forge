@@ -10,7 +10,10 @@ permissions:
 jobs:
   offline-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 6
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,8 +25,19 @@ jobs:
       - name: Compile source
         run: python -m compileall -q packages/security
       - name: Run security policy and output tests
-        run: python -m unittest discover -s packages/security/tests -v
-      - name: Install official Python MCP SDK v2
-        run: python -m pip install -r packages/security/requirements.txt
+        run: python -m unittest discover -s packages/security/tests -v 2>&1 | tee security-unit.log
+      - name: Install official MCP SDK and pinned browser test dependencies
+        run: python -m pip install -r packages/security/requirements-test.txt
       - name: Verify real MCP SDK in-memory and stdio tool calls
-        run: python packages/security/tests/sdk_verify.py
+        run: python packages/security/tests/sdk_verify.py | tee security-sdk.log
+      - name: Install Chromium for mobile emulation
+        run: python -m playwright install --with-deps chromium
+      - name: Verify mobile browser against synthetic loopback HTTP
+        run: python packages/security/tests/browser_verify.py | tee security-browser.log
+      - name: Retain sanitized verification summaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-verification
+          path: security-*.log
+          retention-days: 14
