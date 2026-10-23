@@ -15,7 +15,7 @@ import traceback
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULT = ROOT / "ci-results" / "inspector-client-verification.json"
-INSPECTOR = "@modelcontextprotocol/inspector@2.11.0"
+INSPECTOR = "@modelcontextprotocol/inspector@2.12.0"
 EXPECTED = {
     "forge_list_templates", "forge_preview", "forge_create",
     "forge_add_tool", "forge_test", "forge_package",
@@ -120,7 +120,7 @@ def verify():
     return {
         "passed": True,
         "client": "MCP Inspector CLI",
-        "inspector_version_pin": "2.11.0",
+        "inspector_version_pin": "2.12.0",
         "server": "forge_sdk.py",
         "transport": "stdio",
         "initialized": True,
@@ -152,7 +152,7 @@ def main():
             "status": "FAILED",
             "error": str(error)[-2000:],
             "client": "MCP Inspector CLI",
-            "inspector_version_pin": "2.11.0",
+            "inspector_version_pin": "2.12.0",
         }
         exit_code = 1
     RESULT.write_text(
