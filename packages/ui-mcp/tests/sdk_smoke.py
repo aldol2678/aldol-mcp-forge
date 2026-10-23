@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 async def connection():
     url = os.environ.get('MCP_TEST_URL')
     if url:
-        async with httpx2.AsyncClient(headers={'Authorization': 'Bearer '+os.environ['UI_MCP_API_KEY']}, timeout=30) as http:
+        async with httpx2.AsyncClient(headers={'Authorization': 'Bearer '+os.environ['UI_MCP_API_KEY']}, timeout=30,
+                                      trust_env=not url.startswith(('http://127.0.0.1:', 'http://localhost:'))) as http:
             async with streamable_http_client(url, http_client=http) as (r,w):
                 async with ClientSession(r,w) as s:
                     await s.initialize(); yield s
@@ -30,7 +31,7 @@ async def main():
     async with connection() as s:
         listed=await s.list_tools()
         names={t.name for t in listed.tools}
-        assert names=={'ui_catalog','ui_validate','ui_audit','ui_review','ui_review_markup','ui_generate','ui_presets','ui_import_bonsae'},names
+        assert names=={'ui_catalog','ui_validate','ui_audit','ui_review','ui_review_markup','ui_generate','ui_presets','ui_import_bonsae','ui_reference_analyze','ui_visual_compare'},names
         results.append({'test':'discovery_and_schemas','status':'PASS','tools':[t.model_dump(mode='json') for t in listed.tools]})
         async def call(name,args,label,check,error=False):
             r=await s.call_tool(name,args)
@@ -77,7 +78,7 @@ async def main():
             await call(name,args,'invalid_'+str(len(results)),None,True)
         await call('ui_review_markup',{'html_source':'<script>fetch("http://127.0.0.1/secret")</script>'},'script_inspect_only',lambda d:d['context']=='markup')
     async with connection() as s:
-        assert len((await s.list_tools()).tools)==8
+        assert len((await s.list_tools()).tools)==10
         results.append({'test':'disconnect_reconnect','status':'PASS'})
     print(json.dumps({'sdk':'2.3.0','transport':'https' if os.environ.get('MCP_TEST_URL','').startswith('https:') else 'http' if os.environ.get('MCP_TEST_URL') else 'stdio','results':results,'passed':len(results)},ensure_ascii=False,indent=2))
 

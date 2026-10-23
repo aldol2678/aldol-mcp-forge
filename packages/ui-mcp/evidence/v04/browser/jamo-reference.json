@@ -1,0 +1,2930 @@
+{
+  "analysis_version": "0.4",
+  "status": "DRAFT_REVIEW_REQUIRED",
+  "screens": [
+    {
+      "id": "s1",
+      "basis": "single supplied static document",
+      "routes_verified": false
+    }
+  ],
+  "components": [
+    {
+      "id": "c1",
+      "role": "header",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e1",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c2",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e2",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c3",
+      "role": "tabs",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e3",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c4",
+      "role": "tab",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e4",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c5",
+      "role": "tab",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e5",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c6",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e6",
+      "confidence": "high",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c7",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e7",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c8",
+      "role": "navigation",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e8",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c9",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e9",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c10",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e10",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c11",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e11",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c12",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e12",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c13",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e13",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c14",
+      "role": "disclosure",
+      "basis": "class_name_heuristic",
+      "evidence": "e14",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c15",
+      "role": "disclosure_control",
+      "basis": "class_name_heuristic",
+      "evidence": "e15",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c16",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e16",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": true
+    },
+    {
+      "id": "c17",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e17",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c18",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e18",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c19",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e19",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c20",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e20",
+      "confidence": "high",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c21",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e21",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c22",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e22",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c23",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e23",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c24",
+      "role": "navigation",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e24",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c25",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e25",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c26",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e26",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c27",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e27",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c28",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e28",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c29",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e29",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c30",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e30",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c31",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e31",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c32",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e32",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c33",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e33",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c34",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e34",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c35",
+      "role": "disclosure",
+      "basis": "class_name_heuristic",
+      "evidence": "e35",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c36",
+      "role": "disclosure_control",
+      "basis": "class_name_heuristic",
+      "evidence": "e36",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c37",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e37",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": true
+    },
+    {
+      "id": "c38",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e38",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c39",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e39",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c40",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e40",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c41",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e41",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c42",
+      "role": "disclosure_control",
+      "basis": "class_name_heuristic",
+      "evidence": "e42",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c43",
+      "role": "footer",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e43",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    }
+  ],
+  "layout_regions": [
+    {
+      "id": "c1",
+      "role": "header",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e1",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c2",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e2",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c6",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e6",
+      "confidence": "high",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c7",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e7",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c8",
+      "role": "navigation",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e8",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c9",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e9",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c10",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e10",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c11",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e11",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c12",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e12",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c13",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e13",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c16",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e16",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": true
+    },
+    {
+      "id": "c17",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e17",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c18",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e18",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c19",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e19",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c20",
+      "role": "content",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e20",
+      "confidence": "high",
+      "hidden_attribute": true,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c21",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e21",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c22",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e22",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c23",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e23",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c24",
+      "role": "navigation",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e24",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c25",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e25",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c26",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e26",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c27",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e27",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c28",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e28",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c29",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e29",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c30",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e30",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c31",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e31",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c32",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e32",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c33",
+      "role": "panel",
+      "basis": "class_name_heuristic",
+      "evidence": "e33",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c34",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e34",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c37",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e37",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": true
+    },
+    {
+      "id": "c38",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e38",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c39",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e39",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c40",
+      "role": "button",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e40",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c41",
+      "role": "card",
+      "basis": "class_name_heuristic",
+      "evidence": "e41",
+      "confidence": "medium",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    },
+    {
+      "id": "c43",
+      "role": "footer",
+      "basis": "semantic_tag_or_role",
+      "evidence": "e43",
+      "confidence": "high",
+      "hidden_attribute": false,
+      "disabled_attribute": false
+    }
+  ],
+  "repeated_components": [
+    {
+      "role": "button",
+      "count": 24,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "content",
+      "count": 2,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "disclosure",
+      "count": 2,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "disclosure_control",
+      "count": 3,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "navigation",
+      "count": 2,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "panel",
+      "count": 4,
+      "basis": "same semantic role; not proven reusable component"
+    },
+    {
+      "role": "tab",
+      "count": 2,
+      "basis": "same semantic role; not proven reusable component"
+    }
+  ],
+  "interaction_candidates": [
+    {
+      "component": "c2",
+      "kind": "activation",
+      "evidence": "e2",
+      "behavior_verified": false
+    },
+    {
+      "component": "c3",
+      "kind": "tab_selection",
+      "evidence": "e3",
+      "behavior_verified": false
+    },
+    {
+      "component": "c4",
+      "kind": "tab_selection",
+      "evidence": "e4",
+      "behavior_verified": false
+    },
+    {
+      "component": "c5",
+      "kind": "tab_selection",
+      "evidence": "e5",
+      "behavior_verified": false
+    },
+    {
+      "component": "c7",
+      "kind": "activation",
+      "evidence": "e7",
+      "behavior_verified": false
+    },
+    {
+      "component": "c10",
+      "kind": "activation",
+      "evidence": "e10",
+      "behavior_verified": false
+    },
+    {
+      "component": "c11",
+      "kind": "activation",
+      "evidence": "e11",
+      "behavior_verified": false
+    },
+    {
+      "component": "c13",
+      "kind": "activation",
+      "evidence": "e13",
+      "behavior_verified": false
+    },
+    {
+      "component": "c13",
+      "kind": "expand_collapse",
+      "evidence": "e13",
+      "behavior_verified": false
+    },
+    {
+      "component": "c14",
+      "kind": "expand_collapse",
+      "evidence": "e14",
+      "behavior_verified": false
+    },
+    {
+      "component": "c15",
+      "kind": "expand_collapse",
+      "evidence": "e15",
+      "behavior_verified": false
+    },
+    {
+      "component": "c16",
+      "kind": "activation",
+      "evidence": "e16",
+      "behavior_verified": false
+    },
+    {
+      "component": "c17",
+      "kind": "activation",
+      "evidence": "e17",
+      "behavior_verified": false
+    },
+    {
+      "component": "c18",
+      "kind": "activation",
+      "evidence": "e18",
+      "behavior_verified": false
+    },
+    {
+      "component": "c19",
+      "kind": "activation",
+      "evidence": "e19",
+      "behavior_verified": false
+    },
+    {
+      "component": "c21",
+      "kind": "activation",
+      "evidence": "e21",
+      "behavior_verified": false
+    },
+    {
+      "component": "c22",
+      "kind": "activation",
+      "evidence": "e22",
+      "behavior_verified": false
+    },
+    {
+      "component": "c23",
+      "kind": "activation",
+      "evidence": "e23",
+      "behavior_verified": false
+    },
+    {
+      "component": "c26",
+      "kind": "activation",
+      "evidence": "e26",
+      "behavior_verified": false
+    },
+    {
+      "component": "c27",
+      "kind": "activation",
+      "evidence": "e27",
+      "behavior_verified": false
+    },
+    {
+      "component": "c28",
+      "kind": "activation",
+      "evidence": "e28",
+      "behavior_verified": false
+    },
+    {
+      "component": "c29",
+      "kind": "activation",
+      "evidence": "e29",
+      "behavior_verified": false
+    },
+    {
+      "component": "c30",
+      "kind": "activation",
+      "evidence": "e30",
+      "behavior_verified": false
+    },
+    {
+      "component": "c31",
+      "kind": "activation",
+      "evidence": "e31",
+      "behavior_verified": false
+    },
+    {
+      "component": "c32",
+      "kind": "activation",
+      "evidence": "e32",
+      "behavior_verified": false
+    },
+    {
+      "component": "c34",
+      "kind": "activation",
+      "evidence": "e34",
+      "behavior_verified": false
+    },
+    {
+      "component": "c34",
+      "kind": "expand_collapse",
+      "evidence": "e34",
+      "behavior_verified": false
+    },
+    {
+      "component": "c35",
+      "kind": "expand_collapse",
+      "evidence": "e35",
+      "behavior_verified": false
+    },
+    {
+      "component": "c36",
+      "kind": "expand_collapse",
+      "evidence": "e36",
+      "behavior_verified": false
+    },
+    {
+      "component": "c37",
+      "kind": "activation",
+      "evidence": "e37",
+      "behavior_verified": false
+    },
+    {
+      "component": "c38",
+      "kind": "activation",
+      "evidence": "e38",
+      "behavior_verified": false
+    },
+    {
+      "component": "c39",
+      "kind": "activation",
+      "evidence": "e39",
+      "behavior_verified": false
+    },
+    {
+      "component": "c40",
+      "kind": "activation",
+      "evidence": "e40",
+      "behavior_verified": false
+    },
+    {
+      "component": "c41",
+      "kind": "expand_collapse",
+      "evidence": "e41",
+      "behavior_verified": false
+    },
+    {
+      "component": "c42",
+      "kind": "expand_collapse",
+      "evidence": "e42",
+      "behavior_verified": false
+    }
+  ],
+  "responsive_evidence": [
+    {
+      "kind": "device_width_viewport",
+      "observed": true
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "420px"
+        }
+      ],
+      "sheet": 0,
+      "line": 262
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 234
+    },
+    {
+      "kind": "overflow",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 238
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 219
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 218
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 202
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 200
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 199
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "min-width",
+          "value": "801px"
+        }
+      ],
+      "sheet": 0,
+      "line": 184
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "350px"
+        }
+      ],
+      "sheet": 0,
+      "line": 183
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 112
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 180
+    },
+    {
+      "kind": "overflow-x",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 172
+    },
+    {
+      "kind": "overflow-y",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 168
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 159
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 156
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 156
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 141
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 140
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 76
+    },
+    {
+      "kind": "position",
+      "value": "sticky",
+      "observed": true,
+      "sheet": 0,
+      "line": 106
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 104
+    },
+    {
+      "kind": "position",
+      "value": "sticky",
+      "observed": true,
+      "sheet": 0,
+      "line": 101
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 97
+    },
+    {
+      "kind": "overflow",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 97
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 95
+    },
+    {
+      "kind": "position",
+      "value": "sticky",
+      "observed": true,
+      "sheet": 0,
+      "line": 79
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "min-width",
+          "value": "801px"
+        }
+      ],
+      "sheet": 0,
+      "line": 72
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 47
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 63
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 59
+    },
+    {
+      "kind": "overflow",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 59
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 57
+    },
+    {
+      "kind": "position",
+      "value": "sticky",
+      "observed": true,
+      "sheet": 0,
+      "line": 56
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 38
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "440px"
+        }
+      ],
+      "sheet": 0,
+      "line": 37
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 36
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 23
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [],
+      "sheet": 0,
+      "line": 20
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "440px"
+        }
+      ],
+      "sheet": 0,
+      "line": 19
+    },
+    {
+      "kind": "media_rule",
+      "observed": true,
+      "breakpoints": [
+        {
+          "feature": "max-width",
+          "value": "800px"
+        }
+      ],
+      "sheet": 0,
+      "line": 18
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 17
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 16
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 9
+    },
+    {
+      "kind": "overflow",
+      "value": "hidden",
+      "observed": true,
+      "sheet": 0,
+      "line": 8
+    },
+    {
+      "kind": "overflow",
+      "value": "auto",
+      "observed": true,
+      "sheet": 0,
+      "line": 7
+    },
+    {
+      "kind": "position",
+      "value": "fixed",
+      "observed": true,
+      "sheet": 0,
+      "line": 4
+    }
+  ],
+  "tokens": [
+    {
+      "property": "font-size",
+      "value": "16px",
+      "observed": true,
+      "sheet": 0,
+      "line": 266
+    },
+    {
+      "property": "font-size",
+      "value": "16px",
+      "observed": true,
+      "sheet": 0,
+      "line": 265
+    },
+    {
+      "property": "font-size",
+      "value": "16px",
+      "observed": true,
+      "sheet": 0,
+      "line": 264
+    },
+    {
+      "property": "width",
+      "value": "72px",
+      "observed": true,
+      "sheet": 0,
+      "line": 264
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 260
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 259
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 259
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 258
+    },
+    {
+      "property": "border-radius",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 258
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 257
+    },
+    {
+      "property": "padding",
+      "value": "5px",
+      "observed": true,
+      "sheet": 0,
+      "line": 257
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 257
+    },
+    {
+      "property": "font-size",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 256
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 256
+    },
+    {
+      "property": "border-radius",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 256
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 255
+    },
+    {
+      "property": "border-radius",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 255
+    },
+    {
+      "property": "font-size",
+      "value": "17px",
+      "observed": true,
+      "sheet": 0,
+      "line": 255
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 255
+    },
+    {
+      "property": "font-size",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 254
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 254
+    },
+    {
+      "property": "border-radius",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 254
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 253
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 252
+    },
+    {
+      "property": "font-size",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 252
+    },
+    {
+      "property": "width",
+      "value": "82px",
+      "observed": true,
+      "sheet": 0,
+      "line": 252
+    },
+    {
+      "property": "gap",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 251
+    },
+    {
+      "property": "border-radius",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 251
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 248
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 247
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 247
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 247
+    },
+    {
+      "property": "width",
+      "value": "44px",
+      "observed": true,
+      "sheet": 0,
+      "line": 246
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 246
+    },
+    {
+      "property": "font-size",
+      "value": "19px",
+      "observed": true,
+      "sheet": 0,
+      "line": 246
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 246
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 245
+    },
+    {
+      "property": "font-size",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 245
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 245
+    },
+    {
+      "property": "font-size",
+      "value": "18px",
+      "observed": true,
+      "sheet": 0,
+      "line": 244
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 244
+    },
+    {
+      "property": "padding",
+      "value": "4px",
+      "observed": true,
+      "sheet": 0,
+      "line": 244
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 243
+    },
+    {
+      "property": "font-size",
+      "value": "9px",
+      "observed": true,
+      "sheet": 0,
+      "line": 242
+    },
+    {
+      "property": "font-size",
+      "value": "22px",
+      "observed": true,
+      "sheet": 0,
+      "line": 242
+    },
+    {
+      "property": "width",
+      "value": "62px",
+      "observed": true,
+      "sheet": 0,
+      "line": 242
+    },
+    {
+      "property": "gap",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 242
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 241
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 240
+    },
+    {
+      "property": "font-size",
+      "value": "14px",
+      "observed": true,
+      "sheet": 0,
+      "line": 240
+    },
+    {
+      "property": "font-size",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 237
+    },
+    {
+      "property": "font-size",
+      "value": "16px",
+      "observed": true,
+      "sheet": 0,
+      "line": 237
+    },
+    {
+      "property": "font-size",
+      "value": "17px",
+      "observed": true,
+      "sheet": 0,
+      "line": 237
+    },
+    {
+      "property": "font-size",
+      "value": "14px",
+      "observed": true,
+      "sheet": 0,
+      "line": 237
+    },
+    {
+      "property": "border-radius",
+      "value": "0",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "color",
+      "value": "#5c7865",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "color",
+      "value": "#2d4e3d",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "border-radius",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 233
+    },
+    {
+      "property": "width",
+      "value": "0",
+      "observed": true,
+      "sheet": 0,
+      "line": 228
+    },
+    {
+      "property": "width",
+      "value": "32px",
+      "observed": true,
+      "sheet": 0,
+      "line": 227
+    },
+    {
+      "property": "width",
+      "value": "44px",
+      "observed": true,
+      "sheet": 0,
+      "line": 227
+    },
+    {
+      "property": "padding",
+      "value": "4px",
+      "observed": true,
+      "sheet": 0,
+      "line": 226
+    },
+    {
+      "property": "border-radius",
+      "value": "14px",
+      "observed": true,
+      "sheet": 0,
+      "line": 226
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 225
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 223
+    },
+    {
+      "property": "width",
+      "value": "100%",
+      "observed": true,
+      "sheet": 0,
+      "line": 222
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 218
+    },
+    {
+      "property": "border-radius",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 211
+    },
+    {
+      "property": "color",
+      "value": "#315a38",
+      "observed": true,
+      "sheet": 0,
+      "line": 211
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 211
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 210
+    },
+    {
+      "property": "border-radius",
+      "value": "13px",
+      "observed": true,
+      "sheet": 0,
+      "line": 208
+    },
+    {
+      "property": "gap",
+      "value": "8px",
+      "observed": true,
+      "sheet": 0,
+      "line": 208
+    },
+    {
+      "property": "color",
+      "value": "#28563b",
+      "observed": true,
+      "sheet": 0,
+      "line": 208
+    },
+    {
+      "property": "color",
+      "value": "#e6facb",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "border-radius",
+      "value": "10px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "gap",
+      "value": "6px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "color",
+      "value": "#517a46",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "gap",
+      "value": "8px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "color",
+      "value": "#1e4635",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "border-radius",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "font-size",
+      "value": "13px",
+      "observed": true,
+      "sheet": 0,
+      "line": 204
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 200
+    },
+    {
+      "property": "font-size",
+      "value": "20px",
+      "observed": true,
+      "sheet": 0,
+      "line": 192
+    },
+    {
+      "property": "color",
+      "value": "#e5a435",
+      "observed": true,
+      "sheet": 0,
+      "line": 192
+    },
+    {
+      "property": "border-radius",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 188
+    },
+    {
+      "property": "color",
+      "value": "#24563d",
+      "observed": true,
+      "sheet": 0,
+      "line": 188
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 188
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 183
+    },
+    {
+      "property": "font-size",
+      "value": "20px",
+      "observed": true,
+      "sheet": 0,
+      "line": 183
+    },
+    {
+      "property": "padding",
+      "value": "0",
+      "observed": true,
+      "sheet": 0,
+      "line": 174
+    },
+    {
+      "property": "font-size",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 173
+    },
+    {
+      "property": "font-size",
+      "value": "13px",
+      "observed": true,
+      "sheet": 0,
+      "line": 170
+    },
+    {
+      "property": "border-radius",
+      "value": "12px",
+      "observed": true,
+      "sheet": 0,
+      "line": 169
+    },
+    {
+      "property": "font-size",
+      "value": "11px",
+      "observed": true,
+      "sheet": 0,
+      "line": 167
+    },
+    {
+      "property": "color",
+      "value": "#b5cdb8",
+      "observed": true,
+      "sheet": 0,
+      "line": 167
+    }
+  ],
+  "source_evidence": [
+    {
+      "id": "e1",
+      "element_index": 12,
+      "line": 283,
+      "tag": "header",
+      "observed": true
+    },
+    {
+      "id": "e2",
+      "element_index": 22,
+      "line": 285,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e3",
+      "element_index": 23,
+      "line": 287,
+      "tag": "nav",
+      "observed": true
+    },
+    {
+      "id": "e4",
+      "element_index": 24,
+      "line": 287,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e5",
+      "element_index": 26,
+      "line": 287,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e6",
+      "element_index": 28,
+      "line": 288,
+      "tag": "main",
+      "observed": true
+    },
+    {
+      "id": "e7",
+      "element_index": 38,
+      "line": 290,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e8",
+      "element_index": 41,
+      "line": 291,
+      "tag": "nav",
+      "observed": true
+    },
+    {
+      "id": "e9",
+      "element_index": 43,
+      "line": 293,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e10",
+      "element_index": 60,
+      "line": 297,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e11",
+      "element_index": 65,
+      "line": 300,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e12",
+      "element_index": 70,
+      "line": 301,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e13",
+      "element_index": 71,
+      "line": 301,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e14",
+      "element_index": 79,
+      "line": 301,
+      "tag": "details",
+      "observed": true
+    },
+    {
+      "id": "e15",
+      "element_index": 80,
+      "line": 301,
+      "tag": "summary",
+      "observed": true
+    },
+    {
+      "id": "e16",
+      "element_index": 101,
+      "line": 307,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e17",
+      "element_index": 103,
+      "line": 308,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e18",
+      "element_index": 104,
+      "line": 308,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e19",
+      "element_index": 105,
+      "line": 308,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e20",
+      "element_index": 107,
+      "line": 313,
+      "tag": "main",
+      "observed": true
+    },
+    {
+      "id": "e21",
+      "element_index": 117,
+      "line": 315,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e22",
+      "element_index": 120,
+      "line": 315,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e23",
+      "element_index": 121,
+      "line": 316,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e24",
+      "element_index": 123,
+      "line": 317,
+      "tag": "nav",
+      "observed": true
+    },
+    {
+      "id": "e25",
+      "element_index": 125,
+      "line": 319,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e26",
+      "element_index": 136,
+      "line": 321,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e27",
+      "element_index": 140,
+      "line": 322,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e28",
+      "element_index": 150,
+      "line": 327,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e29",
+      "element_index": 152,
+      "line": 328,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e30",
+      "element_index": 156,
+      "line": 328,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e31",
+      "element_index": 158,
+      "line": 329,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e32",
+      "element_index": 176,
+      "line": 336,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e33",
+      "element_index": 181,
+      "line": 337,
+      "tag": "section",
+      "observed": true
+    },
+    {
+      "id": "e34",
+      "element_index": 182,
+      "line": 337,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e35",
+      "element_index": 190,
+      "line": 337,
+      "tag": "details",
+      "observed": true
+    },
+    {
+      "id": "e36",
+      "element_index": 191,
+      "line": 337,
+      "tag": "summary",
+      "observed": true
+    },
+    {
+      "id": "e37",
+      "element_index": 207,
+      "line": 343,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e38",
+      "element_index": 209,
+      "line": 344,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e39",
+      "element_index": 210,
+      "line": 344,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e40",
+      "element_index": 211,
+      "line": 344,
+      "tag": "button",
+      "observed": true
+    },
+    {
+      "id": "e41",
+      "element_index": 213,
+      "line": 346,
+      "tag": "details",
+      "observed": true
+    },
+    {
+      "id": "e42",
+      "element_index": 214,
+      "line": 346,
+      "tag": "summary",
+      "observed": true
+    },
+    {
+      "id": "e43",
+      "element_index": 225,
+      "line": 354,
+      "tag": "footer",
+      "observed": true
+    }
+  ],
+  "confidence": {
+    "structure": "medium",
+    "runtime": "unknown",
+    "geometry": "unknown"
+  },
+  "unknowns": [
+    "Computed geometry, overflow, visibility and cascade require browser QA",
+    "Executable/embed content ignored: 5",
+    "Interactions and state transitions are candidates, not verified behavior",
+    "Inventory/evidence output capped; omitted entries are not negative evidence",
+    "No screenshot understanding adapter is connected"
+  ],
+  "unmapped_features": [
+    "Arbitrary CSS layout and runtime logic are not translated into UI JSON",
+    "Draft components are review placeholders; source copy, links and actions are not transferred",
+    "23 components omitted from the 20-component BONSAE draft limit"
+  ],
+  "ui_spec_draft": {
+    "version": "0.3",
+    "title": "Static reference structure review",
+    "preset": "forest",
+    "root": {
+      "type": "stack",
+      "children": [
+        {
+          "type": "text",
+          "text": "Static reference structure review",
+          "variant": "heading"
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c1 header",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "header",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c2 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c3 tabs",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "tabs",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c4 tab",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "tab",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c5 tab",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "tab",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c6 content",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "content",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c7 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c8 navigation",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "navigation",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c9 panel",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "panel",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c10 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c11 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c12 panel",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "panel",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c13 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c14 disclosure",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "disclosure",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c15 disclosure_control",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "disclosure_control",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c16 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c17 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c18 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c19 button",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "button",
+              "variant": "normal"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "children": [
+            {
+              "type": "text",
+              "text": "c20 content",
+              "variant": "heading"
+            },
+            {
+              "type": "text",
+              "text": "content",
+              "variant": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    "design": {
+      "context": "product",
+      "brand_note": "BONSAE structural preview only; actions and data require implementation."
+    },
+    "data_mode": "demo"
+  },
+  "bonsae_spec_draft": {
+    "goal": "Static reference structure review",
+    "device": "unspecified",
+    "tokens": {},
+    "components": [
+      {
+        "name": "c1 header",
+        "role": "header",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c2 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c3 tabs",
+        "role": "tabs",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c4 tab",
+        "role": "tab",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c5 tab",
+        "role": "tab",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c6 content",
+        "role": "content",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c7 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c8 navigation",
+        "role": "navigation",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c9 panel",
+        "role": "panel",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c10 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c11 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c12 panel",
+        "role": "panel",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c13 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c14 disclosure",
+        "role": "disclosure",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c15 disclosure_control",
+        "role": "disclosure_control",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c16 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c17 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c18 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c19 button",
+        "role": "button",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      },
+      {
+        "name": "c20 content",
+        "role": "content",
+        "states": [
+          "unverified"
+        ],
+        "mobile_behavior": "Requires viewport QA",
+        "interaction": "Not implemented; see interaction_candidates"
+      }
+    ]
+  },
+  "counts": {
+    "recognized_components": 43,
+    "returned_components": 43
+  },
+  "functional_ui_complete": false,
+  "release_authorized": false
+}

@@ -1,0 +1,237 @@
+{
+  "browser": "Chromium",
+  "android_device_test": "NOT_RUN",
+  "capture": "JPEG quality 75, DPR 1, viewport only; no resizing",
+  "font_fixture": "Noto Sans KR 5.3.1, normalized QA font",
+  "reports": [
+    {
+      "project": "web-dashboard",
+      "viewport": [
+        360,
+        780
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "web-dashboard",
+      "viewport": [
+        390,
+        844
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "web-dashboard",
+      "viewport": [
+        768,
+        1024
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "web-dashboard",
+      "viewport": [
+        1280,
+        800
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "expedition-hud-v03",
+      "viewport": [
+        360,
+        780
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "expedition-hud-v03",
+      "viewport": [
+        390,
+        844
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "expedition-hud-v03",
+      "viewport": [
+        768,
+        1024
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "expedition-hud-v03",
+      "viewport": [
+        1280,
+        800
+      ],
+      "comparison_checks": 3,
+      "intentional_mutation": "48px panel/card translation and hidden panel/card",
+      "status": "PASS",
+      "page_errors": 0
+    },
+    {
+      "project": "jamo",
+      "version": "previous",
+      "source_sha256": "72a9eef7ec0d84d0de7e41cbb5ad6e36ba35c14be5ab6ce5058eea547058732f",
+      "viewport": [
+        360,
+        780
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "current",
+      "source_sha256": "d1dc0ca1c5d70062d2cde9da5a9b5a056890ebbb03d0a6856dcdb97203ce2bbb",
+      "viewport": [
+        360,
+        780
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "editor_panel_box": {
+        "x": 0,
+        "y": 220,
+        "width": 360,
+        "height": 560
+      },
+      "editor_panel_within_viewport": true,
+      "editor_scroll": {
+        "height": 495,
+        "scrollHeight": 581
+      },
+      "popup_change_detected": true,
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "previous",
+      "source_sha256": "72a9eef7ec0d84d0de7e41cbb5ad6e36ba35c14be5ab6ce5058eea547058732f",
+      "viewport": [
+        390,
+        844
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "current",
+      "source_sha256": "d1dc0ca1c5d70062d2cde9da5a9b5a056890ebbb03d0a6856dcdb97203ce2bbb",
+      "viewport": [
+        390,
+        844
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "editor_panel_box": {
+        "x": 0,
+        "y": 284,
+        "width": 390,
+        "height": 560
+      },
+      "editor_panel_within_viewport": true,
+      "editor_scroll": {
+        "height": 495,
+        "scrollHeight": 581
+      },
+      "popup_change_detected": true,
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "previous",
+      "source_sha256": "72a9eef7ec0d84d0de7e41cbb5ad6e36ba35c14be5ab6ce5058eea547058732f",
+      "viewport": [
+        768,
+        1024
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "current",
+      "source_sha256": "d1dc0ca1c5d70062d2cde9da5a9b5a056890ebbb03d0a6856dcdb97203ce2bbb",
+      "viewport": [
+        768,
+        1024
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "editor_panel_box": {
+        "x": 0,
+        "y": 434,
+        "width": 768,
+        "height": 590
+      },
+      "editor_panel_within_viewport": true,
+      "editor_scroll": {
+        "height": 525,
+        "scrollHeight": 585
+      },
+      "popup_change_detected": true,
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "previous",
+      "source_sha256": "72a9eef7ec0d84d0de7e41cbb5ad6e36ba35c14be5ab6ce5058eea547058732f",
+      "viewport": [
+        1280,
+        800
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "status": "OBSERVED"
+    },
+    {
+      "project": "jamo",
+      "version": "current",
+      "source_sha256": "d1dc0ca1c5d70062d2cde9da5a9b5a056890ebbb03d0a6856dcdb97203ce2bbb",
+      "viewport": [
+        1280,
+        800
+      ],
+      "horizontal_overflow": false,
+      "page_errors": 0,
+      "scope": "initial classic stage; no gameplay acceptance",
+      "status": "OBSERVED"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "screens",
+    "components",
+    "layout_regions",
+    "repeated_components",
+    "interaction_candidates",
+    "responsive_evidence",
+    "tokens",
+    "source_evidence",
+    "unknowns",
+    "unmapped_features",
+    "confidence",
+    "counts",
+    "functional_ui_complete",
+    "release_authorized",
+    "analysis_version",
+    "status",
+    "ui_spec_draft",
+    "bonsae_spec_draft"
+  ],
+  "properties": {
+    "screens": {
+      "type": "array"
+    },
+    "components": {
+      "type": "array"
+    },
+    "layout_regions": {
+      "type": "array"
+    },
+    "repeated_components": {
+      "type": "array"
+    },
+    "interaction_candidates": {
+      "type": "array"
+    },
+    "responsive_evidence": {
+      "type": "array"
+    },
+    "tokens": {
+      "type": "array"
+    },
+    "source_evidence": {
+      "type": "array"
+    },
+    "unknowns": {
+      "type": "array"
+    },
+    "unmapped_features": {
+      "type": "array"
+    },
+    "confidence": {
+      "type": "object"
+    },
+    "counts": {
+      "type": "object"
+    },
+    "functional_ui_complete": {
+      "type": "boolean"
+    },
+    "release_authorized": {
+      "const": false
+    },
+    "analysis_version": {
+      "const": "0.4"
+    },
+    "status": {
+      "enum": [
+        "DRAFT_REVIEW_REQUIRED",
+        "INSUFFICIENT_EVIDENCE"
+      ]
+    },
+    "ui_spec_draft": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "bonsae_spec_draft": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

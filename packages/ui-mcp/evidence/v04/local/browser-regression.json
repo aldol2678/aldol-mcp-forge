@@ -1,0 +1,82 @@
+[
+  {
+    "document": "web-dashboard",
+    "viewport": 360,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "web-dashboard",
+    "viewport": 390,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "web-dashboard",
+    "viewport": 768,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "web-dashboard",
+    "viewport": 1280,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "expedition-hud-v03",
+    "viewport": 360,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "expedition-hud-v03",
+    "viewport": 390,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "expedition-hud-v03",
+    "viewport": 768,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  },
+  {
+    "document": "expedition-hud-v03",
+    "viewport": 1280,
+    "horizontal_overflow": false,
+    "hit_targets_ok": true,
+    "interaction": "PASS",
+    "binding": "PASS",
+    "page_errors": 0,
+    "status": "PASS"
+  }
+]

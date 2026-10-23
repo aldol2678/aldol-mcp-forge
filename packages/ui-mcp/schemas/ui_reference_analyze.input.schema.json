@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "source_format": {
+      "default": "html",
+      "enum": [
+        "html",
+        "ui-json"
+      ],
+      "title": "Source Format",
+      "type": "string"
+    },
+    "css": {
+      "default": "",
+      "title": "Css",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "title": "ui_reference_analyzeArguments",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

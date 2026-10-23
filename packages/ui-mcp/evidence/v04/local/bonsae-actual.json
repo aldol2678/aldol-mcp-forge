@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "source": "actual BONSAE source at pinned git commit",
+  "pipeline": [
+    "bonsae.generate_design_spec",
+    "ui_core.bonsae_bridge.import_bonsae",
+    "ui_core.validate",
+    "ui_core.render",
+    "Chromium set_content viewport check"
+  ],
+  "outputs": [
+    "web-html",
+    "game-hud-html",
+    "react-tsx"
+  ],
+  "browser": [
+    {
+      "width": 390,
+      "overflow": false,
+      "cards": 2,
+      "page_errors": 0
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "cards": 2,
+      "page_errors": 0
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "cards": 2,
+      "page_errors": 0
+    }
+  ],
+  "live_remote_calls": false,
+  "android_device_tested": false,
+  "ui_functional_acceptance": false,
+  "release_authorized": false
+}

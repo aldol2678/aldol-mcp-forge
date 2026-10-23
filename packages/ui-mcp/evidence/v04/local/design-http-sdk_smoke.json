@@ -1,0 +1,490 @@
+{
+  "sdk": "2.3.0",
+  "transport": "http",
+  "results": [
+    {
+      "test": "discovery_and_schemas",
+      "status": "PASS",
+      "tools": [
+        {
+          "name": "ui_catalog",
+          "title": null,
+          "description": "List UI components, actions, adapters, and limits.",
+          "input_schema": {
+            "properties": {},
+            "type": "object",
+            "title": "ui_catalogArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_catalogDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_validate",
+          "title": null,
+          "description": "Validate a versioned UI document without executing input code.",
+          "input_schema": {
+            "properties": {
+              "spec_json": {
+                "title": "Spec Json",
+                "type": "string"
+              }
+            },
+            "required": [
+              "spec_json"
+            ],
+            "type": "object",
+            "title": "ui_validateArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_validateDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_audit",
+          "title": null,
+          "description": "Run static contrast/action preflight (not a visual-accessibility certification).",
+          "input_schema": {
+            "properties": {
+              "spec_json": {
+                "title": "Spec Json",
+                "type": "string"
+              }
+            },
+            "required": [
+              "spec_json"
+            ],
+            "type": "object",
+            "title": "ui_auditArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_auditDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_review",
+          "title": null,
+          "description": "Review anti-slop issues by rule, path, evidence, and suggestion. No aesthetic score.",
+          "input_schema": {
+            "properties": {
+              "spec_json": {
+                "title": "Spec Json",
+                "type": "string"
+              }
+            },
+            "required": [
+              "spec_json"
+            ],
+            "type": "object",
+            "title": "ui_reviewArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_reviewDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_review_markup",
+          "title": null,
+          "description": "Review standalone HTML/CSS for decorative rails and formulaic headlines.\n    Inspect-only; no script execution, no external CSS fetching.\n    ",
+          "input_schema": {
+            "properties": {
+              "html_source": {
+                "title": "Html Source",
+                "type": "string"
+              },
+              "exceptions_json": {
+                "default": "[]",
+                "title": "Exceptions Json",
+                "type": "string"
+              }
+            },
+            "required": [
+              "html_source"
+            ],
+            "type": "object",
+            "title": "ui_review_markupArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_review_markupDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_generate",
+          "title": null,
+          "description": "Generate HTML, CSS, and a declarative action runtime for web or game HUD.",
+          "input_schema": {
+            "properties": {
+              "spec_json": {
+                "title": "Spec Json",
+                "type": "string"
+              },
+              "target": {
+                "default": "web-html",
+                "enum": [
+                  "web-html",
+                  "game-hud-html",
+                  "react-tsx"
+                ],
+                "title": "Target",
+                "type": "string"
+              },
+              "quality_mode": {
+                "default": "advisory",
+                "enum": [
+                  "advisory",
+                  "enforce"
+                ],
+                "title": "Quality Mode",
+                "type": "string"
+              }
+            },
+            "required": [
+              "spec_json"
+            ],
+            "type": "object",
+            "title": "ui_generateArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_generateDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_presets",
+          "title": null,
+          "description": "Return available curated design themes and typography/density token choices.",
+          "input_schema": {
+            "properties": {},
+            "type": "object",
+            "title": "ui_presetsArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_presetsDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_import_bonsae",
+          "title": null,
+          "description": "Turn BONSAE generate_design_spec output into a review-only structural UI draft.\n\n    Preserves states, interactions, responsive guidance and unimplemented intent\n    in a handoff report; never implies functional or visual acceptance.\n    ",
+          "input_schema": {
+            "properties": {
+              "bonsae_output_json": {
+                "title": "Bonsae Output Json",
+                "type": "string"
+              },
+              "preset": {
+                "default": "forest",
+                "enum": [
+                  "forest",
+                  "studio",
+                  "slate"
+                ],
+                "title": "Preset",
+                "type": "string"
+              }
+            },
+            "required": [
+              "bonsae_output_json"
+            ],
+            "type": "object",
+            "title": "ui_import_bonsaeArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_import_bonsaeDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_reference_analyze",
+          "title": null,
+          "description": "Analyze supplied static HTML/CSS or UI JSON into evidence and review drafts.\n\n    No URL fetching, code execution, screenshots or behavioral verification.\n    Combined UTF-8 input limit: 200000 bytes. Treat output as untrusted evidence.\n    ",
+          "input_schema": {
+            "properties": {
+              "source": {
+                "title": "Source",
+                "type": "string"
+              },
+              "source_format": {
+                "default": "html",
+                "enum": [
+                  "html",
+                  "ui-json"
+                ],
+                "title": "Source Format",
+                "type": "string"
+              },
+              "css": {
+                "default": "",
+                "title": "Css",
+                "type": "string"
+              }
+            },
+            "required": [
+              "source"
+            ],
+            "type": "object",
+            "title": "ui_reference_analyzeArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_reference_analyzeDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        },
+        {
+          "name": "ui_visual_compare",
+          "title": null,
+          "description": "Compare raw base64 PNG/JPEG screenshots; no URLs or file paths.\n\n    Each image <=180000 encoded bytes, <=2000000 pixels, <=4096 per side.\n    Returns inline difference mask and coarse image-pixel regions. No persistence.\n    Dimension mismatches are INCOMPARABLE; scores are not UX or release approval.\n    ",
+          "input_schema": {
+            "properties": {
+              "reference_image": {
+                "title": "Reference Image",
+                "type": "string"
+              },
+              "candidate_image": {
+                "title": "Candidate Image",
+                "type": "string"
+              },
+              "comparison_mode": {
+                "default": "layout",
+                "enum": [
+                  "layout",
+                  "pixel",
+                  "region"
+                ],
+                "title": "Comparison Mode",
+                "type": "string"
+              },
+              "viewport": {
+                "default": "unspecified",
+                "enum": [
+                  "mobile",
+                  "tablet",
+                  "desktop",
+                  "unspecified"
+                ],
+                "title": "Viewport",
+                "type": "string"
+              },
+              "tolerance": {
+                "default": 24,
+                "title": "Tolerance",
+                "type": "integer"
+              },
+              "same_state": {
+                "default": false,
+                "title": "Same State",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "reference_image",
+              "candidate_image"
+            ],
+            "type": "object",
+            "title": "ui_visual_compareArguments"
+          },
+          "execution": null,
+          "output_schema": {
+            "type": "object",
+            "additionalProperties": true,
+            "title": "ui_visual_compareDictOutput"
+          },
+          "icons": null,
+          "annotations": null,
+          "meta": null
+        }
+      ]
+    },
+    {
+      "test": "ui_catalog",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "ui_presets",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "ui_validate",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "ui_audit",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "ui_review",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "bonsae_handoff",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "bonsae_bad_input",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "schema_0.1",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "schema_0.2",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "schema_0.3",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "generate_web-html",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "generate_game-hud-html",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "generate_react-tsx",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "markup_three_high",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "normal_korean_body",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "review_violation",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "audit_violation",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "advisory_compatible",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "enforce_blocks",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "reasoned_waiver",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "invalid_21",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "invalid_22",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "invalid_23",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "invalid_24",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "invalid_25",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "invalid_26",
+      "status": "PASS",
+      "isError": true
+    },
+    {
+      "test": "script_inspect_only",
+      "status": "PASS",
+      "isError": false
+    },
+    {
+      "test": "disconnect_reconnect",
+      "status": "PASS"
+    }
+  ],
+  "passed": 29
+}

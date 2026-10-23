@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "test": "anonymous",
+      "status": "PASS",
+      "http_status": 401
+    },
+    {
+      "test": "wrong_key",
+      "status": "PASS",
+      "http_status": 401
+    },
+    {
+      "test": "malformed_json",
+      "status": "PASS",
+      "http_status": 400
+    },
+    {
+      "test": "body_limit",
+      "status": "PASS",
+      "http_status": 413
+    },
+    {
+      "test": "untrusted_origin",
+      "status": "PASS",
+      "http_status": 403
+    },
+    {
+      "test": "host_rebinding",
+      "status": "PASS",
+      "http_status": 421
+    }
+  ],
+  "passed": 6
+}

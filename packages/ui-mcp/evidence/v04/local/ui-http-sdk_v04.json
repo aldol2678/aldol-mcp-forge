@@ -1,0 +1,28 @@
+{
+  "passed": 22,
+  "checks": [
+    "ten_tool_discovery",
+    "ui_reference_analyze_success",
+    "ui_import_bonsae_success",
+    "ui_validate_success",
+    "ui_generate_success",
+    "ui_audit_success",
+    "ui_review_success",
+    "ui_visual_compare_success",
+    "ui_visual_compare_success",
+    "ui_visual_compare_success",
+    "ui_visual_compare_success",
+    "ui_visual_compare_success",
+    "ui_reference_analyze_success",
+    "ui_reference_analyze_success",
+    "ui_reference_analyze_safe_error",
+    "ui_reference_analyze_safe_error",
+    "ui_reference_analyze_safe_error",
+    "ui_reference_analyze_safe_error",
+    "ui_visual_compare_safe_error",
+    "ui_visual_compare_safe_error",
+    "ui_visual_compare_safe_error",
+    "ui_visual_compare_safe_error"
+  ],
+  "status": "PASS"
+}
