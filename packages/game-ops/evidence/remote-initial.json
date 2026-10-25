@@ -1,0 +1,214 @@
+{
+  "endpoint": "https://game-ops-mcp-api-production.up.railway.app/mcp",
+  "executed_at": "2026-10-20T23:53:17.467575+00:00",
+  "health": 200,
+  "unauthenticated": 401,
+  "incorrect_token": 401,
+  "tools": [
+    "inspect_game_artifact",
+    "run_static_qa",
+    "run_browser_qa",
+    "run_game_scenarios",
+    "compare_game_versions",
+    "get_qa_report"
+  ],
+  "html": {
+    "kind": "static",
+    "status": "PASS",
+    "artifact": {
+      "filename": "remote.html",
+      "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c",
+      "entry": "remote.html",
+      "files_count": 1,
+      "bytes": 125,
+      "files": [
+        {
+          "name": "remote.html",
+          "bytes": 125,
+          "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c"
+        }
+      ]
+    },
+    "profile_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "checks": [
+      {
+        "id": "static.doctype",
+        "status": "PASS",
+        "detail": "HTML doctype"
+      },
+      {
+        "id": "static.title",
+        "status": "PASS",
+        "detail": "Title element"
+      },
+      {
+        "id": "static.viewport",
+        "status": "PASS",
+        "detail": "Viewport meta element"
+      },
+      {
+        "id": "static.js.inline.1",
+        "status": "PASS",
+        "detail": "JS syntax valid"
+      }
+    ],
+    "blocked": false,
+    "summary": {
+      "PASS": 4,
+      "FAIL": 0,
+      "UNKNOWN": 0
+    },
+    "coverage": {
+      "static": "PASS",
+      "browser": "UNKNOWN",
+      "real_device": "UNKNOWN"
+    },
+    "environment": {
+      "transport": "http",
+      "browser_method": "set_content + emulated localStorage",
+      "os_isolation_verified": false
+    },
+    "qa_id": "1398ecc8fe8a4416b6b7e6714ddb1184",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:53:40.466905+00:00"
+  },
+  "zip": {
+    "kind": "inspect",
+    "status": "PASS",
+    "artifact": {
+      "filename": "remote.zip",
+      "sha256": "0a284d12efc32216f64fce7c4aebadccfc92f85745b25b4735e76429e62dd3f6",
+      "entry": "index.html",
+      "files_count": 1,
+      "bytes": 243,
+      "files": [
+        {
+          "name": "index.html",
+          "bytes": 125,
+          "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c"
+        }
+      ]
+    },
+    "checks": [
+      {
+        "id": "artifact.integrity",
+        "status": "PASS",
+        "detail": "Bounded ingestion and SHA-256 computed; not a safety verdict"
+      }
+    ],
+    "coverage": {
+      "browser": "UNKNOWN",
+      "static": "UNKNOWN"
+    },
+    "qa_id": "3c089135452d42eab4cde29dc80c2d26",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:53:40.548112+00:00"
+  },
+  "report_readback": true,
+  "regression": {
+    "kind": "regression",
+    "status": "PASS",
+    "checks": [],
+    "baseline_id": "1398ecc8fe8a4416b6b7e6714ddb1184",
+    "candidate_id": "1398ecc8fe8a4416b6b7e6714ddb1184",
+    "new_regressions": [],
+    "missing_checks": [],
+    "compatible_profiles": true,
+    "identical_input": true,
+    "scope": "Only comparable recorded checks; not a release verdict",
+    "qa_id": "745206997e974d9db63e37e60d2cf39c",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:53:40.707820+00:00"
+  },
+  "browser": {
+    "kind": "browser",
+    "status": "UNKNOWN",
+    "artifact": {
+      "filename": "remote.html",
+      "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c",
+      "entry": "remote.html",
+      "files_count": 1,
+      "bytes": 125,
+      "files": [
+        {
+          "name": "remote.html",
+          "bytes": 125,
+          "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c"
+        }
+      ]
+    },
+    "profile_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "checks": [
+      {
+        "id": "browser.policy",
+        "status": "UNKNOWN",
+        "detail": "BLOCKED: browser execution is disabled; HTTP never runs artifact HTML"
+      }
+    ],
+    "blocked": true,
+    "summary": {
+      "PASS": 0,
+      "FAIL": 0,
+      "UNKNOWN": 1
+    },
+    "coverage": {
+      "static": "UNKNOWN",
+      "browser": "UNKNOWN",
+      "real_device": "UNKNOWN"
+    },
+    "environment": {
+      "transport": "http",
+      "browser_method": "set_content + emulated localStorage",
+      "os_isolation_verified": false
+    },
+    "qa_id": "97e4c67bc13f4d0ebe0f5495b40d1a37",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:53:40.766248+00:00"
+  },
+  "scenarios": {
+    "kind": "scenarios",
+    "status": "UNKNOWN",
+    "artifact": {
+      "filename": "remote.html",
+      "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c",
+      "entry": "remote.html",
+      "files_count": 1,
+      "bytes": 125,
+      "files": [
+        {
+          "name": "remote.html",
+          "bytes": 125,
+          "sha256": "eee1b8ff1cc6d4069b37c4f4546d40e7b7dfc38b19ee139fa3b92358f70cd46c"
+        }
+      ]
+    },
+    "profile_sha256": "ff672e58ddb3e68f69369cfaa16ae543612a9ef50366e5c6e27e6dc9bed15bd9",
+    "checks": [
+      {
+        "id": "browser.policy",
+        "status": "UNKNOWN",
+        "detail": "BLOCKED: browser execution is disabled; HTTP never runs artifact HTML"
+      }
+    ],
+    "blocked": true,
+    "summary": {
+      "PASS": 0,
+      "FAIL": 0,
+      "UNKNOWN": 1
+    },
+    "coverage": {
+      "static": "UNKNOWN",
+      "browser": "UNKNOWN",
+      "real_device": "UNKNOWN"
+    },
+    "environment": {
+      "transport": "http",
+      "browser_method": "set_content + emulated localStorage",
+      "os_isolation_verified": false
+    },
+    "qa_id": "e659db8ac7154f29a10f570a313d3e8b",
+    "version": "0.4.0",
+    "created_at": "2026-10-20T23:53:40.824909+00:00"
+  },
+  "path_rejected": true
+}

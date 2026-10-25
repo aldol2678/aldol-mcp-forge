@@ -1,0 +1,3 @@
+aldol-openapi-pets: PASS
+aldol-game-html-audit: PASS
+{"passed": true, "projects": {"aldol-openapi-pets": true, "aldol-game-html-audit": true}}

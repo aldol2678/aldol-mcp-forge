@@ -1,0 +1,21 @@
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_create' rejected arguments: ['project_name']
+Tool 'forge_test' rejected arguments: ['isolation']
+Tool 'forge_preview_openapi' rejected arguments: ['spec_json']
+Tool 'forge_preview_openapi' rejected arguments: ['spec_json']
+Tool 'forge_test' failed: 'Error executing tool forge_test: Project does not exist or is symlink'
+Tool 'forge_create' failed: 'Error executing tool forge_create: Project exists; refusing overwrite'
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_preview' rejected arguments: ['description']
+Tool 'forge_create' rejected arguments: ['project_name']
+Tool 'forge_test' rejected arguments: ['isolation']
+Tool 'forge_preview_openapi' rejected arguments: ['spec_json']
+Tool 'forge_preview_openapi' rejected arguments: ['spec_json']
+Tool 'forge_test' failed: 'Error executing tool forge_test: Project does not exist or is symlink'
+Tool 'forge_create' failed: 'Error executing tool forge_create: Project exists; refusing overwrite'
+{"passed": true, "official_sdk_version": "2.3.0", "forge_entrypoint": "forge_sdk.py", "inmemory": {"passed": true, "mode": "inmemory", "tools": ["forge_add_tool", "forge_create", "forge_import_openapi", "forge_list_templates", "forge_package", "forge_preview", "forge_preview_openapi", "forge_test"], "contract": {"schema_fields": 14, "all_required_and_bounds_matched": true}, "errors_visible": true, "generated_mcp": "ci-html-inmemory", "official_generated_sdk": "passed", "openapi_dry_run": false}, "stdio": {"passed": true, "mode": "stdio", "tools": ["forge_add_tool", "forge_create", "forge_import_openapi", "forge_list_templates", "forge_package", "forge_preview", "forge_preview_openapi", "forge_test"], "contract": {"schema_fields": 14, "all_required_and_bounds_matched": true}, "errors_visible": true, "generated_mcp": "ci-html-stdio", "official_generated_sdk": "passed", "openapi_dry_run": true}, "network_called": false, "production_deployed": false}

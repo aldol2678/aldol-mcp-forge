@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2 - source patch only (2026-10-21)
+- Add 23 evidence-labeled, historically observed ALDOL games/concepts in a Git-tracked read-only catalog.
+- Expose `list_games`, `get_game`, `get_game_resume` as three additional owner-protected MCP tools (now nine total); no remote fetch, SQL storage or mutation endpoint.
+- Keep existing six QA operations, security and local/HTTP execution boundaries. New registry is included in the Docker build; add unit/protocol/OAuth coverage.
+- All catalog stages and versions remain UNVERIFIED; release readiness UNKNOWN. No deploy, plugin upgrade, ChatGPT App mapping or production status claim.
+
 ## 0.2.0 - 2026-10-19
 - Removed GitHub/PR/CI as default assumptions. GitHub is one optional delivery route.
 - Added game-by-game environment detection and source/version authority checks.
@@ -16,3 +22,17 @@
 - Added declarative game profiles with Jelly Lab v0.4 scenario coverage (breeding, reward, menus, emulated storage).
 - Added baseline/candidate same-profile regression comparison with scoped PASS/FAIL/UNKNOWN, missing tests and version hashes.
 - Explicit separation of plugin skill packaging from a separately provisioned execution runtime; no MCP server, new external permissions, user game mutation or deployment.
+
+## 0.4.0
+
+- Six official Python MCP SDK tools; stdio and owner-authenticated Streamable HTTP.
+- Bounded HTML/ZIP ingestion, optional SHA verification, private QA report IDs and conservative regression comparison.
+- Default-denied browser/scenario execution, with local trusted-operator opt-in only; HTTP always blocks HTML execution.
+- Docker/Railway deployment configuration, connection examples and protocol/security tests; original v0.3 CLI retained.
+
+## 0.4.1
+
+- Opt-in single-owner OAuth resource-server adapter with protected resource discovery, JWT/JWKS validation and per-tool auth metadata. Established IdP login/code+PKCE remains an external prerequisite.
+- Preserve default bearer authentication, PRIVATE plugin identity, six tools and remote browser blocking. Reject ambiguous duplicate credentials.
+- Correct unsupported ChatGPT API-key setup instructions; document verified-App mapping gate and design-only authenticated mobile QA fallback.
+- ChatGPT web OAuth login/tool calls and physical Android acceptance remain unverified; no app ID invented and no public QA interface deployed.

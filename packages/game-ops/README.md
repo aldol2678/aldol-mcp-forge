@@ -1,46 +1,108 @@
-# ALDOL Game Ops | Open-source QA toolkit
+# ALDOL Game Ops MCP v0.4.2 (Draft source; not deployed)
 
-A platform-agnostic game QA workflow with a real local HTML/ZIP static and optional browser test runner. This folder is independent of the parent MCP Forge runtime and can be extracted into its own repository.
+MIT game artifact QA toolkit and an **official Python MCP SDK server**. Reuses the recovered v0.3 CLI without changing Forge runtime. Stdio executes local QA; authenticated Streamable HTTP provides bounded static QA. No new repository is necessary: the module and dependencies remain isolated here.
 
-## Status
+## Install and run
 
-- **Recovered source:** ALDOL Game Ops personal plugin release v0.3.0 (2026-10-19), 12 original files preserved in this directory.
-- **What runs today:** local Python CLI with static inspection, ZIP resource resolution, optional Node syntax checking, optional Playwright/Chromium responsive checks, declarative gameplay scenarios, and same-profile regression comparison.
-- **MCP status:** **This is not yet a standalone MCP server.** The existing ChatGPT plugin packages skills and the local runner, not an executable MCP tool. MCP SDK adapter and remote deployment are future work, not claimed as completed.
-- **Hosting:** no service, remote API, game deployment, CI/CD connection, or automatic publishing is performed by the QA runner.
+Python 3.11+ and Node.js 18+ (JS syntax checks). No Node means JS checks are UNKNOWN.
 
-## Quick start
+```sh
+cd packages/game-ops
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt
+mkdir -p artifacts reports
+GAME_OPS_ARTIFACT_ROOT="$PWD/artifacts" GAME_OPS_REPORT_ROOT="$PWD/reports" .venv/bin/python server.py
+```
 
-Python 3.10+ required. Node.js is optional for JavaScript syntax diagnostics. Playwright Python and a Chromium executable are optional for responsive and scenario QA.
+Use `examples/mcp-stdio.json` with your absolute paths. Existing CLI is preserved:
 
 ```sh
 python scripts/selftest.py
-python scripts/html_qa.py examples/demo.html --output ./qa-output
-python scripts/html_qa.py examples/demo.html --profile profiles/regression-smoke.json --output ./qa-output-demo
-python scripts/html_qa.py candidate.html --baseline previous.html --output ./qa-diff
+python scripts/html_qa.py examples/demo.html --output /tmp/gameops-cli
 ```
 
-For optional local browser tests in a restricted environment, install Playwright and Chromium independently. Set `ALDOL_CHROMIUM` to your Chromium path. If unavailable, browser checks are **UNKNOWN**, not PASS.
+## MCP tools
 
-## What the runner checks
+| Tool | Input | Result |
+|---|---|---|
+| `inspect_game_artifact` | `artifact` | Bounded file/ZIP metadata and per-file SHA-256 |
+| `run_static_qa` | `artifact` | HTML, JS syntax and bundled resource checks |
+| `run_browser_qa` | `artifact`, optional `profile` | Local responsive/44px configured touch-target checks and JS errors |
+| `run_game_scenarios` | `artifact`, `profile` | Local game-specific JSON steps |
+| `compare_game_versions` | `baseline_id`, `candidate_id` | Conservative comparison of stored QA reports |
+| `get_qa_report` | `qa_id` | Exact persisted JSON readback |
+| `list_games` | optional `stage`, `query`, `limit`, `offset` | Paginated historical inventory; stage and version UNVERIFIED |
+| `get_game` | `game_id` | Historical game card, known links and provenance |
+| `get_game_resume` | `game_id` | Conservative next step; release readiness always UNKNOWN until reverified |
 
-1. HTML/ZIP entry point, bundled assets, simple JavaScript syntax, and SHA-256 evidence.
-2. Desktop/mobile-viewport **browser emulation** when dependencies exist. Layout overflow, minimum touch sizes, JavaScript exceptions, screenshots and configured tabs.
-3. JSON scenario actions and assertions for a particular game. The Jelly Lab sample profile is game-specific; do not apply its expected state to unrelated games.
-4. Previous/candidate artifact comparison on matching test IDs. `NO_REGRESSION_DETECTED` means no regression **within compared tests**, not a global game-quality guarantee.
+Artifact is `{ "filename": "index.html", "content_base64": "..." }`, optionally `expected_sha256`. Stdio additionally accepts `{ "filename":"index.html", "path":"game/index.html" }` relative to the operator-configured artifact root. Exactly one input source. No URL fetching. HTTP never accepts filesystem paths.
 
-## Usage and safety boundaries
+Example SDK client (see executable integration tests for full lifecycle):
 
-Do not run untrusted HTML directly on your everyday device or privileged CI runner. The browser stage executes user-supplied JavaScript. Browser request-abort routing is not an isolation boundary (it does not address all exfiltration paths). Run browser QA as an unprivileged separate OS/container environment with outbound networking disabled and no credentials. No local script is a remote sandbox by itself.
+```python
+import asyncio, base64, sys
+from pathlib import Path
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
 
-Browser loads use `page.set_content` with simulated localStorage, not the real deployed origin. Real Android/iOS physical devices, GPU/game-engine performance, live multiplayer, Production and persistence across real reloads are **NOT verified** by this runner.
+async def main():
+    async with stdio_client(StdioServerParameters(command=sys.executable, args=["server.py"])) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            print(await session.list_tools())
+            result = await session.call_tool("run_static_qa", {"artifact": {
+                "filename": "demo.html",
+                "content_base64": base64.b64encode(Path("examples/demo.html").read_bytes()).decode()
+            }})
+            print(result)
+asyncio.run(main())
+```
 
-Test input files are left unmodified. JSON/screenshots are written under `--output`. Never treat an exit status of 0 as evidence that UNKNOWN checks passed. Check `candidate/report.json`, `summary.json`, and `regression.json` when applicable.
+## Game catalog (new in 0.4.2)
 
-## Open-source scope
+The Git-tracked `games.json` is a **discovery seed**, not a database of live releases. It starts with 23 conversation-derived game/game-concept records and labels every stage/version as `UNVERIFIED`. `registry.py` reads it without any remote fetch or write action. Known repository URLs are references only, not evidence that a given build is current. No ChatGPT App registration, mobile invocation, automatic GitHub sync or production update is part of this patch.
 
-MIT-licensed game QA runner, project-agnostic skills, bundled sample profiles and tests. The original private ChatGPT plugin's installation, permissions, backend ID, and release are not made public or changed by publishing this source. There are no bundled proprietary game source files, user secrets or customer datasets.
+Call `list_games` to filter, `get_game` for a specific ID, and `get_game_resume` before resuming work. Verify the actual repo HEAD, PR, play URL and QA independently. To add or update entries, edit `games.json` in a reviewed Git branch and update its `snapshot_as_of`; use `UNVERIFIED` until independent current evidence is established. Never reclassify a record as officially released based on its seed text alone. No new storage server or SQL database is necessary.
 
-Source provenance: private plugin `aldol-game-ops` release `pluginrel_6ad6150fdf6081918e38d771417d5b7d` (v0.3.0), recovered 2026-10-21. Public fork initially packaged under `packages/game-ops/` in ALDOL MCP Forge.
+The catalog is shipped inside the package's Docker image and is read-only at runtime. Existing QA reports still have independent ephemeral retention. Rebuilding and deploying the service to update its catalog is a separate, **not performed** action; the authenticated ChatGPT integration blocker still applies.
 
-See [SECURITY.md](SECURITY.md) and [LICENSE](LICENSE).
+## Local browser/scenario execution
+
+Disabled by default. Only a trusted local operator may set `GAME_OPS_ALLOW_BROWSER=1` in an appropriate execution environment. Install `playwright` and Chromium separately and set `ALDOL_CHROMIUM` to its executable. **That flag is consent to run trusted local HTML, not proof of sandboxing.** The inherited runner launches Chromium with `--no-sandbox`; arbitrary/untrusted HTML needs OS/container isolation, no secrets, denied network and resource limits established outside this package. The MCP wrapper does not certify those properties. HTTP ignores this flag and never executes HTML, even when configured to allow local browser runs.
+
+Profiles use the existing `viewports`, `responsive_tabs`, `touch_targets`, `scenarios` keys. Scenario actions: click/tap/fill/select/wait, assert_count/text/visible/state/storage_key, reload_simulated. No evaluate action. Screenshots are disabled in the MCP wrapper; use the CLI for local screenshot files. The old CLI supports larger limits and lacks HTTP path protections; never expose it as a network handler.
+
+## Authenticated remote server
+
+```sh
+# Inject a random >=32-character GAME_OPS_TOKEN through your secret manager.
+# Never commit it, put it in plugin files, or send it in a URL.
+GAME_OPS_PUBLIC_HOST=your-verified-host.example .venv/bin/python server.py --http
+```
+
+`/mcp` requires `Authorization: Bearer <owner token>` on **every** request; all unauthenticated discovery/calls are rejected. `/healthz` only exposes service version and the browser-blocked state. Browser Origin headers are refused. Configure the exact host via Railway's `RAILWAY_PUBLIC_DOMAIN` or `GAME_OPS_PUBLIC_HOST`. The default remains bearer authentication for compatible machine clients. ChatGPT does not support this custom API-key connection flow. Version 0.4.1 adds an opt-in, single-owner OAuth resource-server adapter; an established IdP and real ChatGPT App registration are still required. See [OAuth/mobile integration](docs/OAUTH-MOBILE.md).
+
+`Dockerfile` runs as UID 10001, includes Node for parse-only JS checking, excludes Playwright/Chromium. Railway: root `/packages/game-ops`, Dockerfile `Dockerfile`, port 8000, health `/healthz`, one replica, 0.5 vCPU / 0.5 GiB. Only the new service's configuration is changed. `examples/mcp-http.json` describes the connection without containing credentials. Do not paste the owner API key into ChatGPT or a mobile page. OAuth activation and registered App mapping remain blocked pending verified provider/account configuration. Package registration alone is **not** a successful ChatGPT connection.
+
+## Evidence and verdicts
+
+Reports distinguish PASS / FAIL / UNKNOWN. Static PASS only covers executed static checks; browser/real-device coverage remains UNKNOWN. Browser policy blocks, unavailable Chromium, empty scenarios, worker failure and timeout are UNKNOWN. Invalid input is a protocol tool error rather than fabricated QA success. Inspection PASS certifies ingestion/integrity only.
+
+Regression FAIL means a matching check changed PASS→FAIL. Missing checks, UNKNOWN reports or different kinds/profile fingerprints yield UNKNOWN. Otherwise PASS means no newly observed regression in the comparable checks, even if a pre-existing failure remains; read both reports. It is never automatic release approval.
+
+Reports are single-owner, stored as private JSON for at most 24h and 128 reports, and have an individual size cap of 2 MiB. Railway storage is ephemeral; reports may disappear on restart/redeploy. Artifacts and browser outputs are temporary and removed after the call. There is no multi-tenant isolation or permanent evidence archive. Read the report into your own evidence store when needed.
+
+Limits: 2 MiB decoded upload; 3 MiB HTTP body; 100 ZIP entries; 8 MiB total expansion; 2 MiB per expanded file; compression-ratio guard; duplicate/traversal/drive paths, encrypted entries, links and special files refused. Profile 64 KB, at most 12 scenarios × 40 steps. At most 4 active HTTP request bodies, with 15s receive deadline; idle proxy connections do not consume this quota. Worker deadlines 30s static/90s local browser, CPU/file descriptor/output limits and process-group cleanup. Remote service memory/CPU limits are also set at Railway. No upstream security-scanner or full DOM/CSS validator claim.
+
+## Tests
+
+```sh
+.venv/bin/pip install pytest
+.venv/bin/python -m pytest tests -q
+python scripts/selftest.py
+# From repository root:
+python -m unittest discover -s tests -v
+node --test adapters/sites/tests/*.test.mjs
+```
+
+`evidence/` contains this change's executed evidence. Deployment, protocol calls, ChatGPT credential activation, mobile real-device tests and public release are separate acceptance states. See `docs/VERIFICATION.md` for actual results and remaining gaps.

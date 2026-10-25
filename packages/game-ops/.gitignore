@@ -1,0 +1,4 @@
+/reports/
+/artifacts/
+/.venv/
+/.pytest_cache/
