@@ -20,7 +20,7 @@ PINNED_BLOBS = {
 
 def verify_blob(path, expected):
     content = path.read_bytes()
-    actual = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\\0" + content).hexdigest()
+    actual = hashlib.sha1(b"blob " + str(len(content)).encode() + b"\0" + content).hexdigest()
     if actual != expected:
         raise RuntimeError("Source changed; review before staging: " + path.name)
 
