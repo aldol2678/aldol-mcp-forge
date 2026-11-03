@@ -12,7 +12,10 @@ async function body(req){
 function backend(env){
  if(!env.MCP_BACKEND_URL||!env.MCP_BACKEND_TOKEN)return null;
  const u=new URL(env.MCP_BACKEND_URL);
- if(u.protocol!=='https:'||!u.hostname.endsWith('.up.railway.app')||u.username||u.password||u.port||u.pathname!=='/mcp'||u.search||u.hash)throw Error('허용된 Railway MCP 주소가 아닙니다.');
+ const exact=env.MCP_BACKEND_ALLOWED_HOST;
+ if(exact!==undefined&&exact!==null&&(!/^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$/.test(exact)||exact.includes('..')))throw Error('유효하지 않은 서버 허용 호스트입니다.');
+ const permitted=exact?u.hostname===exact:u.hostname.endsWith('.up.railway.app');
+ if(u.protocol!=='https:'||!permitted||u.username||u.password||u.port||u.pathname!=='/mcp'||u.search||u.hash)throw Error('허용된 MCP 백엔드 주소가 아닙니다.');
  return u.toString();
 }
 async function rpc(url,secret,method,params={},asset=false){
@@ -29,14 +32,14 @@ async function runTool(name,args,env){
  const tool=TOOLS.find(t=>t.name===name);if(!tool)throw Error('이 회사에서 제공하지 않는 도구입니다.');
  if(!args||typeof args!=='object'||Array.isArray(args)||Object.keys(args).some(k=>!Object.hasOwn(tool.inputSchema.properties,k))||tool.inputSchema.required.some(k=>typeof args[k]!=='string'))throw Error('도구 입력 필드를 확인하세요.');
  for(const v of Object.values(args))if(v!==null&&(typeof v!=='string'||v.length>262144))throw Error('문자열 입력 크기를 확인하세요.');
- const url=backend(env);if(!url)throw Error('전문 서버 연결 대기: Railway 계정의 신규 리소스 생성 한도');
+ const url=backend(env);if(!url)throw Error('전문 서버 연결 대기: Cloudflare 백엔드 이전 진행 중');
  return unwrap(await rpc(url,env.MCP_BACKEND_TOKEN,'tools/call',{name,arguments:args}));
 }
 export default {async fetch(req,env){
  const u=new URL(req.url), path=u.pathname;
  if(req.method==='GET'&&['/','/client.js','/style.css'].includes(path))return new Response(path==='/'?PAGE:path==='/client.js'?CLIENT:CSS,{headers:{...baseHeaders,'content-type':path==='/'?'text/html; charset=utf-8':path==='/client.js'?'application/javascript; charset=utf-8':'text/css; charset=utf-8','content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'self' https://chatgpt.com"}});
  if(path==='/api/status'&&req.method==='GET'){
-  try{const url=backend(env);if(!url)return json({company:COMPANY,connected:false,status:'BLOCKED',reason:'Railway 신규 리소스 생성 한도: 전문 서버 미배포',sdk:'2.0.0',asset_factory:COMPANY==='bonsae'?'metadata_only; authentication needs verification':null,checked_at:new Date().toISOString()});
+  try{const url=backend(env);if(!url)return json({company:COMPANY,connected:false,status:'BLOCKED',reason:'Cloudflare 백엔드 이전 진행 중: 전문 서버 미연결',sdk:'2.0.0',asset_factory:COMPANY==='bonsae'?'metadata_only; authentication needs verification':null,checked_at:new Date().toISOString()});
    await rpc(url,env.MCP_BACKEND_TOKEN,'tools/list');return json({company:COMPANY,connected:true,status:'CONNECTED',checked_at:new Date().toISOString()});
   }catch{return json({company:COMPANY,connected:false,status:'ERROR',reason:'전문 서버 연결을 확인할 수 없습니다.',checked_at:new Date().toISOString()},502);}
  }
