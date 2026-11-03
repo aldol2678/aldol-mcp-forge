@@ -92,15 +92,45 @@ export default {async fetch(req,env){
   if(!env.ASSET_FACTORY_TOKEN)return json({error:'Asset Factory 인증 연동 대기. 파일 검사는 수행되지 않았습니다.'},503);
   try{const result=await rpc('https://aldol-asset-factory-studio.al-dori.chatgpt.site/mcp',env.ASSET_FACTORY_TOKEN,'tools/call',{name:'audit_preview',arguments:b.manifest},true);return json({result:unwrap(result),scope:'caller_metadata_only',checked_at:new Date().toISOString()});}catch(e){return json({error:e.message},502);}
  }
- const id=b?.id??null, out=result=>json({jsonrpc:'2.0',id,result});
+ const id=b?.id??null;
+ const out=result=>json({jsonrpc:'2.0',id,result});
+ const failure=(code,message,status=400,data)=>json({jsonrpc:'2.0',id,error:{
+   code,message,...(data===undefined?{}:{data})}},status);
  if(b?.jsonrpc!=='2.0'||typeof b.method!=='string')return json({jsonrpc:'2.0',id:null,error:{code:-32600,message:'Invalid request'}},400);
  if(b.method==='notifications/initialized')return new Response(null,{status:202});
- if(b.method==='server/discover')return out({supportedVersions:['2026-07-28'],capabilities:{tools:{}}});
- if(b.method==='initialize')return out({protocolVersion:'2026-07-28',capabilities:{tools:{}},serverInfo:{name:'ALDOL '+COMPANY.toUpperCase()+' Studio',version:'1.0.0'}});
- if(b.method==='tools/list')return out({tools:TOOLS});
- if(b.method==='tools/call'){
-  try{const value=await runTool(b.params?.name,b.params?.arguments??{},env);return out({content:[{type:'text',text:JSON.stringify(value)}],structuredContent:value,isError:false});}
-  catch(e){return out({content:[{type:'text',text:e.message}],isError:true});}
+ // Preserve the existing Sites legacy request form for previously installed
+ // clients. Current SDK 2.0 clients advertise modern headers and _meta.
+ const meta=b.params?._meta;
+ const protocolVersion=meta?.['io.modelcontextprotocol/protocolVersion'];
+ const modern=(req.headers.has('mcp-protocol-version')||protocolVersion!==undefined||b.method==='server/discover');
+ if(modern){
+  const hdr=req.headers;
+  const capabilities=meta?.['io.modelcontextprotocol/clientCapabilities'];
+  if(typeof protocolVersion!=='string'||!capabilities||typeof capabilities!=='object'||Array.isArray(capabilities)
+    ||hdr.get('mcp-protocol-version')!==protocolVersion||hdr.get('mcp-method')!==b.method
+    ||(b.method==='tools/call'&&
+      (typeof b.params?.name!=='string'||hdr.get('mcp-name')!==mirrorName(b.params.name))))
+    return failure(-32020,'Header mismatch');
+  if(protocolVersion!==MCP_PROTOCOL)
+    return failure(-32022,'Unsupported protocol version',400,{
+      supported:[MCP_PROTOCOL],requested:protocolVersion
+    });
  }
- return json({jsonrpc:'2.0',id,error:{code:-32601,message:'Method not found'}});
+ const envelope=(value,cacheable=false)=>modern?{
+  resultType:'complete',
+  _meta:{'io.modelcontextprotocol/serverInfo':{name:'ALDOL '+COMPANY.toUpperCase()+' Studio',version:'1.0.0'}},
+  ...(cacheable?{cacheScope:'private',ttlMs:0}:{}),...value
+ }:value;
+ if(b.method==='server/discover')return out(envelope({supportedVersions:[MCP_PROTOCOL],capabilities:{tools:{}}},true));
+ if(b.method==='initialize')return out({protocolVersion:MCP_PROTOCOL,capabilities:{tools:{}},serverInfo:{name:'ALDOL '+COMPANY.toUpperCase()+' Studio',version:'1.0.0'}});
+ if(b.method==='tools/list')return out(envelope({tools:TOOLS},true));
+ if(b.method==='tools/call'){
+  try{
+   const value=await runTool(b.params?.name,b.params?.arguments??{},env);
+   return out(envelope({content:[{type:'text',text:JSON.stringify(value)}],structuredContent:value,isError:false}));
+  }catch(e){
+   return out(envelope({content:[{type:'text',text:e.message}],isError:true}));
+  }
+ }
+ return failure(-32601,'Method not found',404);
 }};
