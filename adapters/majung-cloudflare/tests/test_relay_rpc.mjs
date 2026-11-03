@@ -34,6 +34,7 @@ test('modern tools/list supplies mirrored method and protocol metadata', async (
   const {requests,value} = await simulate('tools/list');
   const req = requests[0].options;
   const body = JSON.parse(req.body);
+  assert.equal(req.redirect,'manual');
   assert.equal(req.headers['MCP-Protocol-Version'],'2026-07-28');
   assert.equal(req.headers['Mcp-Method'],'tools/list');
   assert.equal(req.headers['Mcp-Name'],undefined);
@@ -83,5 +84,13 @@ test('tool-reported errors do not become successful results', async () => {
       Response.json({jsonrpc:'2.0',id:body.id,result:{
         resultType:'complete',isError:true,content:[{type:'text',text:'blocked'}]}})),
     /전문 도구/
+  );
+});
+
+test('HTTP 3xx is rejected without following Location', async () => {
+  await assert.rejects(
+    () => simulate('tools/list',{},false,()=>
+      new Response(null,{status:302,headers:{Location:'https://attacker.example/mcp'}})),
+    /리다이렉트/
   );
 });
