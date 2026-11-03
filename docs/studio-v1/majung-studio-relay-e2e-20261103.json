@@ -1,0 +1,100 @@
+{
+  "title": "MAJUNG Studio QA relay to Cloudflare backend MCP 2026-07-28 integration",
+  "observed_date": "2026-11-03",
+  "scope": "Isolated two-Worker QA within Cloudflare. The existing owner-private MAJUNG Studio/Sites application and ChatGPT registration were not changed.",
+  "code_review": {
+    "branch": "feat/majung-cloudflare-python-adapter-20261103",
+    "pr": 38,
+    "relay_source": "adapters/majung-studio/worker/runtime.mjs",
+    "cloudflare_backend_source": "adapters/majung-cloudflare/src/entry.py"
+  },
+  "fixes": [
+    {
+      "issue": "Studio sent legacy headerless JSON-RPC to modern 2026-07-28 backend",
+      "resolution": "MCP-Protocol-Version, Mcp-Method, Mcp-Name, _meta clientCapabilities, clientInfo; modern resultType complete validation. Legacy Asset Factory call path untouched."
+    },
+    {
+      "issue": "Cloudflare Workers rejects fetch redirect:'error'",
+      "resolution": "Replace with redirect:'manual' and explicitly reject all 300-399 responses; preserves anti-redirect behavior."
+    },
+    {
+      "issue": "Worker-to-Worker fetch on same workers.dev zone yielded edge 404 (preview and default QA backend)",
+      "resolution": "Only isolated QA relay Worker set global_fetch_strictly_public compatibility flag, to emulate external public fetch. Production Sites caller will not inherit this flag. Cloudflare service binding is an alternative for same-account Workers."
+    },
+    {
+      "issue": "Studio /mcp inbound used pre-2026 response format",
+      "resolution": "Add modern server/discover, list/call result envelopes, mirrored header/Origin checks, protocol version errors while retaining older headerless initialize/list behavior for previously installed Sites clients."
+    }
+  ],
+  "checks": {
+    "local_node": {
+      "passed": 16,
+      "total": 16,
+      "command": "node --test adapters/majung-cloudflare/tests/test_relay.mjs adapters/majung-cloudflare/tests/test_relay_rpc.mjs adapters/majung-cloudflare/tests/test_studio_inbound.mjs",
+      "notes": "Node v26.12.1 using GitHub commit 5a6842f722085d3b4ee2f539bb3c2af3e32db553"
+    },
+    "relay_to_backend_http": {
+      "passed": 8,
+      "total": 8,
+      "checks": [
+        "status CONNECTED and tools/list",
+        "relay-only QA gate 401",
+        "research_market offline",
+        "analyze_competitors UNKNOWN price",
+        "evaluate_opportunity HOLD/no spend",
+        "live network search rejected",
+        "cross-origin API call rejected",
+        "unknown tool rejected"
+      ]
+    },
+    "official_sdk_qa_relay_backend": {
+      "passed": 6,
+      "total": 6,
+      "sdk": "mcp==2.0.0",
+      "protocol": "2026-07-28",
+      "checks": [
+        "Client(mode=auto) connected to QA relay",
+        "tools/list exactly three",
+        "research_market offline 3-hop",
+        "analyze_competitors 3-hop",
+        "evaluate_opportunity 3-hop",
+        "live search fail-closed"
+      ]
+    }
+  },
+  "cloudflare": {
+    "qa_relay_worker": "aldol-majung-relay-qa",
+    "qa_backend_worker": "aldol-majung-cf-qa",
+    "qa_relay_compatibility_flag": "global_fetch_strictly_public (QA only)",
+    "backend_compatibility_flags": [
+      "python_workers",
+      "disable_python_external_sdk"
+    ],
+    "test_bearers": "Synthetic test-only values; no real production credentials or paid provider keys",
+    "post_test_readback": {
+      "qa_relay": {
+        "enabled": false,
+        "previews_enabled": false
+      },
+      "qa_backend": {
+        "enabled": false,
+        "previews_enabled": false
+      },
+      "both_workers_retained": true,
+      "test_browser_session_stopped": true
+    }
+  },
+  "pending": [
+    "Sites deployed MAJUNG Studio source is a historical snapshot; validate and apply approved changes to actual private Sites canonical source separately",
+    "Production Cloudflare Worker with new unique secret binding; update only approved Sites server-side URL, host pin and token after successful readback",
+    "ChatGPT Android connected plugin MCP client tests",
+    "Real live search, source provenance, robots/DNS and rate/quotas review before enabling providers",
+    "Full MCP protocol conformance beyond targeted tests (SSE/extensions) not claimed",
+    "GitHub Actions runner was previously blocked by account billing lock; remote isolated execution does not count as Actions PASS"
+  ],
+  "decision": {
+    "isolation_qa": "PASS",
+    "production_cutover": "HOLD",
+    "official_adoption": "NOT_CLAIMED"
+  }
+}
