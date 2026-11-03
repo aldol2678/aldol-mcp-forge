@@ -18,12 +18,48 @@ function backend(env){
  if(u.protocol!=='https:'||!permitted||u.username||u.password||u.port||u.pathname!=='/mcp'||u.search||u.hash)throw Error('허용된 MCP 백엔드 주소가 아닙니다.');
  return u.toString();
 }
+const MCP_PROTOCOL='2026-07-28';
+const MCP_CLIENT_INFO={name:'ALDOL MAJUNG Studio',version:'1.0.0'};
+function mirrorName(name){
+ if(typeof name!=='string'||!name)throw Error('MCP 도구 이름이 필요합니다.');
+ if(/^[\x21-\x7e]+$/.test(name))return name;
+ // Names with non-ASCII characters use the MCP mirrored-header sentinel.
+ const bytes=new TextEncoder().encode(name);
+ let binary='';for(const byte of bytes)binary+=String.fromCharCode(byte);
+ return '=?base64?'+btoa(binary)+'?=';
+}
 async function rpc(url,secret,method,params={},asset=false){
- const r=await fetch(url,{method:'POST',redirect:'error',headers:{'content-type':'application/json','accept':'application/json, text/event-stream',...(asset?{'OAI-Sites-Authorization':'Bearer '+secret}:{'Authorization':'Bearer '+secret})},body:JSON.stringify({jsonrpc:'2.0',id:crypto.randomUUID(),method,params}),signal:AbortSignal.timeout(60000)});
+ // The Asset Factory proxy is a separate, legacy Sites transport; preserve
+ // it exactly until a separately approved migration.
+ const modern=!asset;
+ const mcpParams=modern?{...params,_meta:{
+   ...(params._meta??{}),
+   'io.modelcontextprotocol/protocolVersion':MCP_PROTOCOL,
+   'io.modelcontextprotocol/clientCapabilities':{},
+   'io.modelcontextprotocol/clientInfo':MCP_CLIENT_INFO
+ }}:params;
+ const headers={'content-type':'application/json','accept':'application/json, text/event-stream',
+   ...(asset?{'OAI-Sites-Authorization':'Bearer '+secret}:{'Authorization':'Bearer '+secret})};
+ if(modern){
+   headers['MCP-Protocol-Version']=MCP_PROTOCOL;
+   headers['Mcp-Method']=method;
+   if(method==='tools/call')headers['Mcp-Name']=mirrorName(params.name);
+ }
+ const r=await fetch(url,{method:'POST',redirect:'error',headers,
+   body:JSON.stringify({jsonrpc:'2.0',id:crypto.randomUUID(),method,params:mcpParams}),
+   signal:AbortSignal.timeout(60000)});
  if(!r.ok)throw Error(asset?'Asset Factory 연결을 확인할 수 없습니다. (HTTP '+r.status+')':'전문 서버 응답 오류 (HTTP '+r.status+')');
- const raw=await r.text();if(raw.length>2097152)throw Error('응답 크기 제한을 초과했습니다.');
- let d;try{d=JSON.parse(raw)}catch{throw Error('지원되지 않는 MCP 응답 형식입니다.');}
- if(d.error||!d.result)throw Error('MCP 요청이 거부되었습니다.');
+ // Read responses with a byte-bound instead of trusting Content-Length.
+ const reader=r.body?.getReader();if(!reader)throw Error('전문 서버 응답이 없습니다.');
+ let size=0;const chunks=[];while(true){
+  const {done,value}=await reader.read();if(done)break;
+  size+=value.length;if(size>2097152){await reader.cancel();throw Error('응답 크기 제한을 초과했습니다.');}
+  chunks.push(value);
+ }
+ const bytes=new Uint8Array(size);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length;}
+ let d;try{d=JSON.parse(new TextDecoder().decode(bytes))}catch{throw Error('지원되지 않는 MCP 응답 형식입니다.');}
+ if(d?.jsonrpc!=='2.0'||d.error||!d.result)throw Error('MCP 요청이 거부되었습니다.');
+ if(modern&&d.result.resultType!=='complete')throw Error('최신 MCP 응답 계약이 일치하지 않습니다.');
  if(d.result.isError)throw Error('전문 도구가 입력 또는 실행을 거부했습니다.');
  return d.result;
 }
