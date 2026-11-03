@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-11-03 21:22 KST session",
+  "purpose": "MAJUNG live Sites source verification before approved Cloudflare cutover",
+  "owner_private_site": "https://aldol-majung-studio.al-dori.chatgpt.site",
+  "plugin_id": "plugin_asdk_app_sites_ecc0455e87a48191a5b82752b111b323",
+  "checked": {
+    "personal_plugin_metadata": {
+      "status": "CONFIRMED",
+      "version": "1.0.0",
+      "discoverability": "PRIVATE",
+      "source": "Plugin Creator get_plugin_metadata"
+    },
+    "plugin_archive": {
+      "status": "CONFIRMED",
+      "files": [
+        ".app.json",
+        ".codex-plugin/plugin.json"
+      ],
+      "contains_sites_source": false
+    },
+    "site_external_http": {
+      "path": "/api/status",
+      "status": 401,
+      "result": "Sign in required, no session access to private Sites source"
+    },
+    "current_mcp_tool_call": {
+      "tool": "research_market",
+      "input": "offline structured question",
+      "result": "ERROR",
+      "message": "전문 서버 연결 대기: Railway 계정의 신규 리소스 생성 한도"
+    },
+    "live_sites_source_read": {
+      "status": "BLOCKED",
+      "reason": "No connected native Sites project source or deploy operation available in chat; browser context unavailable; external request requires owner sign-in"
+    },
+    "github_snapshot": {
+      "status": "AVAILABLE",
+      "repository": "aldol2678/aldol-mcp-forge",
+      "pr_number": 38,
+      "scope": "proposed source changes, NOT live Sites deployment"
+    }
+  },
+  "action_boundary": {
+    "user_authorized_intent": "Apply verified QA changes to current private MAJUNG Studio and connect Cloudflare production backend",
+    "actual_live_sites_changes": false,
+    "production_cloudflare_worker_created": false,
+    "production_secrets_created": false,
+    "plugin_manifest_updated": false,
+    "existing_qa_services_untouched": true,
+    "decision": "HOLD: missing verified live source and authorized Sites update path; do not infer current code from snapshot"
+  },
+  "prerequisite_to_resume": [
+    "Open current owner-private MAJUNG Sites editor using authenticated owner session and expose current source/deployment to an authorized Sites/Work workflow",
+    "Diff exact deployed source and runtime config against GitHub PR #38 snapshot",
+    "Apply only MAJUNG Studio changes without overwriting new deployed edits",
+    "Build production-specific Cloudflare backend with fresh secret binding (never QA token); keep live search off",
+    "Patch current Studio server-only exact backend URL/host/token and read back /api/status",
+    "Verify three tool calls through actual ChatGPT Android client and inspect private access/security postconditions before calling migration complete"
+  ]
+}
