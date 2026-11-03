@@ -1,0 +1,74 @@
+{
+  "title": "MAJUNG isolated Cloudflare Workers Preview HTTP evidence",
+  "observed_date": "2026-11-03",
+  "environment": {
+    "type": "isolated QA Worker Preview",
+    "worker": "aldol-majung-cf-qa",
+    "preview": "majung-offline-smoke-20261103",
+    "runtime": "Cloudflare Python 3.14 (Pyodide)",
+    "compatibility_flags": [
+      "python_workers",
+      "disable_python_external_sdk"
+    ],
+    "search_enabled": false,
+    "credentials": "synthetic QA bearer value only; no paid provider credentials",
+    "production_content": "non-functional QA placeholder HTTP 503; existing production services untouched"
+  },
+  "initial_issue": {
+    "symptom": "Cloudflare edge 404 There is nothing here yet on every Preview path, including /healthz",
+    "evidence": "External HTTP GET returned text/html edge 404, not app JSON",
+    "remediation_observed": "Creating a non-functional QA default Worker deployment, enabling both workers.dev routes on that isolated Worker, and querying the already uploaded Python Preview produced HTTP 200. Preview-only route was not sufficient in this observed setup. This is empirical behavior, not a claimed platform-wide requirement."
+  },
+  "tests": {
+    "pass": 20,
+    "total": 20,
+    "general": [
+      "/healthz HTTP 200 JSON",
+      "unauthenticated /status ->401",
+      "authenticated /status ->200",
+      "unauthenticated /mcp ->401",
+      "initialize ->200",
+      "tools/list exactly research_market, analyze_competitors, evaluate_opportunity",
+      "research_market offline call",
+      "analyze_competitors call",
+      "evaluate_opportunity call",
+      "live market search blocked",
+      "unknown tool blocked"
+    ],
+    "security_semantics": [
+      "wrong bearer token ->401",
+      "GET /mcp ->405",
+      "invalid content-type ->415",
+      "malformed JSON ->400",
+      "body over 512KiB ->413",
+      "direct source URL collection blocked",
+      "offline research reports NOT_REQUESTED and NOT_ESTABLISHED",
+      "missing competitor price preserved as UNKNOWN/null",
+      "example unit economics returned HOLD and -300 after fixed cost with spend_authorized=false and launch_authorized=false"
+    ]
+  },
+  "verification_scope": {
+    "passed": "real Cloudflare Preview HTTP requests via remote Node fetch; actual JSON-RPC and offline business functions returned expected results",
+    "not_verified": [
+      "official MCP Python SDK 2.0 protocol compliance",
+      "full Streamable HTTP/SSE/session handling and spec conformance",
+      "actual ChatGPT/Android production client",
+      "original Python live network transport DNS pin/robots with Cloudflare runtime",
+      "paid Tavily usage or original-source accuracy",
+      "production client migration"
+    ],
+    "github_actions": "2026-11-03 workflow could not start due GitHub billing lock; this remote Preview testing does not imply CI passed"
+  },
+  "cleanup": {
+    "route_config_verified": {
+      "enabled": false,
+      "previews_enabled": false
+    },
+    "preview_artifact_saved": true,
+    "qa_worker_saved": true,
+    "live_public_url_active": false,
+    "existing_railway_or_sites_changed": false,
+    "production_connection_changed": false
+  },
+  "next_gate": "Perform official MCP client compatibility and security review, then deploy a separately authenticated production Cloudflare backend and only then update approved MAJUNG Sites server-only connection. Do not remove safeguards, import QA bearer or authorize paid search."
+}
