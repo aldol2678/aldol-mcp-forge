@@ -16,6 +16,8 @@ const SCOPE = "mcp:read";
 const authorizationServer = new OAuthAuthorizationServer({
   issuer: ISSUER,
   resources: [RESOURCE],
+  authorizeEndpoint: "/authorize",
+  tokenEndpoint: "/oauth/token",
   defaultResource: RESOURCE,
   scopesSupported: [SCOPE, "offline_access"],
   clientIdMetadataDocumentEnabled: true,
