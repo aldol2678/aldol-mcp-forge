@@ -45,9 +45,10 @@ async function rpc(url,secret,method,params={},asset=false){
    headers['Mcp-Method']=method;
    if(method==='tools/call')headers['Mcp-Name']=mirrorName(params.name);
  }
- const r=await fetch(url,{method:'POST',redirect:'error',headers,
+ const r=await fetch(url,{method:'POST',redirect:'manual',headers,
    body:JSON.stringify({jsonrpc:'2.0',id:crypto.randomUUID(),method,params:mcpParams}),
    signal:AbortSignal.timeout(60000)});
+ if(r.status>=300&&r.status<400)throw Error('MCP 서버 리다이렉트는 허용되지 않습니다.');
  if(!r.ok)throw Error(asset?'Asset Factory 연결을 확인할 수 없습니다. (HTTP '+r.status+')':'전문 서버 응답 오류 (HTTP '+r.status+')');
  // Read responses with a byte-bound instead of trusting Content-Length.
  const reader=r.body?.getReader();if(!reader)throw Error('전문 서버 응답이 없습니다.');
