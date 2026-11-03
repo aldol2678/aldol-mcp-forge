@@ -1,0 +1,72 @@
+{
+  "title": "MAJUNG standalone Cloudflare Workers deployment without Sites",
+  "observed_date": "2026-11-04 KST",
+  "reason": "Existing private Sites source cannot be edited with current access; deploy previously QA-verified backend directly as independent MCP.",
+  "deployment": {
+    "name": "aldol-majung-mcp",
+    "worker_id": "63b9b01c389944e388890b3cac1ff1bc",
+    "account_id": "e4d1d9c6b43b49fc3d60f40fa037f0fa",
+    "url": "https://aldol-majung-mcp.aldol-lab.workers.dev/mcp",
+    "deployed_on": "2026-11-03T15:39:15.593154Z",
+    "backend_source_ref": "1eef8457c2b4428979b35470be3e4e4e2c1bc455",
+    "python_runtime_flags": [
+      "python_workers",
+      "disable_python_external_sdk"
+    ],
+    "live_search_enabled": false,
+    "secret_binding": "ALDOL_MCP_BEARER_TOKEN",
+    "secret_type": "secret_text",
+    "secret_value_recorded": false
+  },
+  "readback": {
+    "worker_found": true,
+    "route_enabled": true,
+    "preview_route_enabled": false,
+    "secret_name_present": true,
+    "authenticated_fetch": "NOT_VERIFIED_ON_NEW_PRODUCTION_WORKER",
+    "external_http": [
+      {
+        "path": "/healthz",
+        "status": 200,
+        "body": {
+          "company": "majung",
+          "healthy": true
+        }
+      },
+      {
+        "path": "/status",
+        "status": 401
+      },
+      {
+        "path": "/mcp",
+        "method": "POST",
+        "status": 401
+      }
+    ]
+  },
+  "previous_qa_verified": {
+    "standalone_preview_http": "20/20",
+    "official_sdk_backend": "16/16",
+    "node_relay": "16/16",
+    "relay_backend_http": "8/8",
+    "official_sdk_relay": "6/6"
+  },
+  "separate_connection": {
+    "old_sites_url": "https://aldol-majung-studio.al-dori.chatgpt.site",
+    "old_plugin_id": "plugin_asdk_app_sites_ecc0455e87a48191a5b82752b111b323",
+    "existing_chatgpt_plugin_updated": false,
+    "mcp_new_endpoint_registered_in_chatgpt": false,
+    "current_sites_app_unchanged": true
+  },
+  "caution": [
+    "Production worker deployment and 200/401 health/auth-denial checks are verified; full authenticated production tools/call is not verified.",
+    "The platform test environment could not access workers.dev directly, and a proposed ephemeral credential transfer to an external tester was blocked; no token was shared.",
+    "Real-time external source collection remains disabled. This is not a production live market search service.",
+    "ChatGPT plugin registration/access is plan- and authentication-dependent; static bearer token is not treated as supported ChatGPT OAuth."
+  ],
+  "next_actions": [
+    "Select and implement a supported OAuth-compatible ChatGPT connection and verify plan permissions before replacing the old Sites plugin.",
+    "After a secure client registration, perform authenticated three-tool end-to-end validation and Android usage test.",
+    "Keep the legacy Sites plugin unchanged until a new client is successfully connected; retain QA Workers with public URLs disabled."
+  ]
+}

@@ -1,0 +1,90 @@
+name: MAJUNG isolated Cloudflare Python smoke
+on:
+  push:
+    branches: [feat/majung-cloudflare-python-adapter-20261103]
+    paths: [.github/workflows/verify-majung-cloudflare.yml]
+permissions:
+  contents: read
+concurrency:
+  group: majung-cloudflare-one-shot-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  isolated-workerd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - name: Offline unit and exact-host tests
+        run: |
+          python adapters/majung-cloudflare/prepare.py
+          python -m unittest discover -s adapters/majung-cloudflare/tests -v
+          node --test adapters/majung-cloudflare/tests/test_relay.mjs
+      - name: Start local Python Workers runtime (no cloud deployment)
+        working-directory: adapters/majung-cloudflare
+        run: |
+          printf 'ALDOL_MCP_BEARER_TOKEN="test-only-0123456789-abcdefghijklmnopqrstuvwxyz-0123456789"\n' > .dev.vars
+          timeout 210s uv run pywrangler dev --port 8787 > /tmp/majung-workerd.log 2>&1 &
+          echo $! > /tmp/majung-workerd.pid
+          for i in $(seq 1 100); do
+            if curl --silent --fail http://127.0.0.1:8787/healthz > /tmp/majung-health.json; then
+              cat /tmp/majung-health.json
+              exit 0
+            fi
+            if ! kill -0 "$(cat /tmp/majung-workerd.pid)" 2>/dev/null; then
+              echo "Python Workers runtime exited"
+              tail -100 /tmp/majung-workerd.log
+              exit 1
+            fi
+            sleep 2
+          done
+          echo "Python Workers runtime did not become healthy"
+          tail -100 /tmp/majung-workerd.log
+          exit 1
+      - name: Actual HTTP MCP and bearer-auth smoke
+        run: |
+          python - <<'PY'
+          import json, urllib.request, urllib.error
+          base = "http://127.0.0.1:8787/mcp"
+          token = "test-only-0123456789-abcdefghijklmnopqrstuvwxyz-0123456789"
+          def call(method, params=None, auth=True):
+              payload = json.dumps({"jsonrpc":"2.0","id":1,"method":method,"params":params or {}}).encode()
+              req = urllib.request.Request(base, data=payload, headers={
+                  "Content-Type":"application/json",
+                  **({"Authorization":"Bearer "+token} if auth else {})
+              })
+              try:
+                  with urllib.request.urlopen(req, timeout=12) as response:
+                      return response.status, json.loads(response.read())
+              except urllib.error.HTTPError as exc:
+                  return exc.code, json.loads(exc.read())
+          status, response = call("tools/list", auth=False)
+          assert status == 401, (status, response)
+          status, response = call("initialize")
+          assert status == 200 and response["result"]["serverInfo"]["name"].startswith("ALDOL MAJUNG")
+          status, response = call("tools/list")
+          names = [x["name"] for x in response["result"]["tools"]]
+          assert names == ["research_market", "analyze_competitors", "evaluate_opportunity"], names
+          test_inputs = [
+              ("research_market", {"question":json.dumps({"question":"test market", "sources":[], "live":False})}),
+              ("analyze_competitors", {"product":json.dumps({"name":"x","price":0,"currency":"USD","competitors":[{"name":"peer","price":None,"currency":"USD","source_url":"https://example.com/p","observed_at":"2026-01-01"}]})}),
+              ("evaluate_opportunity", {"brief":json.dumps({"name":"test","price":100,"variable_cost":10,"acquisition_cost":10,"expected_customers":5,"fixed_cost":200})})
+          ]
+          for name, arguments in test_inputs:
+              status, response = call("tools/call", {"name":name,"arguments":arguments})
+              assert status == 200 and response["result"]["isError"] is False, (name,status,response)
+          status, response = call("tools/call", {"name":"research_market","arguments":{"question":"live search"}})
+          assert status == 200 and response["result"]["isError"] is True
+          print("PASS: isolated workerd, auth, tools/list, three offline tool calls, blocked live search")
+          PY
+      - name: Stop local dev process and show errors
+        if: always()
+        run: |
+          if [ -f /tmp/majung-workerd.pid ]; then kill "$(cat /tmp/majung-workerd.pid)" 2>/dev/null || true; fi
+          if [ -f /tmp/majung-workerd.log ]; then tail -60 /tmp/majung-workerd.log; fi
+          rm -f adapters/majung-cloudflare/.dev.vars

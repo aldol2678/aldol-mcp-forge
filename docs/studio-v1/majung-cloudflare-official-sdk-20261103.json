@@ -1,0 +1,70 @@
+{
+  "observed_at": "2026-11-03",
+  "scope": "Cloudflare isolated QA Preview only. No production connection changed.",
+  "official_client": {
+    "sdk": "mcp==2.0.0",
+    "transport": "streamable_http_client with httpx2.AsyncClient",
+    "mode": "auto",
+    "negotiated": "2026-07-28",
+    "result": "PASS",
+    "tools": [
+      "research_market",
+      "analyze_competitors",
+      "evaluate_opportunity"
+    ]
+  },
+  "protocol_patch": {
+    "path": "adapters/majung-cloudflare/src/entry.py",
+    "features": [
+      "strict MCP-Protocol-Version and per-request _meta verification",
+      "Mcp-Method/Mcp-Name mirrored header validation with base64 sentinel decoding",
+      "server/discover 2026-07-28 envelope",
+      "tools/list cacheability contract private/ttlMs=0/resultType=complete",
+      "tool result resultType=complete",
+      "403 for invalid Origin",
+      "-32022 for unsupported protocol version"
+    ]
+  },
+  "runtime": "Cloudflare Python 3.14/Pyodide, preview deployment #4; source compiled and real SDK requests completed.",
+  "tests": {
+    "pass": 16,
+    "total": 16,
+    "sdk_calls": [
+      "auto negotiate",
+      "list_tools",
+      "research_market offline",
+      "analyze_competitors",
+      "evaluate_opportunity",
+      "live market search rejected"
+    ],
+    "negative_and_contract": [
+      "server/discover result shape",
+      "tools/list cache envelope",
+      "Mcp-Method mismatch rejected -32020",
+      "Mcp-Name mismatch rejected -32020",
+      "Mcp-Name missing rejected -32020",
+      "version header/body mismatch rejected -32020",
+      "unsupported version -32022",
+      "required client capabilities enforced",
+      "invalid Origin ->403",
+      "same Origin accepted"
+    ]
+  },
+  "postconditions": {
+    "qa_production_route_enabled": false,
+    "qa_preview_url_enabled": false,
+    "route_readback": true,
+    "qa_artifacts_retained": true,
+    "other_workers_untouched": true,
+    "studio_not_changed": true,
+    "paid_search_enabled": false,
+    "real_source_collection_enabled": false
+  },
+  "remaining_gates": [
+    "Existing MAJUNG Studio relay uses legacy headerless rpc and is not yet modern-compatible; update and test relay before connection switch",
+    "Full spec test suite including unimplemented advanced streaming/extensions was not run; do not claim full conformance",
+    "Run real ChatGPT Android/plugin client tests after approved authenticated backend is deployed",
+    "Use unique production secret binding, not synthetic QA plaintext value",
+    "Review source fetch/robots/DNS control before live search"
+  ]
+}
