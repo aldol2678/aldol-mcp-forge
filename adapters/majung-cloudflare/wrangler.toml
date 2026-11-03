@@ -1,0 +1,8 @@
+name = "aldol-majung-cloudflare-candidate"
+main = "src/entry.py"
+compatibility_date = "2026-11-03"
+compatibility_flags = ["python_workers"]
+workers_dev = true
+
+[vars]
+MAJUNG_LIVE_ENABLED = "false"
