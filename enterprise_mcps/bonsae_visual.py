@@ -103,6 +103,86 @@ _MEASURE = r"""({tokens}) => {
  const visible = e => {const r=e.getBoundingClientRect(), s=getComputedStyle(e);return r.width>0&&r.height>0&&s.visibility!=='hidden'&&s.display!=='none'};
  const loc = e => e.id ? '#'+e.id : e.tagName.toLowerCase()+(e.classList.length?'.'+[...e.classList].slice(0,2).join('.'):'');
  const all=[...document.body.querySelectorAll('*')].filter(visible).slice(0,2000);
+/* BONSAE P0 Layout Collision Engine, inserted into _MEASURE after `const all=...`.
+   No network, mutation, or caller JS execution. Browser DOM is read-only.
+   Explicit opt-out: data-bonsae-overlap="intentional" on either element or a shared ancestor.
+ */
+ const collisionLimit=30, textNodeLimit=300, textRectLimit=900, mediaNodeLimit=120;
+ const intersects=(a,b)=>{
+   const left=Math.max(a.left,b.left),top=Math.max(a.top,b.top);
+   const width=Math.min(a.right,b.right)-left,height=Math.min(a.bottom,b.bottom)-top;
+   return width>2&&height>2 ? Math.round(width*height*100)/100 : 0;
+ };
+ const inViewport=r=>r.bottom>0&&r.right>0&&r.left<innerWidth&&r.top<innerHeight;
+ const box=r=>({left:Math.round(r.left*100)/100,top:Math.round(r.top*100)/100,
+   right:Math.round(r.right*100)/100,bottom:Math.round(r.bottom*100)/100});
+ const allowed=(kind,a,b)=>{
+   const mark='[data-bonsae-overlap="intentional"]';
+   if(kind==='TEXT_TEXT') return a.matches(mark)&&b.matches(mark);
+   const m=a.closest(mark),n=b.closest(mark);
+   return !!(m&&m.contains(b) || n&&n.contains(a) || (m&&n&&m===n));
+ };
+ const nodeVisible=e=>{
+   for(let p=e;p&&p!==document.documentElement;p=p.parentElement){
+     const s=getComputedStyle(p);
+     if(s.display==='none'||s.visibility==='hidden'||s.visibility==='collapse'||Number(s.opacity)===0)
+       return false;
+   }
+   return true;
+ };
+ const textSegments=[];let examinedTextNodes=0,allTextNodes=0,textLimitHit=false;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let tn;
+ while((tn=walker.nextNode())){
+   if(!tn.textContent.trim())continue;
+   const owner=tn.parentElement;
+   if(!owner||owner.closest('style,script,template,noscript,svg')||!nodeVisible(owner))continue;
+   allTextNodes++;
+   if(examinedTextNodes>=textNodeLimit){textLimitHit=true;break;}
+   examinedTextNodes++;
+   const range=document.createRange();range.selectNodeContents(tn);
+   for(const r of range.getClientRects()){
+     if(textSegments.length>=textRectLimit){textLimitHit=true;break;}
+     if(r.width>2&&r.height>2&&inViewport(r)) textSegments.push({el:owner,rect:r});
+   }
+   range.detach();
+   if(textLimitHit)break;
+ }
+ const mediaElements=all.filter(e=>e.matches('img,video,canvas,svg,object'));
+ const mediaLimitHit=mediaElements.length>mediaNodeLimit;
+ const mediaRects=mediaElements.slice(0,mediaNodeLimit).filter(nodeVisible).map(el=>({el,rect:el.getBoundingClientRect()}))
+     .filter(x=>inViewport(x.rect));
+ const overlaps=[];let overlapLimitHit=false;const seen=new Set();
+ const record=(kind,a,b,intersectionArea)=>{
+   if(a.el===b.el||allowed(kind,a.el,b.el))return;
+   let ai=a.el===document.body?-1:all.indexOf(a.el),bi=b.el===document.body?-1:all.indexOf(b.el);
+   if(ai===-1&&a.el!==document.body || bi===-1&&b.el!==document.body)return;
+   const key=kind+':'+Math.min(ai,bi)+':'+Math.max(ai,bi);
+   if(seen.has(key))return;
+   seen.add(key);
+   if(overlaps.length>=collisionLimit){overlapLimitHit=true;return;}
+   overlaps.push({kind,first:{selector:loc(a.el),elementIndex:ai,rect:box(a.rect)},
+       second:{selector:loc(b.el),elementIndex:bi,rect:box(b.rect)},
+       intersectionArea, intent:'UNDECLARED'});
+ };
+ for(let i=0;i<textSegments.length;i++){
+   const a=textSegments[i];
+   for(let j=i+1;j<textSegments.length;j++){
+     const b=textSegments[j];if(a.el===b.el)continue;
+     const area=intersects(a.rect,b.rect);
+     if(area)record('TEXT_TEXT',a,b,area);
+   }
+   for(const b of mediaRects){
+     if(a.el===b.el)continue;
+     const area=intersects(a.rect,b.rect);
+     if(area)record('TEXT_MEDIA',a,b,area);
+   }
+ }
+ const collisionScan={overlaps,coverage:{viewportOnly:true,textNodesExamined:examinedTextNodes,
+   textRectangles:textSegments.length,mediaExamined:mediaRects.length,
+   truncated:textLimitHit||mediaLimitHit||overlapLimitHit||document.body.querySelectorAll('*').length>2000,
+   maxOverlapFindings:collisionLimit},
+   policy:'Explicit data-bonsae-overlap=intentional exempts text-media within that region; text-text exemptions require explicit marking of both text owners.'};
  const clipped=all.filter(e=>{const r=e.getBoundingClientRect();return r.left< -1||r.right>innerWidth+1}).slice(0,30).map(e=>({selector:loc(e),rect:e.getBoundingClientRect().toJSON()}));
  const targets=all.filter(e=>e.matches('button,a,input:not([type=hidden]),select,textarea,[role=button]'));
  const small=targets.filter(e=>{const r=e.getBoundingClientRect();return r.width<44||r.height<44}).slice(0,30).map(e=>({selector:loc(e),width:Math.round(e.getBoundingClientRect().width),height:Math.round(e.getBoundingClientRect().height)}));
@@ -119,7 +199,7 @@ _MEASURE = r"""({tokens}) => {
    contrast.push({selector:loc(e),ratio:Math.round(ratio*100)/100,minimum,passes:ratio>=minimum});
  }
  const observedTokens=Object.fromEntries(Object.keys(tokens).map(k=>[k,getComputedStyle(document.documentElement).getPropertyValue(k).trim()]));
- return {viewport:innerWidth,height:innerHeight,documentWidth:document.documentElement.scrollWidth,documentHeight:document.documentElement.scrollHeight,visibleElements:all.length,domTruncated:document.body.querySelectorAll('*').length>2000,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedElements:clipped,smallTouchTargets:small,clippedContainers:textClips,contrast,unknownContrastCount:unknownContrast,observedTokens,tokenDrift:Object.keys(tokens).filter(k=>observedTokens[k]!==tokens[k]).map(k=>({token:k,expected:tokens[k],observed:observedTokens[k]})),fontFamilies:[...new Set(all.slice(0,300).map(e=>getComputedStyle(e).fontFamily))]};
+ return {viewport:innerWidth,height:innerHeight,documentWidth:document.documentElement.scrollWidth,documentHeight:document.documentElement.scrollHeight,visibleElements:all.length,domTruncated:document.body.querySelectorAll('*').length>2000,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedElements:clipped,smallTouchTargets:small,clippedContainers:textClips,contrast,unknownContrastCount:unknownContrast,observedTokens,tokenDrift:Object.keys(tokens).filter(k=>observedTokens[k]!==tokens[k]).map(k=>({token:k,expected:tokens[k],observed:observedTokens[k]})),fontFamilies:[...new Set(all.slice(0,300).map(e=>getComputedStyle(e).fontFamily))],overlaps:collisionScan.overlaps,overlapCoverage:collisionScan.coverage,overlapPolicy:collisionScan.policy};
 }"""
 
 

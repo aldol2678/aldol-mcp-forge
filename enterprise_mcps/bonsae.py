@@ -244,7 +244,7 @@ def review_visual(artifact: str) -> dict[str, str]:
             verdict = "HOLD_PARTIAL_VISUAL"
             failures = []
             for r in rendered["viewports"]:
-                for check, bad in [("horizontal overflow", r["overflow"]), ("clipped containers", bool(r["clippedContainers"])), ("small touch targets", bool(r["smallTouchTargets"])), ("contrast", any(not c["passes"] for c in r["contrast"])), ("token drift", bool(r["tokenDrift"]))]:
+                for check, bad in [("layout overlaps", bool(r.get("overlaps", []))), ("horizontal overflow", r["overflow"]), ("clipped containers", bool(r["clippedContainers"])), ("small touch targets", bool(r["smallTouchTargets"])), ("contrast", any(not c["passes"] for c in r["contrast"])), ("token drift", bool(r["tokenDrift"]))]:
                     if bad:
                         failures.append({"viewport": r["viewport"], "check": check})
             findings["render_check_failures"] = failures
