@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "snapshot_as_of": "2026-10-22",
-  "source_note": "Evidence reconciliation as of 2026-10-22 (KST), not a live sync. Schema 1 requires record-level verification=UNVERIFIED; bounded source/deployment observations are recorded separately below. A candidate, package version, source main or HTTP 200 is not a full runtime/release approval. Private evidence identifiers/links are retained in the private audit handoff, not exported here.",
+  "snapshot_as_of": "2026-11-07",
+  "source_note": "2026-11-07 KST: preserved 2026-10-22's 23 original game/concept records and appended additional candidate records from connected Notion, Drive and Slack discovery. This is a bounded inventory, NOT an exhaustive full workspace scan, live Game Ops service sync, production release, or gameplay QA. All full-game records remain UNVERIFIED. Private file links are not published in this JSON. Registered in an isolated branch with NO PR or deploy.",
   "games": [
     {
       "game_id": "tiny-army-expedition",
@@ -82,7 +82,9 @@
           "note": "README explicitly says code snapshot; no complete hosted/full-asset playable release.",
           "source": "https://github.com/aldol2678/tiny-army-expedition"
         }
-      ]
+      ],
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "no-not-like-that",
@@ -120,7 +122,9 @@
           "note": "HTML contains v0.8.1 title-note/footer and Genre Episodes Update. Full prologue/gameplay integration and any later hosted build not established."
         }
       ],
-      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "infinite-sword",
@@ -164,7 +168,9 @@
           "scope": "historical Fogleplay publication label",
           "note": "Conversation reported published v13 / v14 patch work. No current platform readback or synchronization with HTML established."
         }
-      ]
+      ],
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "time-clone-factory",
@@ -206,7 +212,9 @@
           "note": "Retrieved historical QA report only; no new runtime test and no production claim."
         }
       ],
-      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "dual-job",
@@ -262,7 +270,9 @@
           "url": "https://dualjob.aldol.app/"
         }
       ],
-      "review_note": "Seed 0.5 and conversation 0.6.15 are superseded by current production version metadata 0.6.16. This does not assert full game or physical-device QA."
+      "review_note": "Seed 0.5 and conversation 0.6.15 are superseded by current production version metadata 0.6.16. This does not assert full game or physical-device QA.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "arrow-heir",
@@ -298,7 +308,9 @@
           "note": "HTML title confirms v0.3.2 mobile combat improvements. No hosted build or new gameplay test verified."
         }
       ],
-      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "life-is-build",
@@ -339,7 +351,9 @@
           "note": "Archive exists; readable content unavailable. Filename alone cannot supersede historical v0.2.2 or establish identity/lineage."
         }
       ],
-      "review_note": "v0.2.2 remains conversation-only UNVERIFIED. The v0.1-named ZIP was discovered but not inspected/executed; no downgrade inferred."
+      "review_note": "v0.2.2 remains conversation-only UNVERIFIED. The v0.1-named ZIP was discovered but not inspected/executed; no downgrade inferred.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "jelly-lab",
@@ -381,7 +395,9 @@
           "note": "Retrieved historical QA report only; no new runtime test and no production claim."
         }
       ],
-      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "induck-defense",
@@ -421,7 +437,9 @@
           "url": "https://github.com/aldol2678/induck-defense/pull/3"
         }
       ],
-      "review_note": "Source work exists beyond R0. Keep paused/HOLD workflow status; implementation progress is not release approval."
+      "review_note": "Source work exists beyond R0. Keep paused/HOLD workflow status; implementation progress is not release approval.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "inhaori-classic",
@@ -479,7 +497,9 @@
           "scope": "source package.json metadata",
           "note": "Tool/package metadata differs from served footer v1.0.1; live label retained as production version."
         }
-      ]
+      ],
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "induck-up",
@@ -535,7 +555,9 @@
           "scope": "source package.json metadata only",
           "note": "Not proof of a deployed game version; production version remains null."
         }
-      ]
+      ],
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "raise-induck",
@@ -590,7 +612,9 @@
           "url": "https://github.com/aldol2678/inhagame/blob/81b3fa793b6155d50e1bb30bb3611732b8c79f9f/apps/induck-grow/v2/README.md"
         }
       ],
-      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA."
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "induck-survival",
@@ -638,7 +662,9 @@
           "url": "https://survival.inhagame.app/"
         }
       ],
-      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA."
+      "review_note": "Shared monorepo and arcade links do not merge the games or their saves. Reachability/version-label observation is not runtime QA.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "inha-world",
@@ -700,7 +726,9 @@
           "note": "Stabilize game-development MCP foundation before INHA WORLD renewal."
         }
       ],
-      "review_note": "Main/source and operating version are not equated. Reuse of infrastructure does not establish a new shipped platform or consolidate independent games."
+      "review_note": "Main/source and operating version are not equated. Reuse of infrastructure does not establish a new shipped platform or consolidate independent games.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "cat-world",
@@ -740,7 +768,9 @@
       "identity_review": {
         "status": "UNVERIFIED",
         "note": "Standalone CAT WORLD HTML and WorldForge examples/worldforge-cat share a motif, but synchronization/lineage is not proven. No merge with ARAM WORLD or INHA WORLD."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "our-class-2010",
@@ -778,7 +808,9 @@
           "note": "HTML title and cover identify first-school-day Alpha 0.1 at fictional Hanbit middle school, 2010-03-02. Artifact exists; gameplay/history fidelity/hosting not tested."
         }
       ],
-      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED."
+      "review_note": "Accessible local artifact evidence; hosted production version and current whole-game acceptance remain UNVERIFIED.",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "aram-world",
@@ -822,7 +854,9 @@
       "identity_review": {
         "status": "SEPARATE",
         "note": "Independent WorldForge sandbox/example; no evidence it is the same game as INHA WORLD, CAT WORLD or KOREA. Office-world PR #7 is a related read-only bridge candidate, not silently folded into a game release."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "korea-hanyang",
@@ -895,7 +929,9 @@
       "identity_review": {
         "status": "UNVERIFIED",
         "note": "한가람/한양월드 added as conversation aliases, not a source rename or a new game. Broader historical scope is a design direction; not implemented-era coverage. No merge with ARAM WORLD, CAT WORLD or INHA WORLD."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "origin-lab",
@@ -953,7 +989,9 @@
       "identity_review": {
         "status": "UNVERIFIED",
         "note": "Possible relationship to 진화랩 is unresolved. Similar evolution/ecosystem subject alone is not identity proof; preserve both IDs."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "evolution-lab",
@@ -995,7 +1033,9 @@
         "status": "UNVERIFIED",
         "related_game_id": "origin-lab",
         "note": "Possible predecessor/alias only; no explicit current lineage evidence found. Preserve separate game_id and planned stage."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "fruit-world-concepts",
@@ -1035,7 +1075,9 @@
       "identity_review": {
         "status": "UNVERIFIED",
         "note": "Existing record groups 사과월드·과일월드·음식월드. Do not split or merge without mapping evidence; keep existing ID and group stage, record artifact separately."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "short-travel",
@@ -1075,7 +1117,9 @@
         "status": "UNVERIFIED",
         "related_game_id": "janheun",
         "note": "Read planning document cover/header says 숏 트래블 Short Travel / INGAME; game-information table says game title 잔흔. Strong duplicate/program-label risk, but no merge/delete authorized by evidence."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
     },
     {
       "game_id": "janheun",
@@ -1115,7 +1159,442 @@
         "status": "UNVERIFIED",
         "related_game_id": "short-travel",
         "note": "잔흔 is the explicit game title in a 숏트래블 template/program document. Keep both existing IDs pending lineage resolution; do not count two verified games."
-      }
+      },
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED"
+    },
+    {
+      "game_id": "hangaram-time-river",
+      "title": "한가람: 시간의 나루",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.2",
+      "verification": "UNVERIFIED",
+      "provenance": "github_repository;private_notion_portfolio;conversation_history",
+      "next_action": "한양 게임과 다른 독립 월드/저장소인지 계보 대조, 첫 퀘스트·시대전환 모바일 QA",
+      "links": {
+        "github": "https://github.com/aldol2678/hangaram"
+      },
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "echo-break",
+      "title": "ECHO//BREAK",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "멀티터치·랭킹·직업 패치 산출물과 최신 실행본 대조",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "palm-civilization",
+      "title": "한뼘문명",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "방 코드·채팅·저장 동기화 실플레이 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "jamo-laboratory",
+      "title": "자모 연구소·자모 연금술",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.3",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "자모 연구소·연금술 이름 계보 및 v0.3 실행본 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "tomorrow-light",
+      "title": "내일도 불을 켜둘게",
+      "aliases": [],
+      "stage": "released",
+      "last_known_version": "1.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_portfolio;conversation_history",
+      "next_action": "moru 사이트·OG 썸네일·저장 전체 QA. 잔불과 별개 작품",
+      "links": {
+        "historical_public_site": "https://moru.aldol.app/"
+      },
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "corebot-scrap-vortex",
+      "title": "코어봇: 스크랩 볼텍스",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "자성·기울기 게임 설계안에서 실행 프로토타입 착수 여부 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "dungeon-business-prep",
+      "title": "던전 영업 준비 중",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.4",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "v0.4 게임 산출물과 최신 플레이 실행본 교차확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "hyper-sync",
+      "title": "Hyper Sync",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.6.1",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_portfolio;private_slack_play_report",
+      "next_action": "90초 체험 공개 플레이 기록과 타이머 속도 문제 실기기 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "rune-battle-gem-duel",
+      "title": "룬 배틀: 젬 듀얼",
+      "aliases": [
+        "Rune Battle: Gem Duel"
+      ],
+      "stage": "prototype",
+      "last_known_version": "7.2.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_drive_gdd;private_drive_html_artifact;private_notion_portfolio",
+      "next_action": "HTML v7.2.0과 GDD v2.2.0 구분, 토스 앱 출시 및 QA 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "local_html_candidate",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "janbul",
+      "title": "잔불",
+      "aliases": [],
+      "stage": "paused",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "github_repository;private_notion_portfolio",
+      "next_action": "HOLD 보존, janbul-a0 실제 빌드 확인. 내일도 불을 켜둘게와 구분",
+      "links": {
+        "github": "https://github.com/aldol2678/janbul-a0"
+      },
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "c02-worker-beast",
+      "title": "C-02 일꾼짐승",
+      "aliases": [],
+      "stage": "paused",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "2026-09-18 HOLD·재개가능 상태 보존. 구현 착수 여부 별도 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_hold_record",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "abyssal-genesis",
+      "title": "ABYSSAL GENESIS",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "기획 허브 대조 후 v0.1 프로토타입 착수/승인 여부 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "ratpack",
+      "title": "RATPACK · 주사위 도적단",
+      "aliases": [],
+      "stage": "active",
+      "last_known_version": "2.7",
+      "verification": "UNVERIFIED",
+      "provenance": "private_drive_html_artifact;private_drive_cloudflare_deployment_record",
+      "next_action": "Drive HTML v2.7과 Cloudflare 운영 기록 v2.5 구분, 모바일 게임플레이 확인",
+      "links": {
+        "historical_public_site": "https://ratpack-v25.aldol-lab.workers.dev/"
+      },
+      "reviewed_on": "2026-11-07",
+      "version_scope": "local_html_candidate",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "dice-backpack",
+      "title": "다이스 백팩",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "2.1.2",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "GDD v1.1.0과 HTML v2.1.2 분리, 실행/실기기 QA",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "dungeon-doctor",
+      "title": "던전 주치의",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "골렘 프로토타입 HTML과 GDD v2.1의 범위 및 실플레이 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "paper-fold",
+      "title": "페이퍼 폴드: 차원 종이접기 던전",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "1.4.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "2.5D Chapter 2 HTML과 원본 GDD의 핵심 플레이 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "tiny-orbit",
+      "title": "타이니 오빗: 우주 1타일 기지 개척",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "단일 HTML의 부팅·모바일 입력·저장·게임루프 실행 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "lucaeon",
+      "title": "루카에온 (LUCAEON)",
+      "aliases": [
+        "셀테이토",
+        "Cell-Tato"
+      ],
+      "stage": "prototype",
+      "last_known_version": "2.8.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_drive_qa_report;private_slack_handoff;github_private_repository",
+      "next_action": "구명칭 셀테이토 2.8.0 HTML과 신규 Private GitHub 심해 브랜치 구분, main/배포 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "legacy_named_local_artifact",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "b05-no-corridor",
+      "title": "5호관: 없는 복도",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "0.5.7",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "PlayCanvas 기획·게임 HTML·공간 지도 파일을 구분, 소프트락 및 실플레이 QA",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "alchemy-pinball",
+      "title": "알케미 핀볼",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "2.0.3",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "GDD 2.0.0과 보고된 v2.0.3 QA 패키지의 실행 범위 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "reported_private_candidate",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "balance-tower",
+      "title": "밸런스 타워",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": "1.2.1",
+      "verification": "UNVERIFIED",
+      "provenance": "private_notion_joint_inventory;private_drive_artifact_metadata;conversation_history",
+      "next_action": "GDD 1.1.0과 ARK HTML 1.2.1 교차검증, 물리/모바일 회귀",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "historical_artifact_or_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "domino-dungeon",
+      "title": "도미노 던전",
+      "aliases": [
+        "Domino Dungeon"
+      ],
+      "stage": "prototype",
+      "last_known_version": "2.0.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_drive_gdd;private_drive_html_artifact;private_slack_handoff",
+      "next_action": "2.5D GDD·HTML 기준본 선정, 기존 도미노 디펜스 명칭과 계보 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "gdd_version",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "optical-prism",
+      "title": "옵티컬 프리즘",
+      "aliases": [
+        "Optical Prism"
+      ],
+      "stage": "prototype",
+      "last_known_version": "1.1.0",
+      "verification": "UNVERIFIED",
+      "provenance": "private_drive_gdd;private_drive_html_artifact;private_slack_handoff",
+      "next_action": "ARK HTML v1.1.0과 Doori GDD v1.2.0 분리, 레이캐스팅·RGB 합성 실제 QA",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "local_html_candidate",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "api-alchemy-laboratory",
+      "title": "API 연금술 연구소",
+      "aliases": [],
+      "stage": "prototype",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "private_google_doc_design;conversation_history",
+      "next_action": "Drive 게임·제품 기획 정본 및 P2.1 HTML, 실제 API 연동/가상데이터 표시 검증",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "design_and_prototype_report",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "marketing-paradigm-lab",
+      "title": "마케팅 패러다임 실험실",
+      "aliases": [],
+      "stage": "planned",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "소비자 주도 시장 비교 설계와 실행본 여부 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "design_only",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+    },
+    {
+      "game_id": "marketing-practice-game",
+      "title": "마케팅 실전교육 게임",
+      "aliases": [],
+      "stage": "unknown",
+      "last_known_version": null,
+      "verification": "UNVERIFIED",
+      "provenance": "conversation_history",
+      "next_action": "마케팅 패러다임 실험실과 중복/별개 게임인지 실제 산출물로 확인",
+      "links": {},
+      "reviewed_on": "2026-11-07",
+      "version_scope": "identity_unresolved",
+      "quality_grade": "U",
+      "technical_feasibility": "UNASSESSED",
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
     }
   ],
   "review_policy": {
@@ -1123,5 +1602,41 @@
     "verification": "Record-level UNVERIFIED remains for schema/API compatibility and incomplete whole-game acceptance. Track-level VERIFIED applies only to its stated scope; REPORTED is a retrieved third-party QA claim, not a new test.",
     "scope": "23 existing IDs preserved; no merge, deploy, production write, automatic GitHub sync, new service, or new management system.",
     "private_evidence": "Private artifact names and bounded findings only; no private Slack/Drive URLs, account identifiers, saves or credentials exported."
-  }
+  },
+  "grading_policy": {
+    "quality_grades": [
+      "S",
+      "A",
+      "B",
+      "C",
+      "U",
+      "X"
+    ],
+    "note": "S/A/B/C: scored gameplay quality; U: not yet assessed; X: independent technology feasibility hold only with evidence, not a quality rank. None assessed as X.",
+    "applied_on": "2026-11-07"
+  },
+  "unresolved_identity_mentions": [
+    {
+      "name": "도미노 디펜스",
+      "potential": "domino-dungeon",
+      "status": "UNKNOWN",
+      "note": "이전 대화와 최신 Doori 도미노 던전 기획의 계보·동일성 미검증. 독립 신규 ID는 보류."
+    },
+    {
+      "name": "한가람",
+      "potential": "korea-hanyang;hangaram-time-river",
+      "status": "CONFLICT",
+      "note": "KOREA 등록부 별칭과 독립 HANGARAM 프로젝트 이름 중첩. 기존 ID 자동 변경 금지."
+    },
+    {
+      "name": "SLOP LAB",
+      "status": "UNKNOWN",
+      "note": "QA 파일은 발견되었지만 독립 게임 여부 미확인."
+    },
+    {
+      "name": "LSP",
+      "status": "UNKNOWN",
+      "note": "HOLD 프로젝트이나 게임 분류/실체 미확인."
+    }
+  ]
 }
