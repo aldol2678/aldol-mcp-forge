@@ -1311,7 +1311,26 @@
       "version_scope": "local_html_candidate",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "HOLD_ENV",
+        "environment": "isolated Chromium 390x844 with page.set_content opaque origin",
+        "executed": [
+          "render lobby",
+          "click start run"
+        ],
+        "observed": "document title still says v6.3 while visible UI says v7.2.0; hero image src not resolved; sandbox localStorage access denied, start transition unverified",
+        "blocked": [
+          "repeat under actual non-opaque http(s) origin",
+          "resolve hero image assets",
+          "match-3 battle and save tests"
+        ],
+        "caveat": "The storage error and missing images may be caused by the artificial opaque origin; do not treat as deployed-production defects."
+      }
     },
     {
       "game_id": "janbul",
@@ -1395,7 +1414,26 @@
       "version_scope": "historical_artifact_or_report",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "PASS_PARTIAL",
+        "environment": "isolated Chromium 390x844 and 844x390",
+        "executed": [
+          "Adventurer class selected",
+          "reroll",
+          "end turn"
+        ],
+        "observed": "rerolls remaining 2 -> 1; HP 80 -> 68 after enemy's announced 12 damage; no JS page exceptions",
+        "blocked": [
+          "item-drag, slot assignment, battle victory and loot",
+          "persistent save QA",
+          "full-run human fun tests"
+        ]
+      }
     },
     {
       "game_id": "dungeon-doctor",
@@ -1427,7 +1465,25 @@
       "version_scope": "historical_artifact_or_report",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "HOLD_ENV",
+        "environment": "isolated Chromium 390x844",
+        "executed": [
+          "attempt standalone load"
+        ],
+        "observed": "Page.set_content(domcontentloaded) timed out; source loads THREE from remote cdnjs; direct isolated browser cannot fetch remote scripts",
+        "blocked": [
+          "rerun in asset-enabled browser with pinned Three.js",
+          "fold movement and Chapter 2 play loop",
+          "mobile UI/gameplay visual QA"
+        ],
+        "caveat": "Environment loading failure is not proof game itself fails on a supported network."
+      }
     },
     {
       "game_id": "tiny-orbit",
@@ -1443,7 +1499,25 @@
       "version_scope": "historical_artifact_or_report",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "PASS_PARTIAL",
+        "environment": "isolated Chromium 390x844",
+        "executed": [
+          "tap star dust node three times",
+          "open facilities tab"
+        ],
+        "observed": "resource display 0 -> 1 -> 2 on first two taps; no JS page exceptions; no document horizontal overflow",
+        "blocked": [
+          "building purchase and production loop",
+          "beacon prestige endgame",
+          "long-session save and physical device"
+        ]
+      }
     },
     {
       "game_id": "lucaeon",
@@ -1494,7 +1568,25 @@
       "version_scope": "reported_private_candidate",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "PASS_PARTIAL",
+        "environment": "isolated Chromium 390x844",
+        "executed": [
+          "enter duel",
+          "display route map"
+        ],
+        "observed": "sector map and nodes appeared; no JS page exceptions; no document horizontal overflow",
+        "blocked": [
+          "actual pinball ball launch and hit scoring",
+          "boss progression",
+          "mobile performance and touch fidelity"
+        ]
+      }
     },
     {
       "game_id": "balance-tower",
@@ -1510,7 +1602,26 @@
       "version_scope": "historical_artifact_or_report",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "PASS_PARTIAL",
+        "environment": "isolated Chromium 390x844 and 844x390",
+        "executed": [
+          "intro -> build mode",
+          "wave start button",
+          "canvas tap+drag injected"
+        ],
+        "observed": "build/wave screen appeared; no JS page exceptions; no horizontal document overflow",
+        "blocked": [
+          "tower physics acceptance",
+          "wave clear and reward",
+          "physical mobile and human testers"
+        ]
+      }
     },
     {
       "game_id": "domino-dungeon",
@@ -1546,7 +1657,26 @@
       "version_scope": "local_html_candidate",
       "quality_grade": "U",
       "technical_feasibility": "UNASSESSED",
-      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음."
+      "review_note": "탐색 인벤토리 항목. 기획/파일/보고서 존재는 게임 전체 QA 또는 공개 출시 승인을 의미하지 않음.",
+      "quality_screening": {
+        "reviewed_on": "2026-11-07",
+        "quality_grade": "U",
+        "score_out_of_100": null,
+        "score_status": "NOT_SCORED",
+        "gate": "PASS_PARTIAL",
+        "environment": "isolated Chromium 390x844 and 844x390",
+        "executed": [
+          "intro -> design screen",
+          "design -> wave 1 combat",
+          "canvas tap+drag input injected"
+        ],
+        "observed": "wave state changed to combat; no JS page exceptions in tested path; no page horizontal overflow",
+        "blocked": [
+          "full wave victory/defeat and scoring",
+          "physical device and long session",
+          "human fun evaluation"
+        ]
+      }
     },
     {
       "game_id": "api-alchemy-laboratory",
@@ -1638,5 +1768,6 @@
       "status": "UNKNOWN",
       "note": "HOLD 프로젝트이나 게임 분류/실체 미확인."
     }
-  ]
+  ],
+  "quality_assessment_note": "2026-11-07 bounded isolated Chromium evidence on 7 retrieved HTML artifacts. No human player fun measurement, complete game loop, physical mobile, or deployment acceptance; no S/A/B/C assigned; 5 partial interaction paths, 2 environment holds. See per-game quality_screening."
 }
